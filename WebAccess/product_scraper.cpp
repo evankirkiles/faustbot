@@ -5,7 +5,8 @@
 #include "product_scraper.hpp"
 
 // Basic constructor that initializes the base website
-ShopifyWebsiteHandler::ShopifyWebsiteHandler(const URLAndMethod& url) : sourceURL(url) {}
+ShopifyWebsiteHandler::ShopifyWebsiteHandler(const URLAndMethod& url) : sourceURL(url) {
+}
 
 // Function that pulls the HTML source and then searches it for " title: ", printing the lines it finds
 void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const std::string& bonusparams) {
@@ -15,42 +16,12 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
     double duration;
     start = std::clock();
 
-    // Create cURL session
-    CURL *curl = curl_easy_init();
-
-    // Set cURL run settings
-    // Set the location website
-    if (sourceURL.method == 1) {
-        curl_easy_setopt(curl, CURLOPT_URL, std::string(sourceURL.baseURL).append(collection).append("/products.json").append(bonusparams).c_str());
+    // Run cURL on the website to download the body to a file
+    if (sourceURL.method > 100 && sourceURL.method < 200) {
+        performCURL(std::string(sourceURL.baseURL).append(collection).append("/products.json").append(bonusparams));
     } else {
-        curl_easy_setopt(curl, CURLOPT_URL, std::string(sourceURL.baseURL).append(collection).append(bonusparams).c_str());
+        performCURL(std::string(sourceURL.baseURL).append(collection).append(bonusparams));
     }
-    // Download the body of the linked URL
-    curl_easy_setopt(curl, CURLOPT_NOBODY, 0L);
-
-    // Build the headers for the cURL request
-    struct curl_slist* headers = NULL;
-    headers = curl_slist_append(headers, "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
-    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-
-    // Open the file to write to
-    FILE *fp = fopen("./WebAccess/Contents/html_body.txt", "wb");
-    if (fp) {
-
-        // Write the page body to the file
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-        // Perform file download
-        curl_easy_perform(curl);
-        // Close the file
-        fclose(fp);
-    }
-
-    // Free the headers list
-    curl_slist_free_all(headers);
-
-    // Clean up cURL
-    curl_easy_cleanup(curl);
-    curl_global_cleanup();
 
     // Tell how much time the connection to the website took
     duration = (std::clock() - start) / (double) CLOCKS_PER_SEC;
@@ -65,7 +36,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
     logFile.open("./WebAccess/Contents/products_log.txt", std::ios::trunc);
 
     // There are different parse requirements for each different method, hence the if statements
-    if (sourceURL.method == 1) {
+    if (sourceURL.method > 100 && sourceURL.method < 200) {
         while (getline(searchFile, str)) {
 
             // If the title identifier is found, print out the line
@@ -96,9 +67,6 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                     if (availability == "false") {
                         logFile << " : unavailable";
                     }
-                } else {
-
-                    // Called whenever a new product is found
                 }
 
                 logFile << "\n";
@@ -106,7 +74,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
             }
 
         }
-    } else if (sourceURL.method == 2) {
+    } else if (sourceURL.method > 200 && sourceURL.method < 300) {
         while (getline(searchFile, str)) {
 
             // If the title identifier is found, print out the line
@@ -122,7 +90,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
             }
 
         }
-    } else if (sourceURL.method == 3) {
+    } else if (sourceURL.method > 200 && sourceURL.method < 300) {
         while (getline(searchFile, str)) {
 
             // If the title identifier is found, print out the line
@@ -141,14 +109,77 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
     // Tell how much time pulling all the products took
     duration = ((std::clock() - start) / (double) CLOCKS_PER_SEC) - duration;
     std::cout << std::endl << duration << " seconds to pull 100 products.";
-    std::cout << std::endl << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds total." << std::endl;
+    std::cout << std::endl << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds total.";
 }
 
 // Gets the ID from a product's purchase page
-std::string ShopifyWebsiteHandler::getIDFrom(const std::string &addToURL) {
+std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL, double size, int whichColor) {
+
+    // Begin clock to check how much time this function takes
+    std::clock_t begin;
+    begin = clock();
+
+    // Run the cURL on the given URL to download the page body
+    if (sourceURL.method > 100 && sourceURL.method < 200) {
+        performCURL(std::string(sourceURL.baseURL).append(addToURL));
+    } else {
+        throw std::runtime_error("This website is not yet supported for retrieving variant ID's from product page.");
+    }
+
+    // Parse through the downloaded html file
+    std::ifstream searchFile("./WebAccess/Contents/html_body.txt");
+    std::string str;
+
+    // There are different parse requirements for each different website
+    if (sourceURL.method > 100 && sourceURL.method < 200) {
+        while (getline(searchFile, str)) {
+
+            // Look for the var meta line, this marks the beginning of the variant id list
 
 
+        }
+    }
 
+    // Mark how much time has passed since function began
+    std::cout << std::endl << (std::clock() - begin) / (double) CLOCKS_PER_SEC << " seconds to get varID.";
+
+}
+
+// Performs the cURL request and sends the body to html_body.txt
+void ShopifyWebsiteHandler::performCURL(const std::string& URL) {
+
+    // Create cURL session
+    CURL *curl = curl_easy_init();
+
+    // Set cURL run settings
+    // Set the location website
+    curl_easy_setopt(curl, CURLOPT_URL, URL.c_str());
+    // Download the body of the linked URL
+    curl_easy_setopt(curl, CURLOPT_NOBODY, 0L);
+
+    // Build the headers for the cURL request
+    struct curl_slist* headers = NULL;
+    headers = curl_slist_append(headers, "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+    // Open the file to write to
+    FILE *fp = fopen("./WebAccess/Contents/html_body.txt", "wb");
+    if (fp) {
+
+        // Write the page body to the file
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+        // Perform file download
+        curl_easy_perform(curl);
+        // Close the file
+        fclose(fp);
+    }
+
+    // Free the headers list
+    curl_slist_free_all(headers);
+
+    // Clean up cURL
+    curl_easy_cleanup(curl);
+    curl_global_cleanup();
 }
 
 // Functions similarly to the above getAllModels function except this filters the results first by date
