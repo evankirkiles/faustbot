@@ -113,7 +113,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 }
 
 // Gets the ID from a product's purchase page
-std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL, double size, int whichColor) {
+std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL, const std::string& size, const std::string &color) {
 
     // Begin clock to check how much time this function takes
     std::clock_t begin;
@@ -134,15 +134,53 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
     if (sourceURL.method > 100 && sourceURL.method < 200) {
         while (getline(searchFile, str)) {
 
-            // Look for the var meta line, this marks the beginning of the variant id list
+            // Look for the handle":" token, this marks the beginning of the variant id list line
+            unsigned long stringpos = str.find("handle\":\"");
+            if (stringpos != str.npos) {
+                str.erase(0, stringpos + 9);
 
+                // Find the id, which comes before the size and color
+                unsigned long tokenpos = str.find("},{\"id\":");
+                while (tokenpos != str.npos) {
 
+                    // Retrieve the id for the variant (cannot tell if it is the correct one yet)
+                    str.erase(0, tokenpos + 8);
+                    unsigned long temptoken = str.find(',');
+                    std::string id = str.substr(0, temptoken);
+                    str.erase(0, temptoken);
+
+                    // Now check the options of the variant to see if it matches the requested color and size
+                    // Option 1:
+                    temptoken = str.find("\"option1\":\"");
+                    str.erase(0, temptoken + 11);
+                    std::string option1 = str.substr(0, str.find(','));
+                    // Check to make sure option1 is not null and it matches one of the parameters
+                    if (option1.back() == 'l') { tokenpos = str.find("},{\"id\":"); continue; } else { option1.pop_back(); }
+                    if (option1 != size && option1 != color) { tokenpos = str.find("},{\"id\":"); continue; }
+
+                    // Option 2:
+                    temptoken = str.find("\"option2\":\"");
+                    str.erase(0, temptoken + 11);
+                    std::string option2 = str.substr(0, str.find(','));
+                    // Check to make sure option2 is not null and it matches one of the parameters
+                    if (option2.back() == 'l') { tokenpos = str.find("},{\"id\":"); continue; } else { option2.pop_back(); }
+                    if (option2 != size && option2 != color) { tokenpos = str.find("},{\"id\":"); continue; }
+
+                    std::cout << std::endl << id << std::endl;
+                    break;
+                }
+
+                // Only find one handle":" line; if size and color is not there then they do not exist
+                break;
+            }
         }
     }
 
     // Mark how much time has passed since function began
     std::cout << std::endl << (std::clock() - begin) / (double) CLOCKS_PER_SEC << " seconds to get varID.";
 
+    // Placeholder return
+    return "egh";
 }
 
 // Performs the cURL request and sends the body to html_body.txt

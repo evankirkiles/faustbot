@@ -40,7 +40,7 @@ public:
 
     // Function that returns the product id from the product's page (the one that has a BUY NOW button)
     // To specify color, they are indexed from the top: highest is 0, then 1, then 2, etc.
-    std::string getVariantIDFrom(const std::string& addToURL, double size, int whichColor=0);
+    std::string getVariantIDFrom(const std::string& addToURL, const std::string& size, const std::string &color);
 
     // Function that return a multidimensional map of the products it finds for the given keyword
     // Return value usage: returned[0]
