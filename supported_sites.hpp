@@ -7,6 +7,10 @@
 
 // This header holds the base URLs for all the supported websites so far; This standardizes so
 // I can use different methods for websites which have different ways of accessing product info.
+struct URLAndMethod {
+    const char* baseURL;
+    const int method;
+};
 
 namespace supported_sites {
 // Also create a basic struct which specifies what method to use for getting product info.
@@ -16,21 +20,14 @@ namespace supported_sites {
 //      2 : Has a "quick add" feature on the base url page that allows directly adding to cart (ex. Kith)
 //      3 : Has a grid view with a Shopify saveVariant background (use view source to check) (ex. Bodega)
 //           ^ Bodega requires adding an extraURL to specify which type of thing you are looking at (footwear, etc.)
-struct URLAndMethod {
-    const char* baseURL;
-    const char* extraURL;
-    const int method;
-
-    const char* evenMoreURL = "";
-};
 
     // MARK: Shopify sites that have a products.json page
 
-    extern URLAndMethod SOCIALSTATUS;
-    extern URLAndMethod XHIBITION;
-    extern URLAndMethod UNDEFEATED;
-    extern URLAndMethod BLENDSUS;
-    extern URLAndMethod WISHATL;
+    extern URLAndMethod SOCIALSTATUS;    // Colors are located in the main product's title, with sizes in the variants' titles
+    extern URLAndMethod XHIBITION;       // Colors are located in the variants' titles on the right of size
+    extern URLAndMethod UNDEFEATED;      // Colors are located in the main product's title, with sizes in the variants' titles
+    extern URLAndMethod BLENDS;          // Colors are located in the main product's title, with sizes in the variants' titles
+    extern URLAndMethod WISHATL;         // Colors are located in the variants' titles on the left of size
 
     // MARK: Specialized Shopify sites
 

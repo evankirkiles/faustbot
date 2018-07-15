@@ -3,8 +3,8 @@
 
 int main() {
 
-    ShopifyWebsiteHandler swh(supported_sites::XHIBITION);
-    swh.findModels();
+    ShopifyWebsiteHandler swh(supported_sites::WISHATL);
+    swh.getAllModels("/collections/footwear", "?limit=100");
 
     return 0;
 }
