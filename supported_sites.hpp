@@ -34,7 +34,7 @@ namespace supported_sites {
     // For Kith, there are collections pages which function in the same way as the base URL page
     extern URLAndMethod KITH;
     // For Bodega, there are also collections pages but base URL page does not have the same function
-    extern URLAndMethod BODEGA_FOOTWEAR;
+    extern URLAndMethod BODEGA;
 
 }
 

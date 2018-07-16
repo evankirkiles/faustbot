@@ -13,7 +13,7 @@ namespace supported_sites {
 
     URLAndMethod KITH = {"https://kith.com", 201};
 
-    URLAndMethod BODEGA_FOOTWEAR = {"https://shop.bdgastore.com", 301};
+    URLAndMethod BODEGA = {"https://shop.bdgastore.com", 301};
 }
 
 
