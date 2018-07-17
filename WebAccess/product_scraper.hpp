@@ -17,6 +17,7 @@
 #include <ctime>
 #include <algorithm>
 #include <iterator>
+#include <boost/algorithm/string.hpp>
 
 #include "../supported_sites.hpp"
 
@@ -46,7 +47,7 @@ public:
     std::string getVariantIDFrom(const std::string& addToURL, const std::string& size, std::string color = "");
 
     // Function that returns the first product it finds that contains any of the given keywords (title and color).
-    // Return value usage: returned[0]
+    // NOTE: Keywords are not case sensitive.
     Product lookForKeywords(const std::string& collection, const std::vector<std::string>& keywords,
                             const std::vector<std::string>& colorKeywords = {""});
 

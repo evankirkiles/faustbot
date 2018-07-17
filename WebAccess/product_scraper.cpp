@@ -67,6 +67,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                         logFile << size << " : " << id << "\n";
                     }
                 } else {
+                    boost::to_upper(size);
                     logFile << "TITLE: " << size << "\n";
                 }
                 stringpos = str.find("\"id\":");
@@ -87,11 +88,13 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                 // The title of the product is the next line
                 getline(searchFile, str);
                 //str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-                logFile << "TITLE: " <<  str;
+                boost::to_upper(str);
+                logFile << "TITLE: " << str;
 
                 // The colorway is four lines down
                 for (int i = 0; i < 4; ++i) { getline(searchFile, str); }
                 //str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+                boost::to_upper(str);
                 logFile << ", COLOR: " << str << "\n";
 
                 // Begin looking at variants and their id's
@@ -140,6 +143,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
                 // The title of the product is down 24 lines
                 for (int i = 0; i < 24; ++i) { getline(searchFile, str); }
+                boost::to_upper(str);
                 logFile << "TITLE: " << str;
 
                 prodFound = true;
@@ -156,7 +160,8 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
                         // Color will be after the tooltip"> substring
                         str.erase(0, tempPos + 9);
-                        logFile << ", COLOR: " << str.substr(0, str.find('<')) << "\n";
+                        std::string tempString = boost::to_upper_copy(str.substr(0, str.find('<')));
+                        logFile << ", COLOR: " << tempString << "\n";
 
                         colorFound = true;
                     }
@@ -346,7 +351,7 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                                             [](char a, char b) {return a == ' ' && b == ' '; }), title.end());
                     for (const std::string& keywd : keywords) {
                         // If a keyword matches, then proceed to check the color
-                        if (title.find(keywd) != title.npos) {
+                        if (title.find(boost::to_upper_copy(keywd)) != title.npos) {
                             prdct.title = title;
                             titleMatch = true;
                             break;
@@ -358,7 +363,7 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                         str.erase(0, str.find("COLOR: ") + 7);
                         for (const std::string& keywd : colorKeywords) {
                             // If a keyword matches the color, then product has been found
-                            if (str.find(keywd) != str.npos) {
+                            if (str.find(boost::to_upper_copy(keywd)) != str.npos) {
                                 str.erase(std::unique(str.begin(), str.end(),
                                                         [](char a, char b) {return a == ' ' && b == ' '; }), str.end());
                                 prdct.color = str;
