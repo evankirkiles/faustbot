@@ -3,19 +3,21 @@
 
 int main() {
 
-    ShopifyWebsiteHandler swh(supported_sites::BODEGA);
+    ShopifyWebsiteHandler swh(supported_sites::KITH);
     // swh.getAllModels("", "");
 
     // swh.getVariantIDFrom("/collections/footwear/products/air-max-95-se", "9");
 
     // Run python checkout.py
-    //FILE* in = popen("python WebAccess/checkout.py https://www.google.com", "r");
 
-    //pclose(in);
 
-    Product prdct = swh.lookForKeywords("/collections/footwear", {"x MITA NMD"}, {""});
+    Product prdct = swh.lookForKeywords("/collections/footwear", {"ASICS"}, {"WHITE"});
+    std::cout << prdct.title << " : " << prdct.color << " : " << prdct.getID("11");
 
-    std::cout << prdct.title << " : " << prdct.color << " : " << prdct.getID("10") << std::endl;
+    std::string cartLink = std::string(supported_sites::KITH.baseURL) + "/cart/" + prdct.getID("11") + ":1";
+    FILE* in = popen(std::string(std::string("python WebAccess/checkout.py ") + cartLink).c_str(), "r");
+
+    pclose(in);
 
     return 0;
 }

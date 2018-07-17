@@ -45,6 +45,8 @@ struct Product {
                 }
             }
         }
+        // Shouldn't get here if the size exists
+        return "Size unavailable.";
     }
 };
 

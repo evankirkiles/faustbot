@@ -15,6 +15,10 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
     double duration;
     start = std::clock();
 
+    // Also open a new file to write to which logs times of each process
+    std::ofstream timeFile;
+    timeFile.open("./logs.txt", std::ios::trunc);
+
     // Run cURL on the website to download the body to a file
     if (sourceURL.method > 100 && sourceURL.method < 200) {
         performCURL(std::string(sourceURL.baseURL).append(collection).append("/products.json").append(bonusparams));
@@ -24,7 +28,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
     // Tell how much time the connection to the website took
     duration = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    std::cout << std::endl << duration << " seconds to connect to website. \n";
+    timeFile << duration << " seconds to connect to website. \n";
 
     // Now parse through the downloaded html file to get the names of all the current items
     std::ifstream searchFile("./WebAccess/Contents/html_body.txt");
@@ -198,7 +202,11 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
     // Tell how much time pulling all the products took
     duration = ((std::clock() - start) / (double) CLOCKS_PER_SEC) - duration;
-    std::cout << std::endl << duration << " seconds to pull the products. \n";
+    timeFile << duration << " seconds to pull the products. \n";
+
+    // Close the files
+    timeFile.close();
+    logFile.close();
 }
 
 // Gets the ID from a product's purchase page
@@ -206,7 +214,7 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
 
     // Open time logging file
     std::ofstream timeLogs;
-    timeLogs.open("../logs.txt", std::ios::trunc);
+    timeLogs.open("./logs.txt", std::ios::trunc);
 
     if (color.empty()) { color = "ul"; }
 
@@ -220,6 +228,7 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
     // Parse through the downloaded html file
     std::ifstream searchFile("./WebAccess/Contents/html_body.txt");
     std::string str;
+    std::string id;
 
     // Read through the html for the website
     while (getline(searchFile, str)) {
@@ -236,7 +245,7 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
                 // Retrieve the id for the variant (cannot tell if it is the correct one yet)
                 str.erase(0, tokenpos + 8);
                 unsigned long temptoken = str.find(',');
-                std::string id = str.substr(0, temptoken);
+                id = str.substr(0, temptoken);
                 str.erase(0, temptoken);
 
                 // Now check the options of the variant to see if it matches the requested color and size
@@ -260,7 +269,6 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
                 }
 
                 // Returns the id
-                timeLogs << "\n" << id << "\n \n";
                 break;
             }
 
@@ -271,9 +279,10 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
 
     // Mark how much time has passed since function began
     timeLogs << (std::clock() - begin) / (double) CLOCKS_PER_SEC << " seconds to get varID. \n";
+    timeLogs.close();
 
     // Placeholder return
-    return "egh";
+    return id;
 }
 
 // Performs the cURL request and sends the body to html_body.txt
@@ -330,11 +339,14 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
     // First, perform a full model scrape on the collection page specified, saved into Contents/products_log.txt
     getAllModels(collection);
 
+    // Open time logging file
+    std::ofstream timeLogs;
+    timeLogs.open("./logs.txt", std::ios::app);
+
     // Now open products_log.txt and begin parsing through the lines, searching for the keywords in the title
     // Again, some websites have different color placements than others, so I have to account for that.
     std::ifstream searchFile("./WebAccess/Contents/products_log.txt");
     std::string str;
-
 
     // Uses a switch function to specify different color locators for different websites
     switch (sourceURL.method) {
@@ -382,12 +394,14 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                     prdct.sizes[str.substr(0, str.find(" :"))] = str.substr(str.find(" : ") + 3);
                 } else if (stringpos != str.npos && prodFound) {
                     // Mark how much time has passed since function began
-                    std::cout << std::endl << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds to find product." << std::endl;
+                    timeLogs << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds to find product. \n";
+                    timeLogs.close();
                     return prdct;
                 }
             }
-        std::cout << std::endl << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds to not find product." << std::endl;
-        std::cout << "Could not find product for specified keywords." << std::endl;
+        timeLogs << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds to not find product. \n";
+        timeLogs << "Could not find product for specified keywords. \n";
+        timeLogs.close();
         return prdct;
     }
 }
