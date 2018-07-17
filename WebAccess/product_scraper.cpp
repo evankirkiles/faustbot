@@ -51,24 +51,24 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                 }
 
                 // This substring is the id
-                logFile << str.substr(0, tokenpos);
+                std::string id = str.substr(0, tokenpos);
 
                 // Title always comes after id, so title string always comes 9 after
                 str.erase(0, tokenpos + 10);
 
                 // This next substring is the title or the size (title always comes before the size)
-                logFile << " : " << str.substr(0, str.find('"'));
+                std::string size = str.substr(0, str.find(',') - 1);
 
                 // Finally, check availability
                 if (str.find("\"variants\":") > str.find("\"available\":")) {
                     str.erase(0, str.find("\"available\":") + 12);
                     std::string availability = str.substr(0, str.find(','));
-                    if (availability == "false") {
-                        logFile << " : unavailable";
+                    if (availability != "false") {
+                        logFile << size << " : " << id << "\n";
                     }
+                } else {
+                    logFile << "TITLE: " << size << "\n";
                 }
-
-                logFile << "\n";
                 stringpos = str.find("\"id\":");
             }
 
@@ -107,12 +107,11 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                     // The id is 43 characters over
                     str.erase(0, stringpos + 43);
                     std::string id = str.substr(0, str.find('"'));
-                    logFile << id << " : ";
 
                     // The size of the given id is two lines down
                     for (int i = 0; i < 2; ++i) { getline(searchFile, str); }
                     str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-                    logFile << str << "\n";
+                    logFile << str << " : " << id << "\n";
 
                     // Variants have now been found
                     varsFound = true;
@@ -175,7 +174,11 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                         tempPos = str.find("class=\"");
                         str.erase(0, tempPos + 7);
 
-                        logFile << id << " : " << str.substr(0, str.find('"')) << "\n";
+                        std::string size = str.substr(0, str.find('"'));
+                        unsigned long tempPos = size.find("available");
+                        if (tempPos != size.npos) {
+                            logFile << size.substr(0, tempPos - 1) << " : " << id << "\n";
+                        }
                     }
                 }
 
@@ -191,7 +194,6 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
     // Tell how much time pulling all the products took
     duration = ((std::clock() - start) / (double) CLOCKS_PER_SEC) - duration;
     std::cout << std::endl << duration << " seconds to pull the products.";
-    std::cout << std::endl << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds total.";
 }
 
 // Gets the ID from a product's purchase page
@@ -303,12 +305,80 @@ void ShopifyWebsiteHandler::performCURL(const std::string& URL) {
     curl_global_cleanup();
 }
 
-// Functions similarly to the above getAllModels function except this filters the results first by date
-// and then by the prevalence of the keywords in the title.
-//std::vector<Product> ShopifyWebsiteHandler::searchFor(const std::string& collection, const std::string& keyword,
-//                                                      unsigned int numResults) {
-//
-//
-//
-//}
+// Uses a title keyword and a color keyword to search through all the models on the page and returns the first
+// product that matches given keywords. This product will be the most recent one.
+Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, const std::vector<std::string>& keywords,
+                                               const std::vector<std::string>& colorKeywords) {
+
+    // Begin clock to check how much time each process takes
+    std::clock_t start;
+    start = std::clock();
+
+    // Placeholder Product to be returned
+    Product prdct;
+
+    // First, perform a full model scrape on the collection page specified, saved into Contents/products_log.txt
+    getAllModels(collection);
+
+    // Now open products_log.txt and begin parsing through the lines, searching for the keywords in the title
+    // Again, some websites have different color placements than others, so I have to account for that.
+    std::ifstream searchFile("./WebAccess/Contents/products_log.txt");
+    std::string str;
+
+
+    // Uses a switch function to specify different color locators for different websites
+    switch (sourceURL.method) {
+
+        // Default is for format in TITLE: [title], COLOR: [color] \n [size] : [id]
+        default:
+            bool titleMatch = false;
+            bool prodFound = false;
+
+            // Parse through the file looking for TITLE: identifier
+            while(getline(searchFile, str)) {
+
+                // If title identifier is found, check for the keywords
+                unsigned long stringpos = str.find("TITLE: ");
+                if (stringpos != str.npos && !prodFound) {
+                    std::string title = str.substr(stringpos + 7, str.find(',') - 7);
+                    // Remove all extra whitespace from the title
+                    title.erase(std::unique(title.begin(), title.end(),
+                                            [](char a, char b) {return a == ' ' && b == ' '; }), title.end());
+                    for (const std::string& keywd : keywords) {
+                        // If a keyword matches, then proceed to check the color
+                        if (title.find(keywd) != title.npos) {
+                            prdct.title = title;
+                            titleMatch = true;
+                            break;
+                        } else {
+                            titleMatch = false;
+                        }
+                    }
+                    if (titleMatch) {
+                        str.erase(0, str.find("COLOR: ") + 7);
+                        for (const std::string& keywd : colorKeywords) {
+                            // If a keyword matches the color, then product has been found
+                            if (str.find(keywd) != str.npos) {
+                                str.erase(std::unique(str.begin(), str.end(),
+                                                        [](char a, char b) {return a == ' ' && b == ' '; }), str.end());
+                                prdct.color = str;
+                                prodFound = true;
+                                break;
+                            }
+                        }
+                    }
+                } else if (stringpos == str.npos && prodFound) {
+                    // If the product has been found, then this line will be the size and its id
+                    prdct.sizes[str.substr(0, str.find(" :"))] = str.substr(str.find(" : ") + 4);
+                } else if (stringpos != str.npos && prodFound) {
+                    // Mark how much time has passed since function began
+                    std::cout << std::endl << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds to find product." << std::endl;
+                    return prdct;
+                }
+            }
+        std::cout << std::endl << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds to not find product." << std::endl;
+        std::cout << "Could not find product for specified keywords." << std::endl;
+        return prdct;
+    }
+}
 
