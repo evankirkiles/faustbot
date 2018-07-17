@@ -86,10 +86,12 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
                 // The title of the product is the next line
                 getline(searchFile, str);
+                //str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
                 logFile << "TITLE: " <<  str;
 
                 // The colorway is four lines down
                 for (int i = 0; i < 4; ++i) { getline(searchFile, str); }
+                //str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
                 logFile << ", COLOR: " << str << "\n";
 
                 // Begin looking at variants and their id's
@@ -109,6 +111,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
                     // The size of the given id is two lines down
                     for (int i = 0; i < 2; ++i) { getline(searchFile, str); }
+                    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
                     logFile << str << "\n";
 
                     // Variants have now been found
@@ -127,31 +130,74 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
         }
     } else if (sourceURL.method > 300 && sourceURL.method < 400) {
+        bool prodFound = false;
+        bool colorFound = false;
+
         while (getline(searchFile, str)) {
 
-            // If the title identifier is found, print out the line
-            unsigned long stringpos = str.find("window.BOLD.common.Shopify.saveProduct(\"");
-            while (stringpos != str.npos) {
+            // While does not have a product found, look for the title identifier
+            unsigned long stringpos = str.find("<li id");
+            if (stringpos != str.npos) {
 
-                // Print the rest of the string after the found part up until the specified token
-                str.erase(0, stringpos + 40);
-                logFile << str.substr(0, str.find('"')) << "\n";
+                // The title of the product is down 24 lines
+                for (int i = 0; i < 24; ++i) { getline(searchFile, str); }
+                logFile << "TITLE: " << str;
 
-                stringpos = str.find("window.BOLD.common.Shopify.saveProduct(\"");
+                prodFound = true;
+                colorFound = false;
+            }
+
+            if (prodFound) {
+                unsigned long tempPos;
+                // If the color has not yet been found, search for that before sizes
+                if (!colorFound) {
+
+                    tempPos = str.find("tooltip\">");
+                    if (tempPos != str.npos) {
+
+                        // Color will be after the tooltip"> substring
+                        str.erase(0, tempPos + 9);
+                        logFile << ", COLOR: " << str.substr(0, str.find('<')) << "\n";
+
+                        colorFound = true;
+                    }
+                } else {
+
+                    // Search for sizes
+                    tempPos = str.find("data-option-title");
+                    if (tempPos != str.npos) {
+
+                        // Size and availability would be after class=" identifier
+                        tempPos = str.find("data-variant-id=\"");
+                        str.erase(0, tempPos + 17);
+                        std::string id = str.substr(0, str.find('"'));
+
+                        tempPos = str.find("class=\"");
+                        str.erase(0, tempPos + 7);
+
+                        logFile << id << " : " << str.substr(0, str.find('"')) << "\n";
+                    }
+                }
+
+                // Finally, if the </li> modifier is found with no spaces, the product variants have ended
+                if (str == "</li>") {
+                    prodFound = false;
+                    colorFound = false;
+                }
             }
         }
     }
 
     // Tell how much time pulling all the products took
     duration = ((std::clock() - start) / (double) CLOCKS_PER_SEC) - duration;
-    std::cout << std::endl << duration << " seconds to pull 100 products.";
+    std::cout << std::endl << duration << " seconds to pull the products.";
     std::cout << std::endl << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds total.";
 }
 
 // Gets the ID from a product's purchase page
 std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL, const std::string& size, std::string color) {
 
-    if (color == "") { color = "ul"; }
+    if (color.empty()) { color = "ul"; }
 
     // Begin clock to check how much time this function takes
     std::clock_t begin;
