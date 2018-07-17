@@ -3,8 +3,8 @@
 
 int main() {
 
-    ShopifyWebsiteHandler swh(supported_sites::KITH);
-    // swh.getAllModels("/collections/footwear", "");
+    ShopifyWebsiteHandler swh(supported_sites::BODEGA);
+    // swh.getAllModels("", "");
 
     // swh.getVariantIDFrom("/collections/footwear/products/air-max-95-se", "9");
 
@@ -13,7 +13,9 @@ int main() {
 
     //pclose(in);
 
-    Product prdct = swh.lookForKeywords("/collections/footwear", {"NIKE AIR JORDAN"}, {"Hyper ROYAL"});
+    Product prdct = swh.lookForKeywords("/collections/footwear", {"x MITA NMD"}, {""});
+
+    std::cout << prdct.title << " : " << prdct.color << " : " << prdct.getID("10") << std::endl;
 
     return 0;
 }

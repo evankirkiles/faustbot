@@ -10,10 +10,6 @@ ShopifyWebsiteHandler::ShopifyWebsiteHandler(const URLAndMethod& url) : sourceUR
 // Function that pulls the HTML source and then searches it for " title: ", printing the lines it finds
 void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const std::string& bonusparams) {
 
-    // Open time logging file
-    std::ofstream timeLogs;
-    timeLogs.open("../logs.txt", std::ios::trunc);
-
     // Begin clock to check how much time each process takes
     std::clock_t start;
     double duration;
@@ -28,7 +24,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
     // Tell how much time the connection to the website took
     duration = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    timeLogs << duration << " seconds to connect to website. \n";
+    std::cout << std::endl << duration << " seconds to connect to website. \n";
 
     // Now parse through the downloaded html file to get the names of all the current items
     std::ifstream searchFile("./WebAccess/Contents/html_body.txt");
@@ -202,11 +198,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
     // Tell how much time pulling all the products took
     duration = ((std::clock() - start) / (double) CLOCKS_PER_SEC) - duration;
-    timeLogs << duration << " seconds to pull the products. \n";
-
-    // Close files
-    timeLogs.close();
-    logFile.close();
+    std::cout << std::endl << duration << " seconds to pull the products. \n";
 }
 
 // Gets the ID from a product's purchase page
@@ -387,7 +379,7 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                     }
                 } else if (stringpos == str.npos && prodFound) {
                     // If the product has been found, then this line will be the size and its id
-                    prdct.sizes[str.substr(0, str.find(" :"))] = str.substr(str.find(" : ") + 4);
+                    prdct.sizes[str.substr(0, str.find(" :"))] = str.substr(str.find(" : ") + 3);
                 } else if (stringpos != str.npos && prodFound) {
                     // Mark how much time has passed since function began
                     std::cout << std::endl << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds to find product." << std::endl;

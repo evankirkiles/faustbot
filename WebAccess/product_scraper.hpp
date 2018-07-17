@@ -30,6 +30,22 @@ struct Product {
     // Usage: sizes[size] returns the ID for the model of that product
     std::unordered_map<std::string, std::string> sizes;
 
+    // Function to return the id for a given size of the product
+    std::string getID(std::string size) {
+        size.append(" ");
+        for (auto i = sizes.begin(); i != sizes.end(); ++i) {
+            std::string format = i.operator*().first;
+            format.append(" ");
+            if (format.find(size) != format.npos) {
+                return i.operator*().second;
+            } else {
+                std::replace(format.begin(), format.end(), '.', '-');
+                if (format.find(size) != format.npos){
+                    return i.operator*().second;
+                }
+            }
+        }
+    }
 };
 
 // Class to interface with the website given
