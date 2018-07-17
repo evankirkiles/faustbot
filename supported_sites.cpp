@@ -12,8 +12,7 @@ namespace supported_sites {
     URLAndMethod WISHATL = {"https://wishatl.com", 105};
 
     URLAndMethod KITH = {"https://kith.com", 201};
-
-    URLAndMethod BODEGA = {"https://shop.bdgastore.com", 301};
+    URLAndMethod BODEGA = {"https://shop.bdgastore.com", 202};
 }
 
 

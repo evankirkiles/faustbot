@@ -3,10 +3,10 @@
 
 int main() {
 
-    ShopifyWebsiteHandler swh(supported_sites::BODEGA);
-    //swh.getAllModels("/collections/footwear", "?limit=100");
+    ShopifyWebsiteHandler swh(supported_sites::KITH);
+    swh.getAllModels("/collections/footwear", "");
 
-    swh.getVariantIDFrom("/collections/footwear/products/clyde-from-the-archive", "9");
+    // swh.getVariantIDFrom("/collections/footwear/products/air-max-95-se", "9");
 
     std::cout << std::endl;
     return 0;
