@@ -22,7 +22,7 @@ namespace supported_sites {
 //           ^ Bodega requires adding an extraURL to specify which type of thing you are looking at (footwear, etc.)
 
     // MARK: Shopify sites that have a products.json page
-
+    // Unavailable sizes are marked unavailable in normal products.json-website getAllModels functions
     extern URLAndMethod SOCIALSTATUS;    // Colors are located in the main product's title, with sizes in the variants' titles
     extern URLAndMethod XHIBITION;       // Colors are located in the variants' titles on the right of size
     extern URLAndMethod UNDEFEATED;      // Colors are located in the main product's title, with sizes in the variants' titles
@@ -32,8 +32,10 @@ namespace supported_sites {
     // MARK: Specialized Shopify sites
 
     // For Kith, there are collections pages which function in the same way as the base URL page
+    // Unavailable sizes are simply not shown in the getAllModels function for Kith
     extern URLAndMethod KITH;
     // For Bodega, there are also collections pages but base URL page does not have the same function
+    // Unavailable sizes are marked unavailable in the getAllModels function for Bodega
     extern URLAndMethod BODEGA;
 
 }

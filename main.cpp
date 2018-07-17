@@ -3,7 +3,7 @@
 
 int main() {
 
-    ShopifyWebsiteHandler swh(supported_sites::BODEGA);
+    ShopifyWebsiteHandler swh(supported_sites::KITH);
     swh.getAllModels("/collections/footwear", "");
 
     // swh.getVariantIDFrom("/collections/footwear/products/air-max-95-se", "9");
