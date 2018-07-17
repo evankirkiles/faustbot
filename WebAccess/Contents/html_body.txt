@@ -194,7 +194,7 @@ Shopify.theme.style = {"id":null,"handle":null};
   }
 })();
 </script>
-<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"806c6efd-78ee-4525-b9b2-ea65a3469185","pageurl":"kith.com\/collections\/footwear?limit=25","u":"814222924ad4","p":"collection","rtyp":"collection","rid":31304833};</script>
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"99d1ee10-8601-4e0b-bc61-e36b6c11fc59","pageurl":"kith.com\/collections\/footwear?limit=25","u":"b4e38d7f7fd0","p":"collection","rtyp":"collection","rid":31304833};</script>
 <script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
 <script>window.Shopify = window.Shopify || {};
 window.Shopify.Checkout = window.Shopify.Checkout || {};
@@ -202,7 +202,7 @@ window.Shopify.Checkout.apiHost = "kithnyc.myshopify.com";
 window.ShopifyPay = window.ShopifyPay || {};
 window.ShopifyPay.acceleratedFlowIncontext = false;
 window.ShopifyPay.apiHost = "pay.shopify.com";
-window.ShopifyPay.apiToken = "TklIMW9RK1lJc2ROa1UxOS9UMkUwRSs2cjZTNDRTcXM2cEtVVmF2RFR6ND0tLXdSMGRwNWUrS0pmS0tMeC9YcnZ5bkE9PQ==--4850a3612d9136a0496bfa27acc21e542ae3d964";
+window.ShopifyPay.apiToken = "VGVSd3VQdG9rY1pGL3QyR0tOOXkyckFidkVRY3VZaE12TXNWUEViVjdiVT0tLS9iRVpPZ0JVajZJSktrSi9WblBoNVE9PQ==--c1a15998ee78805ed0e421dcc87e395354b6c5cf";
 window.ShopifyPay.requestHost = "kith.com"
 window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/sheet\/main-9591cdb8fc78ba1acaca189815e8d30f2513988b8b83f4a84c83115fcae19d76.css";
 </script>

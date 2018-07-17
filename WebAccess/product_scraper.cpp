@@ -10,6 +10,10 @@ ShopifyWebsiteHandler::ShopifyWebsiteHandler(const URLAndMethod& url) : sourceUR
 // Function that pulls the HTML source and then searches it for " title: ", printing the lines it finds
 void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const std::string& bonusparams) {
 
+    // Open time logging file
+    std::ofstream timeLogs;
+    timeLogs.open("../logs.txt", std::ios::trunc);
+
     // Begin clock to check how much time each process takes
     std::clock_t start;
     double duration;
@@ -24,7 +28,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
     // Tell how much time the connection to the website took
     duration = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    std::cout << std::endl << duration << " seconds to connect to website.";
+    timeLogs << duration << " seconds to connect to website. \n";
 
     // Now parse through the downloaded html file to get the names of all the current items
     std::ifstream searchFile("./WebAccess/Contents/html_body.txt");
@@ -198,11 +202,19 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
     // Tell how much time pulling all the products took
     duration = ((std::clock() - start) / (double) CLOCKS_PER_SEC) - duration;
-    std::cout << std::endl << duration << " seconds to pull the products.";
+    timeLogs << duration << " seconds to pull the products. \n";
+
+    // Close files
+    timeLogs.close();
+    logFile.close();
 }
 
 // Gets the ID from a product's purchase page
 std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL, const std::string& size, std::string color) {
+
+    // Open time logging file
+    std::ofstream timeLogs;
+    timeLogs.open("../logs.txt", std::ios::trunc);
 
     if (color.empty()) { color = "ul"; }
 
@@ -255,7 +267,8 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
                     continue;
                 }
 
-                std::cout << std::endl << id << std::endl;
+                // Returns the id
+                timeLogs << "\n" << id << "\n \n";
                 break;
             }
 
@@ -265,7 +278,7 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
     }
 
     // Mark how much time has passed since function began
-    std::cout << std::endl << (std::clock() - begin) / (double) CLOCKS_PER_SEC << " seconds to get varID.";
+    timeLogs << (std::clock() - begin) / (double) CLOCKS_PER_SEC << " seconds to get varID. \n";
 
     // Placeholder return
     return "egh";

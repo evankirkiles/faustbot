@@ -15,9 +15,5 @@ int main() {
 
     Product prdct = swh.lookForKeywords("/collections/footwear", {"NIKE AIR JORDAN"}, {"Hyper ROYAL"});
 
-    std::cout << std::endl << prdct.title << " : " << prdct.color << std::endl;
-//    for (auto i = prdct.sizes.begin(); i != prdct.sizes.end(); ++i) {
-//        std::cout << i.operator*().first << " : " << i.operator*().second << std::endl;
-//    }
     return 0;
 }
