@@ -3,19 +3,19 @@
 
 int main() {
 
+    // Run the python script to log into GMail in hopes of reducing captcha probabilities
+    FILE* in = popen("python WebAccess/checkout.py ", "r");
+
+    // Start the website handler and search for a product
     ShopifyWebsiteHandler swh(supported_sites::KITH);
-    // swh.getAllModels("", "");
+    Product prdct = swh.lookForKeywords("/collections/footwear", {"Asics"}, {"White"});
 
-    // swh.getVariantIDFrom("/collections/footwear/products/air-max-95-se", "9");
-
-    // Run python checkout.py
-
-
-    Product prdct = swh.lookForKeywords("/collections/footwear", {"ASICS"}, {"WHITE"});
-    std::cout << prdct.title << " : " << prdct.color << " : " << prdct.getID("11");
-
-    std::string cartLink = std::string(supported_sites::KITH.baseURL) + "/cart/" + prdct.getID("11") + ":1";
-    FILE* in = popen(std::string(std::string("python WebAccess/checkout.py ") + cartLink).c_str(), "r");
+    // When product is found, write the link to a given size in the communications file
+    std::string cartLink = std::string(supported_sites::KITH.baseURL) + "/cart/" + prdct.getID("9") + ":1";
+    std::ofstream fp;
+    fp.open("./WebAccess/communications.txt", std::ios::trunc);
+    fp << cartLink;
+    fp.close();
 
     // Wait for subprocess to terminate
     pclose(in);

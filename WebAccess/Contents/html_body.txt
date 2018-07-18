@@ -11,7 +11,7 @@
   <meta name="format-detection" content="date=no">
   <meta name="format-detection" content="address=no">
   
-  <link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/favicon.png?4303817170085889276" type="image/png" />
+  <link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/favicon.png?1586323786756710143" type="image/png" />
   
 
   
@@ -48,16 +48,16 @@
   <meta name="theme-color" content="#000000">
 
   <!-- CSS ================================================== -->
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/shop.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/checkout_2.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/custom-mmenu.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/snize-styles.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.scss.css?1586323786756710143" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.scss.css?1586323786756710143" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/shop.scss.css?1586323786756710143" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/checkout_2.css?1586323786756710143" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/custom-mmenu.css?1586323786756710143" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/snize-styles.scss.css?1586323786756710143" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.css?1586323786756710143" rel="stylesheet" type="text/css" media="all" />
 
   
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?1586323786756710143" rel="stylesheet" type="text/css" media="all" />
 
   
 
@@ -194,7 +194,7 @@ Shopify.theme.style = {"id":null,"handle":null};
   }
 })();
 </script>
-<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"c1690c05-3a99-4f5f-86de-6ed63473a6c0","pageurl":"kith.com\/collections\/footwear?limit=25","u":"8bf2c0de2251","p":"collection","rtyp":"collection","rid":31304833};</script>
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"a522f896-9f4d-4b7e-9279-5813a08af976","pageurl":"kith.com\/collections\/footwear?limit=25","u":"7a6850b94eaa","p":"collection","rtyp":"collection","rid":31304833};</script>
 <script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
 <script>window.Shopify = window.Shopify || {};
 window.Shopify.Checkout = window.Shopify.Checkout || {};
@@ -202,7 +202,7 @@ window.Shopify.Checkout.apiHost = "kithnyc.myshopify.com";
 window.ShopifyPay = window.ShopifyPay || {};
 window.ShopifyPay.acceleratedFlowIncontext = false;
 window.ShopifyPay.apiHost = "pay.shopify.com";
-window.ShopifyPay.apiToken = "SXdwRy9QYk9XL281d2J5UHEvQlJYZCtkbS9TK3RxSjVyY3dWNnRta2o1Zz0tLXhIemVVWFhCbUNlSEJvSEt0MDNQY0E9PQ==--dd40acd37ea86aa876d0673c4611c0e8e31a1f6a";
+window.ShopifyPay.apiToken = "UHQxWjlYdnc1YS9UQ0xRTG5wSmwwSmdHdjAzQlNXaE9FQlBleEdEUGNXRT0tLXR6ME01NkJxSjljaXZ0Mm9JVWtkQXc9PQ==--c8eacdd60980f20a0a97dfeb87fbce584515d74c";
 window.ShopifyPay.requestHost = "kith.com"
 window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/sheet\/main-9591cdb8fc78ba1acaca189815e8d30f2513988b8b83f4a84c83115fcae19d76.css";
 </script>
@@ -274,7 +274,7 @@ window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/
     first.parentNode.insertBefore(script, first);
   };
   trekkie.load(
-    {"Trekkie":{"appName":"storefront","development":false,"defaultAttributes":{"shopId":942252,"isMerchantRequest":null,"themeId":450002951,"themeCityHash":4157321648962556008}},"Performance":{"navigationTimingApiMeasurementsEnabled":true,"navigationTimingApiMeasurementsSampleRate":1.0},"Google Analytics":{"trackingId":"UA-62344036-1","domain":"auto","siteSpeedSampleRate":"10","enhancedEcommerce":true,"doubleClick":true,"includeSearch":true},"Facebook Pixel":{"pixelIds":["1059291937516902"],"agent":"plshopify1.2"},"Session Attribution":{}}
+    {"Trekkie":{"appName":"storefront","development":false,"defaultAttributes":{"shopId":942252,"isMerchantRequest":null,"themeId":450002951,"themeCityHash":15663152006607039239}},"Performance":{"navigationTimingApiMeasurementsEnabled":true,"navigationTimingApiMeasurementsSampleRate":1.0},"Google Analytics":{"trackingId":"UA-62344036-1","domain":"auto","siteSpeedSampleRate":"10","enhancedEcommerce":true,"doubleClick":true,"includeSearch":true},"Facebook Pixel":{"pixelIds":["1059291937516902"],"agent":"plshopify1.2"},"Session Attribution":{}}
   );
 
   var loaded = false;
@@ -394,7 +394,7 @@ style='padding:8px 10px;width:100%;display: none;position: fixed; z-index: 99999
 
 <!--[if lt IE 9]>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
-<script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/respond.min.js?4303817170085889276" type="text/javascript"></script>
+<script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/respond.min.js?1586323786756710143" type="text/javascript"></script>
 <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
 <link href="//kith.com/search?q=46d30a55b399b80d9e1d6b487e8f990c" id="respond-redirect" rel="respond-redirect" />
 <script src="//kith.com/search?q=46d30a55b399b80d9e1d6b487e8f990c" type="text/javascript"></script>
@@ -404,9 +404,9 @@ style='padding:8px 10px;width:100%;display: none;position: fixed; z-index: 99999
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.all.min.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.fixedelements.min.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/modernizr.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.all.min.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.fixedelements.min.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/modernizr.min.js?1586323786756710143" type="text/javascript"></script>
 
   
   
@@ -1316,10 +1316,10 @@ $(document).on('ready', function() {
               
               <div class="ksplash-header-leftnav-container">
                 <div class="ksplash-header-back" onClick="window.history.back();">
-                  <img class="ksplash-header-back-icon" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-plain-left-arrow.svg?4303817170085889276" alt="back arrow icon">
+                  <img class="ksplash-header-back-icon" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-plain-left-arrow.svg?1586323786756710143" alt="back arrow icon">
                 </div>
                 <a class="ksplash-header-nav-toggle js-ksplash-header-nav-toggle">
-                  <img src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-hamburger.svg?4303817170085889276" alt="navigation menu icon">
+                  <img src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-hamburger.svg?1586323786756710143" alt="navigation menu icon">
                 </a>
               </div>
             </div>
@@ -11409,7 +11409,7 @@ Back
                 >
                   
                   
-                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?4303817170085889276" alt="logo"></a>
+                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?1586323786756710143" alt="logo"></a>
                 </div>
                 <div
                   class="
@@ -11419,7 +11419,7 @@ Back
                   "
                   data-site="wmns"
                 >
-                  <a href="/pages/women"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?4303817170085889276" alt="logo icon link to womens page"></a>
+                  <a href="/pages/women"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?1586323786756710143" alt="logo icon link to womens page"></a>
                 </div>
                 <div
                   class="
@@ -11429,7 +11429,7 @@ Back
                   "
                   data-site="kids"
                 >
-                  <a href="/pages/kids"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-kids.png?4303817170085889276" alt="logo icon link to kids page"></a>
+                  <a href="/pages/kids"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-kids.png?1586323786756710143" alt="logo icon link to kids page"></a>
                 </div>
                 <div
                   class="
@@ -11439,7 +11439,7 @@ Back
                   "
                   data-site="treats"
                 >
-                  <a href="/pages/treats"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-treats.png?4303817170085889276" alt="logo icon link to kith treats page"></a>
+                  <a href="/pages/treats"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-treats.png?1586323786756710143" alt="logo icon link to kith treats page"></a>
                 </div>
                 <div
                   class="
@@ -11449,7 +11449,7 @@ Back
                   "
                   data-site="site"
                 >
-                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?4303817170085889276" alt="logo icon link to mens page"></a>
+                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?1586323786756710143" alt="logo icon link to mens page"></a>
                 </div>
                 <div
                   class="
@@ -11458,7 +11458,7 @@ Back
                     -spacer
                   "
                 >
-                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?4303817170085889276" alt="logo icon link to mens page"></a>
+                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?1586323786756710143" alt="logo icon link to mens page"></a>
                 </div>
               </div>
 
@@ -12216,7 +12216,7 @@ Back
                   </div>
                 </div>
                 <div class="ksplash-header-search-icon">
-                  <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-search.svg?4303817170085889276" alt="search icon">
+                  <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-search.svg?1586323786756710143" alt="search icon">
                 </div>
                 <div class="ksplash-header-account-icon">
                   <span
@@ -12225,7 +12225,7 @@ Back
                       js-ksplash-header-account-link
                     "
                   >
-                    <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-account.svg?4303817170085889276" alt="kith account icon">
+                    <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-account.svg?1586323786756710143" alt="kith account icon">
                   </span>
                   <div class="ksplash-header-account js-ksplash-header-account" tabindex="-1">
                     <div>
@@ -12267,7 +12267,7 @@ Back
                 <a href="/cart" class="js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
                   <div class="clearfix">
                     <span class="ksplash-header-cart-icon">
-                      <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-bag.svg?4303817170085889276" alt="shopping cart icon">
+                      <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-bag.svg?1586323786756710143" alt="shopping cart icon">
                     </span>
                     <span class="ksplash-header-cart-count">
                       (<span id="CartCount">0</span>)
@@ -22532,7 +22532,7 @@ $('ksplash-header-main-link').click(function() {
               <div class="wrapper wrapper--full">
                 <div class="custwelcome-header">
                   <div class="text-center">
-                    <img class="custwelcome-logo" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-alt-white_small.png?4303817170085889276">
+                    <img class="custwelcome-logo" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-alt-white_small.png?1586323786756710143">
                   </div>
                 </div>
 
@@ -28094,7 +28094,7 @@ $170.00
               </p>
             </div>
           </div>
-          <div class="product-card-info-variants" data-product-tags="52418,air max,air max 98,air max 98 se,am,am98,footwear,mens,nike,nike air max 98 se,Nike Air Max 98 SE - Red / White,nkao9380-600,productsize-10,productsize-12,productsize-7-5,productsize-9,productsize-9-5,red,se,sneaker,sneakers,square-footwear,white">
+          <div class="product-card-info-variants" data-product-tags="52418,air max,air max 98,air max 98 se,am,am98,footwear,mens,nike,nike air max 98 se,Nike Air Max 98 SE - Red / White,nkao9380-600,productsize-10,productsize-12,productsize-7,productsize-7-5,productsize-9,productsize-9-5,red,se,sneaker,sneakers,square-footwear,white">
             
             
 <div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="1561868009479" tooltip="QUICK ADD">
@@ -28761,30 +28761,30 @@ $130.00
     };
   </script>
 
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider-style.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.css?1586323786756710143" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider-style.scss.css?1586323786756710143" rel="stylesheet" type="text/css" media="all" />
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.min.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/plyr.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.min.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/plyr.js?1586323786756710143" type="text/javascript"></script>
   <script src="//cdn.shopify.com/s/assets/themes_support/option_selection-ea4f4a242e299f2227b2b8038152223f741e90780c0c766883939e8902542bda.js" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/packery.pkgd.min.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.2.1.9.min.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.magnific-popup.min.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment-timezone-with-data.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/packery.pkgd.min.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.2.1.9.min.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.magnific-popup.min.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment-timezone-with-data.min.js?1586323786756710143" type="text/javascript"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/snap.js/1.9.2/snap.min.js"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/site.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-super-slider.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-theme.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe-ui.min.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/site.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-super-slider.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-theme.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe-ui.min.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.min.js?1586323786756710143" type="text/javascript"></script>
   
   
 
   
   
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/handlebars.min.js?4303817170085889276" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/handlebars.min.js?1586323786756710143" type="text/javascript"></script>
     <!-- /snippets/ajax-cart-template.liquid -->
 
   <script id="CartTemplate" type="text/template">
@@ -29149,7 +29149,7 @@ $130.00
   
   </script>
 
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/ajax-cart.js?4303817170085889276" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/ajax-cart.js?1586323786756710143" type="text/javascript"></script>
   
 
   <script>
@@ -29182,7 +29182,7 @@ $130.00
 
   
     
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/theme.min.js?4303817170085889276" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/theme.min.js?1586323786756710143" type="text/javascript"></script>
   
 
   
@@ -29191,9 +29191,9 @@ $130.00
     </script>
   
 
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/tweenlite.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.min.js?4303817170085889276" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.animate.plugin.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/tweenlite.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.min.js?1586323786756710143" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.animate.plugin.min.js?1586323786756710143" type="text/javascript"></script>
 
   
   <script>
@@ -29205,7 +29205,7 @@ $130.00
       whenDefined(window, 'HFCHAT_CONFIG', function() {
         HFCHAT_CONFIG.onload = function() {
           var HappyFoxChat = this;
-          HappyFoxChat.addCustomCSSFile('//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?4303817170085889276', function(err) {
+          HappyFoxChat.addCustomCSSFile('//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?1586323786756710143', function(err) {
             if (err) {
               // console.error('Error:', err);
             } else {
