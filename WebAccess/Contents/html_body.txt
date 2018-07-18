@@ -194,7 +194,7 @@ Shopify.theme.style = {"id":null,"handle":null};
   }
 })();
 </script>
-<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"666c461e-6df1-43d8-a66b-5869f7ff565f","pageurl":"kith.com\/collections\/footwear?limit=25","u":"1709889725d7","p":"collection","rtyp":"collection","rid":31304833};</script>
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"46871a78-0c4c-42e6-b701-75c63f418b56","pageurl":"kith.com\/collections\/footwear?limit=25","u":"e8aea426705f","p":"collection","rtyp":"collection","rid":31304833};</script>
 <script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
 <script>window.Shopify = window.Shopify || {};
 window.Shopify.Checkout = window.Shopify.Checkout || {};
@@ -202,7 +202,7 @@ window.Shopify.Checkout.apiHost = "kithnyc.myshopify.com";
 window.ShopifyPay = window.ShopifyPay || {};
 window.ShopifyPay.acceleratedFlowIncontext = false;
 window.ShopifyPay.apiHost = "pay.shopify.com";
-window.ShopifyPay.apiToken = "QjZuUkV6aUsyN2VUbXRST3N0OXozMTZzUk5ya05PcGtWOWhtSFJuNDRRcz0tLUJHdHNOSDRVeVFVeGIrNkxjUFdDY3c9PQ==--25064caff00aad5c1f8be9255e3130a7f1b9f1ff";
+window.ShopifyPay.apiToken = "Wi92T2FnVEo0VDQzektCcW5pNFFCczJnOGs0eWx2R1J5RmNsUEROQ3BHTT0tLUpwbFRONXRCMjdwNjdXZVNnQnlBbmc9PQ==--eb1f221a7e210de442fac86fc1f7eeadb197d195";
 window.ShopifyPay.requestHost = "kith.com"
 window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/sheet\/main-9591cdb8fc78ba1acaca189815e8d30f2513988b8b83f4a84c83115fcae19d76.css";
 </script>
@@ -22951,7 +22951,7 @@ $('ksplash-header-main-link').click(function() {
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="6,6.5,7.5,10.5,12,"
+  data-sizes="6,6.5,7.5,12,"
   >
   <div 
     class="
@@ -23023,7 +23023,7 @@ $150.00
               </p>
             </div>
           </div>
-          <div class="product-card-info-variants" data-product-tags="71418,aabb9252,Adidas consortium,adidas Consortium x Mita Stan Smith -,final-sale,footwear,mens,mita,productsize-10-5,productsize-12,productsize-6,productsize-6-5,productsize-7-5,sneaker,sneakers,square-footwear,stan smith">
+          <div class="product-card-info-variants" data-product-tags="71418,aabb9252,Adidas consortium,adidas Consortium x Mita Stan Smith -,final-sale,footwear,mens,mita,productsize-12,productsize-6,productsize-6-5,productsize-7-5,sneaker,sneakers,square-footwear,stan smith">
             
             
 <div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12209494917243" tooltip="QUICK ADD">
@@ -23037,10 +23037,6 @@ $150.00
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12209495015547" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         7.5
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12209495212155" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        10.5
                       </div>
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12209495310459" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">

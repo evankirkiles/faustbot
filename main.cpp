@@ -17,7 +17,5 @@ int main() {
     std::string cartLink = std::string(supported_sites::KITH.baseURL) + "/cart/" + prdct.getID("11") + ":1";
     FILE* in = popen(std::string(std::string("python WebAccess/checkout.py ") + cartLink).c_str(), "r");
 
-    pclose(in);
-
     return 0;
 }
