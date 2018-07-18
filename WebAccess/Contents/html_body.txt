@@ -11,7 +11,7 @@
   <meta name="format-detection" content="date=no">
   <meta name="format-detection" content="address=no">
   
-  <link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/favicon.png?16674745362632837294" type="image/png" />
+  <link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/favicon.png?4303817170085889276" type="image/png" />
   
 
   
@@ -48,16 +48,16 @@
   <meta name="theme-color" content="#000000">
 
   <!-- CSS ================================================== -->
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.scss.css?16674745362632837294" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.scss.css?16674745362632837294" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/shop.scss.css?16674745362632837294" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/checkout_2.css?16674745362632837294" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/custom-mmenu.css?16674745362632837294" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/snize-styles.scss.css?16674745362632837294" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.css?16674745362632837294" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/shop.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/checkout_2.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/custom-mmenu.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/snize-styles.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
 
   
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?16674745362632837294" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
 
   
 
@@ -194,7 +194,7 @@ Shopify.theme.style = {"id":null,"handle":null};
   }
 })();
 </script>
-<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"46871a78-0c4c-42e6-b701-75c63f418b56","pageurl":"kith.com\/collections\/footwear?limit=25","u":"e8aea426705f","p":"collection","rtyp":"collection","rid":31304833};</script>
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"c1690c05-3a99-4f5f-86de-6ed63473a6c0","pageurl":"kith.com\/collections\/footwear?limit=25","u":"8bf2c0de2251","p":"collection","rtyp":"collection","rid":31304833};</script>
 <script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
 <script>window.Shopify = window.Shopify || {};
 window.Shopify.Checkout = window.Shopify.Checkout || {};
@@ -202,7 +202,7 @@ window.Shopify.Checkout.apiHost = "kithnyc.myshopify.com";
 window.ShopifyPay = window.ShopifyPay || {};
 window.ShopifyPay.acceleratedFlowIncontext = false;
 window.ShopifyPay.apiHost = "pay.shopify.com";
-window.ShopifyPay.apiToken = "Wi92T2FnVEo0VDQzektCcW5pNFFCczJnOGs0eWx2R1J5RmNsUEROQ3BHTT0tLUpwbFRONXRCMjdwNjdXZVNnQnlBbmc9PQ==--eb1f221a7e210de442fac86fc1f7eeadb197d195";
+window.ShopifyPay.apiToken = "SXdwRy9QYk9XL281d2J5UHEvQlJYZCtkbS9TK3RxSjVyY3dWNnRta2o1Zz0tLXhIemVVWFhCbUNlSEJvSEt0MDNQY0E9PQ==--dd40acd37ea86aa876d0673c4611c0e8e31a1f6a";
 window.ShopifyPay.requestHost = "kith.com"
 window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/sheet\/main-9591cdb8fc78ba1acaca189815e8d30f2513988b8b83f4a84c83115fcae19d76.css";
 </script>
@@ -394,7 +394,7 @@ style='padding:8px 10px;width:100%;display: none;position: fixed; z-index: 99999
 
 <!--[if lt IE 9]>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
-<script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/respond.min.js?16674745362632837294" type="text/javascript"></script>
+<script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/respond.min.js?4303817170085889276" type="text/javascript"></script>
 <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
 <link href="//kith.com/search?q=46d30a55b399b80d9e1d6b487e8f990c" id="respond-redirect" rel="respond-redirect" />
 <script src="//kith.com/search?q=46d30a55b399b80d9e1d6b487e8f990c" type="text/javascript"></script>
@@ -404,9 +404,9 @@ style='padding:8px 10px;width:100%;display: none;position: fixed; z-index: 99999
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.all.min.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.fixedelements.min.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/modernizr.min.js?16674745362632837294" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.all.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.fixedelements.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/modernizr.min.js?4303817170085889276" type="text/javascript"></script>
 
   
   
@@ -1316,10 +1316,10 @@ $(document).on('ready', function() {
               
               <div class="ksplash-header-leftnav-container">
                 <div class="ksplash-header-back" onClick="window.history.back();">
-                  <img class="ksplash-header-back-icon" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-plain-left-arrow.svg?16674745362632837294" alt="back arrow icon">
+                  <img class="ksplash-header-back-icon" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-plain-left-arrow.svg?4303817170085889276" alt="back arrow icon">
                 </div>
                 <a class="ksplash-header-nav-toggle js-ksplash-header-nav-toggle">
-                  <img src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-hamburger.svg?16674745362632837294" alt="navigation menu icon">
+                  <img src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-hamburger.svg?4303817170085889276" alt="navigation menu icon">
                 </a>
               </div>
             </div>
@@ -4489,6 +4489,46 @@ Back
   "
   data-collection-filter="true"
   data-collection-site="site"
+  data-collection-link="/collections/palm-angels"
+  data-title="false"
+  data-subtitle="false"
+  data-image="false"
+>
+  <a
+    href="/collections/palm-angels"
+    
+    
+    
+    
+    
+  >
+    Palm Angels
+  </a>
+</li>
+                          
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li 
+  class="
+    ksplash-header-subnav-item
+    -small
+    js-ksplash-header-subnav-item
+    
+  "
+  data-collection-filter="true"
+  data-collection-site="site"
   data-collection-link="/collections/r13"
   data-title="false"
   data-subtitle="false"
@@ -4746,6 +4786,15 @@ Back
   </a>
 </li>
                           
+                          
+                        </ul>
+                      </div>
+                      
+
+                      <div class="grid-item one-fifth">
+                        <ul class="ksplash-header-subnav-col">
+                          
+                          
                             
 
 
@@ -4785,15 +4834,6 @@ Back
     Timberland
   </a>
 </li>
-                          
-                          
-                        </ul>
-                      </div>
-                      
-
-                      <div class="grid-item one-fifth">
-                        <ul class="ksplash-header-subnav-col">
-                          
                           
                             
 
@@ -6633,6 +6673,46 @@ Back
   "
   data-collection-filter="true"
   data-collection-site="site"
+  data-collection-link="/collections/palm-angels"
+  data-title="false"
+  data-subtitle="false"
+  data-image="false"
+>
+  <a
+    href="/collections/palm-angels"
+    
+    
+    
+    
+    
+  >
+    Palm Angels
+  </a>
+</li>
+                          
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li 
+  class="
+    ksplash-header-subnav-item
+    
+    js-ksplash-header-subnav-item
+    
+  "
+  data-collection-filter="true"
+  data-collection-site="site"
   data-collection-link="/collections/r13"
   data-title="false"
   data-subtitle="false"
@@ -6730,6 +6810,13 @@ Back
   </a>
 </li>
                           
+                        </ul>
+                      </div>
+                      
+
+                      <div class="grid-item one-quarter">
+                        <ul class="ksplash-header-subnav-col">
+                          
                             
 
 
@@ -6769,13 +6856,6 @@ Back
     Stone Island
   </a>
 </li>
-                          
-                        </ul>
-                      </div>
-                      
-
-                      <div class="grid-item one-quarter">
-                        <ul class="ksplash-header-subnav-col">
                           
                             
 
@@ -11329,7 +11409,7 @@ Back
                 >
                   
                   
-                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?16674745362632837294" alt="logo"></a>
+                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?4303817170085889276" alt="logo"></a>
                 </div>
                 <div
                   class="
@@ -11339,7 +11419,7 @@ Back
                   "
                   data-site="wmns"
                 >
-                  <a href="/pages/women"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?16674745362632837294" alt="logo icon link to womens page"></a>
+                  <a href="/pages/women"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?4303817170085889276" alt="logo icon link to womens page"></a>
                 </div>
                 <div
                   class="
@@ -11349,7 +11429,7 @@ Back
                   "
                   data-site="kids"
                 >
-                  <a href="/pages/kids"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-kids.png?16674745362632837294" alt="logo icon link to kids page"></a>
+                  <a href="/pages/kids"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-kids.png?4303817170085889276" alt="logo icon link to kids page"></a>
                 </div>
                 <div
                   class="
@@ -11359,7 +11439,7 @@ Back
                   "
                   data-site="treats"
                 >
-                  <a href="/pages/treats"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-treats.png?16674745362632837294" alt="logo icon link to kith treats page"></a>
+                  <a href="/pages/treats"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-treats.png?4303817170085889276" alt="logo icon link to kith treats page"></a>
                 </div>
                 <div
                   class="
@@ -11369,7 +11449,7 @@ Back
                   "
                   data-site="site"
                 >
-                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?16674745362632837294" alt="logo icon link to mens page"></a>
+                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?4303817170085889276" alt="logo icon link to mens page"></a>
                 </div>
                 <div
                   class="
@@ -11378,7 +11458,7 @@ Back
                     -spacer
                   "
                 >
-                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?16674745362632837294" alt="logo icon link to mens page"></a>
+                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?4303817170085889276" alt="logo icon link to mens page"></a>
                 </div>
               </div>
 
@@ -12136,7 +12216,7 @@ Back
                   </div>
                 </div>
                 <div class="ksplash-header-search-icon">
-                  <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-search.svg?16674745362632837294" alt="search icon">
+                  <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-search.svg?4303817170085889276" alt="search icon">
                 </div>
                 <div class="ksplash-header-account-icon">
                   <span
@@ -12145,7 +12225,7 @@ Back
                       js-ksplash-header-account-link
                     "
                   >
-                    <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-account.svg?16674745362632837294" alt="kith account icon">
+                    <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-account.svg?4303817170085889276" alt="kith account icon">
                   </span>
                   <div class="ksplash-header-account js-ksplash-header-account" tabindex="-1">
                     <div>
@@ -12187,7 +12267,7 @@ Back
                 <a href="/cart" class="js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
                   <div class="clearfix">
                     <span class="ksplash-header-cart-icon">
-                      <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-bag.svg?16674745362632837294" alt="shopping cart icon">
+                      <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-bag.svg?4303817170085889276" alt="shopping cart icon">
                     </span>
                     <span class="ksplash-header-cart-count">
                       (<span id="CartCount">0</span>)
@@ -14570,6 +14650,31 @@ Back
 
 <li class="ksplash-header-altdropdown-item">
   <a
+    href="/collections/palm-angels"
+    
+    
+    
+    
+    
+    
+  >
+    Palm Angels
+  </a>
+</li>
+                
+                  
+
+
+
+
+
+
+
+
+
+
+<li class="ksplash-header-altdropdown-item">
+  <a
     href="/collections/r13"
     
     
@@ -16631,6 +16736,31 @@ Back
     
   >
     Our Legacy
+  </a>
+</li>
+                
+                  
+
+
+
+
+
+
+
+
+
+
+<li class="ksplash-header-altdropdown-item">
+  <a
+    href="/collections/palm-angels"
+    
+    
+    
+    
+    
+    
+  >
+    Palm Angels
   </a>
 </li>
                 
@@ -22402,7 +22532,7 @@ $('ksplash-header-main-link').click(function() {
               <div class="wrapper wrapper--full">
                 <div class="custwelcome-header">
                   <div class="text-center">
-                    <img class="custwelcome-logo" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-alt-white_small.png?16674745362632837294">
+                    <img class="custwelcome-logo" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-alt-white_small.png?4303817170085889276">
                   </div>
                 </div>
 
@@ -24726,7 +24856,7 @@ $160.00
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,13,"
+  data-sizes="7,7.5,8.5,9,10,10.5,11,11.5,12,13,"
   >
   <div 
     class="
@@ -24798,7 +24928,7 @@ $60.00
               </p>
             </div>
           </div>
-          <div class="product-card-info-variants" data-product-tags="7218fw,7218fwrusso,final-sale,footwear,mens,productsize-10,productsize-10-5,productsize-11,productsize-11-5,productsize-12,productsize-13,productsize-7,productsize-7-5,productsize-8,productsize-8-5,productsize-9,productsize-9-5,sneaker,sneakers,vans,Vans Sk8-Hi 138 Decon SF - Daniel Russo,vn0a3mv1ubm">
+          <div class="product-card-info-variants" data-product-tags="7218fw,7218fwrusso,final-sale,footwear,mens,productsize-10,productsize-10-5,productsize-11,productsize-11-5,productsize-12,productsize-13,productsize-7,productsize-7-5,productsize-8-5,productsize-9,sneaker,sneakers,vans,Vans Sk8-Hi 138 Decon SF - Daniel Russo,vn0a3mv1ubm">
             
             
 <div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611882196999" tooltip="QUICK ADD">
@@ -24809,10 +24939,6 @@ $60.00
                       <div class="product-card-info-variants-item-inner">
                         7.5
                       </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611882262535" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        8
-                      </div>
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611882295303" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         8.5
@@ -24820,10 +24946,6 @@ $60.00
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611882328071" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         9
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611882360839" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        9.5
                       </div>
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611882393607" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
@@ -27900,7 +28022,7 @@ $110.00
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="7.5,9,9.5,10,12,"
+  data-sizes="7,7.5,9,9.5,10,12,"
   >
   <div 
     class="
@@ -27975,7 +28097,11 @@ $170.00
           <div class="product-card-info-variants" data-product-tags="52418,air max,air max 98,air max 98 se,am,am98,footwear,mens,nike,nike air max 98 se,Nike Air Max 98 SE - Red / White,nkao9380-600,productsize-10,productsize-12,productsize-7-5,productsize-9,productsize-9-5,red,se,sneaker,sneakers,square-footwear,white">
             
             
-<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="1561868042247" tooltip="QUICK ADD">
+<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="1561868009479" tooltip="QUICK ADD">
+                      <div class="product-card-info-variants-item-inner">
+                        7
+                      </div>
+                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="1561868042247" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         7.5
                       </div>
@@ -28635,30 +28761,30 @@ $130.00
     };
   </script>
 
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.css?16674745362632837294" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider-style.scss.css?16674745362632837294" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider-style.scss.css?4303817170085889276" rel="stylesheet" type="text/css" media="all" />
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.min.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/plyr.js?16674745362632837294" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/plyr.js?4303817170085889276" type="text/javascript"></script>
   <script src="//cdn.shopify.com/s/assets/themes_support/option_selection-ea4f4a242e299f2227b2b8038152223f741e90780c0c766883939e8902542bda.js" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/packery.pkgd.min.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.2.1.9.min.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.magnific-popup.min.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment-timezone-with-data.min.js?16674745362632837294" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/packery.pkgd.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.2.1.9.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.magnific-popup.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment-timezone-with-data.min.js?4303817170085889276" type="text/javascript"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/snap.js/1.9.2/snap.min.js"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/site.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-super-slider.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-theme.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe-ui.min.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.min.js?16674745362632837294" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/site.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-super-slider.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-theme.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe-ui.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.min.js?4303817170085889276" type="text/javascript"></script>
   
   
 
   
   
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/handlebars.min.js?16674745362632837294" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/handlebars.min.js?4303817170085889276" type="text/javascript"></script>
     <!-- /snippets/ajax-cart-template.liquid -->
 
   <script id="CartTemplate" type="text/template">
@@ -29023,7 +29149,7 @@ $130.00
   
   </script>
 
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/ajax-cart.js?16674745362632837294" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/ajax-cart.js?4303817170085889276" type="text/javascript"></script>
   
 
   <script>
@@ -29056,7 +29182,7 @@ $130.00
 
   
     
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/theme.min.js?16674745362632837294" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/theme.min.js?4303817170085889276" type="text/javascript"></script>
   
 
   
@@ -29065,9 +29191,9 @@ $130.00
     </script>
   
 
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/tweenlite.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.min.js?16674745362632837294" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.animate.plugin.min.js?16674745362632837294" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/tweenlite.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.min.js?4303817170085889276" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.animate.plugin.min.js?4303817170085889276" type="text/javascript"></script>
 
   
   <script>
@@ -29079,7 +29205,7 @@ $130.00
       whenDefined(window, 'HFCHAT_CONFIG', function() {
         HFCHAT_CONFIG.onload = function() {
           var HappyFoxChat = this;
-          HappyFoxChat.addCustomCSSFile('//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?16674745362632837294', function(err) {
+          HappyFoxChat.addCustomCSSFile('//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?4303817170085889276', function(err) {
             if (err) {
               // console.error('Error:', err);
             } else {
@@ -29242,40 +29368,42 @@ $130.00
               navObj.sublinks.sublink34.title = 'Opening Ceremony';navObj.sublinks.sublink35 = {};
               navObj.sublinks.sublink35.url = '/collections/our-legacy';
               navObj.sublinks.sublink35.title = 'Our Legacy';navObj.sublinks.sublink36 = {};
-              navObj.sublinks.sublink36.url = '/collections/r13';
-              navObj.sublinks.sublink36.title = 'R13';navObj.sublinks.sublink37 = {};
-              navObj.sublinks.sublink37.url = '/collections/rokit';
-              navObj.sublinks.sublink37.title = 'Rokit';navObj.sublinks.sublink38 = {};
-              navObj.sublinks.sublink38.url = '/collections/stance';
-              navObj.sublinks.sublink38.title = 'Stance';navObj.sublinks.sublink39 = {};
-              navObj.sublinks.sublink39.url = '/collections/stone-island';
-              navObj.sublinks.sublink39.title = 'Stone Island';navObj.sublinks.sublink40 = {};
-              navObj.sublinks.sublink40.url = '/collections/thorocraft';
-              navObj.sublinks.sublink40.title = 'TCG';navObj.sublinks.sublink41 = {};
-              navObj.sublinks.sublink41.url = '/collections/t-by-alexander-wang';
-              navObj.sublinks.sublink41.title = 'T by Alexander Wang';navObj.sublinks.sublink42 = {};
-              navObj.sublinks.sublink42.url = '/collections/teva';
-              navObj.sublinks.sublink42.title = 'Teva';navObj.sublinks.sublink43 = {};
-              navObj.sublinks.sublink43.url = '/collections/timberland';
-              navObj.sublinks.sublink43.title = 'Timberland';navObj.sublinks.sublink44 = {};
-              navObj.sublinks.sublink44.url = '/collections/tim-coppens';
-              navObj.sublinks.sublink44.title = 'Tim Coppens';navObj.sublinks.sublink45 = {};
-              navObj.sublinks.sublink45.url = '/collections/tretorn';
-              navObj.sublinks.sublink45.title = 'Tretorn';navObj.sublinks.sublink46 = {};
-              navObj.sublinks.sublink46.url = '/collections/unravel-project';
-              navObj.sublinks.sublink46.title = 'Unravel Project';navObj.sublinks.sublink47 = {};
-              navObj.sublinks.sublink47.url = '/collections/vans';
-              navObj.sublinks.sublink47.title = 'Vans';navObj.sublinks.sublink48 = {};
-              navObj.sublinks.sublink48.url = '/collections/vasque';
-              navObj.sublinks.sublink48.title = 'Vasque';navObj.sublinks.sublink49 = {};
-              navObj.sublinks.sublink49.url = '/collections/veja';
-              navObj.sublinks.sublink49.title = 'Veja';navObj.sublinks.sublink50 = {};
-              navObj.sublinks.sublink50.url = '/collections/visvim';
-              navObj.sublinks.sublink50.title = 'Visvim';navObj.sublinks.sublink51 = {};
-              navObj.sublinks.sublink51.url = '/collections/y3';
-              navObj.sublinks.sublink51.title = 'Y-3';navObj.sublinks.sublink52 = {};
-              navObj.sublinks.sublink52.url = '/collections/y-3-apparel';
-              navObj.sublinks.sublink52.title = 'Y-3 Apparel';linklistObj.link5 = navObj;nav0 = '';
+              navObj.sublinks.sublink36.url = '/collections/palm-angels';
+              navObj.sublinks.sublink36.title = 'Palm Angels';navObj.sublinks.sublink37 = {};
+              navObj.sublinks.sublink37.url = '/collections/r13';
+              navObj.sublinks.sublink37.title = 'R13';navObj.sublinks.sublink38 = {};
+              navObj.sublinks.sublink38.url = '/collections/rokit';
+              navObj.sublinks.sublink38.title = 'Rokit';navObj.sublinks.sublink39 = {};
+              navObj.sublinks.sublink39.url = '/collections/stance';
+              navObj.sublinks.sublink39.title = 'Stance';navObj.sublinks.sublink40 = {};
+              navObj.sublinks.sublink40.url = '/collections/stone-island';
+              navObj.sublinks.sublink40.title = 'Stone Island';navObj.sublinks.sublink41 = {};
+              navObj.sublinks.sublink41.url = '/collections/thorocraft';
+              navObj.sublinks.sublink41.title = 'TCG';navObj.sublinks.sublink42 = {};
+              navObj.sublinks.sublink42.url = '/collections/t-by-alexander-wang';
+              navObj.sublinks.sublink42.title = 'T by Alexander Wang';navObj.sublinks.sublink43 = {};
+              navObj.sublinks.sublink43.url = '/collections/teva';
+              navObj.sublinks.sublink43.title = 'Teva';navObj.sublinks.sublink44 = {};
+              navObj.sublinks.sublink44.url = '/collections/timberland';
+              navObj.sublinks.sublink44.title = 'Timberland';navObj.sublinks.sublink45 = {};
+              navObj.sublinks.sublink45.url = '/collections/tim-coppens';
+              navObj.sublinks.sublink45.title = 'Tim Coppens';navObj.sublinks.sublink46 = {};
+              navObj.sublinks.sublink46.url = '/collections/tretorn';
+              navObj.sublinks.sublink46.title = 'Tretorn';navObj.sublinks.sublink47 = {};
+              navObj.sublinks.sublink47.url = '/collections/unravel-project';
+              navObj.sublinks.sublink47.title = 'Unravel Project';navObj.sublinks.sublink48 = {};
+              navObj.sublinks.sublink48.url = '/collections/vans';
+              navObj.sublinks.sublink48.title = 'Vans';navObj.sublinks.sublink49 = {};
+              navObj.sublinks.sublink49.url = '/collections/vasque';
+              navObj.sublinks.sublink49.title = 'Vasque';navObj.sublinks.sublink50 = {};
+              navObj.sublinks.sublink50.url = '/collections/veja';
+              navObj.sublinks.sublink50.title = 'Veja';navObj.sublinks.sublink51 = {};
+              navObj.sublinks.sublink51.url = '/collections/visvim';
+              navObj.sublinks.sublink51.title = 'Visvim';navObj.sublinks.sublink52 = {};
+              navObj.sublinks.sublink52.url = '/collections/y3';
+              navObj.sublinks.sublink52.title = 'Y-3';navObj.sublinks.sublink53 = {};
+              navObj.sublinks.sublink53.url = '/collections/y-3-apparel';
+              navObj.sublinks.sublink53.title = 'Y-3 Apparel';linklistObj.link5 = navObj;nav0 = '';
         nav0 += '<ul class="mm-listview mm-vertical accordion-parent accordion-content">';
 
 

@@ -16,7 +16,10 @@ state = "New York"
 zip_code = "10016"
 phone = "2129539871"
 # Credit card information
-
+ccnumber = "4621386161794239"
+ccname = "Aiden King"
+ccexpiry = "01/21"
+ccccv = "567"
 ###############################################################################################
 
 # Set up the Selenium instance with Chrome
@@ -39,6 +42,23 @@ driver.find_element(By.ID, 'checkout_shipping_address_zip').send_keys(zip_code)
 driver.find_element(By.ID, 'checkout_shipping_address_phone').send_keys(phone)
 
 # User should now be completing the reCAPTCHA, so wait until the check button is pressed
-while driver.find_elements(By.CLASS_NAME, 'step__step__footer__continue-btn btn ').size() == 0 :
-    time.sleep(3)
+
+# Once python is onto the next page past the reCAPTCHA, it can resume control over the webpage
+driver.find_element(By.CLASS_NAME, 'step__footer__continue-btn').click()
+driver.find_element(By.CLASS_NAME, 'step__footer__continue-btn').click()
+
+# Send necessary information to the required fields
+# First have to switch to each frame to input to them
+iframe = driver.find_elements(By.CLASS_NAME, 'card-fields-iframe')
+driver.switch_to.frame(iframe[0])
+driver.find_element(By.ID, 'number').send_keys(ccnumber)
+driver.switch_to.default_content()
+driver.switch_to.frame(iframe[1])
+driver.find_element(By.ID, 'name').send_keys(ccname)
+driver.switch_to.default_content()
+driver.switch_to.frame(iframe[2])
+driver.find_element(By.ID, 'expiry').send_keys(ccexpiry)
+driver.switch_to.default_content()
+driver.switch_to.frame(iframe[3])
+driver.find_element(By.ID, 'verification_value').send_keys(ccccv)
 
