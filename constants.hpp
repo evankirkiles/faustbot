@@ -28,6 +28,7 @@ namespace supported_sites {
     extern const URLAndMethod SOCIALSTATUS;    // Colors are located in the main product's title, with sizes in the variants' titles
     extern const URLAndMethod XHIBITION;       // Colors are located in the variants' titles on the right of size
     extern const URLAndMethod UNDEFEATED;      // Colors are located in the main product's title, with sizes in the variants' titles
+    // It should be noted that Undefeated requires being logged into an account to proceed to checkout.
     extern const URLAndMethod BLENDS;          // Colors are located in the main product's title, with sizes in the variants' titles
     extern const URLAndMethod WISHATL;         // Colors are located in the variants' titles on the left of size
 

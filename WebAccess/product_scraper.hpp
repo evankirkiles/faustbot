@@ -46,6 +46,9 @@ struct Product {
             }
         }
         // Shouldn't get here if the size exists
+        if (color.empty()) {
+            throw std::runtime_error("Color or size not found.");
+        }
         throw std::runtime_error("Size unavailable.");
     }
 };

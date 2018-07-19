@@ -70,7 +70,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                 if (str.find("\"variants\":") > str.find("\"available\":")) {
                     str.erase(0, str.find("\"available\":") + 12);
                     std::string availability = str.substr(0, str.find(','));
-                    if (availability != "false" && sourceURL.method != 102) {
+                    if (availability != "false" && sourceURL.method != 102 && sourceURL.method != 105) {
                         logFile << size << " : " << id << "\n";
                     } else if (sourceURL.method == 102) {
                         if (availability != "false") {
@@ -82,6 +82,16 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                                 logFile << size.substr(0, size.find(' ')) << " : " << id << "\n";
                             }
                         }
+                    } else if (sourceURL.method == 105) {
+                        if (availability != "false") {
+                            if (sscolor.empty()) {
+                                sscolor = size.substr(0, size.find('/') - 2);
+                                boost::to_upper(sscolor);
+                                logFile << sscolor << "\n" << size.substr(size.find('/') + 2) << " : " << id << "\n";
+                            } else {
+                                logFile << size.substr(size.find('/') + 2) << " : " << id << "\n";
+                            }
+                        }
                     }
                 } else {
                     boost::to_upper(size);
@@ -91,7 +101,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                         std::string color = size.substr(size.find('[') + 1);
                         color.pop_back();
                         logFile << "TITLE: " << size.substr(0, size.find('[') - 1) << ", COLOR: " << color << "\n";
-                    } else if (sourceURL.method == 102) {
+                    } else if (sourceURL.method == 102 || sourceURL.method == 105) {
                         logFile << "TITLE: " << size << ", COLOR: ";
                         sscolor = "";
                     } else if (sourceURL.method == 103) {
