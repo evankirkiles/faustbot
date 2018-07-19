@@ -19,7 +19,7 @@
 #include <iterator>
 #include <boost/algorithm/string.hpp>
 
-#include "../supported_sites.hpp"
+#include "constants.hpp"
 
 // Struct that contains a model's colors and size ID's
 struct Product {
@@ -46,7 +46,7 @@ struct Product {
             }
         }
         // Shouldn't get here if the size exists
-        return "Size unavailable.";
+        throw std::runtime_error("Size unavailable.");
     }
 };
 

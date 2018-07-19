@@ -5,6 +5,8 @@
 #ifndef SHOPIFY_BOT_SUPPORTED_SITES_HPP
 #define SHOPIFY_BOT_SUPPORTED_SITES_HPP
 
+// Constants header as well as base URLs.
+
 // This header holds the base URLs for all the supported websites so far; This standardizes so
 // I can use different methods for websites which have different ways of accessing product info.
 struct URLAndMethod {
@@ -23,22 +25,43 @@ namespace supported_sites {
 
     // MARK: Shopify sites that have a products.json page
     // Unavailable sizes are marked unavailable in normal products.json-website getAllModels functions
-    extern URLAndMethod SOCIALSTATUS;    // Colors are located in the main product's title, with sizes in the variants' titles
-    extern URLAndMethod XHIBITION;       // Colors are located in the variants' titles on the right of size
-    extern URLAndMethod UNDEFEATED;      // Colors are located in the main product's title, with sizes in the variants' titles
-    extern URLAndMethod BLENDS;          // Colors are located in the main product's title, with sizes in the variants' titles
-    extern URLAndMethod WISHATL;         // Colors are located in the variants' titles on the left of size
+    extern const URLAndMethod SOCIALSTATUS;    // Colors are located in the main product's title, with sizes in the variants' titles
+    extern const URLAndMethod XHIBITION;       // Colors are located in the variants' titles on the right of size
+    extern const URLAndMethod UNDEFEATED;      // Colors are located in the main product's title, with sizes in the variants' titles
+    extern const URLAndMethod BLENDS;          // Colors are located in the main product's title, with sizes in the variants' titles
+    extern const URLAndMethod WISHATL;         // Colors are located in the variants' titles on the left of size
 
     // MARK: Specialized Shopify sites
 
     // For Kith, there are collections pages which function in the same way as the base URL page
     // Unavailable sizes are simply not shown in the getAllModels function for Kith
-    extern URLAndMethod KITH;
+    extern const URLAndMethod KITH;
     // For Bodega, there are also collections pages but base URL page does not have the same function
     // Unavailable sizes are marked unavailable in the getAllModels function for Bodega
-    extern URLAndMethod BODEGA;
-
+    extern const URLAndMethod BODEGA;
 }
+
+namespace file_paths {
+    // Declare file paths here so you can change the location of a file and not have to parse through every
+    // usage throughout the program to ensure consistency.
+    extern const char* HTML_BODY;
+
+    extern const char* PRODUCTS_LOG;
+    extern const char* TIME_LOG;
+
+    extern const char* COMMUNICATIONS_FILE;
+}
+
+namespace constants {
+    // Declare global constants here, mostly 'magic numbers'
+
+    // Standard base frequency used to check the website for product, in seconds.
+    extern const unsigned int BASE_FREQ;
+    // Standard base number of results to check from the website, by most recent.
+    extern const unsigned int BASE_NUMRESULTS;
+}
+
+
 
 
 #endif //SHOPIFY_BOT_SUPPORTED_SITES_HPP

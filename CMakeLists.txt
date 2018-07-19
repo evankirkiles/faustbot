@@ -13,7 +13,9 @@ set(CMAKE_AUTORCC ON)
 add_executable(shopify_bot
         main.cpp
         WebAccess/product_scraper.cpp
-        supported_sites.cpp)
+        constants.cpp
+        Infrastructure/interface.cpp
+        Infrastructure/tasks.cpp)
 
 find_package(CURL REQUIRED)
 IF (CURL_FOUND)

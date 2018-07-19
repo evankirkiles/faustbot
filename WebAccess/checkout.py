@@ -33,7 +33,7 @@ options.add_argument('headless')
 
 # Set up the Selenium instance with phantomJS
 driver = webdriver.Chrome()
-driver.set_window_size(10, 600, driver.current_window_handle)
+driver.set_window_size(200, 600, driver.current_window_handle)
 
 # Log into Google to reduce captcha probabilities
 driver.get("https://accounts.google.com/signin")
@@ -66,6 +66,7 @@ driver.find_element(By.ID, 'checkout_shipping_address_zip').send_keys(zip_code)
 driver.find_element(By.ID, 'checkout_shipping_address_phone').send_keys(phone)
 
 # User should now be completing the reCAPTCHA, so checks every second if past captcha page
+driver.switch_to.window(driver.current_window_handle)
 while len(driver.find_elements(By.ID, 'g-recaptcha')) != 0:
     time.sleep(5)
 

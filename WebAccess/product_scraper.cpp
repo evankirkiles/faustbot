@@ -17,7 +17,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
     // Also open a new file to write to which logs times of each process
     std::ofstream timeFile;
-    timeFile.open("./logs.txt", std::ios::trunc);
+    timeFile.open(file_paths::TIME_LOG, std::ios::trunc);
 
     // Run cURL on the website to download the body to a file
     if (sourceURL.method > 100 && sourceURL.method < 200) {
@@ -31,15 +31,18 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
     timeFile << duration << " seconds to connect to website. \n";
 
     // Now parse through the downloaded html file to get the names of all the current items
-    std::ifstream searchFile("./WebAccess/Contents/html_body.txt");
+    std::ifstream searchFile(file_paths::HTML_BODY);
     std::string str;
 
     // Also open a new file to write to which will act as the system output
     std::ofstream logFile;
-    logFile.open("./WebAccess/Contents/products_log.txt", std::ios::trunc);
+    logFile.open(file_paths::PRODUCTS_LOG, std::ios::trunc);
 
     // There are different parse requirements for each different method, hence the if statements
     if (sourceURL.method > 100 && sourceURL.method < 200) {
+        // This bool is Social Status specific but can be adapted for others
+        std::string sscolor;
+
         while (getline(searchFile, str)) {
 
             // If the title identifier is found, print out the line
@@ -67,12 +70,35 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                 if (str.find("\"variants\":") > str.find("\"available\":")) {
                     str.erase(0, str.find("\"available\":") + 12);
                     std::string availability = str.substr(0, str.find(','));
-                    if (availability != "false") {
+                    if (availability != "false" && sourceURL.method != 102) {
                         logFile << size << " : " << id << "\n";
+                    } else if (sourceURL.method == 102) {
+                        if (availability != "false") {
+                            if (sscolor.empty()) {
+                                sscolor = size.substr(size.find(' ') + 1);
+                                boost::to_upper(sscolor);
+                                logFile << sscolor << "\n" << size.substr(0, size.find(' ')) << " : " << id << "\n";
+                            } else {
+                                logFile << size.substr(0, size.find(' ')) << " : " << id << "\n";
+                            }
+                        }
                     }
                 } else {
                     boost::to_upper(size);
-                    logFile << "TITLE: " << size << "\n";
+
+                    // In case of color coming in brackets after title
+                    if (sourceURL.method == 101 && size.find('[') != size.npos) {
+                        std::string color = size.substr(size.find('[') + 1);
+                        color.pop_back();
+                        logFile << "TITLE: " << size.substr(0, size.find('[') - 1) << ", COLOR: " << color << "\n";
+                    } else if (sourceURL.method == 102) {
+                        logFile << "TITLE: " << size << ", COLOR: ";
+                        sscolor = "";
+                    } else if (sourceURL.method == 103) {
+                        logFile << "TITLE: " << size.substr(0, size.find(" - ")) << ", COLOR: " << size.substr(size.find(" - ") + 3) << "\n";
+                    } else {
+                        logFile << "TITLE: " << size << "\n";
+                    }
                 }
                 stringpos = str.find("\"id\":");
             }
@@ -226,7 +252,7 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
     performCURL(std::string(sourceURL.baseURL).append(addToURL));
 
     // Parse through the downloaded html file
-    std::ifstream searchFile("./WebAccess/Contents/html_body.txt");
+    std::ifstream searchFile(file_paths::HTML_BODY);
     std::string str;
     std::string id;
 
@@ -305,7 +331,7 @@ void ShopifyWebsiteHandler::performCURL(const std::string& URL) {
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     // Open the file to write to
-    FILE *fp = fopen("./WebAccess/Contents/html_body.txt", "wb");
+    FILE *fp = fopen(file_paths::HTML_BODY, "wb");
     if (fp) {
 
         // Write the page body to the file
@@ -341,11 +367,11 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
 
     // Open time logging file
     std::ofstream timeLogs;
-    timeLogs.open("./logs.txt", std::ios::app);
+    timeLogs.open(file_paths::TIME_LOG, std::ios::app);
 
     // Now open products_log.txt and begin parsing through the lines, searching for the keywords in the title
     // Again, some websites have different color placements than others, so I have to account for that.
-    std::ifstream searchFile("./WebAccess/Contents/products_log.txt");
+    std::ifstream searchFile(file_paths::PRODUCTS_LOG);
     std::string str;
 
     // Uses a switch function to specify different color locators for different websites
