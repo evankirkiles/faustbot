@@ -57,6 +57,9 @@ struct Product {
 class ShopifyWebsiteHandler {
 public:
 
+    // Instance source variable
+    const URLAndMethod sourceURL;
+
     // Constructor that initializes the handler with the given URL
     explicit ShopifyWebsiteHandler(const URLAndMethod& url);
 
@@ -70,12 +73,9 @@ public:
     // Function that returns the first product it finds that contains any of the given keywords (title and color).
     // NOTE: Keywords are not case sensitive.
     Product lookForKeywords(const std::string& collection, const std::vector<std::string>& keywords,
-                            const std::vector<std::string>& colorKeywords = {""});
+                            const std::vector<std::string>& colorKeywords = {""}, const std::string& numresults="25");
 
 private:
-    // Instance source variable
-    const URLAndMethod sourceURL;
-
     // Perform a cURL download to get the body of a page
     void performCURL(const std::string& URL);
 };

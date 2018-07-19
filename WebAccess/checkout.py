@@ -4,90 +4,48 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 import os
+import sys
 
 ################################### Checkout Details ##########################################
-# Google account to decrease captcha probability
-googleacc = "sneakerbot78"
-googlepass = "brown2018"
-# Currently random address information except for email
-email = "sneakerbot78@gmail.com"
-first_name = "John"
-last_name = "Doe"
-address = "2824 Rosewood Lane"
-city = "New York"
-country = "United States"
-state = "New York"
-zip_code = "10016"
-phone = "2129539871"
-# Credit card information
-ccnumber = "4621386161794239"
-ccname = "Aiden King"
-ccexpiry = "01/21"
-ccccv = "567"
+# Only thing required is PayPal information
+paypalemail = "sneakerbot78@gmail.com"
+paypalpass = "brown2018"
 ###############################################################################################
 
-# Set Chrome options
-# Currently UNUSED
+# Set Chrome options for headless, when ready
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
 
-# Set up the Selenium instance with phantomJS
+# Set up the Selenium instance
+# If want to see what is happening, do not add chrome_options as a parameter
 driver = webdriver.Chrome()
-driver.set_window_size(200, 600, driver.current_window_handle)
+mainwindow = driver.current_window_handle
+driver.set_window_size(200, 600, mainwindow)
 
-# Log into Google to reduce captcha probabilities
-driver.get("https://accounts.google.com/signin")
-firstField = driver.find_element(By.ID, 'identifierId')
-firstField.send_keys(googleacc)
-firstField.send_keys(Keys.RETURN)
-time.sleep(2)
-secondField = driver.find_element(By.CLASS_NAME, 'whsOnd')
-secondField.send_keys(googlepass)
-secondField.send_keys(Keys.RETURN)
+# Open the website given as the first argument
+driver.get(sys.argv[1])
 
-# Now stall until the communications file has a link in it
-while os.stat("WebAccess/communications.txt").st_size == 0:
+# Click on the PayPal element
+driver.find_element(By.ID, 'paypal-express-checkout-btn').click()
+
+# Switch to the new PayPal popup window
+paypalwindow = None
+while not paypalwindow:
+    for handle in driver.window_handles:
+        if handle != mainwindow:
+            paypalwindow = handle
+            break
+driver.switch_to.window(paypalwindow)
+
+# Wait for PayPal to load
+while len(driver.find_elements(By.ID, 'email')) == 0:
+        time.sleep(1)
+
+# Continue once PayPal has loaded
+driver.find_element(By.ID, 'email').send_keys(paypalemail)
+driver.find_element(By.ID, 'btnNext').click()
+# Wait for email to pass
+while not driver.find_element(By.ID, 'password').is_displayed():
     time.sleep(1)
-
-# Go to the link given in the communications file
-communications = open("WebAccess/communications.txt", "r")
-driver.get(communications.read())
-
-# Send necessary information to the required fields
-driver.find_element(By.ID, 'checkout_email').send_keys(email)
-driver.find_element(By.ID, 'checkout_buyer_accepts_marketing').click()
-driver.find_element(By.ID, 'checkout_shipping_address_first_name').send_keys(first_name)
-driver.find_element(By.ID, 'checkout_shipping_address_last_name').send_keys(last_name)
-driver.find_element(By.ID, 'checkout_shipping_address_address1').send_keys(address)
-driver.find_element(By.ID, 'checkout_shipping_address_city').send_keys(city)
-driver.find_element(By.ID, 'checkout_shipping_address_country').send_keys(country)
-driver.find_element(By.ID, 'checkout_shipping_address_province').send_keys(state)
-driver.find_element(By.ID, 'checkout_shipping_address_zip').send_keys(zip_code)
-driver.find_element(By.ID, 'checkout_shipping_address_phone').send_keys(phone)
-
-# User should now be completing the reCAPTCHA, so checks every second if past captcha page
-driver.switch_to.window(driver.current_window_handle)
-while len(driver.find_elements(By.ID, 'g-recaptcha')) != 0:
-    time.sleep(5)
-
-# Once python is onto the next page past the reCAPTCHA, it can resume control over the webpage
-driver.find_element(By.CLASS_NAME, 'step__footer__continue-btn').click()
-
-# Send necessary information to the required fields
-# First have to switch to each frame to input to them
-iframe = driver.find_elements(By.CLASS_NAME, 'card-fields-iframe')
-driver.switch_to.frame(iframe[0])
-driver.find_element(By.ID, 'number').send_keys(ccnumber)
-driver.switch_to.default_content()
-driver.switch_to.frame(iframe[1])
-driver.find_element(By.ID, 'name').send_keys(ccname)
-driver.switch_to.default_content()
-driver.switch_to.frame(iframe[2])
-driver.find_element(By.ID, 'expiry').send_keys(ccexpiry)
-driver.switch_to.default_content()
-driver.switch_to.frame(iframe[3])
-driver.find_element(By.ID, 'verification_value').send_keys(ccccv)
-
-# Finish checkout by clicking pay button
-driver.switch_to.default_content()
-driver.find_element(By.CLASS_NAME, 'step__footer__continue-btn').click()
+driver.find_element(By.ID, 'password').send_keys(paypalpass)
+driver.find_element(By.ID, 'btnLogin').click()

@@ -49,6 +49,7 @@ namespace file_paths {
 
     extern const char* PRODUCTS_LOG;
     extern const char* TIME_LOG;
+    extern const char* TASK_LOG;
 
     extern const char* COMMUNICATIONS_FILE;
 }

@@ -363,7 +363,7 @@ void ShopifyWebsiteHandler::performCURL(const std::string& URL) {
 // Uses a title keyword and a color keyword to search through all the models on the page and returns the first
 // product that matches given keywords. This product will be the most recent one.
 Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, const std::vector<std::string>& keywords,
-                                               const std::vector<std::string>& colorKeywords) {
+                                               const std::vector<std::string>& colorKeywords, const std::string& numresults) {
 
     // Begin clock to check how much time each process takes
     std::clock_t start;
@@ -373,7 +373,7 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
     Product prdct;
 
     // First, perform a full model scrape on the collection page specified, saved into Contents/products_log.txt
-    getAllModels(collection);
+    getAllModels(collection, "?limit=" + numresults);
 
     // Open time logging file
     std::ofstream timeLogs;
@@ -438,7 +438,7 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
         timeLogs << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds to not find product. \n";
         timeLogs << "Could not find product for specified keywords. \n";
         timeLogs.close();
-        return prdct;
+        throw std::runtime_error("Could not find product.");
     }
 }
 

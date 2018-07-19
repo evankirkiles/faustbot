@@ -20,6 +20,7 @@ namespace file_paths {
     const char* HTML_BODY = "./WebAccess/Contents/html_body.txt";
     const char* PRODUCTS_LOG = "./WebAccess/Contents/products_log.txt";
     const char* TIME_LOG = "./logs.txt";
+    const char* TASK_LOG = "./task_logs.txt";
 
     const char* COMMUNICATIONS_FILE = "./WebAccess/communications.txt";
 }
