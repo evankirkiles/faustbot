@@ -85,11 +85,11 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                     } else if (sourceURL.method == 105) {
                         if (availability != "false") {
                             if (sscolor.empty()) {
-                                sscolor = size.substr(0, size.find('/') - 2);
+                                sscolor = size.substr(0, size.find(" \\/"));
                                 boost::to_upper(sscolor);
-                                logFile << sscolor << "\n" << size.substr(size.find('/') + 2) << " : " << id << "\n";
+                                logFile << sscolor << "\n" << size.substr(size.find(" \\/") + 4) << " : " << id << "\n";
                             } else {
-                                logFile << size.substr(size.find('/') + 2) << " : " << id << "\n";
+                                logFile << size.substr(size.find(" \\/") + 4) << " : " << id << "\n";
                             }
                         }
                     }
