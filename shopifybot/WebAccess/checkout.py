@@ -8,8 +8,8 @@ import sys
 
 ################################### Checkout Details ##########################################
 # Only thing required is PayPal information
-paypalemail = "sneakerbot78@gmail.com"
-paypalpass = "brown2018"
+paypalemail = "some-paypal-account"
+paypalpass = "some-paypal-password"
 ###############################################################################################
 
 # Set Chrome options for headless, when ready

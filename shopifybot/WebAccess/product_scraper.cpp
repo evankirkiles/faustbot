@@ -31,12 +31,12 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
     timeFile << duration << " seconds to connect to website. \n";
 
     // Now parse through the downloaded html file to get the names of all the current items
-    std::ifstream searchFile(file_paths::HTML_BODY);
+    std::ifstream searchFile(std::string(file_paths::HTML_BODY) + sourceURL.title + ".txt");
     std::string str;
 
     // Also open a new file to write to which will act as the system output
     std::ofstream logFile;
-    logFile.open(file_paths::PRODUCTS_LOG, std::ios::trunc);
+    logFile.open(std::string(file_paths::PRODUCTS_LOG) + sourceURL.title + ".txt", std::ios::trunc);
 
     // There are different parse requirements for each different method, hence the if statements
     if (sourceURL.method > 100 && sourceURL.method < 200) {
@@ -262,7 +262,7 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
     performCURL(std::string(sourceURL.baseURL).append(addToURL));
 
     // Parse through the downloaded html file
-    std::ifstream searchFile(file_paths::HTML_BODY);
+    std::ifstream searchFile(std::string(file_paths::HTML_BODY) + sourceURL.title + ".txt");
     std::string str;
     std::string id;
 
@@ -341,7 +341,7 @@ void ShopifyWebsiteHandler::performCURL(const std::string& URL) {
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     // Open the file to write to
-    FILE *fp = fopen(file_paths::HTML_BODY, "wb");
+    FILE *fp = fopen(std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + ".txt").c_str(), "wb");
     if (fp) {
 
         // Write the page body to the file
@@ -381,7 +381,7 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
 
     // Now open products_log.txt and begin parsing through the lines, searching for the keywords in the title
     // Again, some websites have different color placements than others, so I have to account for that.
-    std::ifstream searchFile(file_paths::PRODUCTS_LOG);
+    std::ifstream searchFile(std::string(file_paths::PRODUCTS_LOG) + sourceURL.title + ".txt");
     std::string str;
 
     // Uses a switch function to specify different color locators for different websites

@@ -25,7 +25,7 @@ TEST(WebHandlerFixture, getsPageData) {
 
     // Clear the HTML body text file first
     std::ifstream file;
-    file.open(file_paths::HTML_BODY, std::ios::trunc);
+    file.open(std::string(std::string(file_paths::HTML_BODY) + supported_sites::KITH.title + ".txt").c_str(), std::ios::trunc);
     file.close();
 
     // Instantiate a Shopify Web Handler and pull all models
@@ -33,7 +33,7 @@ TEST(WebHandlerFixture, getsPageData) {
     swh.getAllModels("/collections/footwear");
 
     // Check the file again now and make sure that it is not empty
-    file.open(file_paths::HTML_BODY);
+    file.open(std::string(std::string(file_paths::HTML_BODY) + supported_sites::KITH.title + ".txt").c_str());
     EXPECT_NE(std::ifstream::traits_type::eof(), file.peek());
 }
 
@@ -42,7 +42,7 @@ TEST(WebHandlerFixture, getsProductData) {
 
     // Clear the product data text file first
     std::ifstream file;
-    file.open(file_paths::PRODUCTS_LOG, std::ios::trunc);
+    file.open(std::string(std::string(file_paths::PRODUCTS_LOG) + supported_sites::KITH.title + ".txt").c_str(), std::ios::trunc);
     file.close();
 
     // Instantiate a Shopify Web Handler and pull all models
@@ -50,6 +50,6 @@ TEST(WebHandlerFixture, getsProductData) {
     swh.getAllModels("/collections/footwear");
 
     // Check the file again now and make sure that it is not empty
-    file.open(file_paths::PRODUCTS_LOG);
+    file.open(std::string(std::string(file_paths::PRODUCTS_LOG) + supported_sites::KITH.title + ".txt").c_str());
     EXPECT_NE(std::ifstream::traits_type::eof(), file.peek());
 }

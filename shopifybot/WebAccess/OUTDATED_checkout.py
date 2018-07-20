@@ -7,10 +7,10 @@ import os
 
 ################################### Checkout Details ##########################################
 # Google account to decrease captcha probability
-googleacc = "sneakerbot78"
-googlepass = "brown2018"
+googleacc = "some-google-account"
+googlepass = "some-google-password"
 # Currently random address information except for email
-email = "sneakerbot78@gmail.com"
+email = "some-google-account@gmail.com"
 first_name = "John"
 last_name = "Doe"
 address = "2824 Rosewood Lane"

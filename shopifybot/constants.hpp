@@ -12,6 +12,7 @@
 struct URLAndMethod {
     const char* baseURL;
     const int method;
+    const char* title;
 };
 
 namespace supported_sites {
