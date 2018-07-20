@@ -36,3 +36,7 @@ cmake-build-debug/
 /*.gcno
 
 # End of https://www.gitignore.io/api/Xcode
+
+# Custom git ignore files
+# Contents folder containing webscraped things
+shopify/WebAccess/Contents/

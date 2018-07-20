@@ -25,9 +25,9 @@ public:
 
     // Constructor that creates an instance of the task for the specified website, title keywords, color keywords,
     // size, results to check, and frequency (default is to check every 30 seconds to preserve performance).
-    explicit Task(const std::string& title, const URLAndMethod& url, const std::string& collection,
-                  const std::vector<std::string>& keywords, const std::vector<std::string>& colorKeywords,
-                  const std::string& size, const unsigned int p_quantity,
+    explicit Task(const std::string& title, const URLAndMethod& url, const std::string& identifier,
+                  const std::string& collection, const std::vector<std::string>& keywords,
+                  const std::vector<std::string>& colorKeywords, const std::string& size, const unsigned int p_quantity,
                   unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ);
 
     // Runs the task, essentially creating a while loop that runs every [frequency] seconds and continuously checks

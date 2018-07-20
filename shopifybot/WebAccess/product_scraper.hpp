@@ -61,7 +61,7 @@ public:
     const URLAndMethod sourceURL;
 
     // Constructor that initializes the handler with the given URL
-    explicit ShopifyWebsiteHandler(const URLAndMethod& url);
+    explicit ShopifyWebsiteHandler(const URLAndMethod& url, const std::string& taskID);
 
     // Function that at the moment prints out the different models it scrapes from the website at given collection
     void getAllModels(const std::string& collection, const std::string& bonusparams="?limit=25");
@@ -78,6 +78,9 @@ public:
 private:
     // Perform a cURL download to get the body of a page
     void performCURL(const std::string& URL);
+
+    // ID for this instance of the ShopifyWebHandler, used in naming the files
+    const std::string taskID;
 };
 
 
