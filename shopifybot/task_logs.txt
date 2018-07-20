@@ -1,16 +1,9 @@
-[2018-07-19 19:32:39.236] Beginning "Kith Task".
-[2018-07-19 19:32:43.156] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-19 19:32:43.156] Placing order...
-[2018-07-19 19:32:59.751] Order complete!
-[2018-07-19 19:34:09.574] Beginning "Kith Task".
-[2018-07-19 19:34:12.434] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-19 19:34:12.434] Placing order...
-[2018-07-19 19:34:29.116] Order complete!
-[2018-07-19 19:35:32.127] Beginning "Kith Task".
-[2018-07-19 19:35:32.478] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-19 19:35:32.479] Placing order...
-[2018-07-19 19:35:50.182] Order complete!
-[2018-07-19 19:36:24.501] Beginning "Kith Task".
-[2018-07-19 19:36:28.051] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-19 19:36:28.051] Placing order...
-[2018-07-19 19:36:43.426] Order complete!
+
+[2018-07-19 21:08:44.292] Beginning "Kith Task".
+[2018-07-19 21:08:44.625] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-19 21:08:44.625] Placing order...
+[2018-07-19 21:08:44.710] Order complete!
+[2018-07-19 21:09:54.884] Beginning "Kith Task".
+[2018-07-19 21:09:55.178] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-19 21:09:55.178] Placing order...
+[2018-07-19 21:10:12.422] Order complete!

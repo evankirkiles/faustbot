@@ -250,7 +250,7 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
 
     // Open time logging file
     std::ofstream timeLogs;
-    timeLogs.open("./logs.txt", std::ios::trunc);
+    timeLogs.open(file_paths::TIME_LOG, std::ios::trunc);
 
     if (color.empty()) { color = "ul"; }
 

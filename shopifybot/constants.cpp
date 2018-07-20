@@ -19,6 +19,7 @@ namespace supported_sites {
 namespace file_paths {
     const char* HTML_BODY = "./shopifybot/WebAccess/Contents/html_body.txt";
     const char* PRODUCTS_LOG = "./shopifybot/WebAccess/Contents/products_log.txt";
+
     const char* TIME_LOG = "./shopifybot/logs.txt";
     const char* TASK_LOG = "./shopifybot/task_logs.txt";
 }
