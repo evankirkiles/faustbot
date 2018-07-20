@@ -19,7 +19,7 @@
 #include <iterator>
 #include <boost/algorithm/string.hpp>
 
-#include "shopifybot/constants.hpp"
+#include "constants.hpp"
 
 // Struct that contains a model's colors and size ID's
 struct Product {

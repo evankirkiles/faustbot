@@ -11,7 +11,7 @@
   <meta name="format-detection" content="date=no">
   <meta name="format-detection" content="address=no">
   
-  <link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/favicon.png?5842665622790910508" type="image/png" />
+  <link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/favicon.png?18126384560636415848" type="image/png" />
   
 
   
@@ -31,7 +31,7 @@
   <meta property="og:title" content="Footwear">
   
 
-<meta property="og:url" content="https://kith.com/collections/footwear?limit=3">
+<meta property="og:url" content="https://kith.com/collections/footwear?limit=25">
 <meta property="og:site_name" content="Kith">
 
 
@@ -43,21 +43,21 @@
 
 
 
-  <link rel="canonical" href="https://kith.com/collections/footwear?limit=3">
+  <link rel="canonical" href="https://kith.com/collections/footwear?limit=25">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   <meta name="theme-color" content="#000000">
 
   <!-- CSS ================================================== -->
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.scss.css?5842665622790910508" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.scss.css?5842665622790910508" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/shop.scss.css?5842665622790910508" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/checkout_2.css?5842665622790910508" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/custom-mmenu.css?5842665622790910508" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/snize-styles.scss.css?5842665622790910508" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.css?5842665622790910508" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.scss.css?18126384560636415848" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.scss.css?18126384560636415848" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/shop.scss.css?18126384560636415848" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/checkout_2.css?18126384560636415848" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/custom-mmenu.css?18126384560636415848" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/snize-styles.scss.css?18126384560636415848" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.css?18126384560636415848" rel="stylesheet" type="text/css" media="all" />
 
   
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?5842665622790910508" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?18126384560636415848" rel="stylesheet" type="text/css" media="all" />
 
   
 
@@ -95,8 +95,8 @@
   <meta id="shopify-digital-wallet" name="shopify-digital-wallet" content="/942252/digital_wallets/dialog">
 <meta name="shopify-checkout-api-token" content="08430b96c47dd2ac8e17e305db3b71e8">
 <meta id="in-context-paypal-metadata" data-shop-id="942252" data-environment="production" data-locale="en_US" data-merchant-id="J84BKAHN99EUL" data-redirect-url="">
-<link rel="next" href="/collections/footwear?limit=3&amp;page=2">
-<link rel="alternate" type="application/json+oembed" href="https://kith.com/collections/footwear.oembed?limit=3">
+<link rel="next" href="/collections/footwear?limit=25&amp;page=2">
+<link rel="alternate" type="application/json+oembed" href="https://kith.com/collections/footwear.oembed?limit=25">
 <link rel="alternate" type="application/atom+xml" title="Feed" href="/collections/footwear.atom" />
 <style media="all">.additional-checkout-button{border:0 !important;border-radius:5px !important;display:inline-block;margin:0 0 10px;padding:0 24px !important;max-width:100%;min-width:150px !important;line-height:44px !important;text-align:center !important}.additional-checkout-button+.additional-checkout-button{margin-left:10px}.additional-checkout-button:last-child{margin-bottom:0}.additional-checkout-button span{font-size:14px !important}.additional-checkout-button img{display:inline-block !important;height:1.3em !important;margin:0 !important;vertical-align:middle !important;width:auto !important}@media (max-width: 500px){.additional-checkout-button{display:block;margin-left:0 !important;padding:0 10px !important;width:100%}}.additional-checkout-button--apple-pay{background-color:#000 !important;color:#fff !important;display:none;font-family:-apple-system, &#39;Helvetica Neue&#39;, sans-serif !important;min-width:150px !important;white-space:nowrap !important}.additional-checkout-button--apple-pay:hover,.additional-checkout-button--apple-pay:active,.additional-checkout-button--apple-pay:visited{color:#fff !important;text-decoration:none !important}.additional-checkout-button--apple-pay .additional-checkout-button__logo{background:-webkit-named-image(apple-pay-logo-white) center center no-repeat !important;background-size:auto 100% !important;display:inline-block !important;vertical-align:middle !important;width:3em !important;height:1.3em !important}@media (max-width: 500px){.additional-checkout-button--apple-pay{display:none}}.additional-checkout-button--google-pay{line-height:0 !important;padding:0 !important;border-radius:unset !important;width:80px !important}@media (max-width: 500px){.additional-checkout-button--google-pay{width:100% !important}}.gpay-iframe{height:44px !important;width:100%  !important;cursor:pointer;vertical-align:middle !important}.additional-checkout-button--paypal-express{background-color:#ffc439 !important}.additional-checkout-button--paypal{vertical-align:top;line-height:0 !important;padding:0 !important}.additional-checkout-button--amazon{background-color:#fad676 !important;position:relative !important}.additional-checkout-button--amazon .additional-checkout-button__logo{-webkit-transform:translateY(4px) !important;transform:translateY(4px) !important}.additional-checkout-button--amazon .alt-payment-list-amazon-button-image{max-height:none !important;opacity:0 !important;position:absolute !important;top:0 !important;left:0 !important;width:100% !important;height:100% !important}.additional-checkout-button-visually-hidden{border:0 !important;clip:rect(0, 0, 0, 0) !important;clip:rect(0 0 0 0) !important;width:1px !important;height:1px !important;margin:-2px !important;overflow:hidden !important;padding:0 !important;position:absolute !important}
 </style>
@@ -194,7 +194,7 @@ Shopify.theme.style = {"id":null,"handle":null};
   }
 })();
 </script>
-<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"2fe0e23d-728c-47d9-afa6-aadb602162b9","pageurl":"kith.com\/collections\/footwear?limit=3","u":"5677a57ea6ae","p":"collection","rtyp":"collection","rid":31304833};</script>
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"ccf12f2e-70be-4017-bce5-4a1124cf404e","pageurl":"kith.com\/collections\/footwear?limit=25","u":"d9a875617b61","p":"collection","rtyp":"collection","rid":31304833};</script>
 <script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
 <script>window.Shopify = window.Shopify || {};
 window.Shopify.Checkout = window.Shopify.Checkout || {};
@@ -202,7 +202,7 @@ window.Shopify.Checkout.apiHost = "kithnyc.myshopify.com";
 window.ShopifyPay = window.ShopifyPay || {};
 window.ShopifyPay.acceleratedFlowIncontext = false;
 window.ShopifyPay.apiHost = "pay.shopify.com";
-window.ShopifyPay.apiToken = "N2tOejVDMXh2bk9NdVU2TFFISFAwaThTM3YxL1BQYjJDaEdFTDFtT1MzRT0tLU1yWWlYUFVyT0tVUHJXL0dJd3V3Y3c9PQ==--869cb877af8815053c71eee3503e5b1dcd963347";
+window.ShopifyPay.apiToken = "MStIRjFtRGhzVy90NCtlR3NWOXgvTHhmV21uNENxS0JGMDZ5S3RNMkFXMD0tLXViQysyaXFSSGlPb0E0a3UwOVdrR2c9PQ==--12f4c912eaa265f259dba9065cb111b236cfdc39";
 window.ShopifyPay.requestHost = "kith.com"
 window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/sheet\/main-9591cdb8fc78ba1acaca189815e8d30f2513988b8b83f4a84c83115fcae19d76.css";
 </script>
@@ -274,7 +274,7 @@ window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/
     first.parentNode.insertBefore(script, first);
   };
   trekkie.load(
-    {"Trekkie":{"appName":"storefront","development":false,"defaultAttributes":{"shopId":942252,"isMerchantRequest":null,"themeId":450002951,"themeCityHash":5513100438144171096}},"Performance":{"navigationTimingApiMeasurementsEnabled":true,"navigationTimingApiMeasurementsSampleRate":1.0},"Google Analytics":{"trackingId":"UA-62344036-1","domain":"auto","siteSpeedSampleRate":"10","enhancedEcommerce":true,"doubleClick":true,"includeSearch":true},"Facebook Pixel":{"pixelIds":["1059291937516902"],"agent":"plshopify1.2"},"Session Attribution":{}}
+    {"Trekkie":{"appName":"storefront","development":false,"defaultAttributes":{"shopId":942252,"isMerchantRequest":null,"themeId":450002951,"themeCityHash":7016971699011872920}},"Performance":{"navigationTimingApiMeasurementsEnabled":true,"navigationTimingApiMeasurementsSampleRate":1.0},"Google Analytics":{"trackingId":"UA-62344036-1","domain":"auto","siteSpeedSampleRate":"10","enhancedEcommerce":true,"doubleClick":true,"includeSearch":true},"Facebook Pixel":{"pixelIds":["1059291937516902"],"agent":"plshopify1.2"},"Session Attribution":{}}
   );
 
   var loaded = false;
@@ -394,7 +394,7 @@ style='padding:8px 10px;width:100%;display: none;position: fixed; z-index: 99999
 
 <!--[if lt IE 9]>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
-<script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/respond.min.js?5842665622790910508" type="text/javascript"></script>
+<script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/respond.min.js?18126384560636415848" type="text/javascript"></script>
 <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
 <link href="//kith.com/search?q=46d30a55b399b80d9e1d6b487e8f990c" id="respond-redirect" rel="respond-redirect" />
 <script src="//kith.com/search?q=46d30a55b399b80d9e1d6b487e8f990c" type="text/javascript"></script>
@@ -404,9 +404,9 @@ style='padding:8px 10px;width:100%;display: none;position: fixed; z-index: 99999
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.all.min.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.fixedelements.min.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/modernizr.min.js?5842665622790910508" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.all.min.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.mmenu.fixedelements.min.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/modernizr.min.js?18126384560636415848" type="text/javascript"></script>
 
   
   
@@ -1316,10 +1316,10 @@ $(document).on('ready', function() {
               
               <div class="ksplash-header-leftnav-container">
                 <div class="ksplash-header-back" onClick="window.history.back();">
-                  <img class="ksplash-header-back-icon" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-plain-left-arrow.svg?5842665622790910508" alt="back arrow icon">
+                  <img class="ksplash-header-back-icon" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-plain-left-arrow.svg?18126384560636415848" alt="back arrow icon">
                 </div>
                 <a class="ksplash-header-nav-toggle js-ksplash-header-nav-toggle">
-                  <img src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-hamburger.svg?5842665622790910508" alt="navigation menu icon">
+                  <img src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-hamburger.svg?18126384560636415848" alt="navigation menu icon">
                 </a>
               </div>
             </div>
@@ -11409,7 +11409,7 @@ Back
                 >
                   
                   
-                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?5842665622790910508" alt="logo"></a>
+                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?18126384560636415848" alt="logo"></a>
                 </div>
                 <div
                   class="
@@ -11419,7 +11419,7 @@ Back
                   "
                   data-site="wmns"
                 >
-                  <a href="/pages/women"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?5842665622790910508" alt="logo icon link to womens page"></a>
+                  <a href="/pages/women"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?18126384560636415848" alt="logo icon link to womens page"></a>
                 </div>
                 <div
                   class="
@@ -11429,7 +11429,7 @@ Back
                   "
                   data-site="kids"
                 >
-                  <a href="/pages/kids"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-kids.png?5842665622790910508" alt="logo icon link to kids page"></a>
+                  <a href="/pages/kids"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-kids.png?18126384560636415848" alt="logo icon link to kids page"></a>
                 </div>
                 <div
                   class="
@@ -11439,7 +11439,7 @@ Back
                   "
                   data-site="treats"
                 >
-                  <a href="/pages/treats"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-treats.png?5842665622790910508" alt="logo icon link to kith treats page"></a>
+                  <a href="/pages/treats"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-treats.png?18126384560636415848" alt="logo icon link to kith treats page"></a>
                 </div>
                 <div
                   class="
@@ -11449,7 +11449,7 @@ Back
                   "
                   data-site="site"
                 >
-                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?5842665622790910508" alt="logo icon link to mens page"></a>
+                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?18126384560636415848" alt="logo icon link to mens page"></a>
                 </div>
                 <div
                   class="
@@ -11458,7 +11458,7 @@ Back
                     -spacer
                   "
                 >
-                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?5842665622790910508" alt="logo icon link to mens page"></a>
+                  <a href="/"><img class="ksplash-header-logo-image" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?18126384560636415848" alt="logo icon link to mens page"></a>
                 </div>
               </div>
 
@@ -12216,7 +12216,7 @@ Back
                   </div>
                 </div>
                 <div class="ksplash-header-search-icon">
-                  <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-search.svg?5842665622790910508" alt="search icon">
+                  <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-search.svg?18126384560636415848" alt="search icon">
                 </div>
                 <div class="ksplash-header-account-icon">
                   <span
@@ -12225,7 +12225,7 @@ Back
                       js-ksplash-header-account-link
                     "
                   >
-                    <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-account.svg?5842665622790910508" alt="kith account icon">
+                    <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-account.svg?18126384560636415848" alt="kith account icon">
                   </span>
                   <div class="ksplash-header-account js-ksplash-header-account" tabindex="-1">
                     <div>
@@ -12267,7 +12267,7 @@ Back
                 <a href="/cart" class="js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
                   <div class="clearfix">
                     <span class="ksplash-header-cart-icon">
-                      <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-bag.svg?5842665622790910508" alt="shopping cart icon">
+                      <img class="full-width" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/icon-bag.svg?18126384560636415848" alt="shopping cart icon">
                     </span>
                     <span class="ksplash-header-cart-count">
                       (<span id="CartCount">0</span>)
@@ -22532,7 +22532,7 @@ $('ksplash-header-main-link').click(function() {
               <div class="wrapper wrapper--full">
                 <div class="custwelcome-header">
                   <div class="text-center">
-                    <img class="custwelcome-logo" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-alt-white_small.png?5842665622790910508">
+                    <img class="custwelcome-logo" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo-alt-white_small.png?18126384560636415848">
                   </div>
                 </div>
 
@@ -22751,57 +22751,57 @@ $('ksplash-header-main-link').click(function() {
         <div class="scroll-content-fadeoverlay">
         </div>
         <div class="widget-content"><ul class="nav-size "><li class="collection-container filter-active-productsize-3 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-3?limit=3" title="Narrow selection to products matching tag productsize-3"><i class="check-icon"></i> 3</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-3?limit=25" title="Narrow selection to products matching tag productsize-3"><i class="check-icon"></i> 3</a></div>
             </li><li class="collection-container filter-active-productsize-3-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-3-5?limit=3" title="Narrow selection to products matching tag productsize-3-5"><i class="check-icon"></i> 3.5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-3-5?limit=25" title="Narrow selection to products matching tag productsize-3-5"><i class="check-icon"></i> 3.5</a></div>
             </li><li class="collection-container filter-active-productsize-4 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-4?limit=3" title="Narrow selection to products matching tag productsize-4"><i class="check-icon"></i> 4</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-4?limit=25" title="Narrow selection to products matching tag productsize-4"><i class="check-icon"></i> 4</a></div>
             </li><li class="collection-container filter-active-productsize-4-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-4-5?limit=3" title="Narrow selection to products matching tag productsize-4-5"><i class="check-icon"></i> 4.5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-4-5?limit=25" title="Narrow selection to products matching tag productsize-4-5"><i class="check-icon"></i> 4.5</a></div>
             </li><li class="collection-container filter-active-productsize-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-5?limit=3" title="Narrow selection to products matching tag productsize-5"><i class="check-icon"></i> 5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-5?limit=25" title="Narrow selection to products matching tag productsize-5"><i class="check-icon"></i> 5</a></div>
             </li><li class="collection-container filter-active-productsize-5-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-5-5?limit=3" title="Narrow selection to products matching tag productsize-5-5"><i class="check-icon"></i> 5.5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-5-5?limit=25" title="Narrow selection to products matching tag productsize-5-5"><i class="check-icon"></i> 5.5</a></div>
             </li><li class="collection-container filter-active-productsize-6 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-6?limit=3" title="Narrow selection to products matching tag productsize-6"><i class="check-icon"></i> 6</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-6?limit=25" title="Narrow selection to products matching tag productsize-6"><i class="check-icon"></i> 6</a></div>
             </li><li class="collection-container filter-active-productsize-6-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-6-5?limit=3" title="Narrow selection to products matching tag productsize-6-5"><i class="check-icon"></i> 6.5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-6-5?limit=25" title="Narrow selection to products matching tag productsize-6-5"><i class="check-icon"></i> 6.5</a></div>
             </li><li class="collection-container filter-active-productsize-7 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-7?limit=3" title="Narrow selection to products matching tag productsize-7"><i class="check-icon"></i> 7</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-7?limit=25" title="Narrow selection to products matching tag productsize-7"><i class="check-icon"></i> 7</a></div>
             </li><li class="collection-container filter-active-productsize-7-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-7-5?limit=3" title="Narrow selection to products matching tag productsize-7-5"><i class="check-icon"></i> 7.5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-7-5?limit=25" title="Narrow selection to products matching tag productsize-7-5"><i class="check-icon"></i> 7.5</a></div>
             </li><li class="collection-container filter-active-productsize-8 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-8?limit=3" title="Narrow selection to products matching tag productsize-8"><i class="check-icon"></i> 8</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-8?limit=25" title="Narrow selection to products matching tag productsize-8"><i class="check-icon"></i> 8</a></div>
             </li><li class="collection-container filter-active-productsize-8-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-8-5?limit=3" title="Narrow selection to products matching tag productsize-8-5"><i class="check-icon"></i> 8.5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-8-5?limit=25" title="Narrow selection to products matching tag productsize-8-5"><i class="check-icon"></i> 8.5</a></div>
             </li><li class="collection-container filter-active-productsize-9 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-9?limit=3" title="Narrow selection to products matching tag productsize-9"><i class="check-icon"></i> 9</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-9?limit=25" title="Narrow selection to products matching tag productsize-9"><i class="check-icon"></i> 9</a></div>
             </li><li class="collection-container filter-active-productsize-9-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-9-5?limit=3" title="Narrow selection to products matching tag productsize-9-5"><i class="check-icon"></i> 9.5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-9-5?limit=25" title="Narrow selection to products matching tag productsize-9-5"><i class="check-icon"></i> 9.5</a></div>
             </li><li class="collection-container filter-active-productsize-10 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-10?limit=3" title="Narrow selection to products matching tag productsize-10"><i class="check-icon"></i> 10</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-10?limit=25" title="Narrow selection to products matching tag productsize-10"><i class="check-icon"></i> 10</a></div>
             </li><li class="collection-container filter-active-productsize-10-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-10-5?limit=3" title="Narrow selection to products matching tag productsize-10-5"><i class="check-icon"></i> 10.5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-10-5?limit=25" title="Narrow selection to products matching tag productsize-10-5"><i class="check-icon"></i> 10.5</a></div>
             </li><li class="collection-container filter-active-productsize-11 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-11?limit=3" title="Narrow selection to products matching tag productsize-11"><i class="check-icon"></i> 11</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-11?limit=25" title="Narrow selection to products matching tag productsize-11"><i class="check-icon"></i> 11</a></div>
             </li><li class="collection-container filter-active-productsize-11-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-11-5?limit=3" title="Narrow selection to products matching tag productsize-11-5"><i class="check-icon"></i> 11.5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-11-5?limit=25" title="Narrow selection to products matching tag productsize-11-5"><i class="check-icon"></i> 11.5</a></div>
             </li><li class="collection-container filter-active-productsize-12 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-12?limit=3" title="Narrow selection to products matching tag productsize-12"><i class="check-icon"></i> 12</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-12?limit=25" title="Narrow selection to products matching tag productsize-12"><i class="check-icon"></i> 12</a></div>
             </li><li class="collection-container filter-active-productsize-12-5 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-12-5?limit=3" title="Narrow selection to products matching tag productsize-12-5"><i class="check-icon"></i> 12.5</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-12-5?limit=25" title="Narrow selection to products matching tag productsize-12-5"><i class="check-icon"></i> 12.5</a></div>
             </li><li class="collection-container filter-active-productsize-13 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-13?limit=3" title="Narrow selection to products matching tag productsize-13"><i class="check-icon"></i> 13</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-13?limit=25" title="Narrow selection to products matching tag productsize-13"><i class="check-icon"></i> 13</a></div>
             </li><li class="collection-container filter-active-productsize-14 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-14?limit=3" title="Narrow selection to products matching tag productsize-14"><i class="check-icon"></i> 14</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-14?limit=25" title="Narrow selection to products matching tag productsize-14"><i class="check-icon"></i> 14</a></div>
             </li><li class="collection-container filter-active-productsize-15 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-15?limit=3" title="Narrow selection to products matching tag productsize-15"><i class="check-icon"></i> 15</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-15?limit=25" title="Narrow selection to products matching tag productsize-15"><i class="check-icon"></i> 15</a></div>
             </li><li class="collection-container filter-active-productsize-36 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-36?limit=3" title="Narrow selection to products matching tag productsize-36"><i class="check-icon"></i> 36</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-36?limit=25" title="Narrow selection to products matching tag productsize-36"><i class="check-icon"></i> 36</a></div>
             </li><li class="collection-container filter-active-productsize-37 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-37?limit=3" title="Narrow selection to products matching tag productsize-37"><i class="check-icon"></i> 37</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-37?limit=25" title="Narrow selection to products matching tag productsize-37"><i class="check-icon"></i> 37</a></div>
             </li><li class="collection-container filter-active-productsize-38 active ">
-                <div class="collection-name"><a href="/collections/footwear/productsize-38?limit=3" title="Narrow selection to products matching tag productsize-38"><i class="check-icon"></i> 38</a></div>
+                <div class="collection-name"><a href="/collections/footwear/productsize-38?limit=25" title="Narrow selection to products matching tag productsize-38"><i class="check-icon"></i> 38</a></div>
             </li></ul></div>
         </div></div><div class="filter-group filter-group-brand  has_mutliple_items">
         <div class="show-heading-num hide">2</div>
@@ -22810,37 +22810,37 @@ $('ksplash-header-main-link').click(function() {
         <div class="scroll-content-fadeoverlay">
         </div>
         <div class="widget-content"><ul class="nav-brand "><li class="collection-container filter-active-adidas active ">
-                <div class="collection-name"><a href="/collections/footwear/adidas?limit=3" title="Narrow selection to products matching tag adidas"><i class="check-icon"></i> Adidas</a></div>
+                <div class="collection-name"><a href="/collections/footwear/adidas?limit=25" title="Narrow selection to products matching tag adidas"><i class="check-icon"></i> Adidas</a></div>
             </li><li class="collection-container filter-active-asics active ">
-                <div class="collection-name"><a href="/collections/footwear/asics?limit=3" title="Narrow selection to products matching tag asics"><i class="check-icon"></i> Asics</a></div>
+                <div class="collection-name"><a href="/collections/footwear/asics?limit=25" title="Narrow selection to products matching tag asics"><i class="check-icon"></i> Asics</a></div>
             </li><li class="collection-container filter-active-converse active ">
-                <div class="collection-name"><a href="/collections/footwear/converse?limit=3" title="Narrow selection to products matching tag converse"><i class="check-icon"></i> Converse</a></div>
+                <div class="collection-name"><a href="/collections/footwear/converse?limit=25" title="Narrow selection to products matching tag converse"><i class="check-icon"></i> Converse</a></div>
             </li><li class="collection-container filter-active-diadora active ">
-                <div class="collection-name"><a href="/collections/footwear/diadora?limit=3" title="Narrow selection to products matching tag diadora"><i class="check-icon"></i> Diadora</a></div>
+                <div class="collection-name"><a href="/collections/footwear/diadora?limit=25" title="Narrow selection to products matching tag diadora"><i class="check-icon"></i> Diadora</a></div>
             </li><li class="collection-container filter-active-fear-of-god active ">
-                <div class="collection-name"><a href="/collections/footwear/fear-of-god?limit=3" title="Narrow selection to products matching tag fear-of-god"><i class="check-icon"></i> Fear of God</a></div>
+                <div class="collection-name"><a href="/collections/footwear/fear-of-god?limit=25" title="Narrow selection to products matching tag fear-of-god"><i class="check-icon"></i> Fear of God</a></div>
             </li><li class="collection-container filter-active-filling-pieces active ">
-                <div class="collection-name"><a href="/collections/footwear/filling-pieces?limit=3" title="Narrow selection to products matching tag filling-pieces"><i class="check-icon"></i> Filling Pieces</a></div>
+                <div class="collection-name"><a href="/collections/footwear/filling-pieces?limit=25" title="Narrow selection to products matching tag filling-pieces"><i class="check-icon"></i> Filling Pieces</a></div>
             </li><li class="collection-container filter-active-jordan active ">
-                <div class="collection-name"><a href="/collections/footwear/jordan?limit=3" title="Narrow selection to products matching tag jordan"><i class="check-icon"></i> Jordan</a></div>
+                <div class="collection-name"><a href="/collections/footwear/jordan?limit=25" title="Narrow selection to products matching tag jordan"><i class="check-icon"></i> Jordan</a></div>
             </li><li class="collection-container filter-active-kith active ">
-                <div class="collection-name"><a href="/collections/footwear/kith?limit=3" title="Narrow selection to products matching tag kith"><i class="check-icon"></i> Kith</a></div>
+                <div class="collection-name"><a href="/collections/footwear/kith?limit=25" title="Narrow selection to products matching tag kith"><i class="check-icon"></i> Kith</a></div>
             </li><li class="collection-container filter-active-new-balance active ">
-                <div class="collection-name"><a href="/collections/footwear/new-balance?limit=3" title="Narrow selection to products matching tag new-balance"><i class="check-icon"></i> New Balance</a></div>
+                <div class="collection-name"><a href="/collections/footwear/new-balance?limit=25" title="Narrow selection to products matching tag new-balance"><i class="check-icon"></i> New Balance</a></div>
             </li><li class="collection-container filter-active-nike active ">
-                <div class="collection-name"><a href="/collections/footwear/nike?limit=3" title="Narrow selection to products matching tag nike"><i class="check-icon"></i> Nike</a></div>
+                <div class="collection-name"><a href="/collections/footwear/nike?limit=25" title="Narrow selection to products matching tag nike"><i class="check-icon"></i> Nike</a></div>
             </li><li class="collection-container filter-active-timberland active ">
-                <div class="collection-name"><a href="/collections/footwear/timberland?limit=3" title="Narrow selection to products matching tag timberland"><i class="check-icon"></i> Timberland</a></div>
+                <div class="collection-name"><a href="/collections/footwear/timberland?limit=25" title="Narrow selection to products matching tag timberland"><i class="check-icon"></i> Timberland</a></div>
             </li><li class="collection-container filter-active-tretorn active ">
-                <div class="collection-name"><a href="/collections/footwear/tretorn?limit=3" title="Narrow selection to products matching tag tretorn"><i class="check-icon"></i> Tretorn</a></div>
+                <div class="collection-name"><a href="/collections/footwear/tretorn?limit=25" title="Narrow selection to products matching tag tretorn"><i class="check-icon"></i> Tretorn</a></div>
             </li><li class="collection-container filter-active-vans active ">
-                <div class="collection-name"><a href="/collections/footwear/vans?limit=3" title="Narrow selection to products matching tag vans"><i class="check-icon"></i> Vans</a></div>
+                <div class="collection-name"><a href="/collections/footwear/vans?limit=25" title="Narrow selection to products matching tag vans"><i class="check-icon"></i> Vans</a></div>
             </li><li class="collection-container filter-active-veja active ">
-                <div class="collection-name"><a href="/collections/footwear/veja?limit=3" title="Narrow selection to products matching tag veja"><i class="check-icon"></i> Veja</a></div>
+                <div class="collection-name"><a href="/collections/footwear/veja?limit=25" title="Narrow selection to products matching tag veja"><i class="check-icon"></i> Veja</a></div>
             </li><li class="collection-container filter-active-visvim active ">
-                <div class="collection-name"><a href="/collections/footwear/visvim?limit=3" title="Narrow selection to products matching tag visvim"><i class="check-icon"></i> Visvim</a></div>
+                <div class="collection-name"><a href="/collections/footwear/visvim?limit=25" title="Narrow selection to products matching tag visvim"><i class="check-icon"></i> Visvim</a></div>
             </li><li class="collection-container filter-active-y3 active ">
-                <div class="collection-name"><a href="/collections/footwear/y3?limit=3" title="Narrow selection to products matching tag y3"><i class="check-icon"></i> Y-3</a></div>
+                <div class="collection-name"><a href="/collections/footwear/y3?limit=25" title="Narrow selection to products matching tag y3"><i class="check-icon"></i> Y-3</a></div>
             </li></ul></div>
         </div></div><div class="filter-group filter-group-not-shown has_group_selected">
         <div class="show-heading-num hide">4</div>
@@ -23795,7 +23795,7 @@ $120.00
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="10,10.5,12,13,"
+  data-sizes="10.5,13,"
   >
   <div 
     class="
@@ -23870,17 +23870,9 @@ $140.00
           <div class="product-card-info-variants" data-product-tags="71918,cn162288c,converse,Converse x JW Anderson Chuck 70 Big Eyelets - Heron / Coral Pink,final-sale,footwear,mens,productsize-10,productsize-10-5,productsize-12,productsize-13,sneaker,sneakers,wmns">
             
             
-<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12211692109947" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        10
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12211692142715" tooltip="QUICK ADD">
+<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12211692142715" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         10.5
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12211692241019" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        12
                       </div>
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12211692306555" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
@@ -28490,7 +28482,7 @@ $190.00
 
         
           <div class="pagination">
-            <span class="page current">1</span> <span class="page"><a href="/collections/footwear?limit=3&amp;page=2" title="">2</a></span> <span class="page"><a href="/collections/footwear?limit=3&amp;page=3" title="">3</a></span> <span class="deco">&hellip;</span> <span class="page"><a href="/collections/footwear?limit=3&amp;page=14" title="">14</a></span> <span class="next"><a href="/collections/footwear?limit=3&amp;page=2" title="">></a></span>
+            <span class="page current">1</span> <span class="page"><a href="/collections/footwear?limit=25&amp;page=2" title="">2</a></span> <span class="page"><a href="/collections/footwear?limit=25&amp;page=3" title="">3</a></span> <span class="deco">&hellip;</span> <span class="page"><a href="/collections/footwear?limit=25&amp;page=14" title="">14</a></span> <span class="next"><a href="/collections/footwear?limit=25&amp;page=2" title="">></a></span>
           </div>
         
       </div>
@@ -28939,30 +28931,30 @@ $190.00
     };
   </script>
 
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.css?5842665622790910508" rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider-style.scss.css?5842665622790910508" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.css?18126384560636415848" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider-style.scss.css?18126384560636415848" rel="stylesheet" type="text/css" media="all" />
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.min.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/plyr.js?5842665622790910508" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/masterslider.min.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/plyr.js?18126384560636415848" type="text/javascript"></script>
   <script src="//cdn.shopify.com/s/assets/themes_support/option_selection-ea4f4a242e299f2227b2b8038152223f741e90780c0c766883939e8902542bda.js" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/packery.pkgd.min.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.2.1.9.min.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.magnific-popup.min.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment-timezone-with-data.min.js?5842665622790910508" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/packery.pkgd.min.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/dropkick.2.1.9.min.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.magnific-popup.min.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/moment-timezone-with-data.min.js?18126384560636415848" type="text/javascript"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/snap.js/1.9.2/snap.min.js"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/site.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-super-slider.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-theme.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe-ui.min.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.min.js?5842665622790910508" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/vendor.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/site.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-super-slider.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/slick-theme.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe-ui.min.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/photoswipe.min.js?18126384560636415848" type="text/javascript"></script>
   
   
 
   
   
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/handlebars.min.js?5842665622790910508" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/handlebars.min.js?18126384560636415848" type="text/javascript"></script>
     <!-- /snippets/ajax-cart-template.liquid -->
 
   <script id="CartTemplate" type="text/template">
@@ -29327,7 +29319,7 @@ $190.00
   
   </script>
 
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/ajax-cart.js?5842665622790910508" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/ajax-cart.js?18126384560636415848" type="text/javascript"></script>
   
 
   <script>
@@ -29360,7 +29352,7 @@ $190.00
 
   
     
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/theme.min.js?5842665622790910508" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/theme.min.js?18126384560636415848" type="text/javascript"></script>
   
 
   
@@ -29369,9 +29361,9 @@ $190.00
     </script>
   
 
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/tweenlite.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.min.js?5842665622790910508" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.animate.plugin.min.js?5842665622790910508" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/tweenlite.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.min.js?18126384560636415848" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/mightyslider.animate.plugin.min.js?18126384560636415848" type="text/javascript"></script>
 
   
   <script>
@@ -29383,7 +29375,7 @@ $190.00
       whenDefined(window, 'HFCHAT_CONFIG', function() {
         HFCHAT_CONFIG.onload = function() {
           var HappyFoxChat = this;
-          HappyFoxChat.addCustomCSSFile('//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?5842665622790910508', function(err) {
+          HappyFoxChat.addCustomCSSFile('//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/hfchat-custom.scss.css?18126384560636415848', function(err) {
             if (err) {
               // console.error('Error:', err);
             } else {
