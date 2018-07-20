@@ -25,8 +25,9 @@ public:
 
     // Adds a task that will continuously check for a product, and, if found, adds it to the cart.
     // This task has to be started off the task list in its own thread for efficient processing.
-    void createTask(const URLAndMethod& website, const std::vector<std::string>& keywords,
-                    const std::vector<std::string>& colorKeywords, unsigned int quantity);
+    void createTask(const std::string& title, const URLAndMethod& website, const std::string& collection,
+                    const std::vector<std::string>& keywords, const std::vector<std::string>& colorKeywords,
+                    const std::string& size, unsigned int quantity);
 
     // Runs the task at the specified index on the thread and tasks vector
     void runTask(unsigned int which);
