@@ -194,7 +194,7 @@ Shopify.theme.style = {"id":null,"handle":null};
   }
 })();
 </script>
-<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"25767ee8-f609-4546-b3d8-06992e999d79","pageurl":"kith.com\/collections\/footwear?limit=3","u":"956bf989f9af","p":"collection","rtyp":"collection","rid":31304833};</script>
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"b4c4616f-e9c2-4163-8683-810fd8aa0562","pageurl":"kith.com\/collections\/footwear?limit=3","u":"203220a18646","p":"collection","rtyp":"collection","rid":31304833};</script>
 <script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
 <script>window.Shopify = window.Shopify || {};
 window.Shopify.Checkout = window.Shopify.Checkout || {};
@@ -202,7 +202,7 @@ window.Shopify.Checkout.apiHost = "kithnyc.myshopify.com";
 window.ShopifyPay = window.ShopifyPay || {};
 window.ShopifyPay.acceleratedFlowIncontext = false;
 window.ShopifyPay.apiHost = "pay.shopify.com";
-window.ShopifyPay.apiToken = "MzZoSEFTOXV1THoyNEUrbTJBYmxKMElhTlBqeCtYQW9DUjI0aDdaWGJ1Yz0tLTJ5bU44K0xnczZGelU0UFFIcDE5VXc9PQ==--331bdd49354664551698006a7d2430da2ae1ab65";
+window.ShopifyPay.apiToken = "TTQzZFE3amtQVzNEUUlhbEoxclBxT1Z5TnFQdG94NzJodlc4MEhJaUNXcz0tLW5ReFpVcS9mU3FyTXJPSVN5QzFPU3c9PQ==--36bf7d6255f2713d558e28748dc5f2038fc6ec50";
 window.ShopifyPay.requestHost = "kith.com"
 window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/sheet\/main-9591cdb8fc78ba1acaca189815e8d30f2513988b8b83f4a84c83115fcae19d76.css";
 </script>
@@ -23083,7 +23083,7 @@ $('ksplash-header-main-link').click(function() {
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="3.5,4,5,5.5,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,13,"
+  data-sizes="3.5,4,5,5.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,13,"
   >
   <div 
     class="
@@ -23173,10 +23173,6 @@ $160.00
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2184656060423" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         5.5
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2184656158727" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        6.5
                       </div>
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2184656224263" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
@@ -23867,7 +23863,7 @@ $140.00
               </p>
             </div>
           </div>
-          <div class="product-card-info-variants" data-product-tags="71918,cn162288c,converse,Converse x JW Anderson Chuck 70 Big Eyelets - Heron / Coral Pink,final-sale,footwear,mens,productsize-10,productsize-10-5,productsize-12,productsize-13,sneaker,sneakers,wmns">
+          <div class="product-card-info-variants" data-product-tags="71918,cn162288c,converse,Converse x JW Anderson Chuck 70 Big Eyelets - Heron / Coral Pink,final-sale,footwear,mens,productsize-10-5,productsize-13,sneaker,sneakers,wmns">
             
             
 <div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12211692142715" tooltip="QUICK ADD">
@@ -23916,7 +23912,7 @@ $140.00
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="10,11,13,"
+  data-sizes="10,13,"
   >
   <div 
     class="
@@ -23994,10 +23990,6 @@ $140.00
 <div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12212435976315" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         10
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12212436041851" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        11
                       </div>
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12212436172923" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">

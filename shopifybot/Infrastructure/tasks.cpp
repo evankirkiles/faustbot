@@ -40,7 +40,7 @@ void Task::run() {
             order(cartLink);
 
             // When finished, order should be completed
-            log("Order complete!");
+            log("Task finished.");
 
         } catch(std::runtime_error& e) {
             log("Failed because: \"" + std::string(e.what()) + "\", checking again in " + std::to_string(frequency) + " seconds.");

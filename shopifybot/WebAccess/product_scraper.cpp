@@ -143,12 +143,12 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
             }
             if (prodFound) {
                 // Look for the variant identifier
-                unsigned long stringpos = str.find("js-product-card-quickadd-size");
-                if (stringpos != str.npos) {
+                unsigned long newspos = str.find("js-product-card-quickadd-size");
+                if (newspos != str.npos) {
                     divsFound = 0;
 
                     // The id is 43 characters over
-                    str.erase(0, stringpos + 43);
+                    str.erase(0, newspos + 43);
                     std::string id = str.substr(0, str.find('"'));
 
                     // The size of the given id is two lines down
