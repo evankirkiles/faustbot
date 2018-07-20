@@ -35,7 +35,4 @@ cmake-build-debug/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 
-## Custom files and folders
-backtester_tests/lib/
-
 # End of https://www.gitignore.io/api/Xcode
