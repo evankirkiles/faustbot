@@ -1,93 +1,101 @@
-[2018-07-21 00:15:24.908] Beginning "Kith Task".
-[2018-07-21 00:15:25.603] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:15:25.604] Placing order...
-[2018-07-21 00:15:27.279] Got to customer information form.
-[2018-07-21 00:15:27.280] https://kith.com/942252/checkouts/c34bba3e30fc1daf30bed5c83c4690cc
-[2018-07-21 00:15:28.324] 404
-[2018-07-21 00:15:29.533] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 00:15:29.726] Retrieved unique session ID.
-[2018-07-21 00:15:29.774] Task finished.
-[2018-07-21 00:19:41.014] Beginning "Kith Task".
-[2018-07-21 00:19:41.318] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:19:41.318] Placing order...
-[2018-07-21 00:19:43.186] Got to customer information form.
-[2018-07-21 00:19:43.187] https://kith.com/942252/checkouts/7b0d598c70fbada56dadc8f884fe2714
-[2018-07-21 00:19:43.299] Task finished.
-[2018-07-21 00:20:46.569] Beginning "Kith Task".
-[2018-07-21 00:20:46.914] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:20:46.914] Placing order...
-[2018-07-21 00:20:48.417] Got to customer information form.
-[2018-07-21 00:20:48.417] https://kith.com/942252/checkouts/fa1576729096672ba13d14537fd67d93
-[2018-07-21 00:20:48.479] Task finished.
-[2018-07-21 00:21:35.431] Beginning "Kith Task".
-[2018-07-21 00:21:36.541] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:21:36.542] Placing order...
-[2018-07-21 00:21:38.488] Got to customer information form.
-[2018-07-21 00:21:38.490] https://kith.com/942252/checkouts/ccf4adceed3256ce4652555ac23d66ef
-[2018-07-21 00:21:39.327] 404
-[2018-07-21 00:21:40.360] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 00:21:40.465] Retrieved unique session ID.
-[2018-07-21 00:21:40.494] Task finished.
-[2018-07-21 00:21:55.349] Beginning "Kith Task".
-[2018-07-21 00:21:55.722] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:21:55.722] Placing order...
-[2018-07-21 00:21:57.435] Got to customer information form.
-[2018-07-21 00:21:57.436] https://kith.com/942252/checkouts/cb391598ffbc69c04af966b49d73147a
-[2018-07-21 00:21:58.268] 404
-[2018-07-21 00:21:59.482] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 00:21:59.570] Retrieved unique session ID.
-[2018-07-21 00:21:59.604] Task finished.
-[2018-07-21 00:22:07.194] Beginning "Kith Task".
-[2018-07-21 00:22:08.183] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:22:08.183] Placing order...
-[2018-07-21 00:22:09.720] Got to customer information form.
-[2018-07-21 00:22:09.721] https://kith.com/942252/checkouts/5896186d6f09f83daeebd78df5ea99f0
-[2018-07-21 00:22:10.557] 404
-[2018-07-21 00:22:11.666] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 00:22:11.763] Retrieved unique session ID.
-[2018-07-21 00:22:11.785] Task finished.
-[2018-07-21 00:25:20.090] Beginning "Kith Task".
-[2018-07-21 00:25:22.483] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:25:22.484] Placing order...
-[2018-07-21 00:25:24.078] Got to customer information form.
-[2018-07-21 00:25:24.078] https://kith.com/942252/checkouts/73135d1e7331d96348b8131dc21f61db
-[2018-07-21 00:25:24.136] Task finished.
-[2018-07-21 00:25:33.145] Beginning "Kith Task".
-[2018-07-21 00:25:33.535] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:25:33.535] Placing order...
-[2018-07-21 00:25:35.137] Got to customer information form.
-[2018-07-21 00:25:35.138] https://kith.com/942252/checkouts/450f633aad5d379aaf4bc7bc4253cbdc
-[2018-07-21 00:25:35.201] Task finished.
-[2018-07-21 00:29:17.378] Beginning "Kith Task".
-[2018-07-21 00:29:17.783] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:29:17.783] Placing order...
-[2018-07-21 00:29:20.416] Got to customer information form.
-[2018-07-21 00:29:20.417] https://kith.com/942252/checkouts/5d9e55f9018108f49c8a44f732d05be8
-[2018-07-21 00:29:22.140] Successfully submitted customer info to Shopify server.
-[2018-07-21 00:29:23.382] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 00:29:23.499] Retrieved unique session ID.
-[2018-07-21 00:29:23.521] Task finished.
-[2018-07-21 00:30:59.037] Beginning "Kith Task".
-[2018-07-21 00:31:01.506] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:31:01.506] Placing order...
-[2018-07-21 00:31:03.224] Got to customer information form.
-[2018-07-21 00:31:04.950] Successfully submitted customer info to Shopify server.
-[2018-07-21 00:31:06.192] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 00:31:06.315] Retrieved unique session ID.
-[2018-07-21 00:31:06.336] Task finished.
-[2018-07-21 00:43:42.991] Beginning "Kith Task".
-[2018-07-21 00:43:46.243] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:43:46.243] Placing order...
-[2018-07-21 00:43:47.860] Got to customer information form.
-[2018-07-21 00:43:49.675] Successfully submitted customer info to Shopify server.
-[2018-07-21 00:43:50.639] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 00:43:51.142] Sent credit card info to Shopify.
-[2018-07-21 00:43:51.180] Task finished.
-[2018-07-21 00:44:35.209] Beginning "Kith Task".
-[2018-07-21 00:44:35.542] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 00:44:35.542] Placing order...
-[2018-07-21 00:44:37.421] Got to customer information form.
-[2018-07-21 00:44:39.551] Successfully submitted customer info to Shopify server.
-[2018-07-21 00:44:40.795] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 00:44:40.881] Sent credit card info to Shopify.
-[2018-07-21 00:44:40.902] Task finished.
+[2018-07-21 12:54:22.858] Beginning "Kith Task".
+[2018-07-21 12:54:26.313] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 12:54:26.314] Placing order...
+[2018-07-21 12:54:28.191] Got to customer information form.
+[2018-07-21 12:54:29.912] Successfully submitted customer info to Shopify server.
+[2018-07-21 12:54:30.946] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 12:54:31.106] Sent credit card info to Shopify.
+[2018-07-21 12:54:31.140] Task finished.
+[2018-07-21 12:55:07.096] Beginning "Kith Task".
+[2018-07-21 12:55:07.452] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 12:55:07.452] Placing order...
+[2018-07-21 12:55:09.315] Got to customer information form.
+[2018-07-21 12:55:10.651] Successfully submitted customer info to Shopify server.
+[2018-07-21 12:55:11.664] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 12:55:11.971] Got unique session ID from Shopify.
+[2018-07-21 12:55:11.998] Task finished.
+[2018-07-21 12:55:23.504] Beginning "Kith Task".
+[2018-07-21 12:55:26.875] Product found! Link: https://kith.com/cart/2611888586759:3
+[2018-07-21 12:55:26.875] Placing order...
+[2018-07-21 12:55:28.596] Could not fill complete order, reordering to get as many as possible.
+[2018-07-21 12:55:28.614] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
+[2018-07-21 12:55:30.135] Got to customer information form.
+[2018-07-21 12:55:32.069] Successfully submitted customer info to Shopify server.
+[2018-07-21 12:55:34.129] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 12:55:34.225] Got unique session ID from Shopify.
+[2018-07-21 12:55:34.248] Task finished.
+[2018-07-21 12:59:26.514] Beginning "Kith Task".
+[2018-07-21 12:59:29.271] Product found! Link: https://kith.com/cart/2611888586759:3
+[2018-07-21 12:59:29.271] Placing order...
+[2018-07-21 12:59:30.567] Could not fill complete order, reordering to get as many as possible.
+[2018-07-21 12:59:30.586] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
+[2018-07-21 12:59:31.804] Got to customer information form.
+[2018-07-21 12:59:33.841] Successfully submitted customer info to Shopify server.
+[2018-07-21 12:59:35.105] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 12:59:35.628] Got unique session ID from Shopify.
+[2018-07-21 12:59:35.655] Task finished.
+[2018-07-21 12:59:47.984] Beginning "Bodega Task".
+[2018-07-21 12:59:47.985] Beginning "Kith Task".
+[2018-07-21 12:59:51.064] Product found! Link: https://kith.com/cart/2611888586759:3
+[2018-07-21 12:59:51.065] Placing order...
+[2018-07-21 12:59:52.596] Could not fill complete order, reordering to get as many as possible.
+[2018-07-21 12:59:52.613] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
+[2018-07-21 12:59:53.498] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
+[2018-07-21 12:59:53.498] Placing order...
+[2018-07-21 12:59:53.760] Got to customer information form.
+[2018-07-21 12:59:54.950] Got to customer information form.
+[2018-07-21 12:59:55.174] Successfully submitted customer info to Shopify server.
+[2018-07-21 12:59:56.064] Successfully submitted customer info to Shopify server.
+[2018-07-21 12:59:56.201] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 12:59:56.298] Got unique session ID from Shopify.
+[2018-07-21 12:59:56.319] Task finished.
+[2018-07-21 12:59:56.691] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 12:59:56.776] Got unique session ID from Shopify.
+[2018-07-21 12:59:56.797] Task finished.
+[2018-07-21 16:40:42.845] Beginning "Bodega Task".
+[2018-07-21 16:40:42.845] Beginning "Kith Task".
+[2018-07-21 17:05:53.052] Beginning "Kith Task".
+[2018-07-21 17:05:53.052] Beginning "Bodega Task".
+[2018-07-21 17:05:55.749] Product found! Link: https://kith.com/cart/2611888586759:3
+[2018-07-21 17:05:55.749] Placing order...
+[2018-07-21 17:05:55.884] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
+[2018-07-21 17:05:55.885] Placing order...
+[2018-07-21 17:05:57.423] Could not fill complete order, reordering to get as many as possible.
+[2018-07-21 17:05:57.451] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
+[2018-07-21 17:05:57.794] Got to customer information form.
+[2018-07-21 17:05:58.903] Successfully submitted customer info to Shopify server.
+[2018-07-21 17:05:59.414] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 17:05:59.524] Got unique session ID from Shopify.
+[2018-07-21 17:05:59.554] Task finished.
+[2018-07-21 17:05:59.563] Got to customer information form.
+[2018-07-21 17:06:01.972] Successfully submitted customer info to Shopify server.
+[2018-07-21 17:06:03.120] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 17:06:03.213] Got unique session ID from Shopify.
+[2018-07-21 17:06:03.236] Task finished.
+[2018-07-21 17:06:58.943] Beginning "Kith Task".
+[2018-07-21 17:06:58.943] Beginning "Bodega Task".
+[2018-07-21 17:07:01.478] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
+[2018-07-21 17:07:01.479] Placing order...
+[2018-07-21 17:07:02.813] Product found! Link: https://kith.com/cart/2611888586759:3
+[2018-07-21 17:07:02.813] Placing order...
+[2018-07-21 17:07:03.220] Got to customer information form.
+[2018-07-21 17:07:15.672] Beginning "Kith Task".
+[2018-07-21 17:07:16.015] Product found! Link: https://kith.com/cart/2611888586759:3
+[2018-07-21 17:07:16.015] Placing order...
+[2018-07-21 17:07:17.854] Could not fill complete order, reordering to get as many as possible.
+[2018-07-21 17:07:17.874] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
+[2018-07-21 17:07:18.979] Got to customer information form.
+[2018-07-21 17:07:20.937] Successfully submitted customer info to Shopify server.
+[2018-07-21 17:07:22.066] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 17:07:22.188] Got unique session ID from Shopify.
+[2018-07-21 17:07:22.213] Task finished.
+[2018-07-21 17:26:10.663] Beginning "Kith Task".
+[2018-07-21 17:26:13.125] Product found! Link: https://kith.com/cart/2611888586759:3
+[2018-07-21 17:26:13.125] Placing order...
+[2018-07-21 17:26:15.630] Could not fill complete order, reordering to get as many as possible.
+[2018-07-21 17:26:15.659] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
+[2018-07-21 17:26:17.076] Got to customer information form.
+[2018-07-21 17:26:18.593] Successfully submitted customer info to Shopify server.
+[2018-07-21 17:26:19.738] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 17:26:19.877] Got unique session ID from Shopify.
+[2018-07-21 17:26:19.909] Task finished.

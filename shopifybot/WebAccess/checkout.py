@@ -87,6 +87,7 @@ def send_customer_info():
         raise ValueError("Did not reach Customer Information Page!")
 
     # Save the response URL as the Shopify checkout link
+    global shopifyCheckoutLink
     shopifyCheckoutLink = resp.url
 
     # Parse through the html contents and find authenticity tokens
@@ -164,7 +165,7 @@ def submitPayment():
 
     # Check if the post request was successful
     if resp.status_code == 200:
-        log('Sent credit card info to Shopify.')
+        log('Got unique session ID from Shopify.')
     else:
         log(str(resp.status_code))
 
