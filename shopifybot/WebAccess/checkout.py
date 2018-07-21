@@ -21,10 +21,10 @@ province = "New York"
 zipcode = "10016"
 phone = "2129539871"
 # Credit card settings
-ccnumber = "4621386161794239"
+ccnumber = "4621 3861 6179 4239"
 ccname = "Aiden King"
-ccmonth = "01"
-ccyear = "21"
+ccmonth = "1"
+ccyear = "2021"
 ccccv = "567"
 ########################################################################################
 
@@ -164,7 +164,7 @@ def submitPayment():
 
     # Check if the post request was successful
     if resp.status_code == 200:
-        log('Retrieved unique session ID.')
+        log('Sent credit card info to Shopify.')
     else:
         log(str(resp.status_code))
 

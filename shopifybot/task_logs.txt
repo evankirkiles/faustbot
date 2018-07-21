@@ -75,3 +75,19 @@
 [2018-07-21 00:31:06.192] Successfully bypassed reCAPTCHA and got to payment method page.
 [2018-07-21 00:31:06.315] Retrieved unique session ID.
 [2018-07-21 00:31:06.336] Task finished.
+[2018-07-21 00:43:42.991] Beginning "Kith Task".
+[2018-07-21 00:43:46.243] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:43:46.243] Placing order...
+[2018-07-21 00:43:47.860] Got to customer information form.
+[2018-07-21 00:43:49.675] Successfully submitted customer info to Shopify server.
+[2018-07-21 00:43:50.639] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 00:43:51.142] Sent credit card info to Shopify.
+[2018-07-21 00:43:51.180] Task finished.
+[2018-07-21 00:44:35.209] Beginning "Kith Task".
+[2018-07-21 00:44:35.542] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:44:35.542] Placing order...
+[2018-07-21 00:44:37.421] Got to customer information form.
+[2018-07-21 00:44:39.551] Successfully submitted customer info to Shopify server.
+[2018-07-21 00:44:40.795] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 00:44:40.881] Sent credit card info to Shopify.
+[2018-07-21 00:44:40.902] Task finished.
