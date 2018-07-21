@@ -177,7 +177,7 @@ Shopify.theme.style = {"id":null,"handle":null};
 </script>
 <script>(function() {
   function asyncLoad() {
-    var urls = ["https:\/\/d1l7z5ofrj6ab8.cloudfront.net\/visitor\/js\/widget-loader.js?ET=fd62e390-eccf-11e5-abb7-e344ea2b03c8\u0026AT=468dfa9023004bc987f6f7720a5f0622\u0026H=https:\/\/happyfoxchat.com\u0026A=https:\/\/d1l7z5ofrj6ab8.cloudfront.net\/visitor\u0026shop=kithnyc.myshopify.com","https:\/\/d3g420rgevyqxw.cloudfront.net\/cffPC.production.min.js?shop=kithnyc.myshopify.com","https:\/\/cdn.shopifycloud.com\/messenger_commerce\/assets\/new_message_us?version=1517348500\u0026page_id=121342834633255\u0026color=\u0026size=\u0026position_horizontal=\u0026position_vertical=\u0026messenger_app_id=1163199097047119\u0026shop=kithnyc.myshopify.com","\/\/s3.us-east-2.amazonaws.com\/cross-sell\/assets\/js\/cross-sell.js?shop=kithnyc.myshopify.com","https:\/\/d2hwzdtjh6y1wh.cloudfront.net\/assets\/v2\/js\/core\/xsell.js?shop=kithnyc.myshopify.com","\/\/app.backinstock.org\/widget\/9480_1516826751.js?v=5\u0026shop=kithnyc.myshopify.com","\/\/findify-assets-2bveeb6u8ag.netdna-ssl.com\/search\/prod\/kithnyc.myshopify.com.min.js?shop=kithnyc.myshopify.com","\/\/www.searchanise.com\/widgets\/shopify\/init.js?a=3J2M9Q3r7i\u0026shop=kithnyc.myshopify.com","https:\/\/vital-forms.ellipsis.cloud\/ellipsis-vital-forms.js?shop=kithnyc.myshopify.com","https:\/\/script.metricode.com\/ellipsis.js?api_key=61033c2b-49ae-48b5-ad25-58151f777ed6\u0026shop=kithnyc.myshopify.com"];
+    var urls = ["https:\/\/d1l7z5ofrj6ab8.cloudfront.net\/visitor\/js\/widget-loader.js?ET=fd62e390-eccf-11e5-abb7-e344ea2b03c8\u0026AT=468dfa9023004bc987f6f7720a5f0622\u0026H=https:\/\/happyfoxchat.com\u0026A=https:\/\/d1l7z5ofrj6ab8.cloudfront.net\/visitor\u0026shop=kithnyc.myshopify.com","https:\/\/d3g420rgevyqxw.cloudfront.net\/cffPC.production.min.js?shop=kithnyc.myshopify.com","https:\/\/cdn.shopifycloud.com\/messenger_commerce\/assets\/new_message_us?version=1517348500\u0026page_id=121342834633255\u0026color=\u0026size=\u0026position_horizontal=\u0026position_vertical=\u0026messenger_app_id=1163199097047119\u0026shop=kithnyc.myshopify.com","\/\/s3.us-east-2.amazonaws.com\/cross-sell\/assets\/js\/cross-sell.js?shop=kithnyc.myshopify.com","https:\/\/load.csell.co\/assets\/v2\/js\/core\/xsell.js?shop=kithnyc.myshopify.com","\/\/app.backinstock.org\/widget\/9480_1516826751.js?v=5\u0026shop=kithnyc.myshopify.com","\/\/findify-assets-2bveeb6u8ag.netdna-ssl.com\/search\/prod\/kithnyc.myshopify.com.min.js?shop=kithnyc.myshopify.com","\/\/www.searchanise.com\/widgets\/shopify\/init.js?a=3J2M9Q3r7i\u0026shop=kithnyc.myshopify.com","https:\/\/vital-forms.ellipsis.cloud\/ellipsis-vital-forms.js?shop=kithnyc.myshopify.com","https:\/\/script.metricode.com\/ellipsis.js?api_key=61033c2b-49ae-48b5-ad25-58151f777ed6\u0026shop=kithnyc.myshopify.com"];
     for (var i = 0; i < urls.length; i++) {
       var s = document.createElement('script');
       s.type = 'text/javascript';
@@ -194,7 +194,7 @@ Shopify.theme.style = {"id":null,"handle":null};
   }
 })();
 </script>
-<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"466c60db-09aa-41ec-8dfd-d44d42bc0300","pageurl":"kith.com\/collections\/footwear?limit=3","u":"6076dfa44868","p":"collection","rtyp":"collection","rid":31304833};</script>
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"8aea1234-8628-4ee5-b9fb-830ee1c7af51","pageurl":"kith.com\/collections\/footwear?limit=3","u":"671e206ac4bf","p":"collection","rtyp":"collection","rid":31304833};</script>
 <script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
 <script>window.Shopify = window.Shopify || {};
 window.Shopify.Checkout = window.Shopify.Checkout || {};
@@ -202,7 +202,7 @@ window.Shopify.Checkout.apiHost = "kithnyc.myshopify.com";
 window.ShopifyPay = window.ShopifyPay || {};
 window.ShopifyPay.acceleratedFlowIncontext = false;
 window.ShopifyPay.apiHost = "pay.shopify.com";
-window.ShopifyPay.apiToken = "LzRHRG1QanpaOUhxenRBT1BzL3d4aXRIZ1N4cXFBWjkxdEU4RXE5WXdiRT0tLUJuU25FYWZSc3FWeHpnQk9teDYraVE9PQ==--093c08dc88b52d79aec8775c87f71dbf9fae2b25";
+window.ShopifyPay.apiToken = "Qm5BYy96NEk3SzlmSjUxTjBrejJBYTluVytVVm1TTW9za2dUMmxxbDg4cz0tLTBCRnRyblFLaVFCWU1yOTdlQW56NGc9PQ==--93c83a80aa07ba581ab9fbd2a613b94e8fa66b2a";
 window.ShopifyPay.requestHost = "kith.com"
 window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/sheet\/main-9591cdb8fc78ba1acaca189815e8d30f2513988b8b83f4a84c83115fcae19d76.css";
 </script>

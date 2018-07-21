@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Imports
-import requests, sys, json
+import requests, sys, json, datetime
 from bs4 import BeautifulSoup
 
 ################################## Cart Links ##########################################
@@ -33,8 +33,8 @@ session = requests.session()
 
 # Custom write function
 def log(text):
-    with open('shopifybot/WebAccess/pylogs.txt', 'a') as logFile:
-        logFile.write(text)
+    with open('shopifybot/task_logs.txt', 'a') as logFile:
+        logFile.write('[' + str(datetime.datetime.now())[0:23] + '] ' + text + '\n')
 
 # Function that sends the customer info to the Shopify servers
 def send_customer_info():
@@ -47,7 +47,7 @@ def send_customer_info():
         'Connection': 'keep-alive',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Origin': checkoutLink,
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.1 Safari/605.1.15',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
     }
 
     # Try to access the cart link with requests
@@ -58,9 +58,9 @@ def send_customer_info():
 
     # Check progress of response
     if b'Continue to shipping method' in resp.content:
-        log('Got to Customer Information Page. \n')
+        log('Got to customer information form.')
     elif b'Inventory issues' in resp.content:
-        log('Could not fill complete order, reordering to get as many as possible. \n')
+        log('Could not fill complete order, reordering to get as many as possible.')
 
         # Reformat to fill as much of the order as possible
         soup = BeautifulSoup(resp.content, 'html.parser')
@@ -68,7 +68,7 @@ def send_customer_info():
         newURL = cartLink.split(':')[0] + ':' + cartLink.split(':')[1] + ':' + newQuantity
 
         # Log the reformatted order
-        log('Order reformatted for max of ' + newQuantity + ' products. \n')
+        log('Reordered for max of ' + newQuantity + ' products. New link: ' + newURL)
 
         # This should always go through because first one did
         try:
@@ -76,8 +76,14 @@ def send_customer_info():
         except Exception as e:
             log(e)
 
+        if b'Continue to shipping method' in resp.content:
+            log('Got to customer information form.')
+        else:
+            log('Customer Information page not reached. Aborting.')
+            raise ValueError("Did not reach Customer Information Page!")
+
     else:
-        log(resp.text)
+        log('Customer Information page not reached. Aborting.')
         raise ValueError("Did not reach Customer Information Page!")
 
     # Save the response URL as the Shopify checkout link
@@ -90,7 +96,7 @@ def send_customer_info():
     # Customer data packet to send with POST HTTP request
     customerData = {
         'utf8': '✓',
-        'method': 'patch',
+        '_method': 'patch',
         'authenticity_token': authenticity_token,
         'previous_step': 'contact_information',
         'step': 'shipping_method',
@@ -105,10 +111,9 @@ def send_customer_info():
         'checkout[shipping_address][province]': province,
         'checkout[shipping_address][zip]': zipcode,
         'checkout[shipping_address][phone]': phone,
-        'g-recaptcha-response': '',
         'button': '',
-        'checkout[client_details][browser_width]': '527',
-        'checkout[client_details][browser_height]': '620',
+        'checkout[client_details][browser_width]': '520',
+        'checkout[client_details][browser_height]': '704',
         'checkout[client_details][javascript_enabled]': '1'
     }
 
@@ -119,22 +124,24 @@ def send_customer_info():
         log(e)
 
     # If the response code is 200, successfully submitted customer info
-    if (resp.status_code == 200):
+    if resp.status_code == 200:
         log('Successfully submitted customer info to Shopify server.')
+    else:
+        log(str(resp.status_code))
 
     # Now try to access the checkout link asking for the payment method
     resp = session.get(shopifyCheckoutLink+"?previous_step=shipping_method&step=payment_method", allow_redirects=True, timeout=4)
 
     # Check if successfully got to payment page
     if b'Complete order' or b'Complete order'.upper in resp.content:
-        log('Successfully bypassed reCAPTCHA and got to payment method page. \n')
+        log('Successfully bypassed reCAPTCHA and got to payment method page.')
 
 # Function to go through with the payment method
 def submitPayment():
 
     # Define payment headers
     submitPaymentHeaders = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.1 Safari/605.1.15',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
         'Content-Type': 'application/json'
     }
 
@@ -157,9 +164,9 @@ def submitPayment():
 
     # Check if the post request was successful
     if resp.status_code == 200:
-        log('Retrieved unique session ID. \n')
+        log('Retrieved unique session ID.')
     else:
-        log(str(resp.status_code) + "\n")
+        log(str(resp.status_code))
 
 # Run these functions
 send_customer_info()

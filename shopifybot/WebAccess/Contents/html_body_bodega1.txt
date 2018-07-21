@@ -147,7 +147,7 @@ Shopify.theme.style = {"id":null,"handle":null};
   }
 })();
 </script>
-<script id="__st">var __st={"a":499112,"offset":-14400,"reqid":"3aef634f-92f3-49ce-b969-d9a41b46dbcf","pageurl":"shop.bdgastore.com\/collections\/footwear?limit=3","u":"46c13716e9d8","p":"collection","rtyp":"collection","rid":5443522};</script>
+<script id="__st">var __st={"a":499112,"offset":-14400,"reqid":"19af2e33-80a7-4a2c-ba9e-e0f8475198f4","pageurl":"shop.bdgastore.com\/collections\/footwear?limit=3","u":"19d02f5e09ba","p":"collection","rtyp":"collection","rid":5443522};</script>
 <script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
 <script>window.Shopify = window.Shopify || {};
 window.Shopify.Checkout = window.Shopify.Checkout || {};
@@ -155,7 +155,7 @@ window.Shopify.Checkout.apiHost = "bdga.myshopify.com";
 window.ShopifyPay = window.ShopifyPay || {};
 window.ShopifyPay.acceleratedFlowIncontext = false;
 window.ShopifyPay.apiHost = "pay.shopify.com";
-window.ShopifyPay.apiToken = "eDdldzlTKytPbDlkZSs1bG5uOExoOWZCaDNwK3VDcWptK1BUOGgvZnlZdHpwU3RwVnp0WlhzakJxVTg0N0p0YS0tNzN2cm0rR3pzZFFNM3JKTWxYQzZ2Zz09--097740da89e6b227583a97fdbb7fd3b8897919ab";
+window.ShopifyPay.apiToken = "bWJPZkErSWdSSEZxV2lEK2pjMHJ0MVc2ZzBUdFY0S1RFenNEK3BYOFpubW43ZmpRWExKMVJIRlA4MFVhcTFyOS0tZlRMbEFWaVM3aG1RdWFaUUZjNG1VQT09--99ba72aa996b7cf5bd09dd06cb518d743de92f99";
 window.ShopifyPay.requestHost = "shop.bdgastore.com"
 window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/sheet\/main-9591cdb8fc78ba1acaca189815e8d30f2513988b8b83f4a84c83115fcae19d76.css";
 </script>
@@ -317,7 +317,7 @@ window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/
         currency: "USD"
     };
 
-    window.BOLD.common.Shopify.cart = {"token":"de033ec1a1ef9095cd05491366038061","note":null,"attributes":{},"original_total_price":0,"total_price":0,"total_discount":0,"total_weight":0.0,"item_count":0,"items":[],"requires_shipping":false,"currency":"USD"};
+    window.BOLD.common.Shopify.cart = {"token":"4393d1613e9ca65c5a5119188ec0b7ff","note":null,"attributes":{},"original_total_price":0,"total_price":0,"total_discount":0,"total_weight":0.0,"item_count":0,"items":[],"requires_shipping":false,"currency":"USD"};
     window.BOLD.common.template = 'collection';window.BOLD.common.Shopify.formatMoney = function(money, format) {
         function n(t, e) {
             return "undefined" == typeof t ? e : t
@@ -4132,7 +4132,7 @@ addCurrencySymbol(Currency.currentCurrency);
       
       
       
-      <li data-option-title="(EG) LTHR BLACK" data-variant-id="12186197327946" data-product-id="1311134351434" class="color eg-lthr-black available">
+      <li data-option-title="(EG) LTHR BLACK" data-variant-id="12186197327946" data-product-id="1311134351434" class="color eg-lthr-black soldout">
         
         <div class="tooltip">(EG) LTHR BLACK</div>
         
@@ -4258,7 +4258,7 @@ addCurrencySymbol(Currency.currentCurrency);
       
       
       
-      <li data-option-title="8" data-variant-id="12186197327946" data-product-id="1311134351434" class="8 available">
+      <li data-option-title="8" data-variant-id="12186197327946" data-product-id="1311134351434" class="8 soldout">
         
         
           <span >8</span>

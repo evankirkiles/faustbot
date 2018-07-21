@@ -1,140 +1,77 @@
-[2018-07-19 21:08:44.292] Beginning "Kith Task".
-[2018-07-19 21:08:44.625] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-19 21:08:44.625] Placing order...
-[2018-07-19 21:08:44.710] Order complete!
-[2018-07-19 21:09:54.884] Beginning "Kith Task".
-[2018-07-19 21:09:55.178] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-19 21:09:55.178] Placing order...
-[2018-07-19 21:10:12.422] Order complete!
-[2018-07-19 23:23:27.917] Beginning "Kith Task".
-[2018-07-19 23:23:31.316] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-19 23:23:31.317] Placing order...
-[2018-07-19 23:24:08.846] Task finished.
-[2018-07-20 20:22:46.700] Beginning "Kith Task".
-[2018-07-20 20:22:49.791] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:22:49.792] Placing order...
-[2018-07-20 20:22:49.939] Task finished.
-[2018-07-20 20:23:48.361] Beginning "Kith Task".
-[2018-07-20 20:23:51.212] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:23:51.212] Placing order...
-[2018-07-20 20:23:51.642] Task finished.
-[2018-07-20 20:24:31.165] Beginning "Kith Task".
-[2018-07-20 20:24:33.702] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:24:33.702] Placing order...
-[2018-07-20 20:24:34.106] Task finished.
-[2018-07-20 20:25:54.698] Beginning "Kith Task".
-[2018-07-20 20:25:57.956] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:25:57.956] Placing order...
-[2018-07-20 20:25:58.375] Task finished.
-[2018-07-20 20:26:31.896] Beginning "Kith Task".
-[2018-07-20 20:26:32.539] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:26:32.539] Placing order...
-[2018-07-20 20:26:32.916] Task finished.
-[2018-07-20 20:26:36.164] Beginning "Kith Task".
-[2018-07-20 20:26:36.519] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:26:36.519] Placing order...
-[2018-07-20 20:26:41.528] Task finished.
-[2018-07-20 20:37:09.084] Beginning "Kith Task".
-[2018-07-20 20:37:11.677] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:37:11.677] Placing order...
-[2018-07-20 20:37:12.384] Task finished.
-[2018-07-20 20:37:50.432] Beginning "Kith Task".
-[2018-07-20 20:37:51.353] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:37:51.353] Placing order...
-[2018-07-20 20:37:51.906] Task finished.
-[2018-07-20 20:38:18.107] Beginning "Kith Task".
-[2018-07-20 20:38:19.478] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:38:19.478] Placing order...
-[2018-07-20 20:38:19.993] Task finished.
-[2018-07-20 20:38:50.469] Beginning "Kith Task".
-[2018-07-20 20:38:51.503] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:38:51.503] Placing order...
-[2018-07-20 20:38:55.945] Task finished.
-[2018-07-20 20:45:40.997] Beginning "Kith Task".
-[2018-07-20 20:45:44.135] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:45:44.136] Placing order...
-[2018-07-20 20:46:45.932] Beginning "Kith Task".
-[2018-07-20 20:46:46.818] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:46:46.819] Placing order...
-[2018-07-20 20:46:47.356] Task finished.
-[2018-07-20 20:47:19.212] Beginning "Kith Task".
-[2018-07-20 20:47:19.668] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:47:19.668] Placing order...
-[2018-07-20 20:47:20.184] Task finished.
-[2018-07-20 20:47:41.319] Beginning "Kith Task".
-[2018-07-20 20:47:41.731] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:47:41.731] Placing order...
-[2018-07-20 20:47:42.406] Task finished.
-[2018-07-20 20:48:12.618] Beginning "Kith Task".
-[2018-07-20 20:48:13.046] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:48:13.046] Placing order...
-[2018-07-20 20:48:17.940] Task finished.
-[2018-07-20 20:48:31.519] Beginning "Kith Task".
-[2018-07-20 20:48:31.900] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:48:31.900] Placing order...
-[2018-07-20 20:48:36.571] Task finished.
-[2018-07-20 20:50:23.060] Beginning "Kith Task".
-[2018-07-20 20:50:26.942] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:50:26.942] Placing order...
-[2018-07-20 20:50:27.706] Task finished.
-[2018-07-20 20:51:10.676] Beginning "Kith Task".
-[2018-07-20 20:51:12.073] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:51:12.073] Placing order...
-[2018-07-20 20:51:12.414] Task finished.
-[2018-07-20 20:52:40.080] Beginning "Kith Task".
-[2018-07-20 20:52:40.688] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:52:40.688] Placing order...
-[2018-07-20 20:52:41.165] Task finished.
-[2018-07-20 20:53:02.458] Beginning "Kith Task".
-[2018-07-20 20:53:02.895] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:53:02.895] Placing order...
-[2018-07-20 20:53:07.021] Task finished.
-[2018-07-20 20:53:32.051] Beginning "Kith Task".
-[2018-07-20 20:53:34.420] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:53:34.420] Placing order...
-[2018-07-20 20:53:39.208] Task finished.
-[2018-07-20 20:58:49.750] Beginning "Kith Task".
-[2018-07-20 20:58:52.879] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:58:52.879] Placing order...
-[2018-07-20 20:58:56.961] Task finished.
-[2018-07-20 20:59:13.766] Beginning "Kith Task".
-[2018-07-20 20:59:14.104] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 20:59:14.104] Placing order...
-[2018-07-20 20:59:19.221] Task finished.
-[2018-07-20 22:56:19.644] Beginning "Kith Task".
-[2018-07-20 22:56:22.010] Product found! Link: https://kith.com/cart/12211694502011:3
-[2018-07-20 22:56:22.010] Placing order...
-[2018-07-20 22:56:26.267] Task finished.
-[2018-07-20 22:56:55.904] Beginning "Bodega Task".
-[2018-07-20 22:56:59.804] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
-[2018-07-20 22:56:59.804] Placing order...
-[2018-07-20 22:57:01.480] Task finished.
-[2018-07-20 22:59:02.227] Beginning "Bodega Task".
-[2018-07-20 22:59:04.829] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
-[2018-07-20 22:59:04.830] Placing order...
-[2018-07-20 22:59:06.191] Task finished.
-[2018-07-20 23:06:24.745] Beginning "Bodega Task".
-[2018-07-20 23:06:27.335] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
-[2018-07-20 23:06:27.335] Placing order...
-[2018-07-20 23:06:29.027] Task finished.
-[2018-07-20 23:06:50.920] Beginning "Bodega Task".
-[2018-07-20 23:06:51.263] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
-[2018-07-20 23:06:51.263] Placing order...
-[2018-07-20 23:06:52.832] Task finished.
-[2018-07-20 23:35:13.809] Beginning "Bodega Task".
-[2018-07-20 23:35:20.093] Beginning "Bodega Task".
-[2018-07-20 23:35:20.497] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
-[2018-07-20 23:35:20.498] Placing order...
-[2018-07-20 23:35:22.967] Task finished.
-[2018-07-20 23:40:01.469] Beginning "Bodega Task".
-[2018-07-20 23:40:04.006] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
-[2018-07-20 23:40:04.007] Placing order...
-[2018-07-20 23:40:05.486] Task finished.
-[2018-07-20 23:41:23.229] Beginning "Bodega Task".
-[2018-07-20 23:41:26.187] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
-[2018-07-20 23:41:26.187] Placing order...
-[2018-07-20 23:41:27.819] Task finished.
-[2018-07-20 23:41:55.021] Beginning "Bodega Task".
-[2018-07-20 23:41:56.011] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
-[2018-07-20 23:41:56.011] Placing order...
-[2018-07-20 23:42:00.979] Task finished.
+[2018-07-21 00:15:24.908] Beginning "Kith Task".
+[2018-07-21 00:15:25.603] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:15:25.604] Placing order...
+[2018-07-21 00:15:27.279] Got to customer information form.
+[2018-07-21 00:15:27.280] https://kith.com/942252/checkouts/c34bba3e30fc1daf30bed5c83c4690cc
+[2018-07-21 00:15:28.324] 404
+[2018-07-21 00:15:29.533] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 00:15:29.726] Retrieved unique session ID.
+[2018-07-21 00:15:29.774] Task finished.
+[2018-07-21 00:19:41.014] Beginning "Kith Task".
+[2018-07-21 00:19:41.318] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:19:41.318] Placing order...
+[2018-07-21 00:19:43.186] Got to customer information form.
+[2018-07-21 00:19:43.187] https://kith.com/942252/checkouts/7b0d598c70fbada56dadc8f884fe2714
+[2018-07-21 00:19:43.299] Task finished.
+[2018-07-21 00:20:46.569] Beginning "Kith Task".
+[2018-07-21 00:20:46.914] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:20:46.914] Placing order...
+[2018-07-21 00:20:48.417] Got to customer information form.
+[2018-07-21 00:20:48.417] https://kith.com/942252/checkouts/fa1576729096672ba13d14537fd67d93
+[2018-07-21 00:20:48.479] Task finished.
+[2018-07-21 00:21:35.431] Beginning "Kith Task".
+[2018-07-21 00:21:36.541] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:21:36.542] Placing order...
+[2018-07-21 00:21:38.488] Got to customer information form.
+[2018-07-21 00:21:38.490] https://kith.com/942252/checkouts/ccf4adceed3256ce4652555ac23d66ef
+[2018-07-21 00:21:39.327] 404
+[2018-07-21 00:21:40.360] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 00:21:40.465] Retrieved unique session ID.
+[2018-07-21 00:21:40.494] Task finished.
+[2018-07-21 00:21:55.349] Beginning "Kith Task".
+[2018-07-21 00:21:55.722] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:21:55.722] Placing order...
+[2018-07-21 00:21:57.435] Got to customer information form.
+[2018-07-21 00:21:57.436] https://kith.com/942252/checkouts/cb391598ffbc69c04af966b49d73147a
+[2018-07-21 00:21:58.268] 404
+[2018-07-21 00:21:59.482] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 00:21:59.570] Retrieved unique session ID.
+[2018-07-21 00:21:59.604] Task finished.
+[2018-07-21 00:22:07.194] Beginning "Kith Task".
+[2018-07-21 00:22:08.183] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:22:08.183] Placing order...
+[2018-07-21 00:22:09.720] Got to customer information form.
+[2018-07-21 00:22:09.721] https://kith.com/942252/checkouts/5896186d6f09f83daeebd78df5ea99f0
+[2018-07-21 00:22:10.557] 404
+[2018-07-21 00:22:11.666] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 00:22:11.763] Retrieved unique session ID.
+[2018-07-21 00:22:11.785] Task finished.
+[2018-07-21 00:25:20.090] Beginning "Kith Task".
+[2018-07-21 00:25:22.483] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:25:22.484] Placing order...
+[2018-07-21 00:25:24.078] Got to customer information form.
+[2018-07-21 00:25:24.078] https://kith.com/942252/checkouts/73135d1e7331d96348b8131dc21f61db
+[2018-07-21 00:25:24.136] Task finished.
+[2018-07-21 00:25:33.145] Beginning "Kith Task".
+[2018-07-21 00:25:33.535] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:25:33.535] Placing order...
+[2018-07-21 00:25:35.137] Got to customer information form.
+[2018-07-21 00:25:35.138] https://kith.com/942252/checkouts/450f633aad5d379aaf4bc7bc4253cbdc
+[2018-07-21 00:25:35.201] Task finished.
+[2018-07-21 00:29:17.378] Beginning "Kith Task".
+[2018-07-21 00:29:17.783] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:29:17.783] Placing order...
+[2018-07-21 00:29:20.416] Got to customer information form.
+[2018-07-21 00:29:20.417] https://kith.com/942252/checkouts/5d9e55f9018108f49c8a44f732d05be8
+[2018-07-21 00:29:22.140] Successfully submitted customer info to Shopify server.
+[2018-07-21 00:29:23.382] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 00:29:23.499] Retrieved unique session ID.
+[2018-07-21 00:29:23.521] Task finished.
+[2018-07-21 00:30:59.037] Beginning "Kith Task".
+[2018-07-21 00:31:01.506] Product found! Link: https://kith.com/cart/2611888586759:2
+[2018-07-21 00:31:01.506] Placing order...
+[2018-07-21 00:31:03.224] Got to customer information form.
+[2018-07-21 00:31:04.950] Successfully submitted customer info to Shopify server.
+[2018-07-21 00:31:06.192] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-21 00:31:06.315] Retrieved unique session ID.
+[2018-07-21 00:31:06.336] Task finished.
