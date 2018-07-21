@@ -34,3 +34,107 @@
 [2018-07-20 20:26:36.519] Product found! Link: https://kith.com/cart/12211694502011:3
 [2018-07-20 20:26:36.519] Placing order...
 [2018-07-20 20:26:41.528] Task finished.
+[2018-07-20 20:37:09.084] Beginning "Kith Task".
+[2018-07-20 20:37:11.677] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:37:11.677] Placing order...
+[2018-07-20 20:37:12.384] Task finished.
+[2018-07-20 20:37:50.432] Beginning "Kith Task".
+[2018-07-20 20:37:51.353] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:37:51.353] Placing order...
+[2018-07-20 20:37:51.906] Task finished.
+[2018-07-20 20:38:18.107] Beginning "Kith Task".
+[2018-07-20 20:38:19.478] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:38:19.478] Placing order...
+[2018-07-20 20:38:19.993] Task finished.
+[2018-07-20 20:38:50.469] Beginning "Kith Task".
+[2018-07-20 20:38:51.503] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:38:51.503] Placing order...
+[2018-07-20 20:38:55.945] Task finished.
+[2018-07-20 20:45:40.997] Beginning "Kith Task".
+[2018-07-20 20:45:44.135] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:45:44.136] Placing order...
+[2018-07-20 20:46:45.932] Beginning "Kith Task".
+[2018-07-20 20:46:46.818] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:46:46.819] Placing order...
+[2018-07-20 20:46:47.356] Task finished.
+[2018-07-20 20:47:19.212] Beginning "Kith Task".
+[2018-07-20 20:47:19.668] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:47:19.668] Placing order...
+[2018-07-20 20:47:20.184] Task finished.
+[2018-07-20 20:47:41.319] Beginning "Kith Task".
+[2018-07-20 20:47:41.731] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:47:41.731] Placing order...
+[2018-07-20 20:47:42.406] Task finished.
+[2018-07-20 20:48:12.618] Beginning "Kith Task".
+[2018-07-20 20:48:13.046] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:48:13.046] Placing order...
+[2018-07-20 20:48:17.940] Task finished.
+[2018-07-20 20:48:31.519] Beginning "Kith Task".
+[2018-07-20 20:48:31.900] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:48:31.900] Placing order...
+[2018-07-20 20:48:36.571] Task finished.
+[2018-07-20 20:50:23.060] Beginning "Kith Task".
+[2018-07-20 20:50:26.942] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:50:26.942] Placing order...
+[2018-07-20 20:50:27.706] Task finished.
+[2018-07-20 20:51:10.676] Beginning "Kith Task".
+[2018-07-20 20:51:12.073] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:51:12.073] Placing order...
+[2018-07-20 20:51:12.414] Task finished.
+[2018-07-20 20:52:40.080] Beginning "Kith Task".
+[2018-07-20 20:52:40.688] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:52:40.688] Placing order...
+[2018-07-20 20:52:41.165] Task finished.
+[2018-07-20 20:53:02.458] Beginning "Kith Task".
+[2018-07-20 20:53:02.895] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:53:02.895] Placing order...
+[2018-07-20 20:53:07.021] Task finished.
+[2018-07-20 20:53:32.051] Beginning "Kith Task".
+[2018-07-20 20:53:34.420] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:53:34.420] Placing order...
+[2018-07-20 20:53:39.208] Task finished.
+[2018-07-20 20:58:49.750] Beginning "Kith Task".
+[2018-07-20 20:58:52.879] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:58:52.879] Placing order...
+[2018-07-20 20:58:56.961] Task finished.
+[2018-07-20 20:59:13.766] Beginning "Kith Task".
+[2018-07-20 20:59:14.104] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 20:59:14.104] Placing order...
+[2018-07-20 20:59:19.221] Task finished.
+[2018-07-20 22:56:19.644] Beginning "Kith Task".
+[2018-07-20 22:56:22.010] Product found! Link: https://kith.com/cart/12211694502011:3
+[2018-07-20 22:56:22.010] Placing order...
+[2018-07-20 22:56:26.267] Task finished.
+[2018-07-20 22:56:55.904] Beginning "Bodega Task".
+[2018-07-20 22:56:59.804] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
+[2018-07-20 22:56:59.804] Placing order...
+[2018-07-20 22:57:01.480] Task finished.
+[2018-07-20 22:59:02.227] Beginning "Bodega Task".
+[2018-07-20 22:59:04.829] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
+[2018-07-20 22:59:04.830] Placing order...
+[2018-07-20 22:59:06.191] Task finished.
+[2018-07-20 23:06:24.745] Beginning "Bodega Task".
+[2018-07-20 23:06:27.335] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
+[2018-07-20 23:06:27.335] Placing order...
+[2018-07-20 23:06:29.027] Task finished.
+[2018-07-20 23:06:50.920] Beginning "Bodega Task".
+[2018-07-20 23:06:51.263] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
+[2018-07-20 23:06:51.263] Placing order...
+[2018-07-20 23:06:52.832] Task finished.
+[2018-07-20 23:35:13.809] Beginning "Bodega Task".
+[2018-07-20 23:35:20.093] Beginning "Bodega Task".
+[2018-07-20 23:35:20.497] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
+[2018-07-20 23:35:20.498] Placing order...
+[2018-07-20 23:35:22.967] Task finished.
+[2018-07-20 23:40:01.469] Beginning "Bodega Task".
+[2018-07-20 23:40:04.006] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
+[2018-07-20 23:40:04.007] Placing order...
+[2018-07-20 23:40:05.486] Task finished.
+[2018-07-20 23:41:23.229] Beginning "Bodega Task".
+[2018-07-20 23:41:26.187] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
+[2018-07-20 23:41:26.187] Placing order...
+[2018-07-20 23:41:27.819] Task finished.
+[2018-07-20 23:41:55.021] Beginning "Bodega Task".
+[2018-07-20 23:41:56.011] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:3
+[2018-07-20 23:41:56.011] Placing order...
+[2018-07-20 23:42:00.979] Task finished.

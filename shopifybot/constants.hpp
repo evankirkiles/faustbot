@@ -11,6 +11,7 @@
 // I can use different methods for websites which have different ways of accessing product info.
 struct URLAndMethod {
     const char* baseURL;
+    const char* checkoutURL;
     const int method;
     const char* title;
 };

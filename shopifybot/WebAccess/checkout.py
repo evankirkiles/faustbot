@@ -5,9 +5,9 @@ from bs4 import BeautifulSoup
 
 ################################## Cart Links ##########################################
 # First, must denote the checkout link for the Shopify server for the site
-checkoutLink = 'kith.com'
+checkoutLink = sys.argv[1]
 # Also need the cart link for the desired product
-cartLink = sys.argv[1]
+cartLink = sys.argv[2]
 ################################# User Settings ########################################
 # Define user settings here for the checkout form
 email = "sneakerbot78@gmail.com"
@@ -59,6 +59,26 @@ def send_customer_info():
     # Check progress of response
     if b'Continue to shipping method' in resp.content:
         log('Got to Customer Information Page. \n')
+    elif b'Inventory issues' in resp.content:
+        log('Could not fill complete order, reordering to get as many as possible. \n')
+
+        # Reformat to fill as much of the order as possible
+        soup = BeautifulSoup(resp.content, 'html.parser')
+        newQuantity = soup.findAll('input', {'name':'checkout[line_items][0][quantity]'})[1]['value']
+        newURL = cartLink.split(':')[0] + ':' + cartLink.split(':')[1] + ':' + newQuantity
+
+        # Log the reformatted order
+        log('Order reformatted for max of ' + newQuantity + ' products. \n')
+
+        # This should always go through because first one did
+        try:
+            resp = session.get(newURL, allow_redirects=True, headers=customerInfoHeaders, timeout=4)
+        except Exception as e:
+            log(e)
+
+    else:
+        log(resp.text)
+        raise ValueError("Did not reach Customer Information Page!")
 
     # Save the response URL as the Shopify checkout link
     shopifyCheckoutLink = resp.url
@@ -137,7 +157,7 @@ def submitPayment():
 
     # Check if the post request was successful
     if resp.status_code == 200:
-        log('Retrieved unique sesion ID. \n')
+        log('Retrieved unique session ID. \n')
     else:
         log(str(resp.status_code) + "\n")
 
