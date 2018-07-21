@@ -39,4 +39,4 @@ cmake-build-debug/
 
 # Custom git ignore files
 # Contents folder containing webscraped things
-shopify/WebAccess/Contents/
+shopifybot/WebAccess/Contents/
