@@ -1,0 +1,3 @@
+Got to Customer Information Page. 
+Successfully bypassed reCAPTCHA and got to payment method page. 
+Retrieved unique sesion ID. 

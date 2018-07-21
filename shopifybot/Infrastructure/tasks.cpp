@@ -73,7 +73,7 @@ void Task::log(const std::string &message) {
 void Task::order(const std::string &url) {
 
     // Essentially just runs the Python Selenium script for the given url
-    FILE *fp = popen(std::string(std::string("python shopifybot/WebAccess/checkout.py ") + url).c_str(), "r");
+    FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/checkout.py ") + url).c_str(), "r");
 
     // Wait for the Python script to finish
     pclose(fp);

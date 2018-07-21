@@ -11,11 +11,9 @@ void BotInterface::createTask(const std::string& title, const URLAndMethod &webs
 
     // Add the task to the vector at the back, with the identifier the position it starts in the vector
     tasks.emplace_back(Task(title, website, std::to_string(tasks.size()), collection, keywords, colorKeywords, size, quantity));
-
-    // Add a thread to the threads vector for the task
-    std::thread t;
-    threads.emplace_back(t);
 }
+
+// TODO: Figure out how to make the thread remove itself and signify it has finished from the thread vector.
 
 // Runs a task on a new thread
 void BotInterface::runTask(unsigned int which) {
