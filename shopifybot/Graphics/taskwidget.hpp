@@ -20,25 +20,36 @@
 #ifndef QHBoxLayout
 #include <QHBoxLayout>
 #endif
+#ifndef QTextEdit
+#include <QTextEdit>
+#endif
 
 // Contains the class that builds a Task widget to be added to the scroll area
 class TaskWidget : public QFrame {
 Q_OBJECT
 public:
     // Constructor
-    explicit TaskWidget(const QString& title, const QString& website, const QString& keywords,
-                        const QString& colorKeywords, const QString& size, QWidget *parent = 0);
+    explicit TaskWidget(const std::string& title, const URLAndMethod& website, const std::string& collection,
+                        const std::string& p_identifier, const std::vector<std::string>& keywords,
+                        const std::vector<std::string>& colorKeywords, const std::string& size, const unsigned int quantity,
+                        unsigned int resultsToCheck=constants::BASE_NUMRESULTS,
+                        unsigned int frequency=constants::BASE_FREQ, QWidget *parent = 0);
 
 private:
     // Runs the task
     void run();
 
+    // Actual task instance
+    Task task;
+
     // Labels on the task
     QLabel* title;
     QLabel* website;
-    QLabel* keywords;
-    QLabel* colorKeywords;
+    QTextEdit* keywords;
+    QTextEdit* colorKeywords;
     QLabel* size;
+    QLabel* quantity;
 };
+
 
 #endif //SHOPIFY_BOT_TASKWIDGET_HPP

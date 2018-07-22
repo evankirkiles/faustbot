@@ -81,14 +81,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     tasklist = new QScrollArea(this);
     tasklist->setSizePolicy(spRight);
     tasklistwidget = new QWidget(this);
-    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
-    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
-    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
-    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
-    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
-    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
-    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
-    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
+
     tasklistLayout->setAlignment(Qt::AlignTop);
     tasklistwidget->setLayout(tasklistLayout);
     tasklistwidget->setObjectName("scrollarea");
@@ -102,4 +95,31 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     rightColumn->addWidget(tasklist);
     topLayout->addLayout(rightColumn);
     topLayout->setStretchFactor(rightColumn, 4);
+
+    // Add a task
+    addTask("Kith Task", supported_sites::KITH, "1", "/collections/footwear", {"Asics"}, {"White"}, "9", 3, 3);
+
+    // Add a task when button is clicked
+    connect(about, SIGNAL(clicked(bool)), this, SLOT(testtask()));
+}
+
+// Creates a task and adds it to the tasklist
+void BotWindow::addTask(const std::string &title, const URLAndMethod &website, const std::string &collection,
+                        const std::string &identifier, const std::vector<std::string> &keywords,
+                        const std::vector<std::string> &colorKeywords, const std::string &size,
+                        const unsigned int quantity, unsigned int resultsToCheck, unsigned int frequency) {
+
+    // Create a new task
+    auto newtask = new TaskWidget(title, website, collection, identifier, keywords, colorKeywords, size,
+                                        quantity, resultsToCheck, frequency, tasklistwidget);
+
+    // Adds the task to the qvboxlayout
+    tasklistLayout->addWidget(newtask);
+    // Show the new task
+    newtask->show();
+}
+
+// Adds a task
+void BotWindow::testtask() {
+    addTask("Bodega Task", supported_sites::BODEGA, "1", "/collections/footwear", {"Air Max"}, {"Cargo"}, "9", 1, 3);
 }

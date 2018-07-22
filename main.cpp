@@ -26,6 +26,8 @@ int main(int argc, char **argv) {
 
     // Render the Qt bot window
     BotWindow window = BotWindow();
+    window.addTask("Bodega Task", supported_sites::BODEGA, "1", "/collections/footwear", {"Air Max"}, {"Cargo"}, "9", 1, 3);
+
     window.show();
     window.raise();
 

@@ -17,6 +17,9 @@
 #include <QPixmap>
 #include <QBitmap>
 
+// Include the task class
+#include "../Infrastructure/tasks.hpp"
+
 // Include the task widget item
 #include "taskwidget.hpp"
 
@@ -32,6 +35,13 @@ class BotWindow : public QWidget {
 public:
     // Constructor that builds the window
     explicit BotWindow(QWidget *parent = 0);
+
+    // Adds a task to the list
+    void addTask(const std::string& title, const URLAndMethod& website, const std::string& collection,
+                 const std::string& identifier, const std::vector<std::string>& keywords,
+                 const std::vector<std::string>& colorKeywords,
+                 const std::string& size, const unsigned int quantity,
+                 unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ);
 
 private:
 
@@ -50,6 +60,11 @@ private:
     QScrollArea *tasklist;
     QWidget* tasklistwidget;
     QVBoxLayout *tasklistLayout;
+
+private slots:
+
+    // Add a task when button is clicked
+    void testtask();
 };
 
 #endif //SHOPIFY_BOT_WINDOW_HPP
