@@ -33,6 +33,8 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     auto rightColumn = new QVBoxLayout;
     // Horizontal layout that goes above the listview
     auto tasktitleRow = new QHBoxLayout;
+    // Vertical layout for the listview widget
+    tasklistLayout = new QVBoxLayout;
     // Combine layouts
     mainLayout->addLayout(topLayout);
     mainLayout->addLayout(botLayout);
@@ -76,8 +78,22 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     tasktitle = new QLabel("TASKS", this);
     tasktitle->setAlignment(Qt::AlignCenter);
     tasktitle->setObjectName("task_title");
-    tasklist = new QListView(this);
+    tasklist = new QScrollArea(this);
     tasklist->setSizePolicy(spRight);
+    tasklistwidget = new QWidget(this);
+    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
+    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
+    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
+    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
+    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
+    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
+    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
+    tasklistLayout->addWidget(new TaskWidget("a", "b", "c", "d", "e", tasklistwidget));
+    tasklistLayout->setAlignment(Qt::AlignTop);
+    tasklistwidget->setLayout(tasklistLayout);
+    tasklistwidget->setObjectName("scrollarea");
+    tasklist->setWidget(tasklistwidget);
+    tasklist->setWidgetResizable(true);
     // Add widget to the right column
     tasktitleRow->addWidget(line1);
     tasktitleRow->addWidget(tasktitle);

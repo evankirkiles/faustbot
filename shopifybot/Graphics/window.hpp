@@ -16,7 +16,9 @@
 #include <QLabel>
 #include <QPixmap>
 #include <QBitmap>
-#include <QListView>
+
+// Include the task widget item
+#include "taskwidget.hpp"
 
 // Constants include
 #ifndef file_paths
@@ -45,7 +47,9 @@ private:
     QFrame *line1;
     QLabel* tasktitle;
     QFrame *line2;
-    QListView *tasklist;
+    QScrollArea *tasklist;
+    QWidget* tasklistwidget;
+    QVBoxLayout *tasklistLayout;
 };
 
 #endif //SHOPIFY_BOT_WINDOW_HPP
