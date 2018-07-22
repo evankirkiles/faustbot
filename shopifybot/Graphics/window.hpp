@@ -6,14 +6,20 @@
 #define SHOPIFY_BOT_WINDOW_HPP
 
 // Qt includes
-#ifndef QWidget
 #include <QWidget>
-#endif
-#ifndef QFile
 #include <QFile>
-#endif
-#ifndef QString
 #include <QString>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QPushButton>
+#include <QGraphicsView>
+#include <QLabel>
+#include <QPixmap>
+#include <QBitmap>
+
+// Constants include
+#ifndef file_paths
+#include "constants.hpp"
 #endif
 
 // Qt Window through which user is able to interact with the bot.
@@ -23,6 +29,16 @@ class BotWindow : public QWidget {
 public:
     // Constructor that builds the window
     explicit BotWindow(QWidget *parent = 0);
+
+private:
+
+    // Visualization widgets
+    QLabel *logo;
+    QLabel *title;
+    QPushButton *billing;
+    QPushButton *proxies;
+    QPushButton *logs;
+    QPushButton *about;
 };
 
 #endif //SHOPIFY_BOT_WINDOW_HPP

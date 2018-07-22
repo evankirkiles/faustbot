@@ -53,7 +53,9 @@ namespace file_paths {
     extern const char* TIME_LOG;
     extern const char* TASK_LOG;
 
-    extern const char* COMMUNICATIONS_FILE;
+    extern const char* LOGO_FILE;
+
+
 }
 
 namespace constants {
