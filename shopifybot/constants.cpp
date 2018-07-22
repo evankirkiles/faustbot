@@ -23,7 +23,7 @@ namespace file_paths {
     const char* TIME_LOG = "./shopifybot/logs.txt";
     const char* TASK_LOG = "./shopifybot/task_logs.txt";
 
-    const char* LOGO_FILE = "./shopifybot/Graphics/Assets/logo.jpg";
+    const char* LOGO_FILE = "./shopifybot/Graphics/Assets/logo.png";
 }
 
 namespace constants {

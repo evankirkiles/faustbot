@@ -16,6 +16,7 @@
 #include <QLabel>
 #include <QPixmap>
 #include <QBitmap>
+#include <QListView>
 
 // Constants include
 #ifndef file_paths
@@ -39,6 +40,12 @@ private:
     QPushButton *proxies;
     QPushButton *logs;
     QPushButton *about;
+
+    // Tasks listview
+    QFrame *line1;
+    QLabel* tasktitle;
+    QFrame *line2;
+    QListView *tasklist;
 };
 
 #endif //SHOPIFY_BOT_WINDOW_HPP

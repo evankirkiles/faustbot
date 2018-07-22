@@ -1,5 +1,25 @@
 #main_window {
-	background: #232323
+	background: #181818
+}
+#bot_title {
+    color: #e8cb61;
+    font-size: 20px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    max-height: 20px;
+    font-family: "Futura";
+}
+#task_title {
+    color: #e8cb61;
+    font-size: 15px;
+    margin-top: 0px;
+    margin-bottom: 3px;
+    max-height: 20px;
+    max-width: 50px;
+    font-family: "Futura";
+}
+#horizontal_line {
+    background-color: #2b2e33;
 }
 QPushButton:disabled {
     background-color: #2b2e33;
@@ -8,14 +28,25 @@ QPushButton:disabled {
 }
 QPushButton:pressed {
     background-color: #2b2e33;
+    border-style: inset;
     border: 1px solid gray;
 }
 QPushButton {
-     background-color: #313534;
-     border: 1px solid white;
-	border-radius: 3 px;
-	color: #FFFFFF;
+    background-color: #2b2e33;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #232323;
+	border-radius: 15px;
+	color: #e8cb61;
+	font-family: "Futura";
+	min-height: 30px;
+	max-height: 30px;
 }
 QLabel {
 	color: #FFFFFF;
+}
+QListView {
+    background-color: #141414;
+    color: #e8cb61;
+    font-family: "Futura";
 }
