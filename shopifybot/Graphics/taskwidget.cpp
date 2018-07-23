@@ -19,6 +19,9 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
                                quantity(new QLabel(std::to_string(p_quantity).c_str(), this)),
                                QFrame(parent) {
 
+    // Ensure the widget deletes itself when it is closed
+    setAttribute(Qt::WA_DeleteOnClose);
+
     // Initialize the keywords combo boxes
     std::string placeholderkeywords;
     for (const std::string& kwd : p_keywords) { placeholderkeywords.append(kwd + ", "); }
@@ -49,6 +52,8 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     auto secondcol = new QVBoxLayout();
     auto thirdcol = new QVBoxLayout();
     auto fourthcol = new QVBoxLayout();
+    auto fifthcol = new QVBoxLayout();
+    fifthcol->setAlignment(Qt::AlignHCenter);
     // Main horizontal layout
     auto row = new QHBoxLayout();
     // Sub horizontal layouts
@@ -72,6 +77,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     sizetitle->setObjectName("task_mediocre_title_v2");
     sizeHor->addWidget(sizetitle);
     sizeHor->addWidget(size);
+    auto statusHor = new QHBoxLayout();
 
     // Separator line between first column and second column
     separator1 = new QFrame(this);
@@ -91,6 +97,22 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     // Build the edit button
     edit = new ClickableImage(100, 100, file_paths::EDIT2_IMG, file_paths::EDIT_IMG, this);
 
+    // Builds the status identifier
+    auto statusFixed = new QLabel("STATUS:", this);
+    statusFixed->setObjectName("status_title");
+    status = new QTextEdit("Idle", this);
+    status->setObjectName("status_text");
+    status->setReadOnly(true);
+    status->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    status->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    status->setAlignment(Qt::AlignHCenter);
+    logsButton = new ClickableImage(80, 80, file_paths::LOGS2_IMG, file_paths::LOGS_IMG, this);
+    statusHor->addWidget(statusFixed);
+    statusHor->addWidget(logsButton);
+
+    // Delete button
+    deleteButton = new ClickableImage(60, 60, file_paths::DELETE2_IMG, file_paths::DELETE_IMG, this);
+
     // Add the labels and layouts to the main row
     firstcol->addWidget(title);
     firstcol->addWidget(website);
@@ -107,12 +129,18 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     fourthcol->addWidget(play);
     fourthcol->addWidget(edit);
     row->addLayout(fourthcol);
+    fifthcol->addLayout(statusHor);
+    fifthcol->addWidget(status);
+    row->addLayout(fifthcol);
+    row->addWidget(deleteButton);
 
     // Set the qframe's layout to the row
     setLayout(row);
 
     // Connect clicking play to beginning the task.
     connect(play, SIGNAL(runTask()), this, SLOT(run()));
+    // Connect the close button to deleting the task as well
+    connect(deleteButton, SIGNAL(clicked()), this, SLOT(exit()));
 }
 
 // Tells the event loop to run the task
@@ -131,14 +159,42 @@ void TaskWidget::run() {
     // Connects all the necessary signals and slots for communication between the two
     connect(taskthread, SIGNAL(started()), temptask, SLOT(run()));
     connect(play, &ClickableCheckableImage::interrupt, [this, temptask] () {
-        std::cout << "cmon bruh" << std::endl;
         play->disable();
+        setStatus("Stopping...", "#e26c6c");
         temptask->shouldcontinue = false;});
     connect(temptask, SIGNAL(finished()), play, SLOT(enable()));
     connect(temptask, SIGNAL(finished()), taskthread, SLOT(quit()));
     connect(temptask, SIGNAL(finished()), temptask, SLOT(deleteLater()));
     connect(temptask, SIGNAL(finished()), taskthread, SLOT(deleteLater()));
 
+    // Also connect the status signal
+    connect(temptask, SIGNAL(status(QString, QString)), this, SLOT(setStatus(QString, QString)));
+
     // Begin the thread!
     taskthread->start();
+}
+
+// Sets the text in the status textedit
+void TaskWidget::setStatus(QString text, QString hexColor) {
+
+    // Simply change the text in the status bar to the given text with the given color
+    status->setText(text);
+    status->setStyleSheet(std::string("color: ").append(hexColor.toStdString()).append(";").c_str());
+
+    // If task has actually finished, change the play button to the replay button
+    if (text == "Finished!") {
+        play->changeCheckedImg(file_paths::REPLAY2_IMG, file_paths::REPLAY_IMG);
+        play->isChecked = false;
+    }
+}
+
+// Deletes the widget as long as no task is currently running
+void TaskWidget::exit() {
+
+    // Check if task is running by seeing what state the play button is
+    if (play->isChecked) {
+        return;
+    } else {
+        this->close();
+    }
 }

@@ -66,10 +66,11 @@ public slots:
     // Runs the task, essentially creating a while loop that runs every [frequency] seconds and continuously checks
     // if there exists a product for the given size.
     void run();
-    // Interrupts the running of a task (stops it after the loop has finished running)
-    void stop();
 signals:
+    // Emitted when the task has finished running
     void finished();
+    // Emitted to update the status text
+    void status(QString text, QString hexColor);
 
 private:
     // Called to log a message to the tasks log file

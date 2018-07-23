@@ -102,6 +102,8 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
 
     // Add a task
     addTask("Kith Task", supported_sites::KITH, "1", "/collections/footwear", {"Asics"}, {"White"}, "200", 3, 3);
+    addTask("Social Status Task", supported_sites::SOCIALSTATUS, "1", "/collections/sneakers", {"Revaderchi"},
+            {"Black", "Granite"}, "9", 2, 3);
 
     // Add a task when button is clicked
     connect(about, SIGNAL(clicked(bool)), this, SLOT(testtask()));

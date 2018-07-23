@@ -13,6 +13,27 @@ QLabel {
     max-height: 20px;
     font-family: "Futura";
 }
+#status_title {
+    color: #c4c0b2;
+    text-align: center;
+    font-size: 15px;
+    min-height: 18px;
+    max-width: 60px;
+    font-family: "Futura";
+}
+#status_text {
+    background-color: #151515;
+    color: #FFFFFF;
+    font-family: "Futura";
+    font-size: 12px;
+    padding: 3px 3px 3px 3px;
+    border-radius: 3px;
+    border-color: #232323;
+    border-style: solid;
+    min-width: 100px;
+    max-width: 100px;
+    max-height: 25px;
+}
 #task_title {
     color: #e8cb61;
     font-size: 15px;

@@ -62,6 +62,12 @@ namespace file_paths {
     extern const char* EDIT_IMG;
     extern const char* EDIT2_IMG;
     extern const char* PLAY_DISBL_IMG;
+    extern const char* REPLAY_IMG;
+    extern const char* REPLAY2_IMG;
+    extern const char* DELETE_IMG;
+    extern const char* DELETE2_IMG;
+    extern const char* LOGS_IMG;
+    extern const char* LOGS2_IMG;
 }
 
 namespace constants {

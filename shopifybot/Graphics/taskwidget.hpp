@@ -41,14 +41,15 @@ class ClickableCheckableImage : public QLabel {
 Q_OBJECT
 public:
     // Default constructor and destructors
-    ClickableCheckableImage(int width, int height, const char* pressedImg, const char* releasedImg,
+    ClickableCheckableImage(int p_width, int p_height, const char* pressedImg, const char* releasedImg,
                             const char* pressedImg2, const char* releasedImg2, const char* disabledImg,
                             QWidget *parent = 0) :
-            pressed(QPixmap::fromImage(QImage(pressedImg).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
-            released(QPixmap::fromImage(QImage(releasedImg).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
-            pressed2(QPixmap::fromImage(QImage(pressedImg2).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
-            released2(QPixmap::fromImage(QImage(releasedImg2).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
-            disabled(QPixmap::fromImage(QImage(disabledImg).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
+            width(p_width), height(p_height),
+            pressed(QPixmap::fromImage(QImage(pressedImg).scaled(p_width, p_height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
+            released(QPixmap::fromImage(QImage(releasedImg).scaled(p_width, p_height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
+            pressed2(QPixmap::fromImage(QImage(pressedImg2).scaled(p_width, p_height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
+            released2(QPixmap::fromImage(QImage(releasedImg2).scaled(p_width, p_height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
+            disabled(QPixmap::fromImage(QImage(disabledImg).scaled(p_width, p_height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
             QLabel(parent) {
         pressed.setDevicePixelRatio(4.0);
         pressed2.setDevicePixelRatio(4.0);
@@ -58,11 +59,19 @@ public:
 
         // Set the default image to be the released, not checked option
         setPixmap(released);
-        setMaximumWidth(width);
+        setMaximumWidth(width/4);
     }
 
     bool isChecked = false;
     bool enabled = true;
+
+    // Resets the play button to the replay button
+    void changeCheckedImg(const char* pressedImg, const char* releasedImg) {
+        pressed = QPixmap::fromImage(QImage(pressedImg).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        released = QPixmap::fromImage(QImage(releasedImg).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        pressed.setDevicePixelRatio(4.0);
+        released.setDevicePixelRatio(4.0);
+    }
 
 // Emit the clicked() signal when the QLabel is clicked on
 signals:
@@ -79,6 +88,10 @@ public slots:
         enabled = false;
     }
 protected:
+    // Width and height
+    int width;
+    int height;
+
     // Save both states of the image (clicked and not clicked)
     QPixmap pressed;
     QPixmap released;
@@ -128,7 +141,7 @@ public:
 
         // Set the default image to be released
         setPixmap(released);
-        setMaximumWidth(width);
+        setMaximumWidth(width/4);
     }
 
 // Emit the clicked() signal when the QLabel is clicked on
@@ -142,11 +155,11 @@ protected:
     void mousePressEvent(QMouseEvent *event) override {
         // Change to the presed image
         setPixmap(pressed);
-        emit clicked();
     }
     void mouseReleaseEvent(QMouseEvent *event) override {
         // Make the label go back to its initial image
         setPixmap(released);
+        emit clicked();
     }
 };
 
@@ -190,6 +203,10 @@ public:
 private slots:
     // Runs the task, performed when user clicks the play button
     void run();
+    // Updates the status with the given message for the given color
+    void setStatus(QString text, QString hexColor);
+    // Deletes the slot, but only if there no thread currently running
+    void exit();
 
 private:
     // Actual task instance
@@ -213,8 +230,12 @@ private:
     ClickableCheckableImage* play;
     ClickableImage* edit;
 
-    // Vertical label for date
-    VerticalLabel* date;
+    // Status label and logs button
+    QTextEdit* status;
+    ClickableImage* logsButton;
+
+    // Delete button
+    ClickableImage* deleteButton;
 };
 
 #endif //SHOPIFY_BOT_TASKWIDGET_HPP

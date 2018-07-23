@@ -22,6 +22,7 @@ Task::Task(const std::string &p_title, const URLAndMethod &p_url, const std::str
 // Run function which begins the while loop to be run in a separate thread for each task.
 void Task::run() {
     log("Beginning \"" + title + "\".");
+    emit status("Searching...", "#a4ead5");
 
     shouldcontinue = true;
 
@@ -33,14 +34,34 @@ void Task::run() {
             std::string cartLink = std::string(swh.sourceURL.baseURL) + "/cart/" + prdct.getID(size) + ":" + std::to_string(quantity);
 
             // If it gets here, then product has successfully been found
+            emit status("Product found!", "#8dd888");
             log("Product found! Link: " + cartLink);
 
             // Try to order the product
+            if (!shouldcontinue) {
+
+                // Delete the files used
+                remove(std::string("./shopifybot/WebAccess/Contents/html_body_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+                remove(std::string("./shopifybot/WebAccess/Contents/products_log_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+
+                emit status("Interrupted.", "#e26c6c");
+                emit finished();
+                return;
+            }
+
+            emit status("Placing order...", "#8dd888");
             log("Placing order...");
             order(cartLink);
 
             // When finished, order should be completed
             log("Task finished.");
+
+            // Remove the files used
+            remove(std::string("./shopifybot/WebAccess/Contents/html_body_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+            remove(std::string("./shopifybot/WebAccess/Contents/products_log_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+
+            // Successfully finished if it got here
+            emit status("Finished!", "#8dd888");
             emit finished();
             return;
 
@@ -53,14 +74,13 @@ void Task::run() {
     }
 
     // If while loop gets broken, then process is also finished, so emit finished and return to main thread
-    std::cout << "Should be finished." << std::endl;
-    emit finished();
-}
+    emit status("Interrupted.", "#e26c6c");
 
-// Interrupts the running of the task after the running loop is done
-void Task::stop() {
-    std::cout << "2" << std::endl;
-    shouldcontinue = false;
+    // Delete the files used
+    remove(std::string("./shopifybot/WebAccess/Contents/html_body_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+    remove(std::string("./shopifybot/WebAccess/Contents/products_log_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+
+    emit finished();
 }
 
 // Logs task messages to the log text file

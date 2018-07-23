@@ -32,6 +32,12 @@ namespace file_paths {
     const char* EDIT_IMG = "./shopifybot/Graphics/Assets/edit.png";
     const char* EDIT2_IMG = "./shopifybot/Graphics/Assets/edit2.png";
     const char* PLAY_DISBL_IMG = "./shopifybot/Graphics/Assets/play-disabled.png";
+    const char* REPLAY_IMG = "./shopifybot/Graphics/Assets/replay.png";
+    const char* REPLAY2_IMG = "./shopifybot/Graphics/Assets/replay2.png";
+    const char* DELETE_IMG = "./shopifybot/Graphics/Assets/delete.png";
+    const char* DELETE2_IMG = "./shopifybot/Graphics/Assets/delete2.png";
+    const char* LOGS_IMG = "./shopifybot/Graphics/Assets/logs.png";
+    const char* LOGS2_IMG = "./shopifybot/Graphics/Assets/logs2.png";
 }
 
 namespace constants {
