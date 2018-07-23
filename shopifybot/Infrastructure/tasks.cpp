@@ -88,7 +88,7 @@ void Task::log(const std::string &message) {
 
     // Open the log file for logging
     std::ofstream fp;
-    fp.open(file_paths::TASK_LOG, std::ios::app);
+    fp.open(std::string(file_paths::TASK_LOG).append("task_logs_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str(), std::ios::app);
 
     // Gets the current time
     auto t = std::time(nullptr);
@@ -104,7 +104,8 @@ void Task::log(const std::string &message) {
 void Task::order(const std::string &url) {
 
     // Essentially just runs the Python Selenium script for the given url
-    FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/checkout.py ") + swh.sourceURL.checkoutURL + " " + url).c_str(), "r");
+    FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/checkout.py ") + swh.sourceURL.checkoutURL + " " +
+            url + std::string(" shopifybot/Logs/task_logs_") + swh.sourceURL.title + swh.taskID + ".txt").c_str(), "r");
 
     // Wait for the Python script to finish
     pclose(fp);

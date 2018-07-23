@@ -84,6 +84,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     tasktitle->setObjectName("task_title");
     tasklist = new QScrollArea(this);
     tasklist->setSizePolicy(spRight);
+    tasklist->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tasklistwidget = new QWidget(this);
 
     tasklistLayout->setAlignment(Qt::AlignTop);

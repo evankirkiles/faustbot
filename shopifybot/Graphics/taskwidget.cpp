@@ -29,12 +29,14 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     keywords->setReadOnly(true);
     keywords->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     keywords->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    keywords->setFixedWidth(100);
     placeholderkeywords = "";
     for (const std::string& kwd : p_colorKeywords) { placeholderkeywords.append(kwd + ", "); }
     colorKeywords = new QTextEdit(placeholderkeywords.c_str(), this);
     colorKeywords->setReadOnly(true);
     colorKeywords->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     colorKeywords->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    colorKeywords->setFixedWidth(100);
 
     // First, set the style sheet of the frame
     setObjectName("task");
@@ -106,6 +108,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     status->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     status->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     status->setAlignment(Qt::AlignHCenter);
+    status->setFixedWidth(100);
     logsButton = new ClickableImage(80, 80, file_paths::LOGS2_IMG, file_paths::LOGS_IMG, this);
     statusHor->addWidget(statusFixed);
     statusHor->addWidget(logsButton);
@@ -141,6 +144,9 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     connect(play, SIGNAL(runTask()), this, SLOT(run()));
     // Connect the close button to deleting the task as well
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(exit()));
+
+    // Connect the log button to showing the logfile window
+    connect(logsButton, SIGNAL(clicked()), this, SLOT(showLogs()));
 }
 
 // Tells the event loop to run the task
@@ -148,7 +154,7 @@ void TaskWidget::run() {
 
     // Initializes the thread and moves the task onto it
     taskthread = new QThread;
-    Task* temptask = new Task(task.title, task.swh.sourceURL, task.swh.taskID, task.collection, task.keywords,
+    auto temptask = new Task(task.title, task.swh.sourceURL, task.swh.taskID, task.collection, task.keywords,
             task.colorKeywords, task.size, task.quantity, task.resultsToCheck, task.frequency);
     temptask->moveToThread(taskthread);
 
@@ -195,6 +201,22 @@ void TaskWidget::exit() {
     if (play->isChecked) {
         return;
     } else {
+        // Delete the log file when this task is deleted
+        remove(std::string(file_paths::TASK_LOG).append("task_logs_").append(task.swh.sourceURL.title).append(task.swh.taskID).append(".txt").c_str());
         this->close();
     }
+}
+
+// Create a logs window and display it
+void TaskWidget::showLogs() {
+
+    // Make sure a log window is not already open
+    // TODO: Make clicking the log button when log window is already open bring current log window to front
+    if (logWindowOpen) { return; }
+
+    // Otherwise create a new log window and show it
+    LogFileDisplay* lfd = new LogFileDisplay(task.title, std::string(file_paths::TASK_LOG).append("task_logs_").append(task.swh.sourceURL.title).append(task.swh.taskID).append(".txt"));
+    lfd->show();
+
+    logWindowOpen = true;
 }

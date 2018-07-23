@@ -17,7 +17,8 @@ add_executable(shopify_bot
         shopifybot/constants.cpp
         shopifybot/Infrastructure/tasks.cpp
         shopifybot/Graphics/window.cpp
-        shopifybot/Graphics/taskwidget.cpp)
+        shopifybot/Graphics/taskwidget.cpp
+        shopifybot/Graphics/popups.cpp)
 
 include_directories(shopifybot)
 include_directories(shopifybot_tests/lib/googletest/include shopifybot_tests/lib/googletest)

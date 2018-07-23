@@ -36,6 +36,8 @@
 #include <QThread>
 #endif
 
+#include "popups.hpp"
+
 // Custom clickable label to allow for images to be pressed and checked
 class ClickableCheckableImage : public QLabel {
 Q_OBJECT
@@ -200,6 +202,7 @@ public:
                         const std::vector<std::string>& colorKeywords, const std::string& size, unsigned int quantity,
                         unsigned int resultsToCheck=constants::BASE_NUMRESULTS,
                         unsigned int frequency=constants::BASE_FREQ, QWidget *parent = 0);
+
 private slots:
     // Runs the task, performed when user clicks the play button
     void run();
@@ -207,6 +210,8 @@ private slots:
     void setStatus(QString text, QString hexColor);
     // Deletes the slot, but only if there no thread currently running
     void exit();
+    // Builds a logfile window with the task's title and file specifiers
+    void showLogs();
 
 private:
     // Actual task instance
@@ -232,6 +237,7 @@ private:
 
     // Status label and logs button
     QTextEdit* status;
+    bool logWindowOpen = false;
     ClickableImage* logsButton;
 
     // Delete button

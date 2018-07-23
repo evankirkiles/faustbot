@@ -3,6 +3,9 @@
 import requests, sys, json, datetime
 from bs4 import BeautifulSoup
 
+# Log file location is the third argument
+logFileLocation = sys.argv[3]
+
 ################################## Cart Links ##########################################
 # First, must denote the checkout link for the Shopify server for the site
 checkoutLink = sys.argv[1]
@@ -33,7 +36,7 @@ session = requests.session()
 
 # Custom write function
 def log(text):
-    with open('shopifybot/task_logs.txt', 'a') as logFile:
+    with open(logFileLocation, 'a') as logFile:
         logFile.write('[' + str(datetime.datetime.now())[0:23] + '] ' + text + '\n')
 
 # Function that sends the customer info to the Shopify servers

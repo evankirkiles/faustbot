@@ -1,5 +1,5 @@
 #main_window {
-	background: #181818
+	background: #181818;
 }
 QLabel {
 	color: #e8cb61;
@@ -134,6 +134,8 @@ QTextEdit {
     border-radius: 3px;
     border-color: #232323;
     border-style: solid;
-    min-width: 100px;
-    max-width: 100px;
+}
+
+#logs_window {
+    background: #181818;
 }

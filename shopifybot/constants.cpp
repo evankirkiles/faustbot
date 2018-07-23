@@ -21,7 +21,7 @@ namespace file_paths {
     const char* PRODUCTS_LOG = "./shopifybot/WebAccess/Contents/products_log_";
 
     const char* TIME_LOG = "./shopifybot/logs.txt";
-    const char* TASK_LOG = "./shopifybot/task_logs.txt";
+    const char* TASK_LOG = "./shopifybot/Logs/";
 
     // Images
     const char* LOGO_FILE = "./shopifybot/Graphics/Assets/logo.png";
