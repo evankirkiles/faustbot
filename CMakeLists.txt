@@ -15,7 +15,6 @@ add_executable(shopify_bot
         main.cpp
         shopifybot/WebAccess/product_scraper.cpp
         shopifybot/constants.cpp
-        shopifybot/Infrastructure/interface.cpp
         shopifybot/Infrastructure/tasks.cpp
         shopifybot/Graphics/window.cpp
         shopifybot/Graphics/taskwidget.cpp)

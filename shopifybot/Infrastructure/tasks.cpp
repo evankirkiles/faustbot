@@ -23,18 +23,17 @@ Task::Task(const std::string &p_title, const URLAndMethod &p_url, const std::str
 void Task::run() {
     log("Beginning \"" + title + "\".");
 
-    bool productFound = false;
+    shouldcontinue = true;
 
     // Search for the product periodically at the frequency specified
-    while (!productFound) {
+    while (shouldcontinue) {
         try {
             // Try to get the product and the size specified
             Product prdct = swh.lookForKeywords(collection, keywords, colorKeywords, std::to_string(resultsToCheck));
-            std::string cartLink = std::string(swh.sourceURL.baseURL) + "/cart/" + prdct.getID("9") + ":" + std::to_string(quantity);
+            std::string cartLink = std::string(swh.sourceURL.baseURL) + "/cart/" + prdct.getID(size) + ":" + std::to_string(quantity);
 
             // If it gets here, then product has successfully been found
             log("Product found! Link: " + cartLink);
-            productFound = true;
 
             // Try to order the product
             log("Placing order...");
@@ -42,6 +41,8 @@ void Task::run() {
 
             // When finished, order should be completed
             log("Task finished.");
+            emit finished();
+            return;
 
         } catch(std::runtime_error& e) {
             log("Failed because: \"" + std::string(e.what()) + "\", checking again in " + std::to_string(frequency) + " seconds.");
@@ -50,6 +51,16 @@ void Task::run() {
             continue;
         }
     }
+
+    // If while loop gets broken, then process is also finished, so emit finished and return to main thread
+    std::cout << "Should be finished." << std::endl;
+    emit finished();
+}
+
+// Interrupts the running of the task after the running loop is done
+void Task::stop() {
+    std::cout << "2" << std::endl;
+    shouldcontinue = false;
 }
 
 // Logs task messages to the log text file

@@ -59,6 +59,8 @@ public:
 
     // Instance source variable
     const URLAndMethod sourceURL;
+    // ID for this instance of the ShopifyWebHandler, used in naming the files
+    const std::string taskID;
 
     // Constructor that initializes the handler with the given URL
     explicit ShopifyWebsiteHandler(const URLAndMethod& url, const std::string& taskID);
@@ -78,9 +80,6 @@ public:
 private:
     // Perform a cURL download to get the body of a page
     void performCURL(const std::string& URL);
-
-    // ID for this instance of the ShopifyWebHandler, used in naming the files
-    const std::string taskID;
 };
 
 

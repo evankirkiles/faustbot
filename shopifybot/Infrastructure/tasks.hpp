@@ -17,24 +17,31 @@
 #ifndef chrono
 #include <chrono>
 #endif
+#ifndef QObject
+#include <QObject>
+#endif
+#ifndef QCoreApplication
+#include <QCoreApplication>
+#endif
 
 // Class containing task-related functions
 // Main functionality is a while loop that continuously checks the website for the product
-class Task {
+// This is a QObject to allow for QThread functinoality
+class Task : public QObject {
+        Q_OBJECT
 public:
 
     // Constructor that creates an instance of the task for the specified website, title keywords, color keywords,
     // size, results to check, and frequency (default is to check every 30 seconds to preserve performance).
     explicit Task(const std::string& title, const URLAndMethod& url, const std::string& identifier,
                   const std::string& collection, const std::vector<std::string>& keywords,
-                  const std::vector<std::string>& colorKeywords, const std::string& size, const unsigned int p_quantity,
+                  const std::vector<std::string>& colorKeywords, const std::string& size, unsigned int p_quantity,
                   unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ);
 
-    // Runs the task, essentially creating a while loop that runs every [frequency] seconds and continuously checks
-    // if there exists a product for the given size.
-    void run();
+    // Boolean which can be disabled to stop the running of the task
+    bool shouldcontinue = false;
 
-private:
+    // Changed to public so I can copy all of them over into a new Task easily (no copy constructor bc QObject)
     // Title of the task
     const std::string title;
 
@@ -55,6 +62,16 @@ private:
     // How frequently the check should be run (in seconds)
     const unsigned int frequency;
 
+public slots:
+    // Runs the task, essentially creating a while loop that runs every [frequency] seconds and continuously checks
+    // if there exists a product for the given size.
+    void run();
+    // Interrupts the running of a task (stops it after the loop has finished running)
+    void stop();
+signals:
+    void finished();
+
+private:
     // Called to log a message to the tasks log file
     void log(const std::string& message);
 

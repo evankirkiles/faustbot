@@ -25,32 +25,50 @@ QLabel {
 #task_important_text {
     color: #e8cb61;
     font-size: 18px;
+    min-height: 24px;
+    font-family: "Futura";
+}
+#task_important_var {
+    color: #e8cb61;
+    font-size: 15px;
+    max-width: 20px;
     font-family: "Futura";
 }
 #task_mediocre_text {
     color: #c4c0b2;
-    font-size: 12px;
+    font-size: 10px;
+    min-height: 12px;
     font-family: "Futura";
 }
 #task_mediocre_title {
     color: #c4c0b2;
     font-size: 12px;
+    max-width: 100px;
+    font-family: "Futura";
+}
+#task_mediocre_title_v2 {
+    color: #c4c0b2;
+    font-size: 12px;
+    max-width: 60px;
     font-family: "Futura";
 }
 #horizontal_line {
     background-color: #2b2e33;
 }
-QPushButton:disabled {
+#vertical_line {
+    background-color: #2b2e33;
+}
+QPushButton#sidebuttons:disabled {
     background-color: #2b2e33;
     color: #6b6b6b;
     border: 1px solid gray;
 }
-QPushButton:pressed {
+QPushButton#sidebuttons:pressed {
     background-color: #2b2e33;
     border-style: inset;
     border: 1px solid gray;
 }
-QPushButton {
+QPushButton#sidebuttons {
     background-color: #2b2e33;
     border-width: 1px;
     border-style: solid;
@@ -60,6 +78,8 @@ QPushButton {
 	font-family: "Futura";
 	min-height: 30px;
 	max-height: 30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 QScrollArea {
     background-color: #141414;
@@ -81,8 +101,8 @@ QScrollArea {
     margin-bottom: 2px;
     margin-left: 2px;
     margin-right: 2px;
-    max-height: 80px;
-    min-height: 80px;
+    max-height: 90px;
+    min-height: 90px;
 }
 QTextEdit {
     background-color: #151515;

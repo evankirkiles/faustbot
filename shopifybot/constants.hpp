@@ -53,9 +53,15 @@ namespace file_paths {
     extern const char* TIME_LOG;
     extern const char* TASK_LOG;
 
+    // Image locations
     extern const char* LOGO_FILE;
-
-
+    extern const char* PLAY_IMG;
+    extern const char* PLAY2_IMG;
+    extern const char* STOP_IMG;
+    extern const char* STOP2_IMG;
+    extern const char* EDIT_IMG;
+    extern const char* EDIT2_IMG;
+    extern const char* PLAY_DISBL_IMG;
 }
 
 namespace constants {

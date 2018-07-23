@@ -194,7 +194,7 @@ Shopify.theme.style = {"id":null,"handle":null};
   }
 })();
 </script>
-<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"e25806e7-91e8-4e7c-8903-3c84bbf40c32","pageurl":"kith.com\/collections\/footwear?limit=3","u":"9deb8363a106","p":"collection","rtyp":"collection","rid":31304833};</script>
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"3a679dcd-5c58-4593-ab39-fe4012ecd377","pageurl":"kith.com\/collections\/footwear?limit=3","u":"3a97ff52715e","p":"collection","rtyp":"collection","rid":31304833};</script>
 <script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
 <script>window.Shopify = window.Shopify || {};
 window.Shopify.Checkout = window.Shopify.Checkout || {};
@@ -202,7 +202,7 @@ window.Shopify.Checkout.apiHost = "kithnyc.myshopify.com";
 window.ShopifyPay = window.ShopifyPay || {};
 window.ShopifyPay.acceleratedFlowIncontext = false;
 window.ShopifyPay.apiHost = "pay.shopify.com";
-window.ShopifyPay.apiToken = "dnhYdllobmhPcGtGeVc0U3RJVE9jZWVuaWQ5eGs1ZTJGZ1dtTWlCdTJHdz0tLTlLUHZVeWwwejdRVDRkdWxEdGxiUFE9PQ==--87a095e6bce23047b662a8187a57ede825b649d0";
+window.ShopifyPay.apiToken = "MnZXRG1TTFdCNTg3cjZhOFdaQnpjMTJ2bkpJSnBncEp1ejZzbWgyRjBxdz0tLXdHbkYybzc4c3lHSkhLMUQ4U0d3a1E9PQ==--3cda8db176efc66d69ae619a7ef01da654de86be";
 window.ShopifyPay.requestHost = "kith.com"
 window.ShopifyPay.sheetStyleSheetUrl = "\/\/cdn.shopify.com\/s\/assets\/shared\/sheet\/main-9591cdb8fc78ba1acaca189815e8d30f2513988b8b83f4a84c83115fcae19d76.css";
 </script>
@@ -24289,7 +24289,7 @@ $140.00
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="6,6.5,7.5,"
+  data-sizes="6.5,7.5,"
   >
   <div 
     class="
@@ -24367,14 +24367,10 @@ $150.00
               </p>
             </div>
           </div>
-          <div class="product-card-info-variants" data-product-tags="71418,aabb9252,Adidas consortium,adidas Consortium x Mita Stan Smith -,final-sale,footwear,mens,mita,productsize-6,productsize-6-5,productsize-7-5,sneaker,sneakers,square-footwear,stan smith">
+          <div class="product-card-info-variants" data-product-tags="71418,aabb9252,Adidas consortium,adidas Consortium x Mita Stan Smith -,final-sale,footwear,mens,mita,productsize-6-5,productsize-7-5,sneaker,sneakers,square-footwear,stan smith">
             
             
-<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12209494917243" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        6
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12209494950011" tooltip="QUICK ADD">
+<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12209494950011" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         6.5
                       </div>
@@ -25621,7 +25617,7 @@ $85.00
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="8,11,"
+  data-sizes="11,"
   >
   <div 
     class="
@@ -25699,14 +25695,10 @@ $55.00
               </p>
             </div>
           </div>
-          <div class="product-card-info-variants" data-product-tags="71118fw,footwear,mens,productsize-11,productsize-8,sneaker,sneakers,square-footwear,vans,Vans UA Classic Slip-On - Red / Flame,vn0a38f7rx5">
+          <div class="product-card-info-variants" data-product-tags="71118fw,footwear,mens,productsize-11,sneaker,sneakers,square-footwear,vans,Vans UA Classic Slip-On - Red / Flame,vn0a38f7rx5">
             
             
-<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12208956604539" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        8
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12208956801147" tooltip="QUICK ADD">
+<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="12208956801147" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         11
                       </div>
@@ -26494,7 +26486,7 @@ $60.00
               </p>
             </div>
           </div>
-          <div class="product-card-info-variants" data-product-tags="7218fw,footwear,mens,productsize-10,productsize-10-5,productsize-11,productsize-11-5,productsize-12,productsize-13,productsize-7,productsize-7-5,productsize-8,productsize-8-5,productsize-9,productsize-9-5,sneaker,sneakers,vans,Vans Authentic SF Checkerboard - Black / Sunflower,vn0a3mu6u6t">
+          <div class="product-card-info-variants" data-product-tags="7218fw,footwear,mens,productsize-10,productsize-10-5,productsize-11,productsize-11-5,productsize-12,productsize-13,productsize-7,productsize-7-5,productsize-8,productsize-9,productsize-9-5,sneaker,sneakers,vans,Vans Authentic SF Checkerboard - Black / Sunflower,vn0a3mu6u6t">
             
             
 <div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611880558599" tooltip="QUICK ADD">
@@ -26897,162 +26889,7 @@ $90.00
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="7,8,8.5,9.5,10,10.5,11,11.5,12,"
-  >
-  <div 
-    class="
-      product-card
-      
-        -quickadd
-      
-      
-      
-      js-product-card">
-    <div class="product-card-main">
-      
-      
-      
-      
-      
-      
-
-      
-
-
-        
-        <div class="js-product-card-image-slideshow">
-          
-           <a href="/collections/footwear/products/nike-air-force-1-07-mid-white-orange"> 
-             
-              <img class="product-card-slideshow-image" src="//cdn.shopify.com/s/files/1/0094/2252/products/Nike_Air_Force_1_Mid_07_LTHR_Team_Orange_AQ8650_100_3203_500x500_crop_center.progressive.jpg?v=1530566951" alt="Nike Air Force 1 &#39;07 Mid - White / Orange">
-             
-          </a>
-          
-           <a href="/collections/footwear/products/nike-air-force-1-07-mid-white-orange"> 
-             
-              <img class="product-card-slideshow-image" src="//cdn.shopify.com/s/files/1/0094/2252/products/Nike_Air_Force_1_Mid_07_LTHR_Team_Orange_AQ8650_100_3190_500x500_crop_center.progressive.jpg?v=1530566951" alt="Nike Air Force 1 &#39;07 Mid - White / Orange">
-             
-          </a>
-          
-           <a href="/collections/footwear/products/nike-air-force-1-07-mid-white-orange"> 
-             
-              <img class="product-card-slideshow-image" src="//cdn.shopify.com/s/files/1/0094/2252/products/Nike_Air_Force_1_Mid_07_LTHR_Team_Orange_AQ8650_100_3194_500x500_crop_center.progressive.jpg?v=1530566951" alt="Nike Air Force 1 &#39;07 Mid - White / Orange">
-             
-          </a>
-          
-        </div>
-      
-
-
-      
-        
-      
-
-      
-        <a class="product-card-info" href="/collections/footwear/products/nike-air-force-1-07-mid-white-orange">
-      
-        <div class="product-card-info-inner">
-          <div class="product-card-info-items-container">
-            <div class="product-card-info-items-section -flex">
-              
-
-
-
-              <p class="product-card-meta product-card-title">
-                <span class="product-card-title-target">
-                  Nike Air Force 1 '07 Mid
-                </span>
-              </p>
-              <p class="product-card-meta product-card-variant">
-                White / Orange
-              </p>
-            </div>
-            <div class="product-card-info-items-section">
-              <p class="product-card-meta product-card-price">
-                
-                
-$95.00
-              </p>
-            </div>
-          </div>
-          <div class="product-card-info-variants" data-product-tags="7218fw,footwear,mens,nike,Nike Air Force 1 '07 - White / Orange,nkaq8650-100,productsize-10,productsize-10-5,productsize-11,productsize-11-5,productsize-12,productsize-7,productsize-8,productsize-8-5,productsize-9-5,sneaker,sneakers">
-            
-            
-<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2185847963655" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        7
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2185848029191" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        8
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2185848061959" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        8.5
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2185848127495" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        9.5
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2185848160263" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        10
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2185848193031" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        10.5
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2185848225799" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        11
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2185848258567" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        11.5
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2185848291335" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        12
-                      </div>
-                    </div>
-            
-            
-            
-            
-          </div>
-        </div>
-      
-        </a>
-      
-    </div>
-    
-  </div>
-</div>
-            
-
-          
-            
-              <!-- /snippets/product-grid-item.liquid -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div 
-  class="
-     grid-item one-half medium--one-half large-up--one-third  
-    js-product-card-container"
-
-  data-sizes="7,8,8.5,9,9.5,10,10.5,12,13,"
+  data-sizes="8,8.5,9,9.5,10,10.5,12,13,"
   >
   <div 
     class="
@@ -27130,14 +26967,10 @@ $110.00
               </p>
             </div>
           </div>
-          <div class="product-card-info-variants" data-product-tags="7218fw,footwear,mens,nike,Nike Air Max 1 - White / Gum,nkah8145-109,productsize-10,productsize-10-5,productsize-12,productsize-13,productsize-7,productsize-8,productsize-8-5,productsize-9,productsize-9-5,sneaker,sneakers">
+          <div class="product-card-info-variants" data-product-tags="7218fw,footwear,mens,nike,Nike Air Max 1 - White / Gum,nkah8145-109,productsize-10,productsize-10-5,productsize-12,productsize-13,productsize-8,productsize-8-5,productsize-9,productsize-9-5,sneaker,sneakers">
             
             
-<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2163632177159" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        7
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2163632242695" tooltip="QUICK ADD">
+<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2163632242695" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         8
                       </div>
@@ -27207,7 +27040,7 @@ $110.00
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="6,8,11,13,"
+  data-sizes="6,"
   >
   <div 
     class="
@@ -27285,24 +27118,12 @@ $110.00
               </p>
             </div>
           </div>
-          <div class="product-card-info-variants" data-product-tags=""NK848187-100,final-sale,footwear,junesale2018,mens",nike,productsize-11,productsize-13,productsize-6,productsize-8,sale,sneaker,sneakers">
+          <div class="product-card-info-variants" data-product-tags=""NK848187-100,final-sale,footwear,junesale2018,mens",nike,productsize-6,sale,sneaker,sneakers">
             
             
 <div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="48327766279" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         6
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="48391454151" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        8
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="48391454535" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        11
-                      </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="48391454855" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        13
                       </div>
                     </div>
             
@@ -28558,7 +28379,7 @@ $80.00
      grid-item one-half medium--one-half large-up--one-third  
     js-product-card-container"
 
-  data-sizes="4,5.5,6,10,10.5,"
+  data-sizes="4,5.5,10,10.5,"
   >
   <div 
     class="
@@ -28636,7 +28457,7 @@ $80.00
               </p>
             </div>
           </div>
-          <div class="product-card-info-variants" data-product-tags="62118,aab41674,adidas,adidas Originals Continental 80 - Core White / Scarlet / Navy,continental,footwear,mens,productsize-10,productsize-10-5,productsize-4,productsize-5-5,productsize-6,sneaker,sneakers,square-footwear">
+          <div class="product-card-info-variants" data-product-tags="62118,aab41674,adidas,adidas Originals Continental 80 - Core White / Scarlet / Navy,continental,footwear,mens,productsize-10,productsize-10-5,productsize-4,productsize-5-5,sneaker,sneakers,square-footwear">
             
             
 <div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611845070855" tooltip="QUICK ADD">
@@ -28647,10 +28468,6 @@ $80.00
                       <div class="product-card-info-variants-item-inner">
                         5.5
                       </div>
-                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611845201927" tooltip="QUICK ADD">
-                      <div class="product-card-info-variants-item-inner">
-                        6
-                      </div>
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611845464071" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         10
@@ -28658,6 +28475,161 @@ $80.00
                     </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611845496839" tooltip="QUICK ADD">
                       <div class="product-card-info-variants-item-inner">
                         10.5
+                      </div>
+                    </div>
+            
+            
+            
+            
+          </div>
+        </div>
+      
+        </a>
+      
+    </div>
+    
+  </div>
+</div>
+            
+
+          
+            
+              <!-- /snippets/product-grid-item.liquid -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div 
+  class="
+     grid-item one-half medium--one-half large-up--one-third  
+    js-product-card-container"
+
+  data-sizes="8,8.5,9,9.5,10,10.5,11,11.5,12,"
+  >
+  <div 
+    class="
+      product-card
+      
+        -quickadd
+      
+      
+      
+      js-product-card">
+    <div class="product-card-main">
+      
+      
+      
+      
+      
+      
+
+      
+
+
+        
+        <div class="js-product-card-image-slideshow">
+          
+           <a href="/collections/footwear/products/nike-air-vapormax-97-white-purple"> 
+             
+              <img class="product-card-slideshow-image" src="//cdn.shopify.com/s/files/1/0094/2252/products/AIR_VAPORMAX_97_-_WHITE_PURPLE_-_AO4542_902_0597_1_500x500_crop_center.progressive.jpg?v=1530563228" alt="Nike Air VaporMax &#39;97 - White / Purple">
+             
+          </a>
+          
+           <a href="/collections/footwear/products/nike-air-vapormax-97-white-purple"> 
+             
+              <img class="product-card-slideshow-image" src="//cdn.shopify.com/s/files/1/0094/2252/products/AIR_VAPORMAX_97_-_WHITE_PURPLE_-_AO4542_902_0605_500x500_crop_center.progressive.jpg?v=1530563228" alt="Nike Air VaporMax &#39;97 - White / Purple">
+             
+          </a>
+          
+           <a href="/collections/footwear/products/nike-air-vapormax-97-white-purple"> 
+             
+              <img class="product-card-slideshow-image" src="//cdn.shopify.com/s/files/1/0094/2252/products/AIR_VAPORMAX_97_-_WHITE_PURPLE_-_AO4542_902_0599_1_500x500_crop_center.progressive.jpg?v=1530563228" alt="Nike Air VaporMax &#39;97 - White / Purple">
+             
+          </a>
+          
+        </div>
+      
+
+
+      
+        
+      
+
+      
+        <a class="product-card-info" href="/collections/footwear/products/nike-air-vapormax-97-white-purple">
+      
+        <div class="product-card-info-inner">
+          <div class="product-card-info-items-container">
+            <div class="product-card-info-items-section -flex">
+              
+
+
+
+              <p class="product-card-meta product-card-title">
+                <span class="product-card-title-target">
+                  Nike Air VaporMax '97
+                </span>
+              </p>
+              <p class="product-card-meta product-card-variant">
+                White / Purple
+              </p>
+            </div>
+            <div class="product-card-info-items-section">
+              <p class="product-card-meta product-card-price">
+                
+                
+$190.00
+              </p>
+            </div>
+          </div>
+          <div class="product-card-info-variants" data-product-tags="62118,footwear,mens,nike,Nike Air VaporMax '97 - White / Purple,nkaj7291-100,productsize-10,productsize-10-5,productsize-11,productsize-11-5,productsize-12,productsize-8,productsize-8-5,productsize-9,productsize-9-5,sneaker,sneakers,square-footwear">
+            
+            
+<div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611846152199" tooltip="QUICK ADD">
+                      <div class="product-card-info-variants-item-inner">
+                        8
+                      </div>
+                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611846184967" tooltip="QUICK ADD">
+                      <div class="product-card-info-variants-item-inner">
+                        8.5
+                      </div>
+                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611846217735" tooltip="QUICK ADD">
+                      <div class="product-card-info-variants-item-inner">
+                        9
+                      </div>
+                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611846250503" tooltip="QUICK ADD">
+                      <div class="product-card-info-variants-item-inner">
+                        9.5
+                      </div>
+                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611846283271" tooltip="QUICK ADD">
+                      <div class="product-card-info-variants-item-inner">
+                        10
+                      </div>
+                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611846316039" tooltip="QUICK ADD">
+                      <div class="product-card-info-variants-item-inner">
+                        10.5
+                      </div>
+                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611846348807" tooltip="QUICK ADD">
+                      <div class="product-card-info-variants-item-inner">
+                        11
+                      </div>
+                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611846381575" tooltip="QUICK ADD">
+                      <div class="product-card-info-variants-item-inner">
+                        11.5
+                      </div>
+                    </div><div class="product-card-info-variants-item js-product-card-quickadd-size" data-value="2611846414343" tooltip="QUICK ADD">
+                      <div class="product-card-info-variants-item-inner">
+                        12
                       </div>
                     </div>
             

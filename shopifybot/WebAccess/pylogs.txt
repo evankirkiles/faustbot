@@ -1,8 +1,0 @@
-Could not fill complete order, reordering to get as many as possible. 
-Order reformatted for max of 2 products. 
-Could not fill complete order, reordering to get as many as possible. 
-Order reformatted for max of 2 products. 
-Could not fill complete order, reordering to get as many as possible. 
-Order reformatted for max of 2 products. 
-Successfully bypassed reCAPTCHA and got to payment method page. 
-Retrieved unique session ID. 

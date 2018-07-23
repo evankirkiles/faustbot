@@ -40,7 +40,7 @@ public:
     void addTask(const std::string& title, const URLAndMethod& website, const std::string& collection,
                  const std::string& identifier, const std::vector<std::string>& keywords,
                  const std::vector<std::string>& colorKeywords,
-                 const std::string& size, const unsigned int quantity,
+                 const std::string& size, unsigned int quantity,
                  unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ);
 
 private:

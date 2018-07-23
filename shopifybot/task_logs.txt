@@ -1,101 +1,46 @@
-[2018-07-21 12:54:22.858] Beginning "Kith Task".
-[2018-07-21 12:54:26.313] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 12:54:26.314] Placing order...
-[2018-07-21 12:54:28.191] Got to customer information form.
-[2018-07-21 12:54:29.912] Successfully submitted customer info to Shopify server.
-[2018-07-21 12:54:30.946] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 12:54:31.106] Sent credit card info to Shopify.
-[2018-07-21 12:54:31.140] Task finished.
-[2018-07-21 12:55:07.096] Beginning "Kith Task".
-[2018-07-21 12:55:07.452] Product found! Link: https://kith.com/cart/2611888586759:2
-[2018-07-21 12:55:07.452] Placing order...
-[2018-07-21 12:55:09.315] Got to customer information form.
-[2018-07-21 12:55:10.651] Successfully submitted customer info to Shopify server.
-[2018-07-21 12:55:11.664] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 12:55:11.971] Got unique session ID from Shopify.
-[2018-07-21 12:55:11.998] Task finished.
-[2018-07-21 12:55:23.504] Beginning "Kith Task".
-[2018-07-21 12:55:26.875] Product found! Link: https://kith.com/cart/2611888586759:3
-[2018-07-21 12:55:26.875] Placing order...
-[2018-07-21 12:55:28.596] Could not fill complete order, reordering to get as many as possible.
-[2018-07-21 12:55:28.614] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
-[2018-07-21 12:55:30.135] Got to customer information form.
-[2018-07-21 12:55:32.069] Successfully submitted customer info to Shopify server.
-[2018-07-21 12:55:34.129] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 12:55:34.225] Got unique session ID from Shopify.
-[2018-07-21 12:55:34.248] Task finished.
-[2018-07-21 12:59:26.514] Beginning "Kith Task".
-[2018-07-21 12:59:29.271] Product found! Link: https://kith.com/cart/2611888586759:3
-[2018-07-21 12:59:29.271] Placing order...
-[2018-07-21 12:59:30.567] Could not fill complete order, reordering to get as many as possible.
-[2018-07-21 12:59:30.586] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
-[2018-07-21 12:59:31.804] Got to customer information form.
-[2018-07-21 12:59:33.841] Successfully submitted customer info to Shopify server.
-[2018-07-21 12:59:35.105] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 12:59:35.628] Got unique session ID from Shopify.
-[2018-07-21 12:59:35.655] Task finished.
-[2018-07-21 12:59:47.984] Beginning "Bodega Task".
-[2018-07-21 12:59:47.985] Beginning "Kith Task".
-[2018-07-21 12:59:51.064] Product found! Link: https://kith.com/cart/2611888586759:3
-[2018-07-21 12:59:51.065] Placing order...
-[2018-07-21 12:59:52.596] Could not fill complete order, reordering to get as many as possible.
-[2018-07-21 12:59:52.613] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
-[2018-07-21 12:59:53.498] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
-[2018-07-21 12:59:53.498] Placing order...
-[2018-07-21 12:59:53.760] Got to customer information form.
-[2018-07-21 12:59:54.950] Got to customer information form.
-[2018-07-21 12:59:55.174] Successfully submitted customer info to Shopify server.
-[2018-07-21 12:59:56.064] Successfully submitted customer info to Shopify server.
-[2018-07-21 12:59:56.201] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 12:59:56.298] Got unique session ID from Shopify.
-[2018-07-21 12:59:56.319] Task finished.
-[2018-07-21 12:59:56.691] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 12:59:56.776] Got unique session ID from Shopify.
-[2018-07-21 12:59:56.797] Task finished.
-[2018-07-21 16:40:42.845] Beginning "Bodega Task".
-[2018-07-21 16:40:42.845] Beginning "Kith Task".
-[2018-07-21 17:05:53.052] Beginning "Kith Task".
-[2018-07-21 17:05:53.052] Beginning "Bodega Task".
-[2018-07-21 17:05:55.749] Product found! Link: https://kith.com/cart/2611888586759:3
-[2018-07-21 17:05:55.749] Placing order...
-[2018-07-21 17:05:55.884] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
-[2018-07-21 17:05:55.885] Placing order...
-[2018-07-21 17:05:57.423] Could not fill complete order, reordering to get as many as possible.
-[2018-07-21 17:05:57.451] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
-[2018-07-21 17:05:57.794] Got to customer information form.
-[2018-07-21 17:05:58.903] Successfully submitted customer info to Shopify server.
-[2018-07-21 17:05:59.414] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 17:05:59.524] Got unique session ID from Shopify.
-[2018-07-21 17:05:59.554] Task finished.
-[2018-07-21 17:05:59.563] Got to customer information form.
-[2018-07-21 17:06:01.972] Successfully submitted customer info to Shopify server.
-[2018-07-21 17:06:03.120] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 17:06:03.213] Got unique session ID from Shopify.
-[2018-07-21 17:06:03.236] Task finished.
-[2018-07-21 17:06:58.943] Beginning "Kith Task".
-[2018-07-21 17:06:58.943] Beginning "Bodega Task".
-[2018-07-21 17:07:01.478] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
-[2018-07-21 17:07:01.479] Placing order...
-[2018-07-21 17:07:02.813] Product found! Link: https://kith.com/cart/2611888586759:3
-[2018-07-21 17:07:02.813] Placing order...
-[2018-07-21 17:07:03.220] Got to customer information form.
-[2018-07-21 17:07:15.672] Beginning "Kith Task".
-[2018-07-21 17:07:16.015] Product found! Link: https://kith.com/cart/2611888586759:3
-[2018-07-21 17:07:16.015] Placing order...
-[2018-07-21 17:07:17.854] Could not fill complete order, reordering to get as many as possible.
-[2018-07-21 17:07:17.874] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
-[2018-07-21 17:07:18.979] Got to customer information form.
-[2018-07-21 17:07:20.937] Successfully submitted customer info to Shopify server.
-[2018-07-21 17:07:22.066] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 17:07:22.188] Got unique session ID from Shopify.
-[2018-07-21 17:07:22.213] Task finished.
-[2018-07-21 17:26:10.663] Beginning "Kith Task".
-[2018-07-21 17:26:13.125] Product found! Link: https://kith.com/cart/2611888586759:3
-[2018-07-21 17:26:13.125] Placing order...
-[2018-07-21 17:26:15.630] Could not fill complete order, reordering to get as many as possible.
-[2018-07-21 17:26:15.659] Reordered for max of 2 products. New link: https://kith.com/cart/2611888586759:2
-[2018-07-21 17:26:17.076] Got to customer information form.
-[2018-07-21 17:26:18.593] Successfully submitted customer info to Shopify server.
-[2018-07-21 17:26:19.738] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-21 17:26:19.877] Got unique session ID from Shopify.
-[2018-07-21 17:26:19.909] Task finished.
+[2018-07-22 22:50:03.571] Beginning "Kith Task".
+[2018-07-22 22:50:06.318] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 22:50:36.645] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 22:55:40.880] Beginning "Kith Task".
+[2018-07-22 22:55:43.624] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 22:56:27.524] Beginning "Kith Task".
+[2018-07-22 22:56:27.827] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 22:57:26.479] Beginning "Kith Task".
+[2018-07-22 22:57:26.804] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 22:58:00.090] Beginning "Kith Task".
+[2018-07-22 22:58:00.413] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 22:58:02.657] Beginning "Kith Task".
+[2018-07-22 22:58:05.422] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 22:58:33.185] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 22:58:36.752] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 23:00:17.422] Beginning "Kith Task".
+[2018-07-22 23:00:19.794] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 23:00:50.090] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 23:01:55.645] Beginning "Kith Task".
+[2018-07-22 23:01:56.936] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 23:02:32.826] Beginning "Kith Task".
+[2018-07-22 23:02:33.145] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 23:06:23.400] Beginning "Kith Task".
+[2018-07-22 23:06:24.430] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 23:07:23.637] Beginning "Kith Task".
+[2018-07-22 23:07:23.967] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 23:17:30.715] Beginning "Kith Task".
+[2018-07-22 23:17:34.679] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 23:18:10.549] Beginning "Bodega Task".
+[2018-07-22 23:18:12.122] Beginning "Kith Task".
+[2018-07-22 23:18:12.463] Failed because: "Size unavailable.", checking again in 30 seconds.
+[2018-07-22 23:18:14.813] Beginning "Bodega Task".
+[2018-07-22 23:18:15.000] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
+[2018-07-22 23:18:15.000] Placing order...
+[2018-07-22 23:18:15.174] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
+[2018-07-22 23:18:15.174] Placing order...
+[2018-07-22 23:18:16.515] Got to customer information form.
+[2018-07-22 23:18:16.626] Got to customer information form.
+[2018-07-22 23:18:17.728] Successfully submitted customer info to Shopify server.
+[2018-07-22 23:18:17.849] Successfully submitted customer info to Shopify server.
+[2018-07-22 23:18:18.358] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-22 23:18:18.462] Got unique session ID from Shopify.
+[2018-07-22 23:18:18.485] Task finished.
+[2018-07-22 23:18:18.587] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-22 23:18:18.680] Got unique session ID from Shopify.
+[2018-07-22 23:18:18.703] Task finished.

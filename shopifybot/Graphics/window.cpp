@@ -54,9 +54,13 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     title->setAlignment(Qt::AlignCenter);
     title->setObjectName("bot_title");
     billing = new QPushButton("Billing Info", this);
+    billing->setObjectName("sidebuttons");
     proxies = new QPushButton("Proxies", this);
+    proxies->setObjectName("sidebuttons");
     logs = new QPushButton("Logs", this);
+    logs->setObjectName("sidebuttons");
     about = new QPushButton("About", this);
+    about->setObjectName("sidebuttons");
     // Add widgets to the left column
     leftColumn->addWidget(logo);
     leftColumn->addWidget(title);
@@ -97,20 +101,20 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     topLayout->setStretchFactor(rightColumn, 4);
 
     // Add a task
-    addTask("Kith Task", supported_sites::KITH, "1", "/collections/footwear", {"Asics"}, {"White"}, "9", 3, 3);
+    addTask("Kith Task", supported_sites::KITH, "1", "/collections/footwear", {"Asics"}, {"White"}, "200", 3, 3);
 
     // Add a task when button is clicked
     connect(about, SIGNAL(clicked(bool)), this, SLOT(testtask()));
 }
 
 // Creates a task and adds it to the tasklist
-void BotWindow::addTask(const std::string &title, const URLAndMethod &website, const std::string &collection,
-                        const std::string &identifier, const std::vector<std::string> &keywords,
+void BotWindow::addTask(const std::string &title, const URLAndMethod &website, const std::string &identifier,
+                        const std::string &collection, const std::vector<std::string> &keywords,
                         const std::vector<std::string> &colorKeywords, const std::string &size,
                         const unsigned int quantity, unsigned int resultsToCheck, unsigned int frequency) {
 
     // Create a new task
-    auto newtask = new TaskWidget(title, website, collection, identifier, keywords, colorKeywords, size,
+    auto newtask = new TaskWidget(title, website, identifier, collection, keywords, colorKeywords, size,
                                         quantity, resultsToCheck, frequency, tasklistwidget);
 
     // Adds the task to the qvboxlayout

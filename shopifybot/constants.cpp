@@ -23,7 +23,15 @@ namespace file_paths {
     const char* TIME_LOG = "./shopifybot/logs.txt";
     const char* TASK_LOG = "./shopifybot/task_logs.txt";
 
+    // Images
     const char* LOGO_FILE = "./shopifybot/Graphics/Assets/logo.png";
+    const char* PLAY_IMG = "./shopifybot/Graphics/Assets/play.png";
+    const char* PLAY2_IMG = "./shopifybot/Graphics/Assets/play2.png";
+    const char* STOP_IMG = "./shopifybot/Graphics/Assets/stop.png";
+    const char* STOP2_IMG = "./shopifybot/Graphics/Assets/stop2.png";
+    const char* EDIT_IMG = "./shopifybot/Graphics/Assets/edit.png";
+    const char* EDIT2_IMG = "./shopifybot/Graphics/Assets/edit2.png";
+    const char* PLAY_DISBL_IMG = "./shopifybot/Graphics/Assets/play-disabled.png";
 }
 
 namespace constants {
