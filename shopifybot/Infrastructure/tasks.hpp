@@ -48,19 +48,19 @@ public:
     // Shopify Website Handler
     ShopifyWebsiteHandler swh;
     // Collection in which to search for
-    const std::string collection;
+    std::string collection;
     // Keywords to check for in the title of the product
-    const std::vector<std::string> keywords;
+    std::vector<std::string> keywords;
     // Keywords to check for in the color of the product
-    const std::vector<std::string> colorKeywords;
+    std::vector<std::string> colorKeywords;
     // Size to check for
-    const std::string size;
+    std::string size;
     // Quantity of products to try for
-    const unsigned int quantity;
+    unsigned int quantity;
     // How many results to check on the front of each page (in order of most recent)
-    const unsigned int resultsToCheck;
+    unsigned int resultsToCheck;
     // How frequently the check should be run (in seconds)
-    const unsigned int frequency;
+    unsigned int frequency;
 
 public slots:
     // Runs the task, essentially creating a while loop that runs every [frequency] seconds and continuously checks

@@ -36,6 +36,9 @@ public:
     // Constructor that builds the window
     explicit BotWindow(QWidget *parent = 0);
 
+    // Tells if a logwindow is open
+    bool logWindowOpen = false;
+
     // Adds a task to the list
     void addTask(const std::string& title, const URLAndMethod& website, const std::string& collection,
                  const std::string& identifier, const std::vector<std::string>& keywords,
@@ -48,6 +51,10 @@ private:
     // Visualization widgets
     QLabel *logo;
     QLabel *title;
+
+    // Add new task button
+    QPushButton *addtask;
+
     QPushButton *billing;
     QPushButton *proxies;
     QPushButton *logs;
@@ -62,7 +69,6 @@ private:
     QVBoxLayout *tasklistLayout;
 
 private slots:
-
     // Add a task when button is clicked
     void testtask();
 };

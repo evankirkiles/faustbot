@@ -1,10 +1,20 @@
-[2018-07-23 17:32:51.429] Beginning "Social Status Task".
-[2018-07-23 17:32:51.734] Product found! Link: https://www.socialstatuspgh.com/cart/8434620203063:2
-[2018-07-23 17:32:51.734] Placing order...
-[2018-07-23 17:32:53.253] Could not fill complete order, reordering to get as many as possible.
-[2018-07-23 17:32:53.270] Reordered for max of 1 products. New link: https://www.socialstatuspgh.com/cart/8434620203063:1
-[2018-07-23 17:32:54.291] Got to customer information form.
-[2018-07-23 17:32:55.403] Successfully submitted customer info to Shopify server.
-[2018-07-23 17:32:56.230] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-23 17:32:56.724] Got unique session ID from Shopify.
-[2018-07-23 17:32:56.745] Task finished.
+[2018-07-23 23:17:51.321] Beginning "Social Status Task".
+[2018-07-23 23:17:51.589] Product found! Link: https://www.socialstatuspgh.com/cart/8434620203063:2
+[2018-07-23 23:17:51.589] Placing order...
+[2018-07-23 23:17:52.757] Could not fill complete order, reordering to get as many as possible.
+[2018-07-23 23:17:52.798] Reordered for max of 1 products. New link: https://www.socialstatuspgh.com/cart/8434620203063:1
+[2018-07-23 23:17:53.851] Got to customer information form.
+[2018-07-23 23:17:55.014] Successfully submitted customer info to Shopify server.
+[2018-07-23 23:17:55.874] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-23 23:17:56.096] Got unique session ID from Shopify.
+[2018-07-23 23:17:56.122] Task finished.
+[2018-07-23 23:52:26.018] Beginning "Social Status Task".
+[2018-07-23 23:52:26.335] Product found! Link: https://www.socialstatuspgh.com/cart/8434620203063:2
+[2018-07-23 23:52:26.335] Placing order...
+[2018-07-23 23:52:27.921] Could not fill complete order, reordering to get as many as possible.
+[2018-07-23 23:52:27.939] Reordered for max of 1 products. New link: https://www.socialstatuspgh.com/cart/8434620203063:1
+[2018-07-23 23:52:29.370] Got to customer information form.
+[2018-07-23 23:52:30.480] Successfully submitted customer info to Shopify server.
+[2018-07-23 23:52:31.518] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-23 23:52:31.632] Got unique session ID from Shopify.
+[2018-07-23 23:52:31.655] Task finished.

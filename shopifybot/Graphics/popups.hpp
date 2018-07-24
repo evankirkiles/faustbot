@@ -29,6 +29,9 @@
 #ifndef QTextBrowser
 #include <QTextBrowser>
 #endif
+#ifndef QFileInfo
+#include <QFileInfo>
+#endif
 
 // Header containing all the declarations of the different popups available from the mainwindow. These include:
 //  1. The log file display used for each individual task
@@ -43,9 +46,16 @@ class LogFileDisplay : public QWidget {
 public:
     // Constructor that is given the file path for the file it is to open
     explicit LogFileDisplay(const std::string& title, const std::string& LFlocation, QWidget *parent = 0);
+
+    // Override window closed event
+    void closeEvent(QCloseEvent *event) override;
+
+signals:
+    // Signal emitted when the window is closed in the overridden closeevent
+    void closed();
 public slots:
     // Refresher slot that will be connected to a "FILE REFRESH" button, or can also be hooked up to a QTimer
-    // void refresh();
+    void refresh();
 private:
     // File location is saved in a member string to allow for continuous refreshal
     const std::string title;
@@ -56,6 +66,9 @@ private:
     QFile* logFile;
     QTextStream* logStream;
     QTextBrowser* logDisplay;
+protected:
+    // Override the lose focus event so it closes whenever the window is left
+    void focusOutEvent(QFocusEvent *event) override { close(); }
 };
 
 #endif //SHOPIFY_BOT_POPUPS_HPP

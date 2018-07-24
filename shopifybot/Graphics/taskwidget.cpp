@@ -8,7 +8,7 @@
 TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website, const std::string& p_identifier,
                        const std::string& p_collection, const std::vector<std::string>& p_keywords,
                        const std::vector<std::string>& p_colorKeywords, const std::string& p_size,
-                       const unsigned int p_quantity, unsigned int p_resultsToCheck,
+                       const unsigned int p_quantity, bool* p_logWindowOpen, unsigned int p_resultsToCheck,
                        unsigned int p_frequency, QWidget *parent) :
                                task(p_title, p_website, p_identifier, p_collection, p_keywords, p_colorKeywords,
                                p_size, p_quantity, p_resultsToCheck, p_frequency),
@@ -17,6 +17,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
                                collection(new QLabel(p_collection.c_str(), this)),
                                size(new QLabel(p_size.c_str(), this)),
                                quantity(new QLabel(std::to_string(p_quantity).c_str(), this)),
+                               logWindowOpen(p_logWindowOpen),
                                QFrame(parent) {
 
     // Ensure the widget deletes itself when it is closed
@@ -209,14 +210,21 @@ void TaskWidget::exit() {
 
 // Create a logs window and display it
 void TaskWidget::showLogs() {
-
     // Make sure a log window is not already open
-    // TODO: Make clicking the log button when log window is already open bring current log window to front
-    if (logWindowOpen) { return; }
+    if (*logWindowOpen) { if (lfd) { lfd->raise(); } return; }
 
     // Otherwise create a new log window and show it
-    LogFileDisplay* lfd = new LogFileDisplay(task.title, std::string(file_paths::TASK_LOG).append("task_logs_").append(task.swh.sourceURL.title).append(task.swh.taskID).append(".txt"));
+    lfd = new LogFileDisplay(task.title, std::string(file_paths::TASK_LOG).append("task_logs_").append(task.swh.sourceURL.title).append(task.swh.taskID).append(".txt"));
     lfd->show();
+    lfd->setFocus();
+    // Connect the closeLogs function of lfd to the delete button of the task
+    connect(deleteButton, SIGNAL(clicked()), lfd, SLOT(close()));
+    connect(lfd, SIGNAL(closed()), this, SLOT(logsClosed()));
+    // Notify the main window that a log window is open
+    *logWindowOpen = true;
+}
 
-    logWindowOpen = true;
+// Called when the logFile window is closed
+void TaskWidget::logsClosed() {
+    *logWindowOpen = false;
 }

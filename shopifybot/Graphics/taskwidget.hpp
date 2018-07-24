@@ -200,7 +200,7 @@ public:
     explicit TaskWidget(const std::string& title, const URLAndMethod& website, const std::string& identifier,
                         const std::string& collection, const std::vector<std::string>& keywords,
                         const std::vector<std::string>& colorKeywords, const std::string& size, unsigned int quantity,
-                        unsigned int resultsToCheck=constants::BASE_NUMRESULTS,
+                        bool* p_logWindowOpen, unsigned int resultsToCheck=constants::BASE_NUMRESULTS,
                         unsigned int frequency=constants::BASE_FREQ, QWidget *parent = 0);
 
 private slots:
@@ -212,6 +212,8 @@ private slots:
     void exit();
     // Builds a logfile window with the task's title and file specifiers
     void showLogs();
+    // Called when the logfile window is closed by user
+    void logsClosed();
 
 private:
     // Actual task instance
@@ -219,6 +221,9 @@ private:
 
     // Thread for copied task
     QThread* taskthread;
+
+    // Logfile window
+    LogFileDisplay* lfd;
 
     // Labels on the task
     QLabel* title;
@@ -237,7 +242,7 @@ private:
 
     // Status label and logs button
     QTextEdit* status;
-    bool logWindowOpen = false;
+    bool* logWindowOpen;
     ClickableImage* logsButton;
 
     // Delete button

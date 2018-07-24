@@ -53,6 +53,8 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     title = new QLabel("SHOPIFY BOT", this);
     title->setAlignment(Qt::AlignCenter);
     title->setObjectName("bot_title");
+    addtask = new QPushButton("NEW TASK", this);
+    addtask->setObjectName("addtaskbutton");
     billing = new QPushButton("Billing Info", this);
     billing->setObjectName("sidebuttons");
     proxies = new QPushButton("Proxies", this);
@@ -64,6 +66,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Add widgets to the left column
     leftColumn->addWidget(logo);
     leftColumn->addWidget(title);
+    leftColumn->addWidget(addtask);
     leftColumn->addWidget(billing);
     leftColumn->addWidget(proxies);
     leftColumn->addWidget(logs);
@@ -85,6 +88,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     tasklist = new QScrollArea(this);
     tasklist->setSizePolicy(spRight);
     tasklist->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    tasklist->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tasklistwidget = new QWidget(this);
 
     tasklistLayout->setAlignment(Qt::AlignTop);
@@ -118,7 +122,7 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
 
     // Create a new task
     auto newtask = new TaskWidget(title, website, identifier, collection, keywords, colorKeywords, size,
-                                        quantity, resultsToCheck, frequency, tasklistwidget);
+                                        quantity, &logWindowOpen, resultsToCheck, frequency, tasklistwidget);
 
     // Adds the task to the qvboxlayout
     tasklistLayout->addWidget(newtask);

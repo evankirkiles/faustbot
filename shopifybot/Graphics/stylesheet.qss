@@ -102,6 +102,24 @@ QPushButton#sidebuttons {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+QPushButton#addtaskbutton:pressed {
+    background-color: #dbc987;
+    border-style: inset;
+    border: 1px solid gray;
+}
+QPushButton#addtaskbutton {
+    background-color: #e8cb61;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #2b2e33;
+	border-radius: 10px;
+	color: #2b2e33;
+	font-family: "Futura";
+	min-height: 60px;
+	max-height: 70px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
 QScrollArea {
     background-color: #141414;
     color: #e8cb61;
@@ -135,7 +153,9 @@ QTextEdit {
     border-color: #232323;
     border-style: solid;
 }
-
+#logs_text {
+    color: #c4c0b2;
+}
 #logs_window {
     background: #181818;
 }

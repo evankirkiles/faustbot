@@ -10,9 +10,11 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
         title(p_title), QWidget(parent) {
 
     // Fixed size of the window
-    setFixedSize(500, 500);
+    setFixedSize(500, 300);
     setWindowTitle("Logs");
     setObjectName("logs_window");
+    setWindowFlags(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_QuitOnClose, false);
 
     // Set the stylesheet for the window
     QFile File("./shopifybot/Graphics/stylesheet.qss");
@@ -37,9 +39,17 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
     // Initialize the logFile and the textstream
     logFile = new QFile(LFlocation.c_str());
     logFile->open(QIODevice::ReadOnly);
-    logStream = new QTextStream(logFile);
-    logDisplay = new QTextBrowser();
-    logDisplay->setText(logStream->readAll());
+    if (logFile->exists()) {
+        logStream = new QTextStream(logFile);
+        logDisplay = new QTextBrowser();
+        logDisplay->setText(logStream->readAll());
+    } else {
+        logDisplay = new QTextBrowser();
+        logDisplay->setText(QString("Log file not yet generated."));
+    }
+
+    logDisplay->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    logDisplay->setObjectName("logs_text");
 
     // Add these things to the main layout
     mainLayout->addLayout(topLayout);
@@ -47,4 +57,26 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
 
     // Set the window's layout
     setLayout(mainLayout);
+
+    // Connect the refresh button to its slot
+    connect(refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
+}
+
+// Refresh slot which reloads the filestream into the textbrowser
+void LogFileDisplay::refresh() {
+    logFile->close();
+    logFile->open(QIODevice::ReadOnly);
+    if (logFile->exists()) {
+        logStream = new QTextStream(logFile);
+        logDisplay->setText(logStream->readAll());
+    } else {
+        logDisplay->setText(QString("Log file not yet generated."));
+    }
+}
+
+// Custom close event function that just emits a signal signifying it has closed
+void LogFileDisplay::closeEvent(QCloseEvent *event) {
+    // Emit the closed signal and then proceed to cleanup
+    emit closed();
+    QWidget::closeEvent(event);
 }
