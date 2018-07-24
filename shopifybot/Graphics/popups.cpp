@@ -101,22 +101,69 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     // Create layouts
     auto mainLayout = new QVBoxLayout();
     // Individual horizontal row layouts
-    auto topTitleLayout = new QHBoxLayout();
+    auto websiteCollectionLayout = new QHBoxLayout();
+    auto keywordLayout = new QHBoxLayout();
+    auto colorKeywordLayout = new QHBoxLayout();
+    auto titleLayout = new QHBoxLayout();
 
     // Create the widgets
+    // WEBSITE & COLLECTION ROW
+    websitesLabel = new QLabel("Website: ", this);
+    websitesLabel->setObjectName("addtask_mediocre_text");
+    websites = new QComboBox(this);
+    // Change this when adding new websites
+    QStringList supportedsites({"Blends", "Bodega", "Kith", "Social Status",  "Undefeated", "WishATL", "XHibition",});
+    websites->addItems(supportedsites);
+    collectionLabel = new QLabel("Collection: ", this);
+    collectionLabel->setObjectName("addtask_mediocre_text");
+    collection = new QTextEdit(this);
+    collection->setObjectName("addtask_editbox");
+    collection->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    collection->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    // Add row to the layout
+    websiteCollectionLayout->addWidget(websitesLabel);
+    websiteCollectionLayout->addWidget(websites);
+    websiteCollectionLayout->addWidget(collectionLabel);
+    websiteCollectionLayout->addWidget(collection);
+    mainLayout->addLayout(websiteCollectionLayout);
+
+    // KEYWORD ROW
+    keywordsLabel = new QLabel("Title Keywords: ", this);
+    keywordsLabel->setObjectName("addtask_mediocre_text");
+    keywords = new QTextEdit(this);
+    keywords->setObjectName("addtask_editbox");
+    keywords->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    keywords->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    keywordLayout->addWidget(keywordsLabel);
+    keywordLayout->addWidget(keywords);
+    mainLayout->addLayout(keywordLayout);
+
+    // COLOR KEYWORD ROW
+    colorKeywordsLabel = new QLabel("Color Keywords: ", this);
+    colorKeywordsLabel->setObjectName("addtask_mediocre_text");
+    colorKeywords = new QTextEdit(this);
+    colorKeywords->setObjectName("addtask_editbox");
+    colorKeywords->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    colorKeywords->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    colorKeywordLayout->addWidget(colorKeywordsLabel);
+    colorKeywordLayout->addWidget(colorKeywords);
+    mainLayout->addLayout(colorKeywordLayout);
+
     // TITLE ROW
     titleLabel = new QLabel("Title: ", this);
     titleLabel->setObjectName("task_important_text");
     title = new QTextEdit(this);
     title->setObjectName("task_title_textedit");
-    topTitleLayout->addWidget(titleLabel);
-    topTitleLayout->addWidget(title);
-    mainLayout->addLayout(topTitleLayout);
+    title->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    title->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    // Add row to the layout
+    titleLayout->addWidget(titleLabel);
+    titleLayout->addWidget(title);
+    mainLayout->addLayout(titleLayout);
 
     // Set the layout
     setLayout(mainLayout);
 }
-
 
 // Custom close event function that just emits a signal signifying it has closed
 void AddTaskDisplay::closeEvent(QCloseEvent *event) {

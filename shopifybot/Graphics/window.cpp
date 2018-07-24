@@ -158,3 +158,22 @@ void BotWindow::addTaskClosed() {
 void BotWindow::testtask() {
     addTask("Bodega Task", supported_sites::BODEGA, "1", "/collections/footwear", {"Air Max"}, {"Cargo"}, "9", 1, 3);
 }
+
+// Function which interprets the string form of a vector back into the vector
+// Ex. "A,B A,C D W" will produce a vector of size 3 with elements "A", "B A", "C D W"
+std::vector<std::string> vectorFromString(const std::string& interpret) {
+
+    // Create a stringstream from the interpreted string
+    std::stringstream ss(interpret);
+    std::vector<std::string> toReturn;
+
+    // Iterate through the stringstream and get all comma-separated elements
+    while(ss.good()) {
+        std::string substr;
+        getline(ss, substr, ',');
+        if (*substr.begin() == ' ') { substr.erase(0); }
+        toReturn.push_back(substr);
+    }
+    // Return the vector built from the comma-separated string
+    return toReturn;
+}

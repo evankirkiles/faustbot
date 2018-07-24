@@ -177,3 +177,38 @@ QTextEdit#task_title_textedit {
     border-style: solid;
     max-height: 30px;
 }
+QComboBox {
+    background-color: #151515;
+    border-color: #2b2e33;
+    color: #e8cb61;
+    font-family: "Futura";
+    outline: 1px solid #151515;
+    font-size: 12px;
+    min-width: 130px;
+    max-width: 140px;
+    padding: 0px 3px 0px 3px;
+}
+QComboBox QAbstractItemView {
+    min-width: 100px;
+    outline: 1px solid #151515;
+    border: 1px solid #181818;
+    selection-background-color: #e8cb61;
+    background-color: #151515;
+}
+#addtask_mediocre_text {
+    color: #c4c0b2;
+    font-size: 13px;
+    min-height: 15px;
+    font-family: "Futura";
+}
+#addtask_editbox {
+    background-color: #151515;
+    color: #e8cb61;
+    font-family: "Futura";
+    font-size: 13px;
+    padding: 3px 3px 3px 3px;
+    border-radius: 4px;
+    border-color: #232323;
+    border-style: solid;
+    max-height: 20px;
+}

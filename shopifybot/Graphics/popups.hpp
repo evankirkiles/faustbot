@@ -32,6 +32,9 @@
 #ifndef QFileInfo
 #include <QFileInfo>
 #endif
+#ifndef QComboBox
+#include <QComboBox>
+#endif
 
 // Header containing all the declarations of the different popups available from the mainwindow. These include:
 //  1. The log file display used for each individual task
@@ -90,6 +93,22 @@ signals:
 
 private:
     // The widgets through which the new task will be added to the client
+    // Website and collection row
+    QLabel* websitesLabel;
+    QComboBox* websites;
+    QLabel* collectionLabel;
+    QTextEdit* collection;
+
+    // Keyword row
+    QLabel* keywordsLabel;
+    QTextEdit* keywords;
+
+    // Color Keyword row
+    QLabel* colorKeywordsLabel;
+    QTextEdit* colorKeywords;
+    // Size and time
+
+    // Title row is last with the finished button
     QLabel* titleLabel;
     QTextEdit* title;
 };

@@ -5,6 +5,11 @@
 #ifndef SHOPIFY_BOT_WINDOW_HPP
 #define SHOPIFY_BOT_WINDOW_HPP
 
+// std includes
+#ifndef stringstream
+#include <sstream>
+#endif
+
 // Qt includes
 #include <QWidget>
 #include <QFile>
@@ -81,5 +86,9 @@ private slots:
     // Add a task when button is clicked
     void testtask();
 };
+
+// Function which interprets the string form of a vector back into the vector
+// Ex. "A,B A,C D W" will produce a vector of size 3 with elements "A", "B A", "C D W"
+std::vector<std::string> vectorFromString(const std::string& interpret);
 
 #endif //SHOPIFY_BOT_WINDOW_HPP
