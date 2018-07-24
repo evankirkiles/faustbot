@@ -47,6 +47,7 @@ QLabel {
     color: #e8cb61;
     font-size: 18px;
     min-height: 24px;
+    max-height: 30px;
     font-family: "Futura";
 }
 #task_important_var {
@@ -164,4 +165,15 @@ QTextEdit {
 
 #newtaskwindow {
  	background: #181818;
+}
+QTextEdit#task_title_textedit {
+    background-color: #151515;
+    color: #e8cb61;
+    font-family: "Futura";
+    font-size: 15px;
+    padding: 3px 3px 3px 3px;
+    border-radius: 4px;
+    border-color: #232323;
+    border-style: solid;
+    max-height: 30px;
 }

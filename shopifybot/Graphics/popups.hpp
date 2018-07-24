@@ -90,6 +90,7 @@ signals:
 
 private:
     // The widgets through which the new task will be added to the client
+    QLabel* titleLabel;
     QTextEdit* title;
 };
 

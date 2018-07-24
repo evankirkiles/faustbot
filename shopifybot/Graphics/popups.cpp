@@ -100,10 +100,18 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
 
     // Create layouts
     auto mainLayout = new QVBoxLayout();
+    // Individual horizontal row layouts
+    auto topTitleLayout = new QHBoxLayout();
 
     // Create the widgets
+    // TITLE ROW
+    titleLabel = new QLabel("Title: ", this);
+    titleLabel->setObjectName("task_important_text");
     title = new QTextEdit(this);
-    mainLayout->addWidget(title);
+    title->setObjectName("task_title_textedit");
+    topTitleLayout->addWidget(titleLabel);
+    topTitleLayout->addWidget(title);
+    mainLayout->addLayout(topTitleLayout);
 
     // Set the layout
     setLayout(mainLayout);
