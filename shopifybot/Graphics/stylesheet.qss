@@ -153,9 +153,15 @@ QTextEdit {
     border-color: #232323;
     border-style: solid;
 }
+
+
 #logs_text {
     color: #c4c0b2;
 }
 #logs_window {
     background: #181818;
+}
+
+#newtaskwindow {
+ 	background: #181818;
 }

@@ -80,3 +80,39 @@ void LogFileDisplay::closeEvent(QCloseEvent *event) {
     emit closed();
     QWidget::closeEvent(event);
 }
+
+// ADD TASK DISPLAY CLASS
+// Constructor that builds the window for adding a task
+AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
+
+    // Set window properties
+    setFixedSize(500, 500);
+    setObjectName("newtaskwindow");
+    setWindowTitle("New Task");
+    setFocusPolicy(Qt::ClickFocus);
+    setAttribute(Qt::WA_QuitOnClose, false);
+
+    // Set the stylesheet for the window
+    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    setStyleSheet(StyleSheet);
+
+    // Create layouts
+    auto mainLayout = new QVBoxLayout();
+
+    // Create the widgets
+    title = new QTextEdit(this);
+    mainLayout->addWidget(title);
+
+    // Set the layout
+    setLayout(mainLayout);
+}
+
+
+// Custom close event function that just emits a signal signifying it has closed
+void AddTaskDisplay::closeEvent(QCloseEvent *event) {
+    // Emit the closed signal and then proceed to cleanup
+    emit closed();
+    QWidget::closeEvent(event);
+}

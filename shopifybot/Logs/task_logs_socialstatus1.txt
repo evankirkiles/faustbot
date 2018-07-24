@@ -18,3 +18,13 @@
 [2018-07-23 23:52:31.518] Successfully bypassed reCAPTCHA and got to payment method page.
 [2018-07-23 23:52:31.632] Got unique session ID from Shopify.
 [2018-07-23 23:52:31.655] Task finished.
+[2018-07-24 13:42:39.110] Beginning "Social Status Task".
+[2018-07-24 13:42:39.915] Product found! Link: https://www.socialstatuspgh.com/cart/8434620203063:2
+[2018-07-24 13:42:39.915] Placing order...
+[2018-07-24 13:42:41.256] Could not fill complete order, reordering to get as many as possible.
+[2018-07-24 13:42:41.275] Reordered for max of 1 products. New link: https://www.socialstatuspgh.com/cart/8434620203063:1
+[2018-07-24 13:42:42.318] Got to customer information form.
+[2018-07-24 13:42:43.408] Successfully submitted customer info to Shopify server.
+[2018-07-24 13:42:44.241] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-24 13:42:44.351] Got unique session ID from Shopify.
+[2018-07-24 13:42:44.375] Task finished.

@@ -71,4 +71,26 @@ protected:
     void focusOutEvent(QFocusEvent *event) override { close(); }
 };
 
+// Window that pops up when you try to add a task
+class AddTaskDisplay : public QWidget {
+    Q_OBJECT
+public:
+    // Constructor that builds the window
+    explicit AddTaskDisplay(QWidget *parent = 0);
+
+    // Override window closed event
+    void closeEvent(QCloseEvent *event) override;
+
+signals:
+    // Called whenever the addtask window is closed
+    void closed();
+    // Sends the information of the new task to the main window to add it
+    // TODO: Add the information packets sent
+    void sendTask();
+
+private:
+    // The widgets through which the new task will be added to the client
+    QTextEdit* title;
+};
+
 #endif //SHOPIFY_BOT_POPUPS_HPP

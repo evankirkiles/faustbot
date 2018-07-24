@@ -112,6 +112,8 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
 
     // Add a task when button is clicked
     connect(about, SIGNAL(clicked(bool)), this, SLOT(testtask()));
+    // Open the add task window when the add task button is clicked
+    connect(addtask, SIGNAL(clicked()), this, SLOT(openNewTask()));
 }
 
 // Creates a task and adds it to the tasklist
@@ -128,6 +130,28 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
     tasklistLayout->addWidget(newtask);
     // Show the new task
     newtask->show();
+}
+
+// Opens the add task window
+void BotWindow::openNewTask() {
+    if (addTaskOpen) {
+        // Shopw the currently open task window
+        atd->raise();
+        atd->setFocus();
+        return;
+    }
+    // Build the window if it does not exist, otherwise just show it
+    atd = new AddTaskDisplay();
+    atd->show();
+    addTaskOpen = true;
+
+    // Make necessary connections
+    connect(atd, SIGNAL(closed()), this, SLOT(addTaskClosed()));
+}
+
+// Called when the task window closes
+void BotWindow::addTaskClosed() {
+    addTaskOpen = false;
 }
 
 // Adds a task

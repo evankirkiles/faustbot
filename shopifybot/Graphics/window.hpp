@@ -48,13 +48,18 @@ public:
 
 private:
 
+    // Bool telling whether add task window is open
+    bool addTaskOpen = false;
+
     // Visualization widgets
     QLabel *logo;
     QLabel *title;
 
     // Add new task button
     QPushButton *addtask;
+    AddTaskDisplay* atd;
 
+    // Other sidebar buttons
     QPushButton *billing;
     QPushButton *proxies;
     QPushButton *logs;
@@ -69,6 +74,10 @@ private:
     QVBoxLayout *tasklistLayout;
 
 private slots:
+    // Opens the add task window
+    void openNewTask();
+    // Tells the main window that the add task window was closed
+    void addTaskClosed();
     // Add a task when button is clicked
     void testtask();
 };
