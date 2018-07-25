@@ -1,0 +1,16 @@
+[2018-07-24 22:22:29.348] Beginning "Bodega Task".
+[2018-07-24 22:22:32.492] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
+[2018-07-24 22:22:32.492] Placing order...
+[2018-07-24 22:22:34.118] Got to customer information form.
+[2018-07-24 22:22:35.223] Successfully submitted customer info to Shopify server.
+[2018-07-24 22:22:36.164] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-24 22:22:36.249] Got unique session ID from Shopify.
+[2018-07-24 22:22:36.271] Task finished.
+[2018-07-24 22:26:09.555] Beginning "Bodega Task".
+[2018-07-24 22:26:12.905] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
+[2018-07-24 22:26:12.905] Placing order...
+[2018-07-24 22:26:14.530] Got to customer information form.
+[2018-07-24 22:26:15.844] Successfully submitted customer info to Shopify server.
+[2018-07-24 22:26:16.162] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-24 22:26:16.301] Got unique session ID from Shopify.
+[2018-07-24 22:26:16.325] Task finished.

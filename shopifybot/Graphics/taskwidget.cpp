@@ -44,8 +44,11 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
 
     // Stylesheet settings for the different labels
     title->setObjectName("task_important_text");
+    title->setFixedWidth(150);
     website->setObjectName("task_mediocre_text");
+    website->setMaximumWidth(150);
     collection->setObjectName("task_mediocre_text");
+    collection->setMaximumWidth(150);
     size->setObjectName("task_important_var");
     quantity->setObjectName("task_important_var");
 

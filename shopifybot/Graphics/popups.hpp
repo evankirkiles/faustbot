@@ -35,6 +35,15 @@
 #ifndef QComboBox
 #include <QComboBox>
 #endif
+#ifndef QLineEdit
+#include <QLineEdit>
+#endif
+#ifndef QDateTimeEdit
+#include <QDateTimeEdit>
+#endif
+#ifndef QIntValidator
+#include <QIntValidator>
+#endif
 
 // Header containing all the declarations of the different popups available from the mainwindow. These include:
 //  1. The log file display used for each individual task
@@ -97,20 +106,34 @@ private:
     QLabel* websitesLabel;
     QComboBox* websites;
     QLabel* collectionLabel;
-    QTextEdit* collection;
+    QLineEdit* collection;
 
     // Keyword row
     QLabel* keywordsLabel;
-    QTextEdit* keywords;
+    QLineEdit* keywords;
 
     // Color Keyword row
     QLabel* colorKeywordsLabel;
-    QTextEdit* colorKeywords;
-    // Size and time
+    QLineEdit* colorKeywords;
+
+    // Size and time row
+    QLabel* sizeLabel;
+    QLineEdit* size;
+    QLabel* etaLabel;
+    QDateTimeEdit* eta;
+    QLabel* copiesLabel;
+    QLineEdit* copies;
+
+    // Profile and proxy row
+    QLabel* profileLabel;
+    QComboBox* profile;
+    QLabel* proxyLabel;
+    QComboBox* proxy;
 
     // Title row is last with the finished button
     QLabel* titleLabel;
-    QTextEdit* title;
+    QLineEdit* title;
+    QPushButton* submit;
 };
 
 #endif //SHOPIFY_BOT_POPUPS_HPP

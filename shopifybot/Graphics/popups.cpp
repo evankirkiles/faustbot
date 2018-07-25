@@ -86,7 +86,7 @@ void LogFileDisplay::closeEvent(QCloseEvent *event) {
 AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
 
     // Set window properties
-    setFixedSize(500, 500);
+    setFixedSize(500, 300);
     setObjectName("newtaskwindow");
     setWindowTitle("New Task");
     setFocusPolicy(Qt::ClickFocus);
@@ -104,6 +104,8 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     auto websiteCollectionLayout = new QHBoxLayout();
     auto keywordLayout = new QHBoxLayout();
     auto colorKeywordLayout = new QHBoxLayout();
+    auto sizeEtaLayout = new QHBoxLayout();
+    auto frequencyLayout = new QHBoxLayout();
     auto titleLayout = new QHBoxLayout();
 
     // Create the widgets
@@ -116,10 +118,8 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     websites->addItems(supportedsites);
     collectionLabel = new QLabel("Collection: ", this);
     collectionLabel->setObjectName("addtask_mediocre_text");
-    collection = new QTextEdit(this);
+    collection = new QLineEdit(this);
     collection->setObjectName("addtask_editbox");
-    collection->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    collection->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     // Add row to the layout
     websiteCollectionLayout->addWidget(websitesLabel);
     websiteCollectionLayout->addWidget(websites);
@@ -130,10 +130,9 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     // KEYWORD ROW
     keywordsLabel = new QLabel("Title Keywords: ", this);
     keywordsLabel->setObjectName("addtask_mediocre_text");
-    keywords = new QTextEdit(this);
+    keywords = new QLineEdit(this);
     keywords->setObjectName("addtask_editbox");
-    keywords->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    keywords->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    // Add row to the layout
     keywordLayout->addWidget(keywordsLabel);
     keywordLayout->addWidget(keywords);
     mainLayout->addLayout(keywordLayout);
@@ -141,24 +140,75 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     // COLOR KEYWORD ROW
     colorKeywordsLabel = new QLabel("Color Keywords: ", this);
     colorKeywordsLabel->setObjectName("addtask_mediocre_text");
-    colorKeywords = new QTextEdit(this);
+    colorKeywords = new QLineEdit(this);
     colorKeywords->setObjectName("addtask_editbox");
-    colorKeywords->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    colorKeywords->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    // Add row to the layout
     colorKeywordLayout->addWidget(colorKeywordsLabel);
     colorKeywordLayout->addWidget(colorKeywords);
     mainLayout->addLayout(colorKeywordLayout);
 
+    // SIZE & PROXY ROW
+    sizeLabel = new QLabel("Size: ", this);
+    sizeLabel->setObjectName("addtask_mediocre_text");
+    sizeLabel->setMaximumWidth(35);
+    size = new QLineEdit(this);
+    size->setObjectName("addtask_editbox");
+    size->setMaximumWidth(35);
+    etaLabel = new QLabel("Start at: ", this);
+    etaLabel->setObjectName("addtask_mediocre_text");
+    etaLabel->setMaximumWidth(60);
+    eta = new QDateTimeEdit(this);
+    eta->setObjectName("addtask_datetime");
+    eta->setDisplayFormat("[MMMM d, yyyy] h:mm AP");
+    eta->setDateTime(QDateTime::currentDateTime());
+    copiesLabel = new QLabel("Copies: ", this);
+    copiesLabel->setObjectName("addtask_mediocre_text");
+    copiesLabel->setMaximumWidth(45);
+    copies = new QLineEdit(this);
+    copies->setObjectName("addtask_editbox");
+    copies->setValidator(new QIntValidator(0, 20, this));
+    copies->setText("1");
+    copies->setMaximumWidth(35);
+    // Add row to the layout
+    sizeEtaLayout->addStretch();
+    sizeEtaLayout->addWidget(sizeLabel);
+    sizeEtaLayout->addWidget(size);
+    sizeEtaLayout->addWidget(etaLabel);
+    sizeEtaLayout->addWidget(eta);
+    sizeEtaLayout->addWidget(copiesLabel);
+    sizeEtaLayout->addWidget(copies);
+    sizeEtaLayout->addStretch();
+    mainLayout->addLayout(sizeEtaLayout);
+
+    // FREQUENCY & PROXY ROW
+    profileLabel = new QLabel("Profile: ", this);
+    profileLabel->setObjectName("addtask_mediocre_text");
+    profileLabel->setMaximumWidth(50);
+    profile = new QComboBox(this);
+    proxyLabel = new QLabel("Proxy: ", this);
+    proxyLabel->setObjectName("addtask_mediocre_text");
+    proxyLabel->setMaximumWidth(45);
+    proxy = new QComboBox(this);
+    // Add row to the layout
+    frequencyLayout->addWidget(profileLabel);
+    frequencyLayout->addWidget(profile);
+    frequencyLayout->addWidget(proxyLabel);
+    frequencyLayout->addWidget(proxy);
+    mainLayout->addLayout(frequencyLayout);
+
     // TITLE ROW
     titleLabel = new QLabel("Title: ", this);
     titleLabel->setObjectName("task_important_text");
-    title = new QTextEdit(this);
-    title->setObjectName("task_title_textedit");
-    title->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    title->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    title = new QLineEdit(this);
+    title->setObjectName("task_title_lineedit");
+    submit = new QPushButton("SUBMIT", this);
+    submit->setObjectName("addtaskbutton");
+    submit->setFixedSize(100, 35);
     // Add row to the layout
     titleLayout->addWidget(titleLabel);
     titleLayout->addWidget(title);
+    titleLayout->addSpacing(10);
+    titleLayout->addWidget(submit);
     mainLayout->addLayout(titleLayout);
 
     // Set the layout
