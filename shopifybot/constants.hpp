@@ -5,6 +5,13 @@
 #ifndef SHOPIFY_BOT_SUPPORTED_SITES_HPP
 #define SHOPIFY_BOT_SUPPORTED_SITES_HPP
 
+#ifndef Q_DECLARE_METATYPE
+#include <QtCore>
+#endif
+#ifndef unordered_map
+#include <unordered_map>
+#endif
+
 // Constants header as well as base URLs.
 
 // This header holds the base URLs for all the supported websites so far; This standardizes so
@@ -12,9 +19,12 @@
 struct URLAndMethod {
     const char* baseURL;
     const char* checkoutURL;
-    const int method;
+    int method = 0;
     const char* title;
 };
+
+// Declare the URLAndMethod as a metatype so can send it in a signal
+Q_DECLARE_METATYPE(URLAndMethod);
 
 namespace supported_sites {
 // Also create a basic struct which specifies what method to use for getting product info.
@@ -24,6 +34,9 @@ namespace supported_sites {
 //      2 : Has a "quick add" feature on the base url page that allows directly adding to cart (ex. Kith)
 //      3 : Has a grid view with a Shopify saveVariant background (use view source to check) (ex. Bodega)
 //           ^ Bodega requires adding an extraURL to specify which type of thing you are looking at (footwear, etc.)
+
+    // Array containing a reference to each of these constants at a given name
+    extern const std::unordered_map<std::string, URLAndMethod>WEBSITES;
 
     // MARK: Shopify sites that have a products.json page
     // Unavailable sizes are marked unavailable in normal products.json-website getAllModels functions

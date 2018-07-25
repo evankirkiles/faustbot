@@ -20,6 +20,9 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     setWindowTitle(tr("Shopify Bot"));
     setObjectName("main_window");
 
+    // Create URLAndMethod metatype
+    qRegisterMetaType<URLAndMethod>("URLAndMethod");
+
     // Build the Dark Title Bar
     dtb = new DarkTitleBar(this);
 
@@ -62,7 +65,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Left column widgets
     QImage img(file_paths::LOGO_FILE);
     QPixmap logoimg;
-    logoimg = logoimg.fromImage(img).scaled(420, 400, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    logoimg = QPixmap::fromImage(img).scaled(420, 400, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     logoimg.setDevicePixelRatio(2.0);
     logo = new QLabel();
     logo->setPixmap(logoimg);
@@ -123,25 +126,42 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     topLayout->setStretchFactor(rightColumn, 4);
 
     // Add a task
-    addTask("Kith Task", supported_sites::KITH, "1", "/collections/footwear", {"Asics"}, {"White"}, "200", 3, 3);
-    addTask("Social Status Task", supported_sites::SOCIALSTATUS, "1", "/collections/sneakers", {"Revaderchi"},
-            {"Black", "Granite"}, "9", 2, 3);
+//    addTask("Kith Task", supported_sites::KITH, "1", "/collections/footwear", {"Asics"}, {"White"}, "200", 3, 3);
+//    addTask("Social Status Task", supported_sites::SOCIALSTATUS, "1", "/collections/sneakers", {"Revaderchi"},
+//            {"Black", "Granite"}, "9", 2, 3);
 
-    // Add a task when button is clicked
-    connect(about, SIGNAL(clicked(bool)), this, SLOT(testtask()));
     // Open the add task window when the add task button is clicked
     connect(addtask, SIGNAL(clicked()), this, SLOT(openNewTask()));
+}
+
+// Slot which takes information from the new task window and builds a task
+void BotWindow::buildTask(QString title, URLAndMethod website, QString collection,
+                          QString keywords, QString colorKeywords, QString size,
+                          QDateTime start, QString profile, QString proxy, int copies) {
+
+    // Gets an identifier by checking how many task widgets there are on the tasklist
+    // Make sure to break the keywords QStrings down into its component keywords
+    // Builds a task based on the number of copies sent
+    for (int i=0; i<copies; i++) {
+        addTask(title.toStdString(), website, std::to_string(numTasksCreated), collection.toStdString(),
+                vectorFromString(keywords.toStdString()), vectorFromString(colorKeywords.toStdString()),
+                size.toStdString(), start, profile.toStdString(), proxy.toStdString());
+    }
+
+    // Increment the task identifier
+    numTasksCreated++;
 }
 
 // Creates a task and adds it to the tasklist
 void BotWindow::addTask(const std::string &title, const URLAndMethod &website, const std::string &identifier,
                         const std::string &collection, const std::vector<std::string> &keywords,
                         const std::vector<std::string> &colorKeywords, const std::string &size,
-                        const unsigned int quantity, unsigned int resultsToCheck, unsigned int frequency) {
+                        const QDateTime& startAt, const std::string& profile, const std::string& proxy,
+                        unsigned int resultsToCheck, unsigned int frequency) {
 
     // Create a new task
     auto newtask = new TaskWidget(title, website, identifier, collection, keywords, colorKeywords, size,
-                                        quantity, &logWindowOpen, resultsToCheck, frequency, tasklistwidget);
+                                        startAt, profile, proxy, &logWindowOpen, resultsToCheck, frequency, tasklistwidget);
 
     // Adds the task to the qvboxlayout
     tasklistLayout->addWidget(newtask);
@@ -164,16 +184,14 @@ void BotWindow::openNewTask() {
 
     // Make necessary connections
     connect(atd, SIGNAL(closed()), this, SLOT(addTaskClosed()));
+    // Connect the buildtask symbol to the addtask slot of the mainwindow
+    connect(atd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString, int)),
+            this, SLOT(buildTask(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString, int)));
 }
 
 // Called when the task window closes
 void BotWindow::addTaskClosed() {
     addTaskOpen = false;
-}
-
-// Adds a task
-void BotWindow::testtask() {
-    addTask("Bodega Task", supported_sites::BODEGA, "1", "/collections/footwear", {"Air Max"}, {"Cargo"}, "9", 1, 3);
 }
 
 // Function which interprets the string form of a vector back into the vector
@@ -186,10 +204,13 @@ std::vector<std::string> vectorFromString(const std::string& interpret) {
 
     // Iterate through the stringstream and get all comma-separated elements
     while(ss.good()) {
-        std::string substr;
-        getline(ss, substr, ',');
-        if (*substr.begin() == ' ') { substr.erase(0); }
-        toReturn.push_back(substr);
+        std::string sublimstr;
+        getline(ss, sublimstr, ',');
+        if (*sublimstr.begin() == ' ') {
+            toReturn.push_back(sublimstr.substr(1));
+        } else {
+            toReturn.push_back(sublimstr);
+        };
     }
     // Return the vector built from the comma-separated string
     return toReturn;

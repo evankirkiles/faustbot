@@ -7,7 +7,8 @@
 // Task constructor with a very long initializer list for all the instance variables of the Task
 Task::Task(const std::string &p_title, const URLAndMethod &p_url, const std::string& p_identifier,
            const std::string& p_collection, const std::vector<std::string> &p_keywords,
-           const std::vector<std::string> &p_colorKeywords, const std::string &p_size, const unsigned int p_quantity,
+           const std::vector<std::string> &p_colorKeywords, const std::string &p_size, const QDateTime& startDate,
+           const std::string& p_profile, const std::string& p_proxy,
            const unsigned int p_resultsToCheck, const unsigned int p_frequency) :
                                              title(p_title),
                                              swh(p_url, p_identifier),
@@ -15,7 +16,9 @@ Task::Task(const std::string &p_title, const URLAndMethod &p_url, const std::str
                                              keywords(p_keywords),
                                              colorKeywords(p_colorKeywords),
                                              size(p_size),
-                                             quantity(p_quantity),
+                                             startat(startDate),
+                                             profile(p_profile),
+                                             proxy(p_proxy),
                                              resultsToCheck(p_resultsToCheck),
                                              frequency(p_frequency) {}
 
@@ -31,7 +34,7 @@ void Task::run() {
         try {
             // Try to get the product and the size specified
             Product prdct = swh.lookForKeywords(collection, keywords, colorKeywords, std::to_string(resultsToCheck));
-            std::string cartLink = std::string(swh.sourceURL.baseURL) + "/cart/" + prdct.getID(size) + ":" + std::to_string(quantity);
+            std::string cartLink = std::string(swh.sourceURL.baseURL) + "/cart/" + prdct.getID(size) + ":1";
 
             // If it gets here, then product has successfully been found
             emit status("Product found!", "#8dd888");

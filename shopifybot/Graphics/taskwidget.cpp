@@ -8,15 +8,15 @@
 TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website, const std::string& p_identifier,
                        const std::string& p_collection, const std::vector<std::string>& p_keywords,
                        const std::vector<std::string>& p_colorKeywords, const std::string& p_size,
-                       const unsigned int p_quantity, bool* p_logWindowOpen, unsigned int p_resultsToCheck,
-                       unsigned int p_frequency, QWidget *parent) :
+                       const QDateTime& p_startDate, const std::string& p_profile, const std::string& p_proxy,
+                       bool* p_logWindowOpen, unsigned int p_resultsToCheck, unsigned int p_frequency, QWidget *parent) :
                                task(p_title, p_website, p_identifier, p_collection, p_keywords, p_colorKeywords,
-                               p_size, p_quantity, p_resultsToCheck, p_frequency),
+                               p_size, p_startDate, p_profile, p_proxy, p_resultsToCheck, p_frequency),
                                title(new QLabel(p_title.c_str(), this)),
                                website(new QLabel(p_website.baseURL, this)),
                                collection(new QLabel(p_collection.c_str(), this)),
                                size(new QLabel(p_size.c_str(), this)),
-                               quantity(new QLabel(std::to_string(p_quantity).c_str(), this)),
+                               startAt(new QLabel("aa", this)),
                                logWindowOpen(p_logWindowOpen),
                                QFrame(parent) {
 
@@ -50,7 +50,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     collection->setObjectName("task_mediocre_text");
     collection->setMaximumWidth(150);
     size->setObjectName("task_important_var");
-    quantity->setObjectName("task_important_var");
+    startAt->setObjectName("task_important_var");
 
     // Create the layouts for the QLabels
     // Vertical layouts
@@ -73,14 +73,15 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     colorKeywordtitle->setObjectName("task_mediocre_title");
     colorKeywordHor->addWidget(colorKeywordtitle);
     colorKeywordHor->addWidget(colorKeywords);
-    auto quantityHor = new QHBoxLayout();
-    auto quantitytitle = new QLabel("Quantity: ", this);
-    quantitytitle->setObjectName("task_mediocre_title_v2");
-    quantityHor->addWidget(quantitytitle);
-    quantityHor->addWidget(quantity);
+    auto startatHor = new QHBoxLayout();
+    auto startAtTitle = new QLabel("Quantity: ", this);
+    startAtTitle->setObjectName("task_mediocre_title_v2");
+    startatHor->addWidget(startAtTitle);
+    startatHor->addWidget(startAt);
     auto sizeHor = new QHBoxLayout();
     auto sizetitle = new QLabel("Size: ", this);
     sizetitle->setObjectName("task_mediocre_title_v2");
+    size->setMinimumWidth(50);
     sizeHor->addWidget(sizetitle);
     sizeHor->addWidget(size);
     auto statusHor = new QHBoxLayout();
@@ -130,7 +131,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     secondcol->addLayout(colorKeywordHor);
     row->addLayout(secondcol);
     thirdcol->addLayout(sizeHor);
-    thirdcol->addLayout(quantityHor);
+    thirdcol->addLayout(startatHor);
     row->addLayout(thirdcol);
     row->addWidget(separator2);
     fourthcol->addWidget(play);
@@ -159,7 +160,7 @@ void TaskWidget::run() {
     // Initializes the thread and moves the task onto it
     taskthread = new QThread;
     auto temptask = new Task(task.title, task.swh.sourceURL, task.swh.taskID, task.collection, task.keywords,
-            task.colorKeywords, task.size, task.quantity, task.resultsToCheck, task.frequency);
+            task.colorKeywords, task.size, task.startat, task.profile, task.proxy, task.resultsToCheck, task.frequency);
     temptask->moveToThread(taskthread);
 
     // Remove all connections to play so do not set multiple shouldcontinues
@@ -202,7 +203,7 @@ void TaskWidget::setStatus(QString text, QString hexColor) {
 void TaskWidget::exit() {
 
     // Check if task is running by seeing what state the play button is
-    if (play->isChecked) {
+    if (play->isChecked || !play->enabled) {
         return;
     } else {
         // Delete the log file when this task is deleted

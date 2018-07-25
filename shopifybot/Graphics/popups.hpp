@@ -99,8 +99,13 @@ signals:
     // Called whenever the addtask window is closed
     void closed();
     // Sends the information of the new task to the main window to add it
-    // TODO: Add the information packets sent
-    void sendTask();
+    void sendTask(QString title, URLAndMethod website, QString collection,
+                  QString keywords, QString colorKeywords, QString size,
+                  QDateTime start, QString profile, QString proxy, int numCopies);
+private slots:
+    // Tries to send the information in the form to the main window to add it to the task list
+    // If not all required fields are filled, then does not send the form yet.
+    void attemptToSend();
 
 private:
 

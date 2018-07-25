@@ -130,7 +130,7 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     websitesLabel->setObjectName("addtask_mediocre_text");
     websites = new QComboBox(this);
     // Change this when adding new websites
-    QStringList supportedsites({"Blends", "Bodega", "Kith", "Social Status",  "Undefeated", "WishATL", "XHibition",});
+    QStringList supportedsites({"Blends", "Bodega", "Kith", "Social Status",  "Undefeated", "WishATL", "Xhibition",});
     websites->addItems(supportedsites);
     collectionLabel = new QLabel("Collection: ", this);
     collectionLabel->setObjectName("addtask_mediocre_text");
@@ -230,6 +230,27 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     // Set the layout
     bgLayout->addLayout(mainLayout);
     setLayout(externLayout);
+
+    // Connect the submit button to the attempToSend slot
+    connect(submit, SIGNAL(clicked()), this, SLOT(attemptToSend()));
+}
+
+// Tries to send the data in the input fields to the main window to build a new task
+void AddTaskDisplay::attemptToSend() {
+
+    // Non-required fields: collection, color keywords
+    // Check each required input field to make sure a valid task can be built
+    if (keywords->text().isEmpty()) { keywords->setFocus(); return; }
+    if (size->text().isEmpty()) { size->setFocus(); return; }
+    if (title->text().isEmpty()) { title->setFocus(); return; }
+
+    // Send the signal with all the data to the main window if all required fields have text in them
+    emit sendTask(title->text(), supported_sites::WEBSITES.at(websites->currentText().toStdString()), collection->text(),
+                  keywords->text(), colorKeywords->text(), size->text(), eta->dateTime(), profile->currentText(),
+                  proxy->currentText(), copies->text().toInt());
+
+    // Now close the window because the new task has been made
+    close();
 }
 
 // Custom close event function that just emits a signal signifying it has closed

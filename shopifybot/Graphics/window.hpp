@@ -47,8 +47,8 @@ public:
     // Adds a task to the list
     void addTask(const std::string& title, const URLAndMethod& website, const std::string& collection,
                  const std::string& identifier, const std::vector<std::string>& keywords,
-                 const std::vector<std::string>& colorKeywords,
-                 const std::string& size, unsigned int quantity,
+                 const std::vector<std::string>& colorKeywords, const std::string& size, const QDateTime& startAt,
+                 const std::string& profile, const std::string& proxy,
                  unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ);
 
 private:
@@ -58,6 +58,8 @@ private:
 
     // Bool telling whether add task window is open
     bool addTaskOpen = false;
+    // Number of tasks created, incremented every time a task is added
+    int numTasksCreated = 0;
 
     // Visualization widgets
     QLabel *logo;
@@ -86,8 +88,10 @@ private slots:
     void openNewTask();
     // Tells the main window that the add task window was closed
     void addTaskClosed();
-    // Add a task when button is clicked
-    void testtask();
+    // Connects to the submit slot in the main window, and adds a task with the given information
+    void buildTask(QString title, URLAndMethod website, QString collection,
+                   QString keywords, QString colorKeywords, QString size,
+                   QDateTime start, QString profile, QString proxy, int copies);
 };
 
 // Function which interprets the string form of a vector back into the vector

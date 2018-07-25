@@ -23,6 +23,9 @@
 #ifndef QCoreApplication
 #include <QCoreApplication>
 #endif
+#ifndef QDateTime
+#include <QDateTime>
+#endif
 
 // Class containing task-related functions
 // Main functionality is a while loop that continuously checks the website for the product
@@ -35,7 +38,8 @@ public:
     // size, results to check, and frequency (default is to check every 30 seconds to preserve performance).
     explicit Task(const std::string& title, const URLAndMethod& url, const std::string& identifier,
                   const std::string& collection, const std::vector<std::string>& keywords,
-                  const std::vector<std::string>& colorKeywords, const std::string& size, unsigned int p_quantity,
+                  const std::vector<std::string>& colorKeywords, const std::string& size, const QDateTime& startat,
+                  const std::string& profile, const std::string& proxy,
                   unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ);
 
     // Boolean which can be disabled to stop the running of the task
@@ -56,7 +60,11 @@ public:
     // Size to check for
     std::string size;
     // Quantity of products to try for
-    unsigned int quantity;
+    QDateTime startat;
+    // Profile identifier to be given to the Python script to use
+    std::string profile;
+    // Proxy identifier to be given to the Python script to use
+    std::string proxy;
     // How many results to check on the front of each page (in order of most recent)
     unsigned int resultsToCheck;
     // How frequently the check should be run (in seconds)

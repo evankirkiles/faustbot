@@ -163,8 +163,9 @@ public:
     // Constructor
     explicit TaskWidget(const std::string& title, const URLAndMethod& website, const std::string& identifier,
                         const std::string& collection, const std::vector<std::string>& keywords,
-                        const std::vector<std::string>& colorKeywords, const std::string& size, unsigned int quantity,
-                        bool* p_logWindowOpen, unsigned int resultsToCheck=constants::BASE_NUMRESULTS,
+                        const std::vector<std::string>& colorKeywords, const std::string& size, const QDateTime& startAt,
+                        const std::string& profile, const std::string& proxy, bool* p_logWindowOpen,
+                        unsigned int resultsToCheck=constants::BASE_NUMRESULTS,
                         unsigned int frequency=constants::BASE_FREQ, QWidget *parent = 0);
 
 private slots:
@@ -197,7 +198,7 @@ private:
     QTextEdit* keywords;
     QTextEdit* colorKeywords;
     QLabel* size;
-    QLabel* quantity;
+    QLabel* startAt;
     QFrame* separator2;
 
     // Play and edit buttons
