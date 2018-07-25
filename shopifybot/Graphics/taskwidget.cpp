@@ -16,7 +16,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
                                website(new QLabel(p_website.baseURL, this)),
                                collection(new QLabel(p_collection.c_str(), this)),
                                size(new QLabel(p_size.c_str(), this)),
-                               startAt(new QLabel("aa", this)),
+                               startAt(new QDateTimeEdit(this)),
                                logWindowOpen(p_logWindowOpen),
                                QFrame(parent) {
 
@@ -73,11 +73,10 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     colorKeywordtitle->setObjectName("task_mediocre_title");
     colorKeywordHor->addWidget(colorKeywordtitle);
     colorKeywordHor->addWidget(colorKeywords);
-    auto startatHor = new QHBoxLayout();
-    auto startAtTitle = new QLabel("Quantity: ", this);
-    startAtTitle->setObjectName("task_mediocre_title_v2");
-    startatHor->addWidget(startAtTitle);
-    startatHor->addWidget(startAt);
+    auto startAtTitle = new QLabel("START AT: ", this);
+    startAtTitle->setObjectName("task_tiny_text");
+    startAt->setObjectName("task_dateedit");
+    startAt->setDisplayFormat("yyyy-MM-dd hh:mm");
     auto sizeHor = new QHBoxLayout();
     auto sizetitle = new QLabel("Size: ", this);
     sizetitle->setObjectName("task_mediocre_title_v2");
@@ -131,7 +130,8 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     secondcol->addLayout(colorKeywordHor);
     row->addLayout(secondcol);
     thirdcol->addLayout(sizeHor);
-    thirdcol->addLayout(startatHor);
+    thirdcol->addWidget(startAtTitle);
+    thirdcol->addWidget(startAt);
     row->addLayout(thirdcol);
     row->addWidget(separator2);
     fourthcol->addWidget(play);

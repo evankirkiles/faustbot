@@ -1,0 +1,8 @@
+[2018-07-25 15:21:36.200] Beginning "Nike Cortez".
+[2018-07-25 15:21:36.523] Product found! Link: https://kith.com/cart/2188992151559:1
+[2018-07-25 15:21:36.523] Placing order...
+[2018-07-25 15:21:38.108] Got to customer information form.
+[2018-07-25 15:21:39.502] Successfully submitted customer info to Shopify server.
+[2018-07-25 15:21:40.672] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-25 15:21:40.834] Got unique session ID from Shopify.
+[2018-07-25 15:21:40.857] Task finished.

@@ -175,7 +175,7 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     etaLabel->setMaximumWidth(60);
     eta = new QDateTimeEdit(this);
     eta->setObjectName("addtask_datetime");
-    eta->setDisplayFormat("[MMMM d, yyyy] h:mm AP");
+    eta->setDisplayFormat("[MMMM d, yyyy] hh:mm");
     eta->setDateTime(QDateTime::currentDateTime());
     copiesLabel = new QLabel("Copies: ", this);
     copiesLabel->setObjectName("addtask_mediocre_text");

@@ -146,10 +146,9 @@ void BotWindow::buildTask(QString title, URLAndMethod website, QString collectio
         addTask(title.toStdString(), website, std::to_string(numTasksCreated), collection.toStdString(),
                 vectorFromString(keywords.toStdString()), vectorFromString(colorKeywords.toStdString()),
                 size.toStdString(), start, profile.toStdString(), proxy.toStdString());
+        // Increment the task identifier
+        numTasksCreated++;
     }
-
-    // Increment the task identifier
-    numTasksCreated++;
 }
 
 // Creates a task and adds it to the tasklist

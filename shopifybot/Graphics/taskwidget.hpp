@@ -198,7 +198,7 @@ private:
     QTextEdit* keywords;
     QTextEdit* colorKeywords;
     QLabel* size;
-    QLabel* startAt;
+    QDateTimeEdit* startAt;
     QFrame* separator2;
 
     // Play and edit buttons

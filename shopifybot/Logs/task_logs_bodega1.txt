@@ -1,8 +1,0 @@
-[2018-07-25 12:24:24.603] Beginning "Bodega Task".
-[2018-07-25 12:24:27.951] Product found! Link: https://shop.bdgastore.com/cart/12197729796170:1
-[2018-07-25 12:24:27.951] Placing order...
-[2018-07-25 12:24:29.649] Got to customer information form.
-[2018-07-25 12:24:31.168] Successfully submitted customer info to Shopify server.
-[2018-07-25 12:24:31.591] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-07-25 12:24:31.695] Got unique session ID from Shopify.
-[2018-07-25 12:24:31.734] Task finished.

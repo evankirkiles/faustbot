@@ -1,0 +1,9 @@
+[2018-07-25 15:21:37.961] Beginning "Nike Cortez".
+[2018-07-25 15:21:37.988] Failed because: "Could not find product.", checking again in 30 seconds.
+[2018-07-25 15:22:12.520] Product found! Link: https://kith.com/cart/2188992151559:1
+[2018-07-25 15:22:12.520] Placing order...
+[2018-07-25 15:22:14.024] Got to customer information form.
+[2018-07-25 15:22:15.531] Successfully submitted customer info to Shopify server.
+[2018-07-25 15:22:16.687] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-07-25 15:22:16.780] Got unique session ID from Shopify.
+[2018-07-25 15:22:16.806] Task finished.
