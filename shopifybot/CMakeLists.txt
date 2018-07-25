@@ -6,7 +6,8 @@ set(HEADER_FILES
         WebAccess/product_scraper.hpp
         Graphics/window.hpp
         Graphics/taskwidget.hpp
-        Graphics/popups.hpp)
+        Graphics/popups.hpp
+        Graphics/titlebar.hpp)
 
 set(SOURCE_FILES
         constants.cpp
@@ -14,6 +15,7 @@ set(SOURCE_FILES
         WebAccess/product_scraper.cpp
         Graphics/window.cpp
         Graphics/taskwidget.cpp
-        Graphics/popups.cpp)
+        Graphics/popups.cpp
+        Graphics/titlebar.cpp)
 
 add_library(shopifybot STATIC ${SOURCE_FILES} ${HEADER_FILES})

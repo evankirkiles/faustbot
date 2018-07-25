@@ -12,8 +12,8 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
     // Fixed size of the window
     setFixedSize(500, 300);
     setWindowTitle("Logs");
-    setObjectName("logs_window");
     setWindowFlags(Qt::FramelessWindowHint);
+    setObjectName("logs_window");
     setAttribute(Qt::WA_QuitOnClose, false);
 
     // Set the stylesheet for the window
@@ -86,11 +86,16 @@ void LogFileDisplay::closeEvent(QCloseEvent *event) {
 AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
 
     // Set window properties
-    setFixedSize(500, 300);
+    setFixedSize(500, 270);
     setObjectName("newtaskwindow");
     setWindowTitle("New Task");
+    setWindowFlags(Qt::FramelessWindowHint);
     setFocusPolicy(Qt::ClickFocus);
     setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Create the title bar
+    dtb = new DarkTitleBar(this);
 
     // Set the stylesheet for the window
     QFile File("./shopifybot/Graphics/stylesheet.qss");
@@ -99,7 +104,18 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     setStyleSheet(StyleSheet);
 
     // Create layouts
+    auto externLayout = new QVBoxLayout();
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    auto bgLayout = new QVBoxLayout();
+    bgLayout->setContentsMargins(0, 0, 0, 0);
+    bg->setObjectName("main_window");
+    bg->setLayout(bgLayout);
+    bgLayout->addWidget(dtb);
+    bgLayout->addStretch();
+    externLayout->addWidget(bg);
     auto mainLayout = new QVBoxLayout();
+    mainLayout->setContentsMargins(11, 3, 11, 11);
     // Individual horizontal row layouts
     auto websiteCollectionLayout = new QHBoxLayout();
     auto keywordLayout = new QHBoxLayout();
@@ -212,7 +228,8 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     mainLayout->addLayout(titleLayout);
 
     // Set the layout
-    setLayout(mainLayout);
+    bgLayout->addLayout(mainLayout);
+    setLayout(externLayout);
 }
 
 // Custom close event function that just emits a signal signifying it has closed

@@ -68,6 +68,10 @@ namespace file_paths {
     extern const char* DELETE2_IMG;
     extern const char* LOGS_IMG;
     extern const char* LOGS2_IMG;
+    extern const char* EXIT_IMG;
+    extern const char* EXIT2_IMG;
+    extern const char* MINIM_IMG;
+    extern const char* MINIM2_IMG;
 }
 
 namespace constants {

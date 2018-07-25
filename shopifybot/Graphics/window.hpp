@@ -25,7 +25,7 @@
 // Include the task class
 #include "../Infrastructure/tasks.hpp"
 
-// Include the task widget item
+// Include the widgets
 #include "taskwidget.hpp"
 
 // Constants include
@@ -52,6 +52,9 @@ public:
                  unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ);
 
 private:
+
+    // Dark title bar widget
+    DarkTitleBar* dtb;
 
     // Bool telling whether add task window is open
     bool addTaskOpen = false;

@@ -38,6 +38,10 @@ namespace file_paths {
     const char* DELETE2_IMG = "./shopifybot/Graphics/Assets/delete2.png";
     const char* LOGS_IMG = "./shopifybot/Graphics/Assets/logs.png";
     const char* LOGS2_IMG = "./shopifybot/Graphics/Assets/logs2.png";
+    const char* EXIT_IMG = "./shopifybot/Graphics/Assets/exit.png";
+    const char* EXIT2_IMG = "./shopifybot/Graphics/Assets/exit2.png";
+    const char* MINIM_IMG = "./shopifybot/Graphics/Assets/minim.png";
+    const char* MINIM2_IMG = "./shopifybot/Graphics/Assets/minim2.png";
 }
 
 namespace constants {

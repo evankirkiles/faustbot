@@ -45,6 +45,8 @@
 #include <QIntValidator>
 #endif
 
+#include "titlebar.hpp"
+
 // Header containing all the declarations of the different popups available from the mainwindow. These include:
 //  1. The log file display used for each individual task
 //  2. The task information editor
@@ -101,6 +103,10 @@ signals:
     void sendTask();
 
 private:
+
+    // Dark title bar widget
+    DarkTitleBar* dtb;
+
     // The widgets through which the new task will be added to the client
     // Website and collection row
     QLabel* websitesLabel;

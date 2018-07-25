@@ -129,42 +129,6 @@ protected:
     }
 };
 
-// Clickable image without checkable ability
-class ClickableImage : public QLabel {
-Q_OBJECT
-public:
-    // Default constructor and destructors
-    ClickableImage(int width, int height, const char* pressedImg, const char* releasedImg, QWidget *parent = 0) :
-            pressed(QPixmap::fromImage(QImage(pressedImg).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
-            released(QPixmap::fromImage(QImage(releasedImg).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
-            QLabel(parent) {
-        pressed.setDevicePixelRatio(4.0);
-        released.setDevicePixelRatio(4.0);
-
-        // Set the default image to be released
-        setPixmap(released);
-        setMaximumWidth(width/4);
-    }
-
-// Emit the clicked() signal when the QLabel is clicked on
-signals:
-    void clicked();
-protected:
-    // Save both states of the image (clicked and not clicked)
-    QPixmap pressed;
-    QPixmap released;
-
-    void mousePressEvent(QMouseEvent *event) override {
-        // Change to the presed image
-        setPixmap(pressed);
-    }
-    void mouseReleaseEvent(QMouseEvent *event) override {
-        // Make the label go back to its initial image
-        setPixmap(released);
-        emit clicked();
-    }
-};
-
 // Custom vertical label class
 class VerticalLabel : public QLabel {
     Q_OBJECT

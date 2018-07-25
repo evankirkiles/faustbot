@@ -101,7 +101,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     play = new ClickableCheckableImage(80, 100, file_paths::PLAY2_IMG, file_paths::PLAY_IMG,
             file_paths::STOP2_IMG, file_paths::STOP_IMG, file_paths::PLAY_DISBL_IMG, this);
     // Build the edit button
-    edit = new ClickableImage(100, 100, file_paths::EDIT2_IMG, file_paths::EDIT_IMG, this);
+    edit = new ClickableImage(100, 100, 4, file_paths::EDIT2_IMG, file_paths::EDIT_IMG, this);
 
     // Builds the status identifier
     auto statusFixed = new QLabel("STATUS:", this);
@@ -113,12 +113,12 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     status->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     status->setAlignment(Qt::AlignHCenter);
     status->setFixedWidth(100);
-    logsButton = new ClickableImage(80, 80, file_paths::LOGS2_IMG, file_paths::LOGS_IMG, this);
+    logsButton = new ClickableImage(80, 80, 4, file_paths::LOGS2_IMG, file_paths::LOGS_IMG, this);
     statusHor->addWidget(statusFixed);
     statusHor->addWidget(logsButton);
 
     // Delete button
-    deleteButton = new ClickableImage(60, 60, file_paths::DELETE2_IMG, file_paths::DELETE_IMG, this);
+    deleteButton = new ClickableImage(60, 60, 4, file_paths::DELETE2_IMG, file_paths::DELETE_IMG, this);
 
     // Add the labels and layouts to the main row
     firstcol->addWidget(title);

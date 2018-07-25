@@ -15,8 +15,13 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     setStyleSheet(StyleSheet);
     // Finally, set some various window attributes
     setAttribute(Qt::WA_QuitOnClose);
+    setWindowFlags(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_TranslucentBackground);
     setWindowTitle(tr("Shopify Bot"));
     setObjectName("main_window");
+
+    // Build the Dark Title Bar
+    dtb = new DarkTitleBar(this);
 
     // SIZE POLICIES
     // Size policies for top row
@@ -25,7 +30,16 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
 
     // LAYOUTS
     // Create two vertical layouts within a horizontal main layout
+    auto externLayout = new QVBoxLayout;
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto inFrameLayout = new QVBoxLayout;
+    inFrameLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    bg->setObjectName("main_window");
+    bg->setLayout(inFrameLayout);
+    inFrameLayout->addWidget(dtb);
     auto mainLayout = new QVBoxLayout;
+    mainLayout->setContentsMargins(11, 3, 11, 11);
     auto topLayout = new QHBoxLayout;
     auto botLayout = new QHBoxLayout;
     // Vertical layouts for the top layout
@@ -40,7 +54,9 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     mainLayout->addLayout(botLayout);
     topLayout->addLayout(leftColumn);
     topLayout->setStretchFactor(leftColumn, 1);
-    setLayout(mainLayout);
+    inFrameLayout->addLayout(mainLayout);
+    externLayout->addWidget(bg);
+    setLayout(externLayout);
 
     // WIDGETS
     // Left column widgets
