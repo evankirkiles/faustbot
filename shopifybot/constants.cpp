@@ -5,9 +5,6 @@
 #include "constants.hpp"
 
 namespace supported_sites {
-    const std::unordered_map<std::string, URLAndMethod>WEBSITES =
-            {{"Social Status", SOCIALSTATUS}, {"Xhibition", XHIBITION}, {"Undefeated", UNDEFEATED},
-             {"Blends", BLENDS}, {"WishATL", WISHATL}, {"Kith", KITH}, {"Bodega", BODEGA}};
 
     const URLAndMethod SOCIALSTATUS = {"https://www.socialstatuspgh.com", "socialstatuspgh.com", 101, "socialstatus"};
     const URLAndMethod XHIBITION = {"https://www.xhibition.co", "xhibition.co", 102, "xhibition"};
@@ -15,9 +12,25 @@ namespace supported_sites {
     const URLAndMethod BLENDS = {"https://blendsus.com", "blendsus.com", 104, "blends"};
     const URLAndMethod WISHATL = {"https://wishatl.com", "wishatl.com", 105, "wish"};
 
+    // TODO: WORK ON SUPPORT FOR THESE SITES
+    const URLAndMethod HANON = {"https://www.hanon-shop.com", "hanon-shop.com", 106, "hanon"};
+    const URLAndMethod SHOEGALLERY = {"https://shoegallerymiami.com", "shoegallerymiami.com", 107, "shoegallery"};
+
     const URLAndMethod KITH = {"https://kith.com", "kith.com", 201, "kith"};
 
     const URLAndMethod BODEGA = {"https://shop.bdgastore.com", "shop.bdgastore.com", 301, "bodega"};
+
+    const std::unordered_map<std::string, URLAndMethod>WEBSITES =
+            {{"Social Status", SOCIALSTATUS}, {"Xhibition", XHIBITION}, {"Undefeated", UNDEFEATED},
+             {"Blends", BLENDS}, {"WishATL", WISHATL}, {"Kith", KITH}, {"Bodega", BODEGA},
+             {"Hanon", HANON}, {"Shoe Gallery", SHOEGALLERY}};
+    const std::unordered_map<std::string, std::string>WEBSITES_BWD =
+            {{SOCIALSTATUS.baseURL, "Social Status"}, {XHIBITION.baseURL, "Xhibition"}, {UNDEFEATED.baseURL, "Undefeated"},
+             {BLENDS.baseURL, "Blends"}, {WISHATL.baseURL, "WishATL"}, {KITH.baseURL, "Kith"}, {BODEGA.baseURL, "Bodega"},
+             {HANON.baseURL, "Hanon"}, {SHOEGALLERY.baseURL, "Shoe Gallery"}};
+
+    const QStringList ssStringList({"Blends", "Bodega", "Hanon", "Kith", "Shoe Gallery", "Social Status", "Undefeated", "WishATL", "Xhibition",});
+
 }
 
 namespace file_paths {
@@ -50,7 +63,7 @@ namespace file_paths {
 
 namespace constants {
     const unsigned int BASE_FREQ = 30;
-    const unsigned int BASE_NUMRESULTS = 3;
+    const unsigned int BASE_NUMRESULTS = 10;
 }
 
 

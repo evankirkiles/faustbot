@@ -11,6 +11,9 @@
 #ifndef unordered_map
 #include <unordered_map>
 #endif
+#ifndef QStringList
+#include <QStringList>
+#endif
 
 // Constants header as well as base URLs.
 
@@ -35,9 +38,6 @@ namespace supported_sites {
 //      3 : Has a grid view with a Shopify saveVariant background (use view source to check) (ex. Bodega)
 //           ^ Bodega requires adding an extraURL to specify which type of thing you are looking at (footwear, etc.)
 
-    // Array containing a reference to each of these constants at a given name
-    extern const std::unordered_map<std::string, URLAndMethod>WEBSITES;
-
     // MARK: Shopify sites that have a products.json page
     // Unavailable sizes are marked unavailable in normal products.json-website getAllModels functions
     extern const URLAndMethod SOCIALSTATUS;    // Colors are located in the main product's title, with sizes in the variants' titles
@@ -46,6 +46,10 @@ namespace supported_sites {
     // It should be noted that Undefeated requires being logged into an account to proceed to checkout.
     extern const URLAndMethod BLENDS;          // Colors are located in the main product's title, with sizes in the variants' titles
     extern const URLAndMethod WISHATL;         // Colors are located in the variants' titles on the left of size
+    extern const URLAndMethod HANON;           // Colors are located in the products.json before the term "Colourway"; really inconvenient
+    // It should be noted that Hanon requires being logged into an account to proceed to checkout.
+    // Also, Hanon has both UK and US sizes, so when specifying the size one should precede it with "UK " or "US "
+    extern const URLAndMethod SHOEGALLERY;     // Color is located in the main product's title, no way to remove it unfortunately
 
     // MARK: Specialized Shopify sites
 
@@ -55,6 +59,14 @@ namespace supported_sites {
     // For Bodega, there are also collections pages but base URL page does not have the same function
     // Unavailable sizes are marked unavailable in the getAllModels function for Bodega
     extern const URLAndMethod BODEGA;
+
+
+    // Array containing a reference to each of these constants at a given name
+    extern const std::unordered_map<std::string, URLAndMethod>WEBSITES;
+    extern const std::unordered_map<std::string, std::string>WEBSITES_BWD;
+
+    // StringList which can be set in the combobox for all the supported sites
+    extern const QStringList ssStringList;
 }
 
 namespace file_paths {

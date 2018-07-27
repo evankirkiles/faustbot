@@ -9,14 +9,16 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
                        const std::string& p_collection, const std::vector<std::string>& p_keywords,
                        const std::vector<std::string>& p_colorKeywords, const std::string& p_size,
                        const QDateTime& p_startDate, const std::string& p_profile, const std::string& p_proxy,
-                       bool* p_logWindowOpen, unsigned int p_resultsToCheck, unsigned int p_frequency, QWidget *parent) :
-                               task(p_title, p_website, p_identifier, p_collection, p_keywords, p_colorKeywords,
-                               p_size, p_startDate, p_profile, p_proxy, p_resultsToCheck, p_frequency),
+                       bool* p_logWindowOpen, bool* p_editWindowOpen, unsigned int p_resultsToCheck,
+                       unsigned int p_frequency, QWidget *parent) :
+                               task(new Task(p_title, p_website, p_identifier, p_collection, p_keywords, p_colorKeywords,
+                               p_size, p_startDate, p_profile, p_proxy, p_resultsToCheck, p_frequency)),
                                title(new QLabel(p_title.c_str(), this)),
                                website(new QLabel(p_website.baseURL, this)),
                                collection(new QLabel(p_collection.c_str(), this)),
                                size(new QLabel(p_size.c_str(), this)),
                                startAt(new QDateTimeEdit(this)),
+                               editWindowOpen(p_editWindowOpen),
                                logWindowOpen(p_logWindowOpen),
                                QFrame(parent) {
 
@@ -152,6 +154,8 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
 
     // Connect the log button to showing the logfile window
     connect(logsButton, SIGNAL(clicked()), this, SLOT(showLogs()));
+    // Connect the edit button to showing the edit window
+    connect(edit, SIGNAL(clicked()), this, SLOT(showEdit()));
 }
 
 // Tells the event loop to run the task
@@ -159,8 +163,8 @@ void TaskWidget::run() {
 
     // Initializes the thread and moves the task onto it
     taskthread = new QThread;
-    auto temptask = new Task(task.title, task.swh.sourceURL, task.swh.taskID, task.collection, task.keywords,
-            task.colorKeywords, task.size, task.startat, task.profile, task.proxy, task.resultsToCheck, task.frequency);
+    auto temptask = new Task(task->title, task->swh.sourceURL, task->swh.taskID, task->collection, task->keywords,
+            task->colorKeywords, task->size, task->startat, task->profile, task->proxy, task->resultsToCheck, task->frequency);
     temptask->moveToThread(taskthread);
 
     // Remove all connections to play so do not set multiple shouldcontinues
@@ -207,7 +211,7 @@ void TaskWidget::exit() {
         return;
     } else {
         // Delete the log file when this task is deleted
-        remove(std::string(file_paths::TASK_LOG).append("task_logs_").append(task.swh.sourceURL.title).append(task.swh.taskID).append(".txt").c_str());
+        remove(std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str());
         this->close();
     }
 }
@@ -218,7 +222,7 @@ void TaskWidget::showLogs() {
     if (*logWindowOpen) { if (lfd) { lfd->raise(); } return; }
 
     // Otherwise create a new log window and show it
-    lfd = new LogFileDisplay(task.title, std::string(file_paths::TASK_LOG).append("task_logs_").append(task.swh.sourceURL.title).append(task.swh.taskID).append(".txt"));
+    lfd = new LogFileDisplay(task->title, std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt"));
     lfd->show();
     lfd->setFocus();
     // Connect the closeLogs function of lfd to the delete button of the task
@@ -228,7 +232,234 @@ void TaskWidget::showLogs() {
     *logWindowOpen = true;
 }
 
+// Create a logs window and display it
+void TaskWidget::showEdit() {
+    // Make sure a log window is not already open
+    if (*editWindowOpen) { if (etd) { etd->raise(); } return; }
+
+    // Otherwise create a new edit window and show it
+    etd = new EditTaskDisplay(title->text(), supported_sites::WEBSITES_BWD.at(website->text().toStdString()).c_str(),
+                              collection->text(), keywords->toPlainText(), colorKeywords->toPlainText(), size->text(),
+                              startAt->dateTime(), task->profile.c_str(), task->proxy.c_str());
+    etd->show();
+    etd->setFocus();
+    // Connect the closeLogs function of lfd to the delete button of the task
+    connect(deleteButton, SIGNAL(clicked()), etd, SLOT(close()));
+    connect(etd, SIGNAL(closed()), this, SLOT(editClosed()));
+
+    // Finally connect the task edited signal of the display to the receiving end of the taskwidget
+    connect(etd, SIGNAL(sendTaskEdit(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString)),
+            this, SLOT(acceptTaskEdit(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString)));
+
+    // Notify the main window that a log window is open
+    *editWindowOpen = true;
+}
+
+// Receives a packet of information and rebuilds the task and the task widget with edited info
+void TaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QString p_collection, QString p_keywords,
+                                QString p_colorKeywords, QString p_size, QDateTime p_start, QString p_profile, QString p_proxy) {
+
+    // First, change the visuals of the task widget to match the new task
+    title->setText(p_title);
+    website->setText(p_website.baseURL);
+    collection->setText(p_collection);
+    keywords->setText(p_keywords);
+    colorKeywords->setText(p_colorKeywords);
+    size->setText(p_size);
+    startAt->setDateTime(p_start);
+
+    // Then, delete the current task and rebuild it with the edited task
+    task = new Task(p_title.toStdString(), p_website, task->swh.taskID, p_collection.toStdString(),
+            vectorFromString(p_keywords.toStdString()), vectorFromString(p_colorKeywords.toStdString()),
+                    p_size.toStdString(), p_start, p_profile.toStdString(), p_proxy.toStdString());
+}
+
+// Called when the edit task window is closed
+void TaskWidget::editClosed() {
+    *editWindowOpen = false;
+}
+
 // Called when the logFile window is closed
 void TaskWidget::logsClosed() {
     *logWindowOpen = false;
+}
+
+// EDIT TASK DISPLAY CLASS
+// Constructor that builds the window for adding a task
+EditTaskDisplay::EditTaskDisplay(const QString& p_title, const QString& p_website, const QString& p_collection,
+                                 const QString& p_keywords, const QString& p_colorKeywords, const QString& p_size,
+                                 const QDateTime& p_start, const QString& p_profile, const QString& p_proxy, QWidget *parent) : QWidget(parent) {
+
+    // Set window properties
+    setFixedSize(500, 270);
+    setObjectName("newtaskwindow");
+    setWindowTitle(std::string("Edit ").append(p_title.toStdString()).c_str());
+    setWindowFlags(Qt::FramelessWindowHint);
+    setFocusPolicy(Qt::ClickFocus);
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Add the dark title bar
+    dtb = new DarkTitleBar(this);
+
+    // Set the stylesheet for the window
+    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    setStyleSheet(StyleSheet);
+
+    // Create layouts
+    auto externLayout = new QVBoxLayout();
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    auto bgLayout = new QVBoxLayout();
+    bgLayout->setContentsMargins(0, 0, 0, 0);
+    bg->setObjectName("main_window");
+    bg->setLayout(bgLayout);
+    bgLayout->addWidget(dtb);
+    bgLayout->addStretch();
+    externLayout->addWidget(bg);
+    auto mainLayout = new QVBoxLayout();
+    mainLayout->setContentsMargins(11, 3, 11, 11);
+    // Individual horizontal row layouts
+    auto websiteCollectionLayout = new QHBoxLayout();
+    auto keywordLayout = new QHBoxLayout();
+    auto colorKeywordLayout = new QHBoxLayout();
+    auto sizeEtaLayout = new QHBoxLayout();
+    auto frequencyLayout = new QHBoxLayout();
+    auto titleLayout = new QHBoxLayout();
+
+    // Create the widgets
+    // WEBSITE & COLLECTION ROW
+    websitesLabel = new QLabel("Website: ", this);
+    websitesLabel->setObjectName("addtask_mediocre_text");
+    websites = new QComboBox(this);
+    websites->addItems(supported_sites::ssStringList);
+    collectionLabel = new QLabel("Collection: ", this);
+    collectionLabel->setObjectName("addtask_mediocre_text");
+    collection = new QLineEdit(this);
+    collection->setObjectName("addtask_editbox");
+    // Add the row to the layout
+    websiteCollectionLayout->addWidget(websitesLabel);
+    websiteCollectionLayout->addWidget(websites);
+    websiteCollectionLayout->addWidget(collectionLabel);
+    websiteCollectionLayout->addWidget(collection);
+    mainLayout->addLayout(websiteCollectionLayout);
+
+    // KEYWORD ROW
+    keywordsLabel = new QLabel("Title Keywords: ", this);
+    keywordsLabel->setObjectName("addtask_mediocre_text");
+    keywords = new QLineEdit(this);
+    keywords->setObjectName("addtask_editbox");
+    // Add row to the layout
+    keywordLayout->addWidget(keywordsLabel);
+    keywordLayout->addWidget(keywords);
+    mainLayout->addLayout(keywordLayout);
+
+    // COLOR KEYWORD ROW
+    colorKeywordsLabel = new QLabel("Color Keywords: ", this);
+    colorKeywordsLabel->setObjectName("addtask_mediocre_text");
+    colorKeywords = new QLineEdit(this);
+    colorKeywords->setObjectName("addtask_editbox");
+    // Add row to the layout
+    colorKeywordLayout->addWidget(colorKeywordsLabel);
+    colorKeywordLayout->addWidget(colorKeywords);
+    mainLayout->addLayout(colorKeywordLayout);
+
+    // SIZE & PROXY ROW
+    sizeLabel = new QLabel("Size: ", this);
+    sizeLabel->setObjectName("addtask_mediocre_text");
+    sizeLabel->setMaximumWidth(35);
+    size = new QLineEdit(this);
+    size->setObjectName("addtask_editbox");
+    size->setMaximumWidth(35);
+    etaLabel = new QLabel("Start at: ", this);
+    etaLabel->setObjectName("addtask_mediocre_text");
+    etaLabel->setMaximumWidth(60);
+    eta = new QDateTimeEdit(this);
+    eta->setObjectName("addtask_datetime");
+    eta->setDisplayFormat("[MMMM d, yyyy] hh:mm");
+    eta->setDateTime(QDateTime::currentDateTime());
+    // Add row to the layout
+    sizeEtaLayout->addStretch();
+    sizeEtaLayout->addWidget(sizeLabel);
+    sizeEtaLayout->addWidget(size);
+    sizeEtaLayout->addWidget(etaLabel);
+    sizeEtaLayout->addWidget(eta);
+    sizeEtaLayout->addStretch();
+    mainLayout->addLayout(sizeEtaLayout);
+
+    // FREQUENCY & PROXY ROW
+    profileLabel = new QLabel("Profile: ", this);
+    profileLabel->setObjectName("addtask_mediocre_text");
+    profileLabel->setMaximumWidth(50);
+    profile = new QComboBox(this);
+    proxyLabel = new QLabel("Proxy: ", this);
+    proxyLabel->setObjectName("addtask_mediocre_text");
+    proxyLabel->setMaximumWidth(45);
+    proxy = new QComboBox(this);
+    // Add row to the layout
+    frequencyLayout->addWidget(profileLabel);
+    frequencyLayout->addWidget(profile);
+    frequencyLayout->addWidget(proxyLabel);
+    frequencyLayout->addWidget(proxy);
+    mainLayout->addLayout(frequencyLayout);
+
+    // TITLE ROW
+    titleLabel = new QLabel("Title: ", this);
+    titleLabel->setObjectName("task_important_text");
+    title = new QLineEdit(this);
+    title->setObjectName("task_title_lineedit");
+    submit = new QPushButton("SUBMIT", this);
+    submit->setObjectName("addtaskbutton");
+    submit->setFixedSize(100, 35);
+    // Add row to the layout
+    titleLayout->addWidget(titleLabel);
+    titleLayout->addWidget(title);
+    titleLayout->addSpacing(10);
+    titleLayout->addWidget(submit);
+    mainLayout->addLayout(titleLayout);
+
+    // Set the contents of each edit box
+    websites->setCurrentText(p_website);
+    collection->setText(p_collection);
+    keywords->setText(p_keywords);
+    colorKeywords->setText(p_colorKeywords);
+    size->setText(p_size);
+    eta->setDateTime(p_start);
+    profile->setCurrentText(p_profile);
+    proxy->setCurrentText(p_proxy);
+    title->setText(p_title);
+
+    // Set the layout
+    bgLayout->addLayout(mainLayout);
+    setLayout(externLayout);
+
+    // Connect the submit button to the attemptToSend slot
+    connect(submit, SIGNAL(clicked()), this, SLOT(attemptToSend()));
+}
+
+// Tries to send the data in the input fields to the main window to build a new task
+void EditTaskDisplay::attemptToSend() {
+
+    // Non-required fields: collection, color keywords
+    // Check each required input field to make sure a valid task can be built
+    if (keywords->text().isEmpty()) { keywords->setFocus(); return; }
+    if (size->text().isEmpty()) { size->setFocus(); return; }
+    if (title->text().isEmpty()) { title->setFocus(); return; }
+
+    // Send the signal with all the data to the main window if all required fields have text in them
+    emit sendTaskEdit(title->text(), supported_sites::WEBSITES.at(websites->currentText().toStdString()), collection->text(),
+                  keywords->text(), colorKeywords->text(), size->text(), eta->dateTime(), profile->currentText(),
+                  proxy->currentText());
+
+    // Now close the window because the task edit package has been sent
+    close();
+}
+
+// Custom close event function that just emits a signal signifying it has closed
+void EditTaskDisplay::closeEvent(QCloseEvent *event) {
+    // Emit the closed signal and then proceed to cleanup
+    emit closed();
+    QWidget::closeEvent(event);
 }

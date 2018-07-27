@@ -43,6 +43,8 @@ public:
 
     // Tells if a logwindow is open
     bool logWindowOpen = false;
+    // Tells if a task edit window is open
+    bool editWindowOpen = false;
 
     // Adds a task to the list
     void addTask(const std::string& title, const URLAndMethod& website, const std::string& collection,
@@ -94,8 +96,6 @@ private slots:
                    QDateTime start, QString profile, QString proxy, int copies);
 };
 
-// Function which interprets the string form of a vector back into the vector
-// Ex. "A,B A,C D W" will produce a vector of size 3 with elements "A", "B A", "C D W"
-std::vector<std::string> vectorFromString(const std::string& interpret);
+
 
 #endif //SHOPIFY_BOT_WINDOW_HPP

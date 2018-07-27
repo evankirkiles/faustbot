@@ -129,9 +129,7 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     websitesLabel = new QLabel("Website: ", this);
     websitesLabel->setObjectName("addtask_mediocre_text");
     websites = new QComboBox(this);
-    // Change this when adding new websites
-    QStringList supportedsites({"Blends", "Bodega", "Kith", "Social Status",  "Undefeated", "WishATL", "Xhibition",});
-    websites->addItems(supportedsites);
+    websites->addItems(supported_sites::ssStringList);
     collectionLabel = new QLabel("Collection: ", this);
     collectionLabel->setObjectName("addtask_mediocre_text");
     collection = new QLineEdit(this);
@@ -231,7 +229,7 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     bgLayout->addLayout(mainLayout);
     setLayout(externLayout);
 
-    // Connect the submit button to the attempToSend slot
+    // Connect the submit button to the attemptToSend slot
     connect(submit, SIGNAL(clicked()), this, SLOT(attemptToSend()));
 }
 

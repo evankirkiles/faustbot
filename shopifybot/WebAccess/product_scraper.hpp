@@ -32,15 +32,19 @@ struct Product {
 
     // Function to return the id for a given size of the product
     std::string getID(std::string size) {
-        size.append(" ");
+        // Remove whitespace from the size string
+        size.erase(std::remove_if(size.begin(), size.end(), isspace), size.end());
         for (auto i = sizes.begin(); i != sizes.end(); ++i) {
             std::string format = i.operator*().first;
-            format.append(" ");
-            if (format.find(size) != format.npos) {
+            format.erase(std::remove_if(format.begin(), format.end(), isspace), format.end());
+            const unsigned long position = format.find(size);
+            if (position != std::string::npos &&
+                format.substr(position + size.length(), 2) != ".5" &&
+                format.substr(position + size.length(), 2) != "-5") {
                 return i.operator*().second;
             } else {
                 std::replace(format.begin(), format.end(), '.', '-');
-                if (format.find(size) != format.npos){
+                if (format.find(size) != std::string::npos){
                     return i.operator*().second;
                 }
             }

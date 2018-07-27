@@ -113,3 +113,26 @@ void Task::order(const std::string &url) {
     // Wait for the Python script to finish
     pclose(fp);
 }
+
+
+// Function which interprets the string form of a vector back into the vector
+// Ex. "A,B A,C D W" will produce a vector of size 3 with elements "A", "B A", "C D W"
+std::vector<std::string> vectorFromString(const std::string& interpret) {
+
+    // Create a stringstream from the interpreted string
+    std::stringstream ss(interpret);
+    std::vector<std::string> toReturn;
+
+    // Iterate through the stringstream and get all comma-separated elements
+    while(ss.good()) {
+        std::string sublimstr;
+        getline(ss, sublimstr, ',');
+        if (*sublimstr.begin() == ' ') {
+            toReturn.push_back(sublimstr.substr(1));
+        } else {
+            toReturn.push_back(sublimstr);
+        };
+    }
+    // Return the vector built from the comma-separated string
+    return toReturn;
+}

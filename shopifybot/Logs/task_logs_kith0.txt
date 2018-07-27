@@ -1,0 +1,2 @@
+[2018-07-27 00:42:21.296] Beginning "Kith Task".
+[2018-07-27 00:42:23.902] Failed because: "Size unavailable.", checking again in 30 seconds.
