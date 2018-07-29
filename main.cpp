@@ -21,8 +21,8 @@ int main(int argc, char **argv) {
 
     // Builds the QApplication
     QApplication app(argc, argv);
-    app.setAttribute(Qt::AA_DisableHighDpiScaling);
-    // app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+    app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+    app.setAttribute(Qt::AA_EnableHighDpiScaling);
 
     // Render the Qt bot window
     BotWindow window = BotWindow();

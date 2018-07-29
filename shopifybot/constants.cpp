@@ -4,6 +4,22 @@
 
 #include "constants.hpp"
 
+// Check what operating system the program is running on and use different screengrab method for each
+#ifdef _WIN32         // WINDOWS
+#include <windows.h>
+#include <iostream>
+namespace system_vars {
+    screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    screenHeight = GetSystemMetrics(SM_CYSCREEN);
+}
+#elif __APPLE_        // APPLE
+
+#elif __linux__       // LINUX
+
+#else                 // Everything else
+
+#endif
+
 namespace supported_sites {
 
     const URLAndMethod SOCIALSTATUS = {"https://www.socialstatuspgh.com", "socialstatuspgh.com", 101, "socialstatus"};
@@ -12,7 +28,6 @@ namespace supported_sites {
     const URLAndMethod BLENDS = {"https://blendsus.com", "blendsus.com", 104, "blends"};
     const URLAndMethod WISHATL = {"https://wishatl.com", "wishatl.com", 105, "wish"};
 
-    // TODO: WORK ON SUPPORT FOR THESE SITES
     const URLAndMethod HANON = {"https://www.hanon-shop.com", "hanon-shop.com", 106, "hanon"};
     const URLAndMethod SHOEGALLERY = {"https://shoegallerymiami.com", "shoegallerymiami.com", 107, "shoegallery"};
 

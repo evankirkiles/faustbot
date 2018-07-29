@@ -20,11 +20,17 @@
 // This header holds the base URLs for all the supported websites so far; This standardizes so
 // I can use different methods for websites which have different ways of accessing product info.
 struct URLAndMethod {
-    const char* baseURL;
-    const char* checkoutURL;
+    const char* baseURL = "";
+    const char* checkoutURL = "";
     int method = 0;
-    const char* title;
+    const char* title = "";
 };
+
+// System-specific variables which are set for Mac, Windows, and Linux
+namespace system_vars {
+    extern const unsigned int screenWidth;
+    extern const unsigned int screenHeight;
+}
 
 // Declare the URLAndMethod as a metatype so can send it in a signal
 Q_DECLARE_METATYPE(URLAndMethod);
