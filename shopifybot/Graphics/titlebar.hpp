@@ -82,7 +82,9 @@ private:
 
 public:
     // Constructor that builds the title bar
-    DarkTitleBar(QWidget* parent);
+    DarkTitleBar(QWidget* parent, bool moreInfo = false);
+    // Optional moreinfo button
+    ClickableImage* moreInfoButton;
 protected:
     // Override mousepressevent and mousemoveevent
     void mousePressEvent(QMouseEvent *event) override;

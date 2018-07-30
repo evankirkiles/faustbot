@@ -4,22 +4,6 @@
 
 #include "constants.hpp"
 
-// Check what operating system the program is running on and use different screengrab method for each
-#ifdef _WIN32         // WINDOWS
-#include <windows.h>
-#include <iostream>
-namespace system_vars {
-    screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    screenHeight = GetSystemMetrics(SM_CYSCREEN);
-}
-#elif __APPLE_        // APPLE
-
-#elif __linux__       // LINUX
-
-#else                 // Everything else
-
-#endif
-
 namespace supported_sites {
 
     const URLAndMethod SOCIALSTATUS = {"https://www.socialstatuspgh.com", "socialstatuspgh.com", 101, "socialstatus"};
@@ -72,8 +56,8 @@ namespace file_paths {
     const char* LOGS2_IMG = "./shopifybot/Graphics/Assets/logs2.png";
     const char* EXIT_IMG = "./shopifybot/Graphics/Assets/exit.png";
     const char* EXIT2_IMG = "./shopifybot/Graphics/Assets/exit2.png";
-    const char* MINIM_IMG = "./shopifybot/Graphics/Assets/minim.png";
-    const char* MINIM2_IMG = "./shopifybot/Graphics/Assets/minim2.png";
+    const char* MOREINFO_IMG = "./shopifybot/Graphics/Assets/moreinfo.png";
+    const char* MOREINFO2_IMG = "./shopifybot/Graphics/Assets/moreinfo2.png";
 }
 
 namespace constants {

@@ -5,7 +5,7 @@
 #include "titlebar.hpp"
 
 // Builds the dark title bar
-DarkTitleBar::DarkTitleBar(QWidget *parent) : parentWidg(parent){
+DarkTitleBar::DarkTitleBar(QWidget *parent, bool moreInfo) : parentWidg(parent){
 
     // Build the title bar's necessary components
     title = new QLabel(parent->windowTitle(), this);
@@ -24,6 +24,13 @@ DarkTitleBar::DarkTitleBar(QWidget *parent) : parentWidg(parent){
     mainLayout->addStretch();
     mainLayout->addWidget(title);
     mainLayout->addStretch();
+
+    // If the moreinfo option is enabled, add a moreinfo button to the top right
+    if (moreInfo) {
+        // Clickable buttons in top right
+        moreInfoButton = new ClickableImage(26, 26, 2, file_paths::MOREINFO2_IMG, file_paths::MOREINFO_IMG, this);
+        mainLayout->addWidget(moreInfoButton);
+    }
 
     // Connect the pushbutton to the close function of the parent widget
     connect(closeWindow, SIGNAL(clicked()), parent, SLOT(close()));

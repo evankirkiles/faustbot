@@ -26,12 +26,6 @@ struct URLAndMethod {
     const char* title = "";
 };
 
-// System-specific variables which are set for Mac, Windows, and Linux
-namespace system_vars {
-    extern const unsigned int screenWidth;
-    extern const unsigned int screenHeight;
-}
-
 // Declare the URLAndMethod as a metatype so can send it in a signal
 Q_DECLARE_METATYPE(URLAndMethod);
 
@@ -101,8 +95,8 @@ namespace file_paths {
     extern const char* LOGS2_IMG;
     extern const char* EXIT_IMG;
     extern const char* EXIT2_IMG;
-    extern const char* MINIM_IMG;
-    extern const char* MINIM2_IMG;
+    extern const char* MOREINFO_IMG;
+    extern const char* MOREINFO2_IMG;
 }
 
 namespace constants {

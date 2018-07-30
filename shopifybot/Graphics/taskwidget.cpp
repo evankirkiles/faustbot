@@ -300,7 +300,7 @@ EditTaskDisplay::EditTaskDisplay(const QString& p_title, const QString& p_websit
     setAttribute(Qt::WA_TranslucentBackground);
 
     // Add the dark title bar
-    dtb = new DarkTitleBar(this);
+    dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
     QFile File("./shopifybot/Graphics/stylesheet.qss");

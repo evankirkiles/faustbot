@@ -24,7 +24,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     qRegisterMetaType<URLAndMethod>("URLAndMethod");
 
     // Build the Dark Title Bar
-    dtb = new DarkTitleBar(this);
+    dtb = new DarkTitleBar(this, true);
 
     // SIZE POLICIES
     // Size policies for top row
