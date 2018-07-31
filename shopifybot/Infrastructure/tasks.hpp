@@ -74,8 +74,6 @@ public slots:
     // Runs the task, essentially creating a while loop that runs every [frequency] seconds and continuously checks
     // if there exists a product for the given size.
     void run();
-    // Sets shouldcontinue to false
-    void stop();
 signals:
     // Emitted when the task has finished running
     void finished();

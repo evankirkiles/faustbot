@@ -93,12 +93,12 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Add widgets to the left column
     leftColumn->addWidget(logo);
     leftColumn->addWidget(title);
+    leftColumn->addLayout(alltaskButtonsLayout);
     leftColumn->addWidget(addtask);
     leftColumn->addWidget(billing);
     leftColumn->addWidget(proxies);
     leftColumn->addWidget(logs);
     leftColumn->addWidget(about);
-    leftColumn->addLayout(alltaskButtonsLayout);
     leftColumn->setAlignment(Qt::AlignTop);
 
     // Right column widget
@@ -170,6 +170,10 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
     auto newtask = new TaskWidget(title, website, identifier, collection, keywords, colorKeywords, size,
                                         startAt, profile, proxy, &logWindowOpen, &editWindowOpen,
                                         resultsToCheck, frequency, tasklistwidget);
+
+    // Connect the signals of the window to this new task's start and stop
+    connect(startAllTasks, SIGNAL(clicked()), newtask, SLOT(run()));
+    connect(stopAllTasks, SIGNAL(clicked()), newtask, SLOT(stopWidget()));
 
     // Adds the task to the qvboxlayout
     tasklistLayout->addWidget(newtask);

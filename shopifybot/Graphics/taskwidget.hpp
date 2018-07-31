@@ -75,6 +75,18 @@ public:
         released.setDevicePixelRatio(4.0);
     }
 
+    // When the play button is clicked
+    void clickedPlay() {
+        setPixmap(released2);
+        isChecked = true;
+    }
+
+    // when the stop button is clicked
+    void clickedStop() {
+        // Make the label go back to its initial image
+        setPixmap(released);
+        isChecked = false;
+    }
 // Emit the clicked() signal when the QLabel is clicked on
 signals:
     void runTask();
@@ -89,6 +101,7 @@ public slots:
         setPixmap(disabled);
         enabled = false;
     }
+
 protected:
     // Width and height
     int width;
@@ -117,13 +130,8 @@ protected:
             return;
         }
         if (!isChecked) {
-            setPixmap(released2);
-            isChecked = true;
             emit runTask();
         } else {
-            // Make the label go back to its initial image
-            setPixmap(released);
-            isChecked = false;
             emit interrupt();
         }
     }
@@ -244,7 +252,7 @@ private slots:
     // Runs the task, performed when user clicks the play button
     void run();
     // Stops the task, performed when user clicks the stop button
-    void stop();
+    void stopWidget();
     // Updates the status with the given message for the given color
     void setStatus(QString text, QString hexColor);
     // Deletes the slot, but only if there no thread currently running

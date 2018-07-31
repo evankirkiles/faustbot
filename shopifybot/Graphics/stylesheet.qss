@@ -126,42 +126,38 @@ QPushButton#sidebuttons {
 	margin-bottom: 5px;
 }
 QPushButton#startallbutton:pressed {
-    background-color: #2b2e33;
+    background-color: #4f755b;
     border-style: inset;
     border: 1px solid gray;
 }
 QPushButton#startallbutton {
-    background-color: #2b2e33;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #232323;
+    background-color: #6ea37f;
+    border: none;
 	border-radius: 8px;
-	color: #e8cb61;
+	color: #2b2e33;
 	font-family: "Futura";
 	min-height: 25px;
 	max-height: 25px;
-	margin-top: 5px;
+	margin-top: 0px;
 	margin-right: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 0px;
 }
 QPushButton#stopallbutton:pressed {
-    background-color: #2b2e33;
+    background-color: #a35341;
     border-style: inset;
     border: 1px solid gray;
 }
 QPushButton#stopallbutton {
-    background-color: #2b2e33;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #232323;
+    background-color: #c96650;
+    border: none;
 	border-radius: 8px;
-	color: #e8cb61;
+	color: #2b2e33;
 	font-family: "Futura";
 	min-height: 25px;
 	max-height: 25px;
-	margin-top: 5px;
+	margin-top: 0px;
 	margin-left: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 0px;
 }
 QPushButton#addtaskbutton:pressed {
     background-color: #dbc987;

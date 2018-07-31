@@ -86,11 +86,6 @@ void Task::run() {
     emit finished();
 }
 
-// Sets shouldcontinue to false
-void Task::stop() {
-    shouldcontinue = false;
-}
-
 // Logs task messages to the log text file
 void Task::log(const std::string &message) {
 

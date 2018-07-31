@@ -161,6 +161,13 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
 // Tells the event loop to run the task
 void TaskWidget::run() {
 
+    // Make sure the play button changes if it is called not by the play button
+    // If the play button is not available when run is picked, then do nothing
+    if (play->isChecked) {
+        return;
+    }
+    play->clickedPlay();
+
     // Initializes the thread and moves the task onto it
     taskthread = new QThread;
     auto temptask = new Task(task->title, task->swh.sourceURL, task->swh.taskID, task->collection, task->keywords,
@@ -173,8 +180,10 @@ void TaskWidget::run() {
 
     // Connects all the necessary signals and slots for communication between the two
     connect(taskthread, SIGNAL(started()), temptask, SLOT(run()));
-    connect(play, SIGNAL(interrupt()), this, SLOT(stop()));
-    connect(this, SIGNAL(stopTask()), temptask, SLOT(stop()));
+    connect(play, SIGNAL(interrupt()), this, SLOT(stopWidget()));
+    connect(this, &TaskWidget::stopTask, [temptask] () {
+        temptask->shouldcontinue = false;
+    });
     connect(temptask, SIGNAL(finished()), play, SLOT(enable()));
     connect(temptask, SIGNAL(finished()), taskthread, SLOT(quit()));
     connect(temptask, SIGNAL(finished()), temptask, SLOT(deleteLater()));
@@ -188,7 +197,7 @@ void TaskWidget::run() {
 }
 
 // Tells the task to interrupt after the loop has finished
-void TaskWidget::stop() {
+void TaskWidget::stopWidget() {
     if (play->isChecked) {
         play->disable();
         setStatus("Stopping...", "#e26c6c");
@@ -206,6 +215,8 @@ void TaskWidget::setStatus(QString text, QString hexColor) {
     // If task has actually finished, change the play button to the replay button
     if (text == "Finished!") {
         play->changeCheckedImg(file_paths::REPLAY2_IMG, file_paths::REPLAY_IMG);
+        play->isChecked = false;
+    } else if (text == "Interrupted.") {
         play->isChecked = false;
     }
 }
