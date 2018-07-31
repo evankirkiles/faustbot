@@ -61,7 +61,7 @@ namespace file_paths {
 }
 
 namespace constants {
-    const unsigned int BASE_FREQ = 30;
+    const unsigned int BASE_FREQ = 5;
     const unsigned int BASE_NUMRESULTS = 10;
 }
 

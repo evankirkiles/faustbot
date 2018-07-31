@@ -54,6 +54,31 @@
 //  4. The proxy list editor
 //  5. The information/about popup
 
+// Window that pops up when you click the moreinfo button
+class MoreInfoDisplay : public QWidget {
+Q_OBJECT
+public:
+    // Constructor that builds the window, params denote the image to be used and the size of the window
+    explicit MoreInfoDisplay(unsigned int width, unsigned int height, const char* img_filepath, QWidget *parent = 0);
+    // Override the window closed event
+    void closeEvent(QCloseEvent *event) override;
+
+signals:
+    // Called whenever the moreinfo display is closed
+    void closed();
+
+private:
+    // Instance-related variables
+    QLabel* imageLabel;
+
+    // Set the background as a simple gray qframe
+    QFrame* background;
+
+protected:
+    // Override the lose focus event so it closes whenever the window is left
+    void focusOutEvent(QFocusEvent *event) override { close(); }
+};
+
 // Class for a popup which displays a text file and refreshes it at a specified frequency.
 class LogFileDisplay : public QWidget {
     Q_OBJECT
@@ -106,8 +131,16 @@ private slots:
     // Tries to send the information in the form to the main window to add it to the task list
     // If not all required fields are filled, then does not send the form yet.
     void attemptToSend();
+    // Opens the moreInfoDisplay which gives a basic tutorial on how to create a new task
+    void buildMoreInfoDisplay();
+    // Called whenever the moreinfodisplay window is closed
+    void MIDClosed();
 
 private:
+
+    // Specifies whether the moreInfoDisplay is open or not
+    bool moreInfoDisplayOpen = false;
+    MoreInfoDisplay* mid;
 
     // Dark title bar widget
     DarkTitleBar* dtb;

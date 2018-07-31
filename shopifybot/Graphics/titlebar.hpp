@@ -73,6 +73,7 @@ private:
 
     // Makes sure not clicking on an exit button when moving
     bool clickedOnButton = false;
+    bool showMoreInfo = false;
 
     // The actual title of the window as well as a pushbutton to close it
     QLabel* title;
@@ -85,10 +86,15 @@ public:
     DarkTitleBar(QWidget* parent, bool moreInfo = false);
     // Optional moreinfo button
     ClickableImage* moreInfoButton;
+signals:
+    // MoreInfo-related signals to specify when to show and not show the moreinfo window
+    void showMIW();
+    void hideMIW();
 protected:
-    // Override mousepressevent and mousemoveevent
+    // Override mousepressevent and mousemoveevent and mousereleaseevent
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 };
 
 #endif //SHOPIFY_BOT_TITLEBAR_HPP

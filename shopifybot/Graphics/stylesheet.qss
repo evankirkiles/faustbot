@@ -2,6 +2,10 @@
 	background: #181818;
 	border-radius: 8px;
 }
+#moreinfo_window {
+	background: #181818;
+	border-radius: 8px;
+}
 QLabel {
 	color: #e8cb61;
     font-family: "Futura";

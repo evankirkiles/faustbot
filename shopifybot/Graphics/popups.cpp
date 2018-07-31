@@ -231,6 +231,8 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
 
     // Connect the submit button to the attemptToSend slot
     connect(submit, SIGNAL(clicked()), this, SLOT(attemptToSend()));
+    // Connect the moreinfo button the moreinfodisplay slot
+    connect(dtb, SIGNAL(showMIW()), this, SLOT(buildMoreInfoDisplay()));
 }
 
 // Tries to send the data in the input fields to the main window to build a new task
@@ -251,9 +253,81 @@ void AddTaskDisplay::attemptToSend() {
     close();
 }
 
+// Opens the moreinfo display to give a basic tutorial on how to create a new task
+void AddTaskDisplay::buildMoreInfoDisplay() {
+
+    // Make sure that a tutorial display is not open already
+    if (moreInfoDisplayOpen) { if (mid) { mid->raise(); } return; }
+
+    // Otherwise create a tutorial display and show it
+    mid = new MoreInfoDisplay(400, 400, file_paths::MOREINFO_IMG);
+    mid->show();
+    mid->setFocus();
+
+    // Connect the close situations
+    connect(submit, SIGNAL(clicked()), mid, SLOT(close()));
+    connect(this, SIGNAL(closed()), mid, SLOT(close()));
+    connect(dtb, SIGNAL(hideMIW()), mid, SLOT(close()));
+    // Also notify the add new task window when the window is closed
+    connect(mid, SIGNAL(closed()), this, SLOT(MIDClosed()));
+
+    // More info bool set to true
+    moreInfoDisplayOpen = true;
+}
+
+// Function that simply changes the boolean when the more info display is closed
+void AddTaskDisplay::MIDClosed() {
+    moreInfoDisplayOpen = false;
+}
+
 // Custom close event function that just emits a signal signifying it has closed
 void AddTaskDisplay::closeEvent(QCloseEvent *event) {
     // Emit the closed signal and then proceed to cleanup
+    emit closed();
+    QWidget::closeEvent(event);
+}
+
+// MORE INFO DISPLAY ClASS
+// Constructor to build the pop up window
+MoreInfoDisplay::MoreInfoDisplay(unsigned int width, unsigned int height, const char *img_filepath,
+                                      QWidget *parent) : QWidget(parent) {
+    // Fixed size of the window
+    setFixedSize(width + 22, height + 22);
+    setWindowTitle("More Info");
+    setWindowFlags(Qt::FramelessWindowHint);
+    setObjectName("moreinfo_window");
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Set the stylesheet for the window
+    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    setStyleSheet(StyleSheet);
+
+    // Create the window layouts
+    auto externLayout = new QVBoxLayout();
+    auto mainLayout = new QVBoxLayout();
+
+    // Build the QFrame
+    background = new QFrame(this);
+    background->setObjectName("moreinfo_window");
+    background->setFixedSize(width, height);
+
+    // Create the image for the QLabel to be displayed in the window and set it to the QLabel
+    imageLabel = new QLabel(this);
+    QPixmap img = QPixmap::fromImage(QImage(img_filepath).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    imageLabel->setPixmap(img);
+    mainLayout->addWidget(imageLabel);
+
+    // Set the window's layout
+    background->setLayout(mainLayout);
+    externLayout->addWidget(background);
+    setLayout(externLayout);
+}
+
+// Custom close event which emits the closed() signal and then does normal close procedures
+void MoreInfoDisplay::closeEvent(QCloseEvent *event) {
     emit closed();
     QWidget::closeEvent(event);
 }

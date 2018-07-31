@@ -41,7 +41,11 @@ void DarkTitleBar::mousePressEvent(QMouseEvent *event) {
     // When the user clicks with the left button, save the position of the click relative to window
     if (event->buttons() & Qt::LeftButton) {
         cursorPoint = event->globalPos() - parentWidg->geometry().topLeft();
-        clickedOnButton = childAt(event->pos()) == closeWindow;
+        clickedOnButton = childAt(event->pos()) == closeWindow || childAt(event->pos()) == moreInfoButton;
+        if (childAt(event->pos()) == moreInfoButton) {
+            showMoreInfo = true;
+            emit showMIW();
+        }
         event->accept();
     }
 }
@@ -51,5 +55,13 @@ void DarkTitleBar::mouseMoveEvent(QMouseEvent *event) {
     if (event->buttons() & Qt::LeftButton && !clickedOnButton) {
         parentWidg->move(event->globalPos() - cursorPoint);
         event->accept();
+    }
+}
+// Override the mouse release event
+void DarkTitleBar::mouseReleaseEvent(QMouseEvent *event) {
+    // If the moreinfowindow is being shown, then close it
+    if (showMoreInfo) {
+        showMoreInfo = false;
+        emit hideMIW();
     }
 }
