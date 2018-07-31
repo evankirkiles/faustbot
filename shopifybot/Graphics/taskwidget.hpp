@@ -236,9 +236,15 @@ public:
     // Title label, public so edit task can access it
     QLabel* title;
 
+signals:
+    // Emitted to the running task to tell it to stop
+    void stopTask();
+
 private slots:
     // Runs the task, performed when user clicks the play button
     void run();
+    // Stops the task, performed when user clicks the stop button
+    void stop();
     // Updates the status with the given message for the given color
     void setStatus(QString text, QString hexColor);
     // Deletes the slot, but only if there no thread currently running

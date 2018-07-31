@@ -47,6 +47,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     auto botLayout = new QHBoxLayout;
     // Vertical layouts for the top layout
     auto leftColumn = new QVBoxLayout;
+    auto alltaskButtonsLayout = new QHBoxLayout;
     auto rightColumn = new QVBoxLayout;
     // Horizontal layout that goes above the listview
     auto tasktitleRow = new QHBoxLayout;
@@ -72,6 +73,12 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     title = new QLabel("SHOPIFY BOT", this);
     title->setAlignment(Qt::AlignCenter);
     title->setObjectName("bot_title");
+    startAllTasks = new QPushButton("Start All", this);
+    startAllTasks->setObjectName("startallbutton");
+    stopAllTasks = new QPushButton("Stop All", this);
+    stopAllTasks->setObjectName("stopallbutton");
+    alltaskButtonsLayout->addWidget(startAllTasks);
+    alltaskButtonsLayout->addWidget(stopAllTasks);
     addtask = new QPushButton("NEW TASK", this);
     addtask->setObjectName("addtaskbutton");
     addtask->setFixedHeight(70);
@@ -91,6 +98,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     leftColumn->addWidget(proxies);
     leftColumn->addWidget(logs);
     leftColumn->addWidget(about);
+    leftColumn->addLayout(alltaskButtonsLayout);
     leftColumn->setAlignment(Qt::AlignTop);
 
     // Right column widget

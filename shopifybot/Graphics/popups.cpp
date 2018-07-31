@@ -315,7 +315,7 @@ MoreInfoDisplay::MoreInfoDisplay(unsigned int width, unsigned int height, const 
     background->setFixedSize(width, height);
 
     // Create the image for the QLabel to be displayed in the window and set it to the QLabel
-    imageLabel = new QLabel(this);
+    imageLabel = new QLabel(background);
     QPixmap img = QPixmap::fromImage(QImage(img_filepath).scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     imageLabel->setPixmap(img);
     mainLayout->addWidget(imageLabel);

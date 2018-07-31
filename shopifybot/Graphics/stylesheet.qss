@@ -125,6 +125,44 @@ QPushButton#sidebuttons {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+QPushButton#startallbutton:pressed {
+    background-color: #2b2e33;
+    border-style: inset;
+    border: 1px solid gray;
+}
+QPushButton#startallbutton {
+    background-color: #2b2e33;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #232323;
+	border-radius: 8px;
+	color: #e8cb61;
+	font-family: "Futura";
+	min-height: 25px;
+	max-height: 25px;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+QPushButton#stopallbutton:pressed {
+    background-color: #2b2e33;
+    border-style: inset;
+    border: 1px solid gray;
+}
+QPushButton#stopallbutton {
+    background-color: #2b2e33;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #232323;
+	border-radius: 8px;
+	color: #e8cb61;
+	font-family: "Futura";
+	min-height: 25px;
+	max-height: 25px;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
 QPushButton#addtaskbutton:pressed {
     background-color: #dbc987;
     border-style: inset;

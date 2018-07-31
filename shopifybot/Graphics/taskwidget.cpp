@@ -173,10 +173,8 @@ void TaskWidget::run() {
 
     // Connects all the necessary signals and slots for communication between the two
     connect(taskthread, SIGNAL(started()), temptask, SLOT(run()));
-    connect(play, &ClickableCheckableImage::interrupt, [this, temptask] () {
-        play->disable();
-        setStatus("Stopping...", "#e26c6c");
-        temptask->shouldcontinue = false;});
+    connect(play, SIGNAL(interrupt()), this, SLOT(stop()));
+    connect(this, SIGNAL(stopTask()), temptask, SLOT(stop()));
     connect(temptask, SIGNAL(finished()), play, SLOT(enable()));
     connect(temptask, SIGNAL(finished()), taskthread, SLOT(quit()));
     connect(temptask, SIGNAL(finished()), temptask, SLOT(deleteLater()));
@@ -187,6 +185,15 @@ void TaskWidget::run() {
 
     // Begin the thread!
     taskthread->start();
+}
+
+// Tells the task to interrupt after the loop has finished
+void TaskWidget::stop() {
+    if (play->isChecked) {
+        play->disable();
+        setStatus("Stopping...", "#e26c6c");
+        emit stopTask();
+    }
 }
 
 // Sets the text in the status textedit

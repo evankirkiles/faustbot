@@ -67,6 +67,10 @@ private:
     QLabel *logo;
     QLabel *title;
 
+    // Start all tasks and stop all tasks button
+    QPushButton* startAllTasks;
+    QPushButton* stopAllTasks;
+
     // Add new task button
     QPushButton *addtask;
     AddTaskDisplay* atd;
