@@ -7,7 +7,7 @@
 // Constructor for the Bot's main window
 BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Set the size of the window
-    setFixedSize(1000, 600);
+    setFixedSize(1000, 610);
     // Also set the stylesheet for the window
     QFile File("./shopifybot/Graphics/stylesheet.qss");
     File.open(QFile::ReadOnly);
@@ -90,6 +90,8 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     logs->setObjectName("sidebuttons");
     about = new QPushButton("About", this);
     about->setObjectName("sidebuttons");
+    copyrightLabel = new QLabel("© 2018 Evan Kirkiles", this);
+    copyrightLabel->setObjectName("copyrightlabel");
     // Add widgets to the left column
     leftColumn->addWidget(logo);
     leftColumn->addWidget(title);
@@ -99,6 +101,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     leftColumn->addWidget(proxies);
     leftColumn->addWidget(logs);
     leftColumn->addWidget(about);
+    leftColumn->addWidget(copyrightLabel);
     leftColumn->setAlignment(Qt::AlignTop);
 
     // Right column widget

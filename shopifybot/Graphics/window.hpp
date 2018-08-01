@@ -80,6 +80,7 @@ private:
     QPushButton *proxies;
     QPushButton *logs;
     QPushButton *about;
+    QLabel *copyrightLabel;
 
     // Tasks listview
     QFrame *line1;

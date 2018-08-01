@@ -168,6 +168,9 @@ void TaskWidget::run() {
     }
     play->clickedPlay();
 
+    // Add a small delay to prevent strange error code
+    std::this_thread::sleep_for(std::chrono::nanoseconds(10000000));
+
     // Initializes the thread and moves the task onto it
     taskthread = new QThread;
     auto temptask = new Task(task->title, task->swh.sourceURL, task->swh.taskID, task->collection, task->keywords,

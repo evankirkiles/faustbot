@@ -175,6 +175,13 @@ QPushButton#addtaskbutton {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+#copyrightlabel {
+    color: #282828;
+    text-align: center;
+    font-size: 10px;
+    max-height: 14px;
+    font-family: "Futura";
+}
 QScrollArea {
     background-color: #141414;
     color: #e8cb61;
