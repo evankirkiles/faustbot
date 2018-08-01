@@ -44,6 +44,12 @@
 #ifndef QIntValidator
 #include <QIntValidator>
 #endif
+#ifndef QGraphicsOpacityEffect
+#include <QGraphicsOpacityEffect>
+#endif
+#ifndef QPropertyAnimation
+#include <QPropertyAnimation>
+#endif
 
 #include "titlebar.hpp"
 
@@ -66,6 +72,11 @@ public:
 signals:
     // Called whenever the moreinfo display is closed
     void closed();
+
+public slots:
+    // Transparent fade in and fade out of the More Info window
+    void fadeIn();
+    void fadeOut();
 
 private:
     // Instance-related variables

@@ -261,13 +261,13 @@ void AddTaskDisplay::buildMoreInfoDisplay() {
 
     // Otherwise create a tutorial display and show it
     mid = new MoreInfoDisplay(400, 400, file_paths::MOREINFO_IMG);
-    mid->show();
+    mid->fadeIn();
     mid->setFocus();
 
     // Connect the close situations
-    connect(submit, SIGNAL(clicked()), mid, SLOT(close()));
-    connect(this, SIGNAL(closed()), mid, SLOT(close()));
-    connect(dtb, SIGNAL(hideMIW()), mid, SLOT(close()));
+    connect(submit, SIGNAL(clicked()), mid, SLOT(fadeOut()));
+    connect(this, SIGNAL(closed()), mid, SLOT(fadeOut()));
+    connect(dtb, SIGNAL(hideMIW()), mid, SLOT(fadeOut()));
     // Also notify the add new task window when the window is closed
     connect(mid, SIGNAL(closed()), this, SLOT(MIDClosed()));
 
@@ -330,4 +330,30 @@ MoreInfoDisplay::MoreInfoDisplay(unsigned int width, unsigned int height, const 
 void MoreInfoDisplay::closeEvent(QCloseEvent *event) {
     emit closed();
     QWidget::closeEvent(event);
+}
+
+// Fades the window in and shows it
+void MoreInfoDisplay::fadeIn() {
+    auto eff = new QGraphicsOpacityEffect(this);
+    setGraphicsEffect(eff);
+    auto a = new QPropertyAnimation(eff, "opacity");
+    a->setDuration(250);
+    a->setStartValue(0);
+    a->setEndValue(1);
+    a->setEasingCurve(QEasingCurve::InBack);
+    a->start(QPropertyAnimation::DeleteWhenStopped);
+    show();
+}
+
+// Fades the window out and closes it
+void MoreInfoDisplay::fadeOut() {
+    auto eff = new QGraphicsOpacityEffect(this);
+    setGraphicsEffect(eff);
+    auto a = new QPropertyAnimation(eff, "opacity");
+    a->setDuration(250);
+    a->setStartValue(1);
+    a->setEndValue(0);
+    a->setEasingCurve(QEasingCurve::OutBack);
+    a->start(QPropertyAnimation::DeleteWhenStopped);
+    connect(a, SIGNAL(finished()), this, SLOT(close()));
 }
