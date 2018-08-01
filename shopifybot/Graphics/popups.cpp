@@ -134,6 +134,7 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     collectionLabel->setObjectName("addtask_mediocre_text");
     collection = new QLineEdit(this);
     collection->setObjectName("addtask_editbox");
+    collection->setPlaceholderText("/collections/footwear");
     // Add row to the layout
     websiteCollectionLayout->addWidget(websitesLabel);
     websiteCollectionLayout->addWidget(websites);
@@ -340,7 +341,7 @@ void MoreInfoDisplay::fadeIn() {
     a->setDuration(250);
     a->setStartValue(0);
     a->setEndValue(1);
-    a->setEasingCurve(QEasingCurve::InBack);
+    a->setEasingCurve(QEasingCurve::InOutQuad);
     a->start(QPropertyAnimation::DeleteWhenStopped);
     show();
 }
@@ -353,7 +354,7 @@ void MoreInfoDisplay::fadeOut() {
     a->setDuration(250);
     a->setStartValue(1);
     a->setEndValue(0);
-    a->setEasingCurve(QEasingCurve::OutBack);
+    a->setEasingCurve(QEasingCurve::OutInQuad);
     a->start(QPropertyAnimation::DeleteWhenStopped);
     connect(a, SIGNAL(finished()), this, SLOT(close()));
 }

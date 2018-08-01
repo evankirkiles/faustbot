@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(APP_DOMAIN ./domain)
 set(APP_CALC ./calc)
-set(CMAKE_PREFIX_PATH /Users/samkirkiles/Qt/5.11.1/clang_64)
+set(CMAKE_PREFIX_PATH /Users/evankirkiles
+        /Qt/5.11.1/clang_64)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -19,7 +20,8 @@ add_executable(shopify_bot
         shopifybot/Graphics/window.cpp
         shopifybot/Graphics/taskwidget.cpp
         shopifybot/Graphics/popups.cpp
-        shopifybot/Graphics/titlebar.cpp)
+        shopifybot/Graphics/titlebar.cpp
+        shopifybot/Graphics/sidebarpopups.cpp)
 
 include_directories(shopifybot)
 include_directories(shopifybot_tests/lib/googletest/include shopifybot_tests/lib/googletest)
