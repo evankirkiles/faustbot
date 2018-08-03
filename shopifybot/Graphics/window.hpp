@@ -27,6 +27,8 @@
 
 // Include the widgets
 #include "taskwidget.hpp"
+// Include the sidebar popups
+#include "sidebarpopups.hpp"
 
 // Constants include
 #ifndef file_paths
@@ -58,8 +60,9 @@ private:
     // Dark title bar widget
     DarkTitleBar* dtb;
 
-    // Bool telling whether add task window is open
+    // Bool telling whether windows are open
     bool addTaskOpen = false;
+    bool profilesOpen = false;
     // Number of tasks created, incremented every time a task is added
     int numTasksCreated = 0;
 
@@ -82,6 +85,9 @@ private:
     QPushButton *about;
     QLabel *copyrightLabel;
 
+    // Sidebar windows
+    ProfilesDisplay* profilesDisp;
+
     // Tasks listview
     QFrame *line1;
     QLabel* tasktitle;
@@ -95,6 +101,10 @@ private slots:
     void openNewTask();
     // Tells the main window that the add task window was closed
     void addTaskClosed();
+    // Opens the profiles window
+    void openProfiles();
+    // Tells the main window that the profiles window was closed
+    void profilesClosed();
     // Connects to the submit slot in the main window, and adds a task with the given information
     void buildTask(QString title, URLAndMethod website, QString collection,
                    QString keywords, QString colorKeywords, QString size,

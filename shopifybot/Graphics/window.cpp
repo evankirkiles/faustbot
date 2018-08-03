@@ -136,13 +136,10 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     topLayout->addLayout(rightColumn);
     topLayout->setStretchFactor(rightColumn, 4);
 
-    // Add a task
-//    addTask("Kith Task", supported_sites::KITH, "1", "/collections/footwear", {"Asics"}, {"White"}, "200", 3, 3);
-//    addTask("Social Status Task", supported_sites::SOCIALSTATUS, "1", "/collections/sneakers", {"Revaderchi"},
-//            {"Black", "Granite"}, "9", 2, 3);
-
     // Open the add task window when the add task button is clicked
     connect(addtask, SIGNAL(clicked()), this, SLOT(openNewTask()));
+    // Open the profiles window when the profiles button is clicked
+    connect(billing, SIGNAL(clicked()), this, SLOT(openProfiles()));
 }
 
 // Slot which takes information from the new task window and builds a task
@@ -203,8 +200,28 @@ void BotWindow::openNewTask() {
     connect(atd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString, int)),
             this, SLOT(buildTask(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString, int)));
 }
-
 // Called when the task window closes
 void BotWindow::addTaskClosed() {
     addTaskOpen = false;
+}
+
+// Opens the profiles window
+void BotWindow::openProfiles() {
+    if (profilesOpen) {
+        // Show the currently open profiles window
+        profilesDisp->raise();
+        profilesDisp->setFocus();
+        return;
+    }
+    // Build the window if it does not exist, otherwise just show it
+    profilesDisp = new ProfilesDisplay();
+    profilesDisp->show();
+    profilesOpen = true;
+
+    // Make necessary connections
+    connect(profilesDisp, SIGNAL(closed()), this, SLOT(profilesClosed()));
+}
+// Called when the task window closes
+void BotWindow::profilesClosed() {
+    profilesOpen = false;
 }

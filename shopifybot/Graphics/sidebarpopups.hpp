@@ -5,7 +5,9 @@
 #ifndef SHOPIFY_BOT_SIDEBARPOPUPS_HPP
 #define SHOPIFY_BOT_SIDEBARPOPUPS_HPP
 
+#ifndef NewTaskDisplay
 #include "popups.hpp"
+#endif
 
 #ifndef QListView
 #include <QListView>
@@ -26,16 +28,16 @@ signals:
 
 private:
     // Specifies whether the moreInfoDisplay is open or not
-    bool moreInfoDisplayOpen = false;
-    MoreInfoDisplay* mid;
+//    bool moreInfoDisplayOpen = false;
+//    MoreInfoDisplay* mid;
 
     // Dark Title bar widget
     DarkTitleBar* dtb;
 
     // Icons for adding, duplicating, and deleting profiles
-    ClickableImage* addProfileButton;
-    ClickableImage* duplicateProfileButton;
-    ClickableImage* deleteProfileButton;
+//    ClickableImage* addProfileButton;
+//    ClickableImage* duplicateProfileButton;
+//    ClickableImage* deleteProfileButton;
 
     // List view of all the profiles currently opened in the left column
     QListView* profilesListView;
@@ -43,10 +45,7 @@ private:
     // All the lineedits and the labels for editing the profiles
     QLabel* titleLabel;
     QLineEdit* editTitle;
-    QLabel* billingAddressTitleLabel;
-
-    // TODO: Work on the profile editing
-
+//    QLabel* billingAddressTitleLabel;
 };
 
 #endif //SHOPIFY_BOT_SIDEBARPOPUPS_HPP

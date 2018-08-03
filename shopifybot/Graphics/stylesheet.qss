@@ -303,3 +303,8 @@ QComboBox QAbstractItemView {
     background-color: #111111;
     border-radius: 8px;
 }
+
+#profileslistview {
+    background-color: #141414;
+    border-radius: 8px;
+}
