@@ -45,7 +45,27 @@ private:
     // All the lineedits and the labels for editing the profiles
     QLabel* titleLabel;
     QLineEdit* editTitle;
-//    QLabel* billingAddressTitleLabel;
+    QLabel* firstnameLabel;
+    QLineEdit* firstname;
+    QLabel* lastnameLabel;
+    QLineEdit* lastname;
+    QLabel* address1Label;
+    QLineEdit* address1;
+    QLabel* address2Label;
+    QLineEdit* address2;
+    QLabel* cityLabel;
+    QLineEdit* city;
+    QLabel* countryLabel;
+    QLineEdit* country;
+    QLabel* provinceLabel;
+    QLineEdit* province;
+    QLabel* zipcodeLabel;
+    QLineEdit* zipcode;
+    QLabel* phoneLabel;
+    QLineEdit* phone;
+    QLabel* ccardLabel;
+    QComboBox* ccard;
+    QPushButton* update;
 };
 
 #endif //SHOPIFY_BOT_SIDEBARPOPUPS_HPP

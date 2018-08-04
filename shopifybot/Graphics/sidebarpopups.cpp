@@ -6,9 +6,31 @@
 
 // PROFILES DISPLAY
 // Constructor that builds the profiles display
-ProfilesDisplay::ProfilesDisplay(QWidget *parent) : QWidget(parent) {
+ProfilesDisplay::ProfilesDisplay(QWidget *parent) : profilesListView(new QListView(this)),
+                                                    titleLabel(new QLabel("Title: ", this)),
+                                                    editTitle(new QLineEdit(this)),
+                                                    firstnameLabel(new QLabel("First name:", this)),
+                                                    firstname(new QLineEdit(this)),
+                                                    lastnameLabel(new QLabel("Last name:", this)),
+                                                    lastname(new QLineEdit(this)),
+                                                    address1Label(new QLabel("Address:", this)),
+                                                    address1(new QLineEdit(this)),
+                                                    address2Label(new QLabel("Apartment, Suite, etc:", this)),
+                                                    address2(new QLineEdit(this)),
+                                                    cityLabel(new QLabel("City:", this)),
+                                                    city(new QLineEdit(this)),
+                                                    zipcodeLabel(new QLabel("Zip Code:", this)),
+                                                    zipcode(new QLineEdit(this)),
+                                                    countryLabel(new QLabel("Country:", this)),
+                                                    country(new QLineEdit(this)),
+                                                    phoneLabel(new QLabel("Phone:", this)),
+                                                    phone(new QLineEdit(this)),
+                                                    ccardLabel(new QLabel("Credit Card:", this)),
+                                                    ccard(new QComboBox(this)),
+                                                    update(new QPushButton("UPDATE", this)),
+                                                    QWidget(parent) {
 
-    // Set window proprties
+    // Set window properties
     setFixedSize(500, 500);
     setWindowTitle("Profiles");
     setWindowFlags(Qt::FramelessWindowHint);
@@ -16,7 +38,7 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_QuitOnClose, false);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    // Create the title bar
+    // Create the dark title bar
     dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
@@ -55,23 +77,75 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : QWidget(parent) {
     rightColumnWidg->setSizePolicy(spRight);
     rightColumn->setContentsMargins(0, 0, 0, 0);
     auto titleRow = new QHBoxLayout();
+    auto fNameRow = new QHBoxLayout();
+    auto lNameRow = new QHBoxLayout();
+    auto address1Row = new QHBoxLayout();
+    auto address2Row = new QHBoxLayout();
+    auto cityZipRow = new QHBoxLayout();
+    auto countryRow = new QHBoxLayout();
+    auto phoneRow = new QHBoxLayout();
+    auto ccardRow = new QHBoxLayout();
 
     // Create the widgets and add them to their respective layouts
     leftColumn->addLayout(smallButtonRow);
-    profilesListView = new QListView(this);
     profilesListView->setObjectName("profileslistview");
     leftColumn->addWidget(profilesListView);
-    titleLabel = new QLabel("Title: ", this);
     titleLabel->setObjectName("task_important_text");
-    editTitle = new QLineEdit(this);
     editTitle->setObjectName("task_title_lineedit");
     titleRow->addWidget(titleLabel);
     titleRow->addWidget(editTitle);
+    firstnameLabel->setObjectName("addtask_mediocre_text");
+    firstname->setObjectName("addtask_editbox");
+    fNameRow->addWidget(firstnameLabel);
+    fNameRow->addWidget(firstname);
+    lastnameLabel->setObjectName("addtask_mediocre_text");
+    lastname->setObjectName("addtask_editbox");
+    lNameRow->addWidget(lastnameLabel);
+    lNameRow->addWidget(lastname);
+    address1Label->setObjectName("addtask_mediocre_text");
+    address1->setObjectName("addtask_editbox");
+    address1Row->addWidget(address1Label);
+    address1Row->addWidget(address1);
+    address2Label->setObjectName("addtask_mediocre_text");
+    address2->setObjectName("addtask_editbox");
+    address2Row->addWidget(address2Label);
+    address2Row->addWidget(address2);
+    cityLabel->setObjectName("addtask_mediocre_text");
+    city->setObjectName("addtask_editbox");
+    cityZipRow->addWidget(cityLabel);
+    cityZipRow->addWidget(city);
+    zipcodeLabel->setObjectName("addtask_mediocre_text");
+    zipcode->setObjectName("addtask_editbox");
+    zipcode->setMaximumWidth(60);
+    cityZipRow->addWidget(zipcodeLabel);
+    cityZipRow->addWidget(zipcode);
+    countryLabel->setObjectName("addtask_mediocre_text");
+    country->setObjectName("addtask_editbox");
+    countryRow->addWidget(countryLabel);
+    countryRow->addWidget(country);
+    phoneLabel->setObjectName("addtask_mediocre_text");
+    phone->setObjectName("addtask_editbox");
+    phoneRow->addWidget(phoneLabel);
+    phoneRow->addWidget(phone);
+    ccardLabel->setObjectName("addtask_mediocre_text");
+    update->setObjectName("addtaskbutton");
+    update->setFixedSize(100, 35);
+    ccardRow->addWidget(ccardLabel);
+    ccardRow->addWidget(ccard);
+    ccardRow->addWidget(update);
 
     // Finish adding all the layouts
     mainLayout->addWidget(leftColumnWidg);
     mainLayout->addWidget(rightColumnWidg);
     rightColumn->addLayout(titleRow);
+    rightColumn->addLayout(fNameRow);
+    rightColumn->addLayout(lNameRow);
+    rightColumn->addLayout(address1Row);
+    rightColumn->addLayout(address2Row);
+    rightColumn->addLayout(cityZipRow);
+    rightColumn->addLayout(countryRow);
+    rightColumn->addLayout(phoneRow);
+    rightColumn->addLayout(ccardRow);
     bgLayout->addLayout(mainLayout);
 
     // Set the layout finally
