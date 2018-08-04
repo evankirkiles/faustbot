@@ -6,7 +6,13 @@
 
 // PROFILES DISPLAY
 // Constructor that builds the profiles display
-ProfilesDisplay::ProfilesDisplay(QWidget *parent) : profilesListView(new QListView(this)),
+ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new ClickableImage(26, 26, 2, file_paths::ADD2_IMG,
+                                                                                        file_paths::ADD_IMG, this)),
+                                                    duplicateProfileButton(new ClickableImage(26, 26, 2, file_paths::DUPLICATE2_IMG,
+                                                                                        file_paths::DUPLICATE_IMG, this)),
+                                                    deleteProfileButton(new ClickableImage(26, 26, 2, file_paths::MINUS2_IMG,
+                                                                                        file_paths::MINUS_IMG, this)),
+                                                    profilesListView(new QListView(this)),
                                                     titleLabel(new QLabel("Title: ", this)),
                                                     editTitle(new QLineEdit(this)),
                                                     firstnameLabel(new QLabel("First name:", this)),
@@ -71,6 +77,9 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : profilesListView(new QListVi
     auto smallButtonRow = new QHBoxLayout();
     QSizePolicy spRight(QSizePolicy::Preferred, QSizePolicy::Preferred);
     spRight.setHorizontalStretch(2);
+    smallButtonRow->addWidget(addProfileButton);
+    smallButtonRow->addWidget(duplicateProfileButton);
+    smallButtonRow->addWidget(deleteProfileButton);
     auto rightColumnWidg = new QWidget();
     auto rightColumn = new QVBoxLayout();
     rightColumnWidg->setLayout(rightColumn);

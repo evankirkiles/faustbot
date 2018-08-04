@@ -35,9 +35,9 @@ private:
     DarkTitleBar* dtb;
 
     // Icons for adding, duplicating, and deleting profiles
-//    ClickableImage* addProfileButton;
-//    ClickableImage* duplicateProfileButton;
-//    ClickableImage* deleteProfileButton;
+    ClickableImage* addProfileButton;
+    ClickableImage* duplicateProfileButton;
+    ClickableImage* deleteProfileButton;
 
     // List view of all the profiles currently opened in the left column
     QListView* profilesListView;

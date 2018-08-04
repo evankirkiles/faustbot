@@ -78,6 +78,8 @@ namespace file_paths {
     extern const char* TIME_LOG;
     extern const char* TASK_LOG;
 
+    extern const char* PROFILES_TXT;
+
     // Image locations
     extern const char* LOGO_FILE;
     extern const char* PLAY_IMG;
@@ -97,6 +99,14 @@ namespace file_paths {
     extern const char* EXIT2_IMG;
     extern const char* MOREINFO_IMG;
     extern const char* MOREINFO2_IMG;
+    extern const char* ADD_IMG;
+    extern const char* ADD2_IMG;
+    extern const char* MINUS_IMG;
+    extern const char* MINUS2_IMG;
+    extern const char* MINUS2_IMG;
+    extern const char* DUPLICATE_IMG;
+    extern const char* DUPLICATE2_IMG;
+
 }
 
 namespace constants {

@@ -39,6 +39,8 @@ namespace file_paths {
     const char* TIME_LOG = "./shopifybot/logs.txt";
     const char* TASK_LOG = "./shopifybot/Logs/";
 
+    const char* PROFILES_TXT = "./shopifybot/Infrastructure/profiles.txt";
+
     // Images
     const char* LOGO_FILE = "./shopifybot/Graphics/Assets/logo.png";
     const char* PLAY_IMG = "./shopifybot/Graphics/Assets/play.png";
@@ -58,6 +60,12 @@ namespace file_paths {
     const char* EXIT2_IMG = "./shopifybot/Graphics/Assets/exit2.png";
     const char* MOREINFO_IMG = "./shopifybot/Graphics/Assets/moreinfo.png";
     const char* MOREINFO2_IMG = "./shopifybot/Graphics/Assets/moreinfo2.png";
+    const char* ADD_IMG = "./shopifybot/Graphics/Assets/add.png";
+    const char* ADD2_IMG = "./shopifybot/Graphics/Assets/add2.png";
+    const char* MINUS_IMG = "./shopifybot/Graphics/Assets/minus.png";
+    const char* MINUS2_IMG = "./shopifybot/Graphics/Assets/minus2.png";
+    const char* DUPLICATE_IMG = "./shopifybot/Graphics/Assets/duplicate.png";
+    const char* DUPLICATE2_IMG = "./shopifybot/Graphics/Assets/duplicate2.png";
 }
 
 namespace constants {
