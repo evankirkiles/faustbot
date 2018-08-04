@@ -39,9 +39,21 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : QWidget(parent) {
     // Create normal layouts
     auto mainLayout = new QHBoxLayout();
     mainLayout->setContentsMargins(11, 3, 11, 11);
+    QSizePolicy spLeft(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    spLeft.setHorizontalStretch(1);
+    auto leftColumnWidg = new QWidget();
     auto leftColumn = new QVBoxLayout();
+    leftColumnWidg->setLayout(leftColumn);
+    leftColumnWidg->setSizePolicy(spLeft);
+    leftColumn->setContentsMargins(0, 0, 0, 0);
     auto smallButtonRow = new QHBoxLayout();
+    QSizePolicy spRight(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    spRight.setHorizontalStretch(2);
+    auto rightColumnWidg = new QWidget();
     auto rightColumn = new QVBoxLayout();
+    rightColumnWidg->setLayout(rightColumn);
+    rightColumnWidg->setSizePolicy(spRight);
+    rightColumn->setContentsMargins(0, 0, 0, 0);
     auto titleRow = new QHBoxLayout();
 
     // Create the widgets and add them to their respective layouts
@@ -57,8 +69,8 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : QWidget(parent) {
     titleRow->addWidget(editTitle);
 
     // Finish adding all the layouts
-    mainLayout->addLayout(leftColumn);
-    mainLayout->addLayout(rightColumn);
+    mainLayout->addWidget(leftColumnWidg);
+    mainLayout->addWidget(rightColumnWidg);
     rightColumn->addLayout(titleRow);
     bgLayout->addLayout(mainLayout);
 
