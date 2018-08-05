@@ -23,6 +23,7 @@ country = "United States"
 province = "New York"
 zipcode = "10016"
 phone = "2129539871"
+# {"email":"sneakerbot78@gmail.com","firstname":"Aiden","lastname":"King","address1":"2824 Rosewood Lane","address2":"","city":"New York","country":"United States","province":"New York","zipcode":"10016","phone":"2129539871"}
 # Credit card settings
 ccnumber = "4621 3861 6179 4239"
 ccname = "Aiden King"

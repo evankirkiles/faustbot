@@ -79,6 +79,7 @@ namespace file_paths {
     extern const char* TASK_LOG;
 
     extern const char* PROFILES_TXT;
+    extern const char* TEMPPROFILES_TXT;
 
     // Image locations
     extern const char* LOGO_FILE;

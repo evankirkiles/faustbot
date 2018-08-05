@@ -15,9 +15,19 @@
 #ifndef ifstream
 #include <fstream>
 #endif
+#ifndef algorithm
+#include <algorithm>
+#endif
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+
+// trim from end (in place)
+static inline void rtrim(std::string &s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
+        return !std::isspace(ch);
+    }).base(), s.end());
+}
 
 // Header for the side bar popups, including billing information, proxy information, etc.
 class ProfilesDisplay : public QWidget {
@@ -32,10 +42,14 @@ signals:
     // Called whenever the profiles display is closed
     void closed();
 private slots:
-    // Changes the text fields to the selected profile's values and readies the
+    // Changes the text fields to the selected profile's values
     void select(QString which);
+    // Submits the text fields and overwrites their respective positions in the profiles.txt file
+    void submit();
+    // Creates a new profile called Untitled
+    void createNew();
     // Refreshes the profile list
-    void refresh();
+    void refresh(QModelIndex selected = QModelIndex());
 
 private:
     // Specifies whether the moreInfoDisplay is open or not
@@ -79,6 +93,9 @@ private:
     QLabel* ccardLabel;
     QComboBox* ccard;
     QPushButton* update;
+
+    // Function that returns a 'safe' version of a name (is unique)
+    std::string getSafeName(const int currentIndex = 0, std::string title = "Untitled");
 };
 
 #endif //SHOPIFY_BOT_SIDEBARPOPUPS_HPP

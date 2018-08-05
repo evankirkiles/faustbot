@@ -40,6 +40,7 @@ namespace file_paths {
     const char* TASK_LOG = "./shopifybot/Logs/";
 
     const char* PROFILES_TXT = "./shopifybot/Infrastructure/profiles.txt";
+    const char* TEMPPROFILES_TXT = "./shopifybot/Infrastructure/tempprofiles.txt";
 
     // Images
     const char* LOGO_FILE = "./shopifybot/Graphics/Assets/logo.png";

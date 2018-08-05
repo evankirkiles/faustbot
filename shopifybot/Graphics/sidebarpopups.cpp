@@ -175,10 +175,15 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     // Set the layout finally
     setLayout(externLayout);
 
-    // Connect the refresh button to the submit button for testing purposes
-    connect(update, SIGNAL(clicked()), this, SLOT(refresh()));
+    // Connect the update button to the submit
+    connect(update, SIGNAL(clicked()), this, SLOT(submit()));
     // Connect the select function to the signal produced by the qlistwidget
     connect(profilesListView, SIGNAL(currentTextChanged(QString)), this, SLOT(select(QString)));
+    // Connect the add new function to the signal produced by clicking the plus button
+    connect(addProfileButton, SIGNAL(clicked()), this, SLOT(createNew()));
+
+    // Fill in the profiles listview
+    refresh();
 }
 // Override the column for the profiles display
 void ProfilesDisplay::closeEvent(QCloseEvent* event) {
@@ -186,7 +191,7 @@ void ProfilesDisplay::closeEvent(QCloseEvent* event) {
     QWidget::closeEvent(event);
 }
 // Refreshes the list of profiles, should be called after updates
-void ProfilesDisplay::refresh() {
+void ProfilesDisplay::refresh(QModelIndex selected) {
     // Rereads the profiles file and builds the qlist of profile titles for the listview
     std::ifstream fin(file_paths::PROFILES_TXT);
     std::string str;
@@ -206,7 +211,12 @@ void ProfilesDisplay::refresh() {
     // Close the file
     fin.close();
 
-    select("sadwd");
+    // Select a specified item, useful for the submit function
+    if (selected.isValid()) {
+        profilesListView->setCurrentIndex(selected);
+    } else {
+        profilesListView->setCurrentIndex(profilesListView->indexAt(QPoint(profilesListView->count() - 1,0)));
+    }
 }
 // Changes the text fields to the selected profile's information
 void ProfilesDisplay::select(QString which) {
@@ -225,31 +235,117 @@ void ProfilesDisplay::select(QString which) {
 
             // Use the JSON object to fill in the data fields
             editTitle->setText(which);
-            editTitle->setStyleSheet("color: #e8cb61;");
+            editTitle->setStyleSheet("color: #baa86a;");
             email->setText(jsonObject.value("email").toString());
-            email->setStyleSheet("color: #e8cb61;");
+            email->setStyleSheet("color: #baa86a;");
             firstname->setText(jsonObject.value("firstname").toString());
-            firstname->setStyleSheet("color: #e8cb61;");
+            firstname->setStyleSheet("color: #baa86a;");
             lastname->setText(jsonObject.value("lastname").toString());
-            lastname->setStyleSheet("color: #e8cb61;");
+            lastname->setStyleSheet("color: #baa86a;");
             address1->setText(jsonObject.value("address1").toString());
-            address1->setStyleSheet("color: #e8cb61;");
+            address1->setStyleSheet("color: #baa86a;");
             address2->setText(jsonObject.value("address2").toString());
-            address2->setStyleSheet("color: #e8cb61;");
+            address2->setStyleSheet("color: #baa86a;");
             city->setText(jsonObject.value("city").toString());
-            city->setStyleSheet("color: #e8cb61;");
+            city->setStyleSheet("color: #baa86a;");
             country->setText(jsonObject.value("country").toString());
-            country->setStyleSheet("color: #e8cb61;");
+            country->setStyleSheet("color: #baa86a;");
             province->setText(jsonObject.value("province").toString());
-            province->setStyleSheet("color: #e8cb61;");
+            province->setStyleSheet("color: #baa86a;");
             zipcode->setText(jsonObject.value("zipcode").toString());
-            zipcode->setStyleSheet("color: #e8cb61;");
+            zipcode->setStyleSheet("color: #baa86a;");
             phone->setText(jsonObject.value("phone").toString());
-            phone->setStyleSheet("color: #e8cb61;");
+            phone->setStyleSheet("color: #baa86a;");
             ccard->setCurrentText(jsonObject.value("ccard").toString());
-            ccard->setStyleSheet("color: #e8cb61;");
+            ccard->setStyleSheet("color: #baa86a;");
 
             break;
         }
     }
+}
+// Submits the text to the profiles.txt
+void ProfilesDisplay::submit() {
+    // Initialize input/output streams
+    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::ofstream fileout(file_paths::TEMPPROFILES_TXT);
+    if (!filein || !fileout) { throw std::runtime_error("Error opening profiles file."); }
+
+    // Cycle through the input file until the correct line is found
+    std::string strTemp;
+    bool titleNotChanged = true;
+    while (getline(filein, strTemp)) {
+        // When it finds the correct title, change the text to the JSON formatted string
+        if (strTemp.substr(0, strTemp.find(" :-:")) == profilesListView->currentItem()->text().toStdString() && titleNotChanged) {
+
+            // If there already exists a profile by the same name, edit the title
+
+            strTemp = getSafeName(profilesListView->currentRow(), editTitle->text().toStdString()) +
+                    R"( :-: {"email":")" + email->text().toStdString() +
+                    R"(","firstname":")" + firstname->text().toStdString() + R"(","lastname":")" +
+                      lastname->text().toStdString() + R"(","address1":")" + address1->text().toStdString() +
+                    R"(","address2":")" + address2->text().toStdString() + R"(","city":")" +
+                      city->text().toStdString() + R"(","country":")" + country->text().toStdString() +
+                      R"(","province":")" + province->text().toStdString() + R"(","zipcode":")" +
+                      zipcode->text().toStdString() + R"(","phone":")" + phone->text().toStdString() +
+                      R"(","ccard":")" + ccard->currentText().toStdString() + R"("})";
+            titleNotChanged = false;
+        }
+
+        // Finalize the string formatting and write it to the output file
+        fileout << strTemp << "\n";
+    }
+
+    // Close the files used
+    filein.close();
+    fileout.close();
+
+    // Rename the output file to the input file so it overwrites it and is picked up by the listview
+    std::rename(file_paths::TEMPPROFILES_TXT, file_paths::PROFILES_TXT);
+
+    // Finally update the qlistview display
+    refresh(profilesListView->currentIndex());
+}
+
+// Slot that creates a new profile (called when the plus button is clicked)
+void ProfilesDisplay::createNew() {
+
+    // Opens the profiles file and adds a new profile to the end
+    std::ofstream profilesFile(file_paths::PROFILES_TXT, std::ios_base::app | std::ios_base::out);
+    profilesFile << getSafeName() + R"( :-: {"email":","firstname":"","lastname":"","address1":"","address2":"","city":"","country":"","province":"","zipcode":"","phone":"","ccard":"Random"})" + "\n";
+    profilesFile.close();
+
+    // Then refreshes the profiles view and selects the most recent addition
+    refresh();
+}
+
+// Gets a safe, unique name for a profile, default is Untitled (for add new case)
+std::string ProfilesDisplay::getSafeName(const int currentIndex, std::string title) {
+
+    // Remove whitespace from the end of the title
+    rtrim(title);
+
+    // Iterate through the names and search for number add-on availiability
+    bool nameFound = false;
+    unsigned int modNum = 0;
+    std::string modifier;
+    while (!nameFound) {
+
+        // Iterate through the current profile names
+        for (int i = 0; i < profilesListView->count(); i++) {
+            nameFound = false;
+            QListWidgetItem* item = profilesListView->item(i);
+            // Skip the current index of the profile being edited
+            if (i == currentIndex) { nameFound = true; continue; }
+
+            // If a match is found, update the modifier and rerun the loop
+            if (item->text().toStdString() == title + modifier) {
+                modNum++;
+                modifier = " (" + std::to_string(modNum) + ")";
+                break;
+            }
+            nameFound = true;
+        }
+    }
+
+    return title + modifier;
 }
