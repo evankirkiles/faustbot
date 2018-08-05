@@ -307,4 +307,9 @@ QComboBox QAbstractItemView {
 #profileslistview {
     background-color: #141414;
     border-radius: 8px;
+    font-family: "Futura";
+    color: #e8cb61;
+    font-size: 12px;
+    selection-color: #fce694;
+    selection-background-color: #505050
 }

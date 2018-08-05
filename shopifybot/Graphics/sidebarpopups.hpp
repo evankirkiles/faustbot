@@ -9,9 +9,15 @@
 #include "popups.hpp"
 #endif
 
-#ifndef QListView
-#include <QListView>
+#ifndef QListWidget
+#include <QListWidget>
 #endif
+#ifndef ifstream
+#include <fstream>
+#endif
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 // Header for the side bar popups, including billing information, proxy information, etc.
 class ProfilesDisplay : public QWidget {
@@ -25,6 +31,11 @@ public:
 signals:
     // Called whenever the profiles display is closed
     void closed();
+private slots:
+    // Changes the text fields to the selected profile's values and readies the
+    void select(QString which);
+    // Refreshes the profile list
+    void refresh();
 
 private:
     // Specifies whether the moreInfoDisplay is open or not
@@ -40,11 +51,13 @@ private:
     ClickableImage* deleteProfileButton;
 
     // List view of all the profiles currently opened in the left column
-    QListView* profilesListView;
+    QListWidget* profilesListView;
 
     // All the lineedits and the labels for editing the profiles
     QLabel* titleLabel;
     QLineEdit* editTitle;
+    QLabel* emailLabel;
+    QLineEdit* email;
     QLabel* firstnameLabel;
     QLineEdit* firstname;
     QLabel* lastnameLabel;
