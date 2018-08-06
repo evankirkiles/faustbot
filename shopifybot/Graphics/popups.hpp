@@ -50,6 +50,9 @@
 #ifndef QPropertyAnimation
 #include <QPropertyAnimation>
 #endif
+#ifndef ifstream
+#include <fstream>
+#endif
 
 #include "titlebar.hpp"
 
@@ -130,7 +133,6 @@ public:
 
     // Override window closed event
     void closeEvent(QCloseEvent *event) override;
-
 signals:
     // Called whenever the addtask window is closed
     void closed();
@@ -189,6 +191,9 @@ private:
     QLabel* titleLabel;
     QLineEdit* title;
     QPushButton* submit;
+
+    // Builds the qcombobox used for profiles
+    void buildProfilesBox();
 };
 
 #endif //SHOPIFY_BOT_POPUPS_HPP

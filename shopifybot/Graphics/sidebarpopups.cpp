@@ -193,6 +193,8 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     connect(profilesListView, SIGNAL(currentTextChanged(QString)), this, SLOT(select(QString)));
     // Connect the add new function to the signal produced by clicking the plus button
     connect(addProfileButton, SIGNAL(clicked()), this, SLOT(createNew()));
+    // Connect the duplicate function to the signal produced by clicking the dupe button
+    connect(duplicateProfileButton, SIGNAL(clicked()), this, SLOT(duplicateProfile()));
     // Connect the delete function to the signal produced by clicking the subtract button
     connect(deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteProfile()));
 
@@ -205,7 +207,7 @@ void ProfilesDisplay::closeEvent(QCloseEvent* event) {
     QWidget::closeEvent(event);
 }
 // Refreshes the list of profiles, should be called after updates
-void ProfilesDisplay::refresh(QModelIndex selected) {
+void ProfilesDisplay::refresh(int selected) {
     // Rereads the profiles file and builds the qlist of profile titles for the listview
     std::ifstream fin(file_paths::PROFILES_TXT);
     std::string str;
@@ -226,11 +228,7 @@ void ProfilesDisplay::refresh(QModelIndex selected) {
     fin.close();
 
     // Select a specified item, useful for the submit function
-    if (selected.isValid()) {
-        profilesListView->setCurrentIndex(selected);
-    } else {
-        profilesListView->setCurrentIndex(profilesListView->indexAt(QPoint(profilesListView->count() - 1,0)));
-    }
+    profilesListView->setCurrentRow(selected);
 }
 // Changes the text fields to the selected profile's information
 void ProfilesDisplay::select(QString which) {
@@ -322,7 +320,7 @@ void ProfilesDisplay::submit() {
     std::rename(file_paths::TEMPPROFILES_TXT, file_paths::PROFILES_TXT);
 
     // Finally update the qlistview display
-    refresh(profilesListView->currentIndex());
+    refresh(profilesListView->currentRow());
 }
 
 // Slot that creates a new profile (called when the plus button is clicked)
@@ -334,7 +332,7 @@ void ProfilesDisplay::createNew() {
     profilesFile.close();
 
     // Then refreshes the profiles view and selects the most recent addition
-    refresh();
+    refresh(profilesListView->count());
 }
 
 // Gets a safe, unique name for a profile, default is Untitled (for add new case)
@@ -372,6 +370,38 @@ std::string ProfilesDisplay::getSafeName(bool addingnew, const int currentIndex,
     return title + modifier;
 }
 
+// Duplicates the currently selected profile
+void ProfilesDisplay::duplicateProfile() {
+    // Initialize input/output streams
+    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::ofstream fileout(file_paths::TEMPPROFILES_TXT);
+    if (!filein || !fileout) { throw std::runtime_error("Error opening profiles file."); }
+
+    // Find the line with the selected profile, then duplicate it in the temp file
+    std::string strTemp;
+    std::string toDuplicate;
+    while (getline(filein, strTemp)) {
+        // Check if the line matches the designated duplicate file
+        std::string title = profilesListView->currentItem()->text().toStdString();
+        if (strTemp.substr(0, strTemp.find(" :-:")) == title) {
+            // If it does, then write the line and then write a second same line in the temp file
+            fileout << strTemp << "\n" << getSafeName(true, 0, title) << strTemp.substr(title.length()) << "\n";
+        } else {
+            fileout << strTemp << "\n";
+        }
+    }
+
+    // Close the files used
+    filein.close();
+    fileout.close();
+
+    // Rename the output file to the input file so it overwrites it and is picked up by the listview
+    std::rename(file_paths::TEMPPROFILES_TXT, file_paths::PROFILES_TXT);
+
+    // Finally update the qlistview display
+    refresh(profilesListView->currentRow() + 1);
+}
+
 // Deletes the currently selected profile
 void ProfilesDisplay::deleteProfile() {
     // Initialize input/output streams
@@ -396,5 +426,21 @@ void ProfilesDisplay::deleteProfile() {
     std::rename(file_paths::TEMPPROFILES_TXT, file_paths::PROFILES_TXT);
 
     // Finally update the qlistview display
-    refresh();
+    refresh(std::max(profilesListView->currentRow() - 1, 0));
+
+    // If the last one has been deleted, then clear all the input fields
+    if (profilesListView->count() == 0) {
+        editTitle->setText("");
+        email->setText("");
+        firstname->setText("");
+        lastname->setText("");
+        address1->setText("");
+        address2->setText("");
+        city->setText("");
+        country->setText("");
+        province->setText("");
+        zipcode->setText("");
+        phone->setText("");
+        ccard->setCurrentText("Random");
+    }
 }

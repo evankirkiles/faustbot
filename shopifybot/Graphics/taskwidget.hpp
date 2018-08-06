@@ -227,6 +227,9 @@ private:
     QLineEdit* title;
     QPushButton* cancel;
     QPushButton* submit;
+
+    // Builds the profile combobox
+    void buildProfiles();
 };
 
 // Contains the class that builds a Task widget to be added to the scroll area

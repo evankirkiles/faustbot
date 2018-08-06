@@ -48,10 +48,12 @@ private slots:
     void submit();
     // Creates a new profile called Untitled
     void createNew();
+    // Duplicates the selected profile
+    void duplicateProfile();
     // Deletes the selected profile
     void deleteProfile();
     // Refreshes the profile list
-    void refresh(QModelIndex selected = QModelIndex());
+    void refresh(int selected = 0);
 
 private:
     // Specifies whether the moreInfoDisplay is open or not

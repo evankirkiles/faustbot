@@ -79,6 +79,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     startAtTitle->setObjectName("task_tiny_text");
     startAt->setObjectName("task_dateedit");
     startAt->setDisplayFormat("yyyy-MM-dd hh:mm");
+    startAt->setDateTime(task->startat);
     auto sizeHor = new QHBoxLayout();
     auto sizetitle = new QLabel("Size: ", this);
     sizetitle->setObjectName("task_mediocre_title_v2");
@@ -415,6 +416,7 @@ EditTaskDisplay::EditTaskDisplay(const QString& p_title, const QString& p_websit
     profileLabel->setObjectName("addtask_mediocre_text");
     profileLabel->setMaximumWidth(50);
     profile = new QComboBox(this);
+    buildProfiles();
     proxyLabel = new QLabel("Proxy: ", this);
     proxyLabel->setObjectName("addtask_mediocre_text");
     proxyLabel->setMaximumWidth(45);
@@ -483,4 +485,23 @@ void EditTaskDisplay::closeEvent(QCloseEvent *event) {
     // Emit the closed signal and then proceed to cleanup
     emit closed();
     QWidget::closeEvent(event);
+}
+
+// TODO: Make sure that when a profile is deleted, all tasks using said profile revert to using "Random"
+// Builds the profiles combobox
+void EditTaskDisplay::buildProfiles() {
+    // First add "Random" as an option
+    profile->addItem("Random");
+
+    // Open the profiles.txt
+    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::string tempStr;
+
+    // Cycle through each line and get the profiles' titles
+    while (getline(filein, tempStr)) {
+        profile->addItem(tempStr.substr(0, tempStr.find(" :-:")).c_str());
+    }
+
+    // Close the file in
+    filein.close();
 }

@@ -82,7 +82,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     addtask = new QPushButton("NEW TASK", this);
     addtask->setObjectName("addtaskbutton");
     addtask->setFixedHeight(70);
-    billing = new QPushButton("Billing Info", this);
+    billing = new QPushButton("Profiles", this);
     billing->setObjectName("sidebuttons");
     proxies = new QPushButton("Proxies", this);
     proxies->setObjectName("sidebuttons");

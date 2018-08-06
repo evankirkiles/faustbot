@@ -162,7 +162,7 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     colorKeywordLayout->addWidget(colorKeywords);
     mainLayout->addLayout(colorKeywordLayout);
 
-    // SIZE & PROXY ROW
+    // SIZE & ETA & COPIES ROW
     sizeLabel = new QLabel("Size: ", this);
     sizeLabel->setObjectName("addtask_mediocre_text");
     sizeLabel->setMaximumWidth(35);
@@ -195,11 +195,12 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     sizeEtaLayout->addStretch();
     mainLayout->addLayout(sizeEtaLayout);
 
-    // FREQUENCY & PROXY ROW
+    // PROFILES & PROXY ROW
     profileLabel = new QLabel("Profile: ", this);
     profileLabel->setObjectName("addtask_mediocre_text");
     profileLabel->setMaximumWidth(50);
     profile = new QComboBox(this);
+    buildProfilesBox();
     proxyLabel = new QLabel("Proxy: ", this);
     proxyLabel->setObjectName("addtask_mediocre_text");
     proxyLabel->setMaximumWidth(45);
@@ -286,6 +287,24 @@ void AddTaskDisplay::closeEvent(QCloseEvent *event) {
     // Emit the closed signal and then proceed to cleanup
     emit closed();
     QWidget::closeEvent(event);
+}
+
+// Scans the profiles.txt file for the titles of each profile
+void AddTaskDisplay::buildProfilesBox() {
+    // First add "Random" as an option
+    profile->addItem("Random");
+
+    // Open the profiles.txt
+    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::string tempStr;
+
+    // Cycle through each line and get the profiles' titles
+    while (getline(filein, tempStr)) {
+        profile->addItem(tempStr.substr(0, tempStr.find(" :-:")).c_str());
+    }
+
+    // Close the file in
+    filein.close();
 }
 
 // MORE INFO DISPLAY ClASS
