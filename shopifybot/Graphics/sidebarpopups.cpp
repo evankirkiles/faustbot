@@ -107,50 +107,62 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     leftColumn->addWidget(profilesListView);
     titleLabel->setObjectName("task_important_text");
     editTitle->setObjectName("task_title_lineedit");
+    connect(editTitle, &QLineEdit::textEdited, [this] () { editTitle->setStyleSheet("color: #69c64f;"); } );
     titleRow->addWidget(titleLabel);
     titleRow->addWidget(editTitle);
     emailLabel->setObjectName("addtask_mediocre_text");
     email->setObjectName("addtask_editbox");
+    connect(email, &QLineEdit::textEdited, [this] () { email->setStyleSheet("color: #69c64f;"); } );
     emailRow->addWidget(emailLabel);
     emailRow->addWidget(email);
     firstnameLabel->setObjectName("addtask_mediocre_text");
     firstname->setObjectName("addtask_editbox");
+    connect(firstname, &QLineEdit::textEdited, [this] () { firstname->setStyleSheet("color: #69c64f;"); } );
     fNameRow->addWidget(firstnameLabel);
     fNameRow->addWidget(firstname);
     lastnameLabel->setObjectName("addtask_mediocre_text");
     lastname->setObjectName("addtask_editbox");
+    connect(lastname, &QLineEdit::textEdited, [this] () { lastname->setStyleSheet("color: #69c64f;"); } );
     lNameRow->addWidget(lastnameLabel);
     lNameRow->addWidget(lastname);
     address1Label->setObjectName("addtask_mediocre_text");
     address1->setObjectName("addtask_editbox");
+    connect(address1, &QLineEdit::textEdited, [this] () { address1->setStyleSheet("color: #69c64f;"); } );
     address1Row->addWidget(address1Label);
     address1Row->addWidget(address1);
     address2Label->setObjectName("addtask_mediocre_text");
     address2->setObjectName("addtask_editbox");
+    connect(address2, &QLineEdit::textEdited, [this] () { address2->setStyleSheet("color: #69c64f;"); } );
     address2Row->addWidget(address2Label);
     address2Row->addWidget(address2);
     cityLabel->setObjectName("addtask_mediocre_text");
     city->setObjectName("addtask_editbox");
+    connect(city, &QLineEdit::textEdited, [this] () { city->setStyleSheet("color: #69c64f;"); } );
     cityZipRow->addWidget(cityLabel);
     cityZipRow->addWidget(city);
     zipcodeLabel->setObjectName("addtask_mediocre_text");
     zipcode->setObjectName("addtask_editbox");
     zipcode->setMaximumWidth(60);
+    connect(zipcode, &QLineEdit::textEdited, [this] () { zipcode->setStyleSheet("color: #69c64f;"); } );
     cityZipRow->addWidget(zipcodeLabel);
     cityZipRow->addWidget(zipcode);
     countryLabel->setObjectName("addtask_mediocre_text");
     country->setObjectName("addtask_editbox");
+    connect(country, &QLineEdit::textEdited, [this] () { country->setStyleSheet("color: #69c64f;"); } );
     provinceLabel->setObjectName("addtask_mediocre_text");
     province->setObjectName("addtask_editbox");
+    connect(province, &QLineEdit::textEdited, [this] () { province->setStyleSheet("color: #69c64f;"); } );
     countryRow->addWidget(countryLabel);
     countryRow->addWidget(country);
     countryRow->addWidget(provinceLabel);
     countryRow->addWidget(province);
     phoneLabel->setObjectName("addtask_mediocre_text");
     phone->setObjectName("addtask_editbox");
+    connect(phone, &QLineEdit::textEdited, [this] () { phone->setStyleSheet("color: #69c64f;"); } );
     phoneRow->addWidget(phoneLabel);
     phoneRow->addWidget(phone);
     ccardLabel->setObjectName("addtask_mediocre_text");
+    connect(ccard, &QComboBox::currentTextChanged, [this] () { ccard->setStyleSheet("color: #69c64f;"); } );
     update->setObjectName("addtaskbutton");
     update->setFixedSize(100, 35);
     ccardRow->addWidget(ccardLabel);
@@ -181,6 +193,8 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     connect(profilesListView, SIGNAL(currentTextChanged(QString)), this, SLOT(select(QString)));
     // Connect the add new function to the signal produced by clicking the plus button
     connect(addProfileButton, SIGNAL(clicked()), this, SLOT(createNew()));
+    // Connect the delete function to the signal produced by clicking the subtract button
+    connect(deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteProfile()));
 
     // Fill in the profiles listview
     refresh();
@@ -265,6 +279,11 @@ void ProfilesDisplay::select(QString which) {
 }
 // Submits the text to the profiles.txt
 void ProfilesDisplay::submit() {
+    // Make sure there is actually a selected item
+    if (profilesListView->selectedItems().isEmpty()) {
+        return;
+    }
+
     // Initialize input/output streams
     std::ifstream filein(file_paths::PROFILES_TXT);
     std::ofstream fileout(file_paths::TEMPPROFILES_TXT);
@@ -279,7 +298,7 @@ void ProfilesDisplay::submit() {
 
             // If there already exists a profile by the same name, edit the title
 
-            strTemp = getSafeName(profilesListView->currentRow(), editTitle->text().toStdString()) +
+            strTemp = getSafeName(false, profilesListView->currentRow(), editTitle->text().toStdString()) +
                     R"( :-: {"email":")" + email->text().toStdString() +
                     R"(","firstname":")" + firstname->text().toStdString() + R"(","lastname":")" +
                       lastname->text().toStdString() + R"(","address1":")" + address1->text().toStdString() +
@@ -311,7 +330,7 @@ void ProfilesDisplay::createNew() {
 
     // Opens the profiles file and adds a new profile to the end
     std::ofstream profilesFile(file_paths::PROFILES_TXT, std::ios_base::app | std::ios_base::out);
-    profilesFile << getSafeName() + R"( :-: {"email":","firstname":"","lastname":"","address1":"","address2":"","city":"","country":"","province":"","zipcode":"","phone":"","ccard":"Random"})" + "\n";
+    profilesFile << getSafeName(true) + R"( :-: {"email":","firstname":"","lastname":"","address1":"","address2":"","city":"","country":"","province":"","zipcode":"","phone":"","ccard":"Random"})" + "\n";
     profilesFile.close();
 
     // Then refreshes the profiles view and selects the most recent addition
@@ -319,10 +338,13 @@ void ProfilesDisplay::createNew() {
 }
 
 // Gets a safe, unique name for a profile, default is Untitled (for add new case)
-std::string ProfilesDisplay::getSafeName(const int currentIndex, std::string title) {
+std::string ProfilesDisplay::getSafeName(bool addingnew, const int currentIndex, std::string title) {
 
     // Remove whitespace from the end of the title
     rtrim(title);
+
+    // If the profilesListView is empty, then simply return the title without ending whitespace
+    if (profilesListView->count() == 0) { return title; }
 
     // Iterate through the names and search for number add-on availiability
     bool nameFound = false;
@@ -335,7 +357,7 @@ std::string ProfilesDisplay::getSafeName(const int currentIndex, std::string tit
             nameFound = false;
             QListWidgetItem* item = profilesListView->item(i);
             // Skip the current index of the profile being edited
-            if (i == currentIndex) { nameFound = true; continue; }
+            if (i == currentIndex && !addingnew) { nameFound = true; continue; }
 
             // If a match is found, update the modifier and rerun the loop
             if (item->text().toStdString() == title + modifier) {
@@ -348,4 +370,31 @@ std::string ProfilesDisplay::getSafeName(const int currentIndex, std::string tit
     }
 
     return title + modifier;
+}
+
+// Deletes the currently selected profile
+void ProfilesDisplay::deleteProfile() {
+    // Initialize input/output streams
+    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::ofstream fileout(file_paths::TEMPPROFILES_TXT);
+    if (!filein || !fileout) { throw std::runtime_error("Error opening profiles file."); }
+
+    // Find the line with the given profile; then delete it in the temp file
+    std::string strTemp;
+    while(getline(filein, strTemp)) {
+        // When it finds the correct title, do not write the line
+        if (strTemp.substr(0, strTemp.find(" :-:")) != profilesListView->currentItem()->text().toStdString()) {
+            fileout << strTemp << "\n";
+        }
+    }
+
+    // Close the files used
+    filein.close();
+    fileout.close();
+
+    // Rename the output file to the input file so it overwrites it and is picked up by the listview
+    std::rename(file_paths::TEMPPROFILES_TXT, file_paths::PROFILES_TXT);
+
+    // Finally update the qlistview display
+    refresh();
 }

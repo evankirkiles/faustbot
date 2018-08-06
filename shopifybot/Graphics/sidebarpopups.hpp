@@ -48,6 +48,8 @@ private slots:
     void submit();
     // Creates a new profile called Untitled
     void createNew();
+    // Deletes the selected profile
+    void deleteProfile();
     // Refreshes the profile list
     void refresh(QModelIndex selected = QModelIndex());
 
@@ -95,7 +97,7 @@ private:
     QPushButton* update;
 
     // Function that returns a 'safe' version of a name (is unique)
-    std::string getSafeName(const int currentIndex = 0, std::string title = "Untitled");
+    std::string getSafeName(bool addingnew = false, int currentIndex = 0, std::string title = "Untitled");
 };
 
 #endif //SHOPIFY_BOT_SIDEBARPOPUPS_HPP
