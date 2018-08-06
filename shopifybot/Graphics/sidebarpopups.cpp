@@ -12,7 +12,14 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
                                                                                         file_paths::DUPLICATE_IMG, this)),
                                                     deleteProfileButton(new ClickableImage(26, 26, 2, file_paths::MINUS2_IMG,
                                                                                         file_paths::MINUS_IMG, this)),
+                                                    addCreditCardButton(new ClickableImage(26, 26, 2, file_paths::ADD2_IMG,
+                                                                                        file_paths::ADD_IMG, this)),
+                                                    deleteCreditCardButton(new ClickableImage(26, 26, 2, file_paths::MINUS2_IMG,
+                                                                                        file_paths::MINUS_IMG, this)),
+                                                    editCreditCardButton(new ClickableImage(26, 26, 2, file_paths::EDIT2_IMG,
+                                                                                        file_paths::EDIT_IMG, this)),
                                                     profilesListView(new QListWidget(this)),
+                                                    profileViewTitle(new QLabel("Profiles", this)),
                                                     titleLabel(new QLabel("Title: ", this)),
                                                     editTitle(new QLineEdit(this)),
                                                     emailLabel(new QLabel("Email:", this)),
@@ -38,6 +45,8 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
                                                     ccardLabel(new QLabel("Credit Card:", this)),
                                                     ccard(new QComboBox(this)),
                                                     update(new QPushButton("UPDATE", this)),
+                                                    creditcardViewTitle(new QLabel("Credit Cards", this)),
+                                                    creditcardsListView(new QListWidget(this)),
                                                     QWidget(parent) {
 
     // Set window properties
@@ -81,9 +90,17 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     auto smallButtonRow = new QHBoxLayout();
     QSizePolicy spRight(QSizePolicy::Preferred, QSizePolicy::Preferred);
     spRight.setHorizontalStretch(2);
+    profileViewTitle->setObjectName("addtask_mediocre_text");
+    smallButtonRow->addWidget(profileViewTitle);
     smallButtonRow->addWidget(addProfileButton);
     smallButtonRow->addWidget(duplicateProfileButton);
     smallButtonRow->addWidget(deleteProfileButton);
+    auto secondSmallButtonRow = new QHBoxLayout();
+    creditcardViewTitle->setObjectName("addtask_mediocre_text");
+    secondSmallButtonRow->addWidget(creditcardViewTitle);
+    secondSmallButtonRow->addWidget(addCreditCardButton);
+    secondSmallButtonRow->addWidget(deleteCreditCardButton);
+    secondSmallButtonRow->addWidget(editCreditCardButton);
     auto rightColumnWidg = new QWidget();
     auto rightColumn = new QVBoxLayout();
     rightColumnWidg->setLayout(rightColumn);
@@ -104,7 +121,16 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     leftColumn->addLayout(smallButtonRow);
     profilesListView->setObjectName("profileslistview");
     profilesListView->setSelectionMode(QAbstractItemView::SingleSelection);
+    profilesListView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    profilesListView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     leftColumn->addWidget(profilesListView);
+    leftColumn->addLayout(secondSmallButtonRow);
+    creditcardsListView->setObjectName("profileslistview");
+    creditcardsListView->setMaximumHeight(120);
+    creditcardsListView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    creditcardsListView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    profilesListView->setSelectionMode(QAbstractItemView::SingleSelection);
+    leftColumn->addWidget(creditcardsListView);
     titleLabel->setObjectName("task_important_text");
     editTitle->setObjectName("task_title_lineedit");
     connect(editTitle, &QLineEdit::textEdited, [this] () { editTitle->setStyleSheet("color: #69c64f;"); } );

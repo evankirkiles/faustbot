@@ -373,7 +373,7 @@ void MoreInfoDisplay::fadeOut() {
     a->setDuration(250);
     a->setStartValue(1);
     a->setEndValue(0);
-    a->setEasingCurve(QEasingCurve::OutInQuad);
+    a->setEasingCurve(QEasingCurve::InOutQuad);
     a->start(QPropertyAnimation::DeleteWhenStopped);
     connect(a, SIGNAL(finished()), this, SLOT(close()));
 }

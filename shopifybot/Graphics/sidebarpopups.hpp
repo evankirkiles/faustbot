@@ -64,6 +64,7 @@ private:
     DarkTitleBar* dtb;
 
     // Icons for adding, duplicating, and deleting profiles
+    QLabel* profileViewTitle;
     ClickableImage* addProfileButton;
     ClickableImage* duplicateProfileButton;
     ClickableImage* deleteProfileButton;
@@ -97,6 +98,15 @@ private:
     QLabel* ccardLabel;
     QComboBox* ccard;
     QPushButton* update;
+
+    // The next row of small buttons and the credit card label
+    QLabel* creditcardViewTitle;
+    ClickableImage* addCreditCardButton;
+    ClickableImage* deleteCreditCardButton;
+    ClickableImage* editCreditCardButton;
+
+    // List view of all the credit cards currently opened in the left column
+    QListWidget* creditcardsListView;
 
     // Function that returns a 'safe' version of a name (is unique)
     std::string getSafeName(bool addingnew = false, int currentIndex = 0, std::string title = "Untitled");

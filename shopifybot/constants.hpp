@@ -80,6 +80,8 @@ namespace file_paths {
 
     extern const char* PROFILES_TXT;
     extern const char* TEMPPROFILES_TXT;
+    extern const char* CCARD_TXT;
+    extern const char* TEMPCCARD_TXT;
 
     // Image locations
     extern const char* LOGO_FILE;
