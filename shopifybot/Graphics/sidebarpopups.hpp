@@ -34,7 +34,7 @@ class AddCreditCardDisplay : public QWidget {
     Q_OBJECT
 public:
     // Constructor that builds the add credit card window
-    explicit AddCreditCardDisplay(QWidget *parent = 0);
+    explicit AddCreditCardDisplay(QString profiletitle = QString(""), QWidget *parent = 0);
     // Override the window closed
     void closeEvent(QCloseEvent* event) override;
 
@@ -45,6 +45,9 @@ signals:
     void submitted();
 
 private:
+    // The title of the credit card; if exists then edit task rather than add task
+    QString ccprofiletitle;
+
     // Dark Title bar widget
     DarkTitleBar* dtb;
 
@@ -62,6 +65,9 @@ private:
 
     // The push button to submit the credit card
     QPushButton* submit;
+
+    // Function to fill in the credit card information being edited
+    void fillCCInfo();
 };
 
 // Header for the side bar popups, including billing information, proxy information, etc.
@@ -89,6 +95,8 @@ private slots:
     void deleteProfile();
     // Refreshes the profile list
     void refresh(int selected = 0);
+    // Refreshes the credit card list
+    void refreshCC(int selected = 0);
     // Builds the add credit card display
     void addCC();
 

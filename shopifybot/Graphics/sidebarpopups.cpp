@@ -258,6 +258,30 @@ void ProfilesDisplay::refresh(int selected) {
     // Select a specified item, useful for the submit function
     profilesListView->setCurrentRow(selected);
 }
+// Refreshes the list of credit cards, should be called after updates
+void ProfilesDisplay::refreshCC(int selected) {
+    // Rereads teh credit cards file and builds the qlist of creidt card titles for the listview
+    std::ifstream fin(file_paths::CCARD_TXT);
+    std::string str;
+
+    // Reset the list view
+    creditcardsListView->clear();
+
+    // Cycle through the lines and get the title of each credit card profile
+    while (getline(fin, str)) {
+        // Check for the title identifier and add the preceding substring to the QList
+        const unsigned long titlePos = str.find(" :-:");
+        if (titlePos != std::string::npos) {
+            creditcardsListView->addItem(str.substr(0, titlePos).c_str());
+        }
+    }
+
+    // Close the file
+    fin.close();
+
+    // Select the specified item, useful for the submit function
+    creditcardsListView->setCurrentRow(selected);
+}
 // Changes the text fields to the selected profile's information
 void ProfilesDisplay::select(QString which) {
     // Reads the profiles file and finds the JSON data for the given profile title
@@ -267,9 +291,9 @@ void ProfilesDisplay::select(QString which) {
     // Cycle through the lines and get the title of each profile
     while (getline(fin, str)) {
         // Check for the title identifier and parse through its JSON data
-        const unsigned long titlePos = str.find(which.toStdString());
-        if (titlePos != std::string::npos) {
-            str = str.substr(titlePos + which.toStdString().size() + 5);
+        const unsigned long titlePos = str.find(std::string(" :-:")
+        if (str.substr(0, titlePos) != which.toStdString()) {
+            str = str.substr(titlePos + 4);
             QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(str.c_str()).toUtf8());
             QJsonObject jsonObject = jsonDoc.object();
 
@@ -489,11 +513,18 @@ void ProfilesDisplay::addCC() {
 
     // Make necessary connections
     connect(accd, &AddCreditCardDisplay::closed, [this] () { accdOpen = false; });
+    connect(accd, &AddCreditCardDisplay::submitted, [this] () {
+        if (accd->windowTitle().toStdString().substr(0, 3) == "Add") {
+            refreshCC(creditcardsListView->count() + 1);
+        } else {
+            refreshCC(creditcardsListView->currentRow());
+        }
+    });
 }
 
 // ADD CREDIT CARD DISPLAY
 // Constructor which builds the credit card add display
-AddCreditCardDisplay::AddCreditCardDisplay(QWidget *parent) :
+AddCreditCardDisplay::AddCreditCardDisplay(const QString profiletitle, QWidget *parent) :
         titleLabel(new QLabel("Title:", this)),
         title(new QLineEdit(this)),
         ccnumLabel(new QLabel("Credit Card:", this)),
@@ -505,11 +536,16 @@ AddCreditCardDisplay::AddCreditCardDisplay(QWidget *parent) :
         ccccvLabel(new QLabel("CCV:", this)),
         ccccv(new QLineEdit(this)),
         submit(new QPushButton("ADD", this)),
+        ccprofiletitle(profiletitle),
         QWidget(parent) {
 
     // Set window properties
     setFixedSize(400, 200);
-    setWindowTitle("Add Credit Card");
+    if (!ccprofiletitle.isEmpty()) {
+        setWindowTitle(QString(std::string("Edit Credit Card \"" + ccprofiletitle.toStdString() + "\"").c_str()));
+    } else {
+        setWindowTitle("Add Credit Card");
+    }
     setWindowFlags(Qt::FramelessWindowHint);
     setFocusPolicy(Qt::ClickFocus);
     setAttribute(Qt::WA_QuitOnClose, false);
@@ -562,6 +598,7 @@ AddCreditCardDisplay::AddCreditCardDisplay(QWidget *parent) :
     ccnameLayout->addWidget(ccname);
     ccdateLabel->setObjectName("addtask_mediocre_text");
     ccdate->setObjectName("task_dateedit");
+    ccdate->setDisplayFormat("MM/yy");
     ccccvLabel->setObjectName("addtask_mediocre_text");
     ccccv->setObjectName("addtask_editbox");
     ccccv->setContentsMargins(0, 0, 5, 0);
@@ -573,8 +610,41 @@ AddCreditCardDisplay::AddCreditCardDisplay(QWidget *parent) :
     ccdateccvsubmitLayout->addWidget(ccccv);
     ccdateccvsubmitLayout->addWidget(submit);
 
+    // If editing, then fill the credit card info
+    if (!ccprofiletitle.isEmpty()) {
+        fillCCInfo();
+    }
+
     bgLayout->addLayout(mainLayout);
     setLayout(externLayout);
+}
+
+// Fills in the necessary fields for when editing a card
+void AddCreditCardDisplay::fillCCInfo() {
+
+    // Searches the credit card text file for the given title being edited
+    std::ifstream filein(file_paths::CCARD_TXT);
+    std::string strTemp;
+
+    // Cycle through the Credit Card profiles until a match is found
+    while (getline(filein, strTemp)) {
+        // Check for the title identifier and parse through its JSON data
+        const unsigned long titlePos = strTemp.find(std::string(" :-:"));
+        if (strTemp.substr(0, titlePos) != ccprofiletitle.toStdString()) {
+            strTemp = strTemp.substr(titlePos + 4);
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(strTemp.c_str()).toUtf8());
+            QJsonObject jsonObject = jsonDoc.object();
+
+            // Use the JSON object to fill in the data fields
+            title->setText(ccprofiletitle);
+            ccnum->setText(jsonObject.value("ccnum").toString());
+            ccname->setText(jsonObject.value("ccname").toString());
+            QDate expiryDate = QDate::fromString(jsonObject.value("ccmonth").toString() + QString("/") + jsonObject.value("ccyear").toString(), QString("M/yyyy"));
+            ccdate->setDate(expiryDate);
+            ccccv->setText(jsonObject.value("ccccv").toString());
+        }
+    }
+
 }
 
 // Override the window closed display
