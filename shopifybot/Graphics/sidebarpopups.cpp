@@ -223,6 +223,8 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     connect(duplicateProfileButton, SIGNAL(clicked()), this, SLOT(duplicateProfile()));
     // Connect the delete function to the signal produced by clicking the subtract button
     connect(deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteProfile()));
+    // Connect the add credit card function to hte signal produced by clicking the lower add button
+    connect(addCreditCardButton, SIGNAL(clicked()), this, SLOT(addCC()));
 
     // Fill in the profiles listview
     refresh();
@@ -469,4 +471,114 @@ void ProfilesDisplay::deleteProfile() {
         phone->setText("");
         ccard->setCurrentText("Random");
     }
+}
+
+// Builds the add credit card display
+void ProfilesDisplay::addCC() {
+
+    // If there is already a window open, then just raise it
+    if (accdOpen) {
+        accd->raise();
+        accd->setFocus();
+        return;
+    }
+    // Otherwise build a new add credit card window and show it
+    accd = new AddCreditCardDisplay();
+    accd->show();
+    accdOpen = true;
+
+    // Make necessary connections
+    connect(accd, &AddCreditCardDisplay::closed, [this] () { accdOpen = false; });
+}
+
+// ADD CREDIT CARD DISPLAY
+// Constructor which builds the credit card add display
+AddCreditCardDisplay::AddCreditCardDisplay(QWidget *parent) :
+        titleLabel(new QLabel("Title:", this)),
+        title(new QLineEdit(this)),
+        ccnumLabel(new QLabel("Credit Card:", this)),
+        ccnum(new QLineEdit(this)),
+        ccnameLabel(new QLabel("Name:", this)),
+        ccname(new QLineEdit(this)),
+        ccdateLabel(new QLabel("Expiry Date:", this)),
+        ccdate(new QDateEdit(this)),
+        ccccvLabel(new QLabel("CCV:", this)),
+        ccccv(new QLineEdit(this)),
+        submit(new QPushButton("ADD", this)),
+        QWidget(parent) {
+
+    // Set window properties
+    setFixedSize(400, 200);
+    setWindowTitle("Add Credit Card");
+    setWindowFlags(Qt::FramelessWindowHint);
+    setFocusPolicy(Qt::ClickFocus);
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Create the dark title bar
+    dtb = new DarkTitleBar(this, true);
+
+    // Set the stylesheet for the window
+    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    setStyleSheet(StyleSheet);
+
+    // Create external qframe and layouts for dtb
+    auto externLayout = new QVBoxLayout();
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    auto bgLayout = new QVBoxLayout();
+    bgLayout->setContentsMargins(0, 0, 0, 0);
+    bg->setObjectName("main_window");
+    bg->setLayout(bgLayout);
+    bgLayout->addWidget(dtb);
+    externLayout->addWidget(bg);
+
+    // Create sub layouts
+    auto mainLayout = new QVBoxLayout();
+    mainLayout->setContentsMargins(11, 3, 11, 11);
+    auto titleLayout = new QHBoxLayout();
+    mainLayout->addLayout(titleLayout);
+    auto ccnumLayout = new QHBoxLayout();
+    mainLayout->addLayout(ccnumLayout);
+    auto ccnameLayout = new QHBoxLayout();
+    mainLayout->addLayout(ccnameLayout);
+    auto ccdateccvsubmitLayout = new QHBoxLayout();
+    mainLayout->addLayout(ccdateccvsubmitLayout);
+
+    // Add the labels and lineedits
+    titleLabel->setObjectName("task_important_text");
+    title->setObjectName("task_title_lineedit");
+    titleLayout->addWidget(titleLabel);
+    titleLayout->addWidget(title);
+    ccnumLabel->setObjectName("addtask_mediocre_text");
+    ccnum->setObjectName("addtask_editbox");
+    ccnumLayout->addWidget(ccnumLabel);
+    ccnumLayout->addWidget(ccnum);
+    ccnameLabel->setObjectName("addtask_mediocre_text");
+    ccname->setObjectName("addtask_editbox");
+    ccnameLayout->addWidget(ccnameLabel);
+    ccnameLayout->addWidget(ccname);
+    ccdateLabel->setObjectName("addtask_mediocre_text");
+    ccdate->setObjectName("task_dateedit");
+    ccccvLabel->setObjectName("addtask_mediocre_text");
+    ccccv->setObjectName("addtask_editbox");
+    ccccv->setContentsMargins(0, 0, 5, 0);
+    submit->setObjectName("addtaskbutton");
+    submit->setFixedSize(100, 35);
+    ccdateccvsubmitLayout->addWidget(ccdateLabel);
+    ccdateccvsubmitLayout->addWidget(ccdate);
+    ccdateccvsubmitLayout->addWidget(ccccvLabel);
+    ccdateccvsubmitLayout->addWidget(ccccv);
+    ccdateccvsubmitLayout->addWidget(submit);
+
+    bgLayout->addLayout(mainLayout);
+    setLayout(externLayout);
+}
+
+// Override the window closed display
+void AddCreditCardDisplay::closeEvent(QCloseEvent *event) {
+    emit closed();
+    QWidget::closeEvent(event);
 }

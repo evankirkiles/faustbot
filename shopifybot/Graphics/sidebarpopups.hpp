@@ -29,6 +29,41 @@ static inline void rtrim(std::string &s) {
     }).base(), s.end());
 }
 
+// Window which pops up when adding a new Credit Card
+class AddCreditCardDisplay : public QWidget {
+    Q_OBJECT
+public:
+    // Constructor that builds the add credit card window
+    explicit AddCreditCardDisplay(QWidget *parent = 0);
+    // Override the window closed
+    void closeEvent(QCloseEvent* event) override;
+
+signals:
+    // Called whenever the add credit card display is closed
+    void closed();
+    // Called whenever a new credit card is successfully added
+    void submitted();
+
+private:
+    // Dark Title bar widget
+    DarkTitleBar* dtb;
+
+    // Widgets to edit the credit card
+    QLabel* titleLabel;
+    QLineEdit* title;
+    QLabel* ccnumLabel;
+    QLineEdit* ccnum;
+    QLabel* ccnameLabel;
+    QLineEdit* ccname;
+    QLabel* ccdateLabel;
+    QDateEdit *ccdate;
+    QLabel* ccccvLabel;
+    QLineEdit* ccccv;
+
+    // The push button to submit the credit card
+    QPushButton* submit;
+};
+
 // Header for the side bar popups, including billing information, proxy information, etc.
 class ProfilesDisplay : public QWidget {
     Q_OBJECT
@@ -54,6 +89,8 @@ private slots:
     void deleteProfile();
     // Refreshes the profile list
     void refresh(int selected = 0);
+    // Builds the add credit card display
+    void addCC();
 
 private:
     // Specifies whether the moreInfoDisplay is open or not
@@ -62,6 +99,10 @@ private:
 
     // Dark Title bar widget
     DarkTitleBar* dtb;
+
+    // The Add Credit Card display
+    AddCreditCardDisplay* accd;
+    bool accdOpen = false;
 
     // Icons for adding, duplicating, and deleting profiles
     QLabel* profileViewTitle;
