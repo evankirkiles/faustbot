@@ -225,9 +225,19 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     connect(deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteProfile()));
     // Connect the add credit card function to hte signal produced by clicking the lower add button
     connect(addCreditCardButton, SIGNAL(clicked()), this, SLOT(addCC()));
+    // Connect the edit credit card function to the signal produced by clicking the edit button
+    connect(editCreditCardButton, &ClickableImage::clicked, [this] () {
+        // Make sure that there is actually a selected credit card profile
+        if (!creditcardsListView->selectedItems().isEmpty()) {
+            editCC();
+        }});
+    // Connect the delete credit card function to the signal produced by clicking the delete button
+    connect(deleteCreditCardButton, SIGNAL(clicked()), this, SLOT(deleteCC()));
 
     // Fill in the profiles listview
     refresh();
+    // Fill in the credit card listview
+    refreshCC();
 }
 // Override the column for the profiles display
 void ProfilesDisplay::closeEvent(QCloseEvent* event) {
@@ -260,7 +270,7 @@ void ProfilesDisplay::refresh(int selected) {
 }
 // Refreshes the list of credit cards, should be called after updates
 void ProfilesDisplay::refreshCC(int selected) {
-    // Rereads teh credit cards file and builds the qlist of creidt card titles for the listview
+    // Rereads the credit cards file and builds the qlist of credit card titles for the listview
     std::ifstream fin(file_paths::CCARD_TXT);
     std::string str;
 
@@ -291,7 +301,7 @@ void ProfilesDisplay::select(QString which) {
     // Cycle through the lines and get the title of each profile
     while (getline(fin, str)) {
         // Check for the title identifier and parse through its JSON data
-        const unsigned long titlePos = str.find(std::string(" :-:")
+        const unsigned long titlePos = str.find(std::string(" :-:"));
         if (str.substr(0, titlePos) != which.toStdString()) {
             str = str.substr(titlePos + 4);
             QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(str.c_str()).toUtf8());
@@ -522,6 +532,57 @@ void ProfilesDisplay::addCC() {
     });
 }
 
+// Opens the edit credit card display
+void ProfilesDisplay::editCC() {
+
+    // If there is already a window open, then just raise it
+    if (accdOpen) {
+        accd->raise();
+        accd->setFocus();
+        return;
+    }
+    // Otherwise build a new edit credit card window and show it
+    accd = new AddCreditCardDisplay(creditcardsListView->currentItem()->text());
+    accd->show();
+    accdOpen = true;
+
+    // Make necessary connections
+    connect(accd, &AddCreditCardDisplay::closed, [this] () { accdOpen = false; });
+    connect(accd, &AddCreditCardDisplay::submitted, [this] () {
+        if (accd->windowTitle().toStdString().substr(0, 3) == "Add") {
+            refreshCC(creditcardsListView->count() + 1);
+        } else {
+            refreshCC(creditcardsListView->currentRow());
+        }
+    });
+}
+
+// Deletes a credit card profile
+void ProfilesDisplay::deleteCC() {
+
+    // Cycle through the ccard text file
+    std::ifstream filein(file_paths::CCARD_TXT);
+    std::ofstream fileout(file_paths::TEMPCCARD_TXT);
+    std::string str;
+    while(getline(filein, str)) {
+
+        // Write the lines to the temporary credit card text file except for the one with the same title
+        if (str.substr(0, str.find(" :-:")) != creditcardsListView->currentItem()->text().toStdString()) {
+            fileout << str << "\n";
+        }
+    }
+
+    // Close the files
+    filein.close();
+    fileout.close();
+
+    // Rename the temporary credit card list to the real one
+    rename(file_paths::TEMPCCARD_TXT, file_paths::CCARD_TXT);
+
+    // Refresh the credit cards list
+    refreshCC(std::max(0, creditcardsListView->currentRow() - 1));
+}
+
 // ADD CREDIT CARD DISPLAY
 // Constructor which builds the credit card add display
 AddCreditCardDisplay::AddCreditCardDisplay(const QString profiletitle, QWidget *parent) :
@@ -615,8 +676,12 @@ AddCreditCardDisplay::AddCreditCardDisplay(const QString profiletitle, QWidget *
         fillCCInfo();
     }
 
+    // Set the layouts
     bgLayout->addLayout(mainLayout);
     setLayout(externLayout);
+
+    // Connect the signals to the slots
+    connect(submit, SIGNAL(clicked()), this, SLOT(submitEditOrNew()));
 }
 
 // Fills in the necessary fields for when editing a card
@@ -630,7 +695,7 @@ void AddCreditCardDisplay::fillCCInfo() {
     while (getline(filein, strTemp)) {
         // Check for the title identifier and parse through its JSON data
         const unsigned long titlePos = strTemp.find(std::string(" :-:"));
-        if (strTemp.substr(0, titlePos) != ccprofiletitle.toStdString()) {
+        if (strTemp.substr(0, titlePos) == ccprofiletitle.toStdString()) {
             strTemp = strTemp.substr(titlePos + 4);
             QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(strTemp.c_str()).toUtf8());
             QJsonObject jsonObject = jsonDoc.object();
@@ -645,6 +710,115 @@ void AddCreditCardDisplay::fillCCInfo() {
         }
     }
 
+}
+
+// Submits the new credit card
+void AddCreditCardDisplay::submitEditOrNew() {
+
+    // First case is just when it is a new task
+    if (windowTitle().toStdString().substr(0, 3) == "Add") {
+
+        // Takes the information from the new credit card form and puts it in the credit card text file
+        std::ofstream fileout(file_paths::CCARD_TXT, std::ios_base::app | std::ios_base::out);
+
+        // First, make sure that all the required fields are filled
+        if (title->text().isEmpty()) { title->setFocus(); return; }
+        if (ccnum->text().isEmpty() || ccnum->text().length() != 19) { ccnum->setFocus(); return; }
+        if (ccname->text().isEmpty()) { ccname->setFocus(); return; }
+        if (ccccv->text().isEmpty() || ccccv->text().length() != 3) { ccccv->setFocus(); return; }
+
+        // Then write a new credit card with the data in the text edits
+        fileout << getSafeName(ccprofiletitle.toStdString(), title->text().toStdString()) << R"( :-: {"ccnum":")" <<
+                ccnum->text().toStdString() << R"(","ccname":")" << ccname->text().toStdString() << R"(","ccmonth":")" <<
+                ccdate->date().month() << R"(","ccyear":")" << ccdate->date().year() << R"(","ccccv":")" <<
+                ccccv->text().toStdString() << R"("})" << "\n";
+
+        // Close the file
+        fileout.close();
+
+        // Emit the correct signals
+        emit submitted();
+        close();
+
+        // Second case is when the task is being edited
+    } else {
+        // Takes the information from the edited credit card and puts it in the credit card text file
+        std::ifstream filein(file_paths::CCARD_TXT);
+        std::ofstream fileout(file_paths::TEMPCCARD_TXT);
+        std::string str;
+
+        // First, make sure that all the required fields are filled
+        if (title->text().isEmpty()) { title->setFocus(); return; }
+        if (ccnum->text().isEmpty() || ccnum->text().length() != 19) { ccnum->setFocus(); return; }
+        if (ccname->text().isEmpty()) { ccname->setFocus(); return; }
+        if (ccccv->text().isEmpty() || ccccv->text().length() != 3) { ccccv->setFocus(); return; }
+
+        // Cycle through each line until the correct line is found
+        while (getline(filein, str)) {
+            // Check the title of each cc line against that of the requested edit
+            const unsigned long titlePos = str.find(" :-:");
+            if (str.substr(0, titlePos) == ccprofiletitle.toStdString()) {
+                // Write the edited file to the outfile
+                fileout << getSafeName(ccprofiletitle.toStdString(), title->text().toStdString()) << R"( :-: {"ccnum":")" <<
+                    ccnum->text().toStdString() << R"(","ccname":")" << ccname->text().toStdString() << R"(","ccmonth":")" <<
+                    ccdate->date().month() << R"(","ccyear":")" << ccdate->date().year() << R"(","ccccv":")" <<
+                    ccccv->text().toStdString() << R"("})" << "\n";
+            } else { fileout << str << "\n"; }
+        }
+
+        // Finally, close the files
+        filein.close();
+        fileout.close();
+
+        // Rename the temporary credit card file to the real one
+        rename(file_paths::TEMPCCARD_TXT, file_paths::CCARD_TXT);
+
+        // Emit the correct signals
+        emit submitted();
+        close();
+    }
+}
+
+// Gets a safe name for the credit card profile
+std::string AddCreditCardDisplay::getSafeName(std::string currentTitle, std::string title) {
+
+    // Remove whitespace from the end of the title
+    rtrim(title);
+
+    // Make sure the title is actually changing
+    if (title == currentTitle) { return title; }
+
+    // Cycle through the credit card names in the credit card text file
+    std::ifstream filein(file_paths::CCARD_TXT);
+    // Make sure that the credit cards file actually has contents
+    if (filein.peek() == std::ifstream::traits_type::eof()) { return title; }
+    std::string str;
+    int modifierNum = 0;
+    std::string modifier;
+    bool foundName = false;
+
+    // Go until a name is found
+    while (!foundName) {
+        // Check for the title at each line, if found then break and retry
+        while(getline(filein, str)) {
+            foundName = false;
+            // Reformat the string to be just the line's title
+            str = str.substr(0, str.find(" :-:"));
+            // Now try to make a unique title for the credit card profile
+            if (str == title + modifier) {
+                modifierNum++;
+                modifier = std::string(" (") + std::to_string(modifierNum) + ")";
+                break;
+            }
+            // If it gets through all, then continue and return the title
+            foundName = true;
+        }
+    }
+
+    // When finished, close the file and return the unique name found
+    filein.close();
+
+    return title + modifier;
 }
 
 // Override the window closed display

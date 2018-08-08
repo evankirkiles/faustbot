@@ -41,8 +41,11 @@ public:
 signals:
     // Called whenever the add credit card display is closed
     void closed();
-    // Called whenever a new credit card is successfully added
+    // Called when the credit card is submitted
     void submitted();
+private slots:
+    // Called whenever a new credit card is successfully added
+    void submitEditOrNew();
 
 private:
     // The title of the credit card; if exists then edit task rather than add task
@@ -68,6 +71,9 @@ private:
 
     // Function to fill in the credit card information being edited
     void fillCCInfo();
+
+    // Gets a unique name for the credit card
+    std::string getSafeName(std::string currentTitle, std::string title = "Untitled");
 };
 
 // Header for the side bar popups, including billing information, proxy information, etc.
@@ -99,6 +105,10 @@ private slots:
     void refreshCC(int selected = 0);
     // Builds the add credit card display
     void addCC();
+    // Edits the information of a credit card
+    void editCC();
+    // Deletes a credit card profile
+    void deleteCC();
 
 private:
     // Specifies whether the moreInfoDisplay is open or not
