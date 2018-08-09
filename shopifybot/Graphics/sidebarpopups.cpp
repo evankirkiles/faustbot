@@ -592,6 +592,9 @@ void ProfilesDisplay::deleteCC() {
 // Resets the Credit Card QCB with all the credit cards profiles in the text file
 void ProfilesDisplay::resetCreditCardQCB() {
 
+    // Store the QString of the selected item for ease of access
+    QString selectedItem = ccard->currentText();
+
     // First clear the credit card profiles and then add "Random"
     ccard->clear();
     ccard->addItem("Random");
@@ -608,6 +611,9 @@ void ProfilesDisplay::resetCreditCardQCB() {
 
     // Close the file
     filein.close();
+
+    // Set the current text back to the selected item
+    ccard->setCurrentText(selectedItem);
 }
 
 // ADD CREDIT CARD DISPLAY
@@ -679,6 +685,7 @@ AddCreditCardDisplay::AddCreditCardDisplay(const QString profiletitle, QWidget *
     titleLayout->addWidget(title);
     ccnumLabel->setObjectName("addtask_mediocre_text");
     ccnum->setObjectName("addtask_editbox");
+    ccnum->setPlaceholderText("xxxx xxxx xxxx xxxx");
     ccnumLayout->addWidget(ccnumLabel);
     ccnumLayout->addWidget(ccnum);
     ccnameLabel->setObjectName("addtask_mediocre_text");
@@ -691,6 +698,7 @@ AddCreditCardDisplay::AddCreditCardDisplay(const QString profiletitle, QWidget *
     ccccvLabel->setObjectName("addtask_mediocre_text");
     ccccv->setObjectName("addtask_editbox");
     ccccv->setContentsMargins(0, 0, 5, 0);
+    ccccv->setPlaceholderText("xxx");
     submit->setObjectName("addtaskbutton");
     submit->setFixedSize(100, 35);
     ccdateccvsubmitLayout->addWidget(ccdateLabel);
