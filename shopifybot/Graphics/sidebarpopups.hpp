@@ -169,6 +169,9 @@ private:
 
     // Function that returns a 'safe' version of a name (is unique)
     std::string getSafeName(bool addingnew = false, int currentIndex = 0, std::string title = "Untitled");
+    // Function that retrieves a qcombobox with all the titles of the credit cards for use in the profile
+    void resetCreditCardQCB();
+
 };
 
 #endif //SHOPIFY_BOT_SIDEBARPOPUPS_HPP

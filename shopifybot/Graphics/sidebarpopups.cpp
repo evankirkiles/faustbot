@@ -291,6 +291,9 @@ void ProfilesDisplay::refreshCC(int selected) {
 
     // Select the specified item, useful for the submit function
     creditcardsListView->setCurrentRow(selected);
+
+    // Reset the QComboBox containing all the credit cards for the edit task function
+    resetCreditCardQCB();
 }
 // Changes the text fields to the selected profile's information
 void ProfilesDisplay::select(QString which) {
@@ -302,7 +305,7 @@ void ProfilesDisplay::select(QString which) {
     while (getline(fin, str)) {
         // Check for the title identifier and parse through its JSON data
         const unsigned long titlePos = str.find(std::string(" :-:"));
-        if (str.substr(0, titlePos) != which.toStdString()) {
+        if (str.substr(0, titlePos) == which.toStdString()) {
             str = str.substr(titlePos + 4);
             QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(str.c_str()).toUtf8());
             QJsonObject jsonObject = jsonDoc.object();
@@ -560,6 +563,9 @@ void ProfilesDisplay::editCC() {
 // Deletes a credit card profile
 void ProfilesDisplay::deleteCC() {
 
+    // If there is an edit window open or new file window, close it
+    if (accdOpen) { accd->close(); }
+
     // Cycle through the ccard text file
     std::ifstream filein(file_paths::CCARD_TXT);
     std::ofstream fileout(file_paths::TEMPCCARD_TXT);
@@ -583,6 +589,27 @@ void ProfilesDisplay::deleteCC() {
     refreshCC(std::max(0, creditcardsListView->currentRow() - 1));
 }
 
+// Resets the Credit Card QCB with all the credit cards profiles in the text file
+void ProfilesDisplay::resetCreditCardQCB() {
+
+    // First clear the credit card profiles and then add "Random"
+    ccard->clear();
+    ccard->addItem("Random");
+
+    // Open the filein
+    std::ifstream filein(file_paths::CCARD_TXT);
+    std::string str;
+
+    // Cycle through the lines and get the titles of each credit card profile
+    while (getline(filein, str)) {
+        // Title is found before every " :-:"
+        ccard->addItem(str.substr(0, str.find(" :-:")).c_str());
+    }
+
+    // Close the file
+    filein.close();
+}
+
 // ADD CREDIT CARD DISPLAY
 // Constructor which builds the credit card add display
 AddCreditCardDisplay::AddCreditCardDisplay(const QString profiletitle, QWidget *parent) :
@@ -604,6 +631,7 @@ AddCreditCardDisplay::AddCreditCardDisplay(const QString profiletitle, QWidget *
     setFixedSize(400, 200);
     if (!ccprofiletitle.isEmpty()) {
         setWindowTitle(QString(std::string("Edit Credit Card \"" + ccprofiletitle.toStdString() + "\"").c_str()));
+        submit->setText("UPDATE");
     } else {
         setWindowTitle("Add Credit Card");
     }
