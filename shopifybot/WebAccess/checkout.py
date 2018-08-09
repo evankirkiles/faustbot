@@ -3,8 +3,41 @@
 import requests, sys, json, datetime
 from bs4 import BeautifulSoup
 
+# Custom write function
+def log(text):
+    with open(logFileLocation, 'a') as logFile:
+        logFile.write('[' + str(datetime.datetime.now())[0:23] + '] ' + text + '\n')
+
+
 # Log file location is the third argument
 logFileLocation = sys.argv[3]
+# Name of the profile is the fourth argument
+profileName = sys.argv[4]
+
+# Go into the profile file and find the correct profile's json data
+j = None
+with open('shopifybot/Infrastructure/profiles.txt') as input_file:
+    for i, line in enumerate(input_file):
+        if line.split(' :-: ', 1)[0] == profileName:
+            j = json.loads(line.split(' :-: ', 1)[1])
+            break
+    input_file.close()
+if j is None:
+    # If it gets here (j is undefined), then profile has not been found
+    raise ValueError("Could not locate profile in profiles.txt")
+
+# TODO: Implement Random credit card selection
+# Go into the credit card file and find the correct credit card json data
+c = None
+with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
+    for i, line in enumerate(ccinput_file):
+        if line.split(' :-: ', 1)[0] == j['ccard']:
+            c = json.loads(line.split(' :-: ', 1)[1])
+            break
+    ccinput_file.close()
+if c is None:
+    # If it gets here (c is undefined), then the credit card has not been found
+    raise ValueError("Could not locate credit card in readme.txt")
 
 ################################## Cart Links ##########################################
 # First, must denote the checkout link for the Shopify server for the site
@@ -35,11 +68,6 @@ ccccv = "567"
 
 # Create requests session
 session = requests.session()
-
-# Custom write function
-def log(text):
-    with open(logFileLocation, 'a') as logFile:
-        logFile.write('[' + str(datetime.datetime.now())[0:23] + '] ' + text + '\n')
 
 # Function that sends the customer info to the Shopify servers
 def send_customer_info():
@@ -106,17 +134,17 @@ def send_customer_info():
         'authenticity_token': authenticity_token,
         'previous_step': 'contact_information',
         'step': 'shipping_method',
-        'checkout[email]': email,
+        'checkout[email]': j['email'],
         'checkout[buyer_accepts_marketing]': '0',
-        'checkout[shipping_address][first_name]': firstName,
-        'checkout[shipping_address][last_name]': lastName,
-        'checkout[shipping_address][address1]': address1,
-        'checkout[shipping_address][address2]': address2,
-        'checkout[shipping_address][city]': city,
-        'checkout[shipping_address][country]': country,
-        'checkout[shipping_address][province]': province,
-        'checkout[shipping_address][zip]': zipcode,
-        'checkout[shipping_address][phone]': phone,
+        'checkout[shipping_address][first_name]': j['firstname'],
+        'checkout[shipping_address][last_name]': j['lastname'],
+        'checkout[shipping_address][address1]': j['address1'],
+        'checkout[shipping_address][address2]': j['address2'],
+        'checkout[shipping_address][city]': j['city'],
+        'checkout[shipping_address][country]': j['country'],
+        'checkout[shipping_address][province]': j['province'],
+        'checkout[shipping_address][zip]': j['zipcode'],
+        'checkout[shipping_address][phone]': j['phone'],
         'button': '',
         'checkout[client_details][browser_width]': '520',
         'checkout[client_details][browser_height]': '704',
@@ -154,11 +182,11 @@ def submitPayment():
     # Also define the credit card info data packet to send to Shopify
     ccInfo = {
         'credit_card': {
-            'number': ccnumber,
-            'name': ccname,
-            'month': ccmonth,
-            'year': ccyear,
-            'verification_value': ccccv
+            'number': c['ccnum'],
+            'name': c['ccname'],
+            'month': c['ccmonth'],
+            'year': c['ccyear'],
+            'verification_value': c['ccccv']
         }
     }
 

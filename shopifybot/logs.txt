@@ -1,7 +1,3 @@
-0.30673 seconds to connect to website. 
-0.033758 seconds to pull the products. 
-
-0.235022 seconds to find product. 
-0.304179 seconds to find product. 
-0.30912 seconds to find product. 
-0.341067 seconds to find product. 
+0.055426 seconds to connect to website. 
+0.026739 seconds to pull the products. 
+0.082453 seconds to find product. 

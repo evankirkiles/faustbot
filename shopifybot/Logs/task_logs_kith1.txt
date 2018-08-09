@@ -1,0 +1,6 @@
+[2018-08-09 02:24:32.813] Beginning "Any Nike".
+[2018-08-09 02:24:37.823] Product found! Link: https://kith.com/cart/2611897139207:1
+[2018-08-09 02:24:37.823] Placing order...
+[2018-08-09 02:24:38.065] Aiden King :-: {"email":"sneakerbot78@gmail.com","firstname":"Aiden","lastname":"King","address1":"2824 Rosewood Lane","address2":"","city":"New York","country":"United States","province":"New York","zipcode":"10016","phone":"2129539871","ccard":"Random"}
+
+[2018-08-09 02:24:38.077] Task finished.
