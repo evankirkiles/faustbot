@@ -82,6 +82,8 @@ namespace file_paths {
     extern const char* TEMPPROFILES_TXT;
     extern const char* CCARD_TXT;
     extern const char* TEMPCCARD_TXT;
+    extern const char* PROXIES_TXT;
+    extern const char* TEMPPROXIES_TXT;
 
     // Image locations
     extern const char* LOGO_FILE;

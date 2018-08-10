@@ -867,4 +867,149 @@ void AddCreditCardDisplay::closeEvent(QCloseEvent *event) {
 }
 
 // PROXY DISPLAY CLASS
+// Proxy list item which is used by the proxy listview
+ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString username, QString password,
+                             QString settings, QWidget *parent) :
+        indexDisp(new QLabel(index, this)),
+        ipLabel(new QLabel(ip, this)),
+        portLabel(new QLabel(port, this)),
+        usernameLabel(new QLabel(username, this)),
+        passwordLabel(new QLabel(password, this)),
+        QWidget(parent) {
+
+    // Set the object name and height
+    setObjectName("proxylistitem");
+    setStyleSheet(settings);
+    setContentsMargins(2, 2, 2, 2);
+
+    // Give each QLabel a fixed size
+    indexDisp->setFixedWidth(20);
+    ipLabel->setFixedWidth(80);
+    portLabel->setFixedWidth(40);
+    usernameLabel->setFixedWidth(100);
+    passwordLabel->setFixedWidth(100);
+
+    // Add all the QWidgets to a horizontal layout
+    auto mainLayout = new QHBoxLayout();
+    mainLayout->setContentsMargins(2, 1, 1, 1);
+    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+    mainLayout->addWidget(indexDisp);
+    mainLayout->addWidget(ipLabel);
+    mainLayout->addWidget(portLabel);
+    mainLayout->addWidget(usernameLabel);
+    mainLayout->addWidget(passwordLabel);
+    setLayout(mainLayout);
+}
+
 // Constructor that builds the proxy window
+ProxyDisplay::ProxyDisplay(QWidget *parent) :
+        proxiesViewTitle(new QLabel("Proxies", this)),
+        addProxyButton(new ClickableImage(26, 26, 2, file_paths::ADD2_IMG, file_paths::ADD_IMG, this)),
+        deleteProxyButton(new ClickableImage(26, 26, 2, file_paths::MINUS2_IMG, file_paths::MINUS_IMG, this)),
+        proxiesListView(new QListWidget(this)),
+        columnProxies(new ProxyListItem("#", "IP", "PORT", "USERNAME", "PASSWORD", "color:#c4c0b2;font-size:10px;", this)),
+        QWidget(parent) {
+
+    // Set window properties
+    setFixedSize(400, 300);
+    setWindowTitle("Proxies");
+    setWindowFlags(Qt::FramelessWindowHint);
+    setFocusPolicy(Qt::ClickFocus);
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Create the dark title bar
+    dtb = new DarkTitleBar(this, true);
+
+    // Set the stylesheet for the window
+    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    setStyleSheet(StyleSheet);
+
+    // Create external qframe and layouts for dtb
+    auto externLayout = new QVBoxLayout();
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    auto bgLayout = new QVBoxLayout();
+    bgLayout->setContentsMargins(0, 0, 0, 0);
+    bg->setObjectName("main_window");
+    bg->setLayout(bgLayout);
+    bgLayout->addWidget(dtb);
+    externLayout->addWidget(bg);
+
+    // Create normal layouts
+    auto mainLayout = new QVBoxLayout();
+    mainLayout->setContentsMargins(11, 3, 11, 11);
+    auto topRow = new QWidget(this);
+    auto smallButtonRow = new QHBoxLayout();
+    topRow->setLayout(smallButtonRow);
+    topRow->setContentsMargins(0, 0, 0, 0);
+    smallButtonRow->setContentsMargins(0, 0, 0, 0);
+
+    // Add the widgets to their respective layouts
+    proxiesViewTitle->setObjectName("addtask_mediocre_text");
+    smallButtonRow->addWidget(proxiesViewTitle);
+    smallButtonRow->addWidget(addProxyButton);
+    smallButtonRow->addWidget(deleteProxyButton);
+    mainLayout->addWidget(topRow);
+
+    proxiesListView->setObjectName("profileslistview");
+    proxiesListView->setSelectionMode(QAbstractItemView::SingleSelection);
+    proxiesListView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    proxiesListView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    mainLayout->addWidget(proxiesListView);
+
+    // Load the proxies from the file
+    refresh(0);
+
+    // Finally add the layouts to their parents
+    bgLayout->addLayout(mainLayout);
+    setLayout(externLayout);
+}
+
+// Override the proxy display's close function to emit closed
+void ProxyDisplay::closeEvent(QCloseEvent *event) {
+    emit closed();
+    QWidget::closeEvent(event);
+}
+
+// Refreshes the ProxyDisplay while retaining the selected element
+void ProxyDisplay::refresh(int selected) {
+    // Clear the proxy display
+    proxiesListView->clear();
+
+    // Add the column header in the listwidget
+    auto proxiesListWidgHeader = new QListWidgetItem();
+    proxiesListWidgHeader->setSizeHint(columnProxies->sizeHint());
+    proxiesListView->addItem(proxiesListWidgHeader);
+    proxiesListView->setItemWidget(proxiesListWidgHeader, columnProxies);
+    proxiesListWidgHeader->setFlags(proxiesListWidgHeader->flags() & ~Qt::ItemIsSelectable);
+
+    // Read in the Proxy Display file and interpret the JSON
+    std::ifstream filein(file_paths::PROXIES_TXT);
+    std::string str;
+
+    // Cycle through each line and read in the JSON object for each IP
+    while (getline(filein, str)) {
+        const unsigned long indexPos = str.find(" :-: ");
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(str.substr(indexPos + 5).c_str()).toUtf8());
+        QJsonObject jsonObject = jsonDoc.object();
+
+        // Use the JSON object to add a new proxy to the list
+        auto lwidgitem = new QListWidgetItem();
+        auto newWidgItem = new ProxyListItem(str.substr(0, indexPos).c_str(),
+                jsonObject.value("proxyip").toString(),
+                jsonObject.value("proxyport").toString(),
+                jsonObject.value("proxyusername").toString(),
+                jsonObject.value("proxypassword").toString(), "", proxiesListView);
+        lwidgitem->setSizeHint(newWidgItem->sizeHint());
+        proxiesListView->addItem(lwidgitem);
+        proxiesListView->setItemWidget(lwidgitem, newWidgItem);
+    }
+
+    // Close the proxy file
+    filein.close();
+    // Select the desired integer
+    proxiesListView->setCurrentRow(selected + 1);
+}

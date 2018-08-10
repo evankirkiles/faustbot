@@ -173,6 +173,53 @@ private:
     void resetCreditCardQCB();
 };
 
+// Class for a QWidget item which is the standard on the proxy listwidget
+class ProxyListItem : public QWidget {
+    Q_OBJECT
+public:
+    // Constructor that builds the custom ProxyListItem widget
+    explicit ProxyListItem(QString index, QString ip, QString port, QString username, QString password,
+                           QString settings = "", QWidget *parent = 0);
+private:
+    // Several QLabels which simply display the passed in data
+    QLabel* indexDisp;
+    QLabel* ipLabel;
+    QLabel* portLabel;
+    QLabel* usernameLabel;
+    QLabel* passwordLabel;
+};
+
+//// The window which pops up when adding a proxy to the list
+//class AddProxyDisplay : public QWidget {
+//    Q_OBJECT
+//public:
+//    // Constructor that builds the add proxy window
+//    explicit AddProxyDisplay(QWidget* parent = 0);
+//    // Override the window closed
+//    void closeEvent(QCloseEvent* event) override;
+//
+//signals:
+//    // Emitted when the add proxy display is closed
+//    void closed();
+//private:
+//    // Dark Title Bar widget
+//    DarkTitleBar* dtb;
+//
+//    // Labels and their qlineedits for entering the proxy info
+//    QLabel* proxyIPLabel;
+//    QLineEdit* proxyIP;
+//    QLabel* proxyPortLabel;
+//    QLineEdit* proxyPort;
+//    QLabel* proxyUsernameLabel;
+//    QLineEdit* proxyUsername;
+//    QLabel* proxyPasswordLabel;
+//    QLineEdit* proxyPassword;
+//
+//    // Submit button which adds it to the list
+//    QPushButton* submit;
+//private slots:
+//};
+
 // Header for the Proxy Display window which will include a listview of the proxies and functions to add
 // and delete them.
 class ProxyDisplay : public QWidget {
@@ -187,15 +234,17 @@ signals:
     // Emitted whenever the proxy display is closed
     void closed();
 private slots:
-    // Refreshes the
+    // Refreshes the proxy display
+    void refresh(int selected);
 private:
     // Dark Title Bar widget
     DarkTitleBar* dtb;
 
     // Icons for adding and deleting proxies
     QLabel* proxiesViewTitle;
-    ClickableImage* addProxybutton;
-    ClickableImage* deleteProfileButton;
+    ClickableImage* addProxyButton;
+    ClickableImage* deleteProxyButton;
+    ProxyListItem* columnProxies;
 
     // List view of all the proxies
     QListWidget* proxiesListView;

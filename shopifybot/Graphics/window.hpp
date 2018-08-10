@@ -63,6 +63,7 @@ private:
     // Bool telling whether windows are open
     bool addTaskOpen = false;
     bool profilesOpen = false;
+    bool proxiesOpen = false;
     // Number of tasks created, incremented every time a task is added
     int numTasksCreated = 0;
 
@@ -87,6 +88,7 @@ private:
 
     // Sidebar windows
     ProfilesDisplay* profilesDisp;
+    ProxyDisplay* proxiesDisp;
 
     // Tasks listview
     QFrame *line1;
@@ -103,8 +105,9 @@ private slots:
     void addTaskClosed();
     // Opens the profiles window
     void openProfiles();
-    // Tells the main window that the profiles window was closed
-    void profilesClosed();
+    // Opens the proxies window
+    void openProxies();
+    // Tells the main window that the proxies window was closed
     // Connects to the submit slot in the main window, and adds a task with the given information
     void buildTask(QString title, URLAndMethod website, QString collection,
                    QString keywords, QString colorKeywords, QString size,

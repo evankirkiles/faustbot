@@ -140,6 +140,8 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     connect(addtask, SIGNAL(clicked()), this, SLOT(openNewTask()));
     // Open the profiles window when the profiles button is clicked
     connect(billing, SIGNAL(clicked()), this, SLOT(openProfiles()));
+    // Open the proxies window when the proxies button is clicked
+    connect(proxies, SIGNAL(clicked()), this, SLOT(openProxies()));
 }
 
 // Slot which takes information from the new task window and builds a task
@@ -213,15 +215,28 @@ void BotWindow::openProfiles() {
         profilesDisp->setFocus();
         return;
     }
-    // Build the window if it does not exist, otherwise just show it
+    // Build the window if it does not exist
     profilesDisp = new ProfilesDisplay();
     profilesDisp->show();
     profilesOpen = true;
 
     // Make necessary connections
-    connect(profilesDisp, SIGNAL(closed()), this, SLOT(profilesClosed()));
+    connect(profilesDisp, &ProfilesDisplay::closed, [this] () { profilesOpen = false; });
 }
-// Called when the task window closes
-void BotWindow::profilesClosed() {
-    profilesOpen = false;
+
+// Opens the proxies window
+void BotWindow::openProxies() {
+    if (proxiesOpen) {
+        // Show the currently open proxies window
+        proxiesDisp->raise();
+        proxiesDisp->setFocus();
+        return;
+    }
+    // Build the window if it does not exist
+    proxiesDisp = new ProxyDisplay();
+    proxiesDisp->show();
+    proxiesOpen = true;
+
+    // Make necessary connections
+    connect(proxiesDisp, &ProxyDisplay::closed, [this] () { proxiesOpen = false; });
 }

@@ -43,6 +43,8 @@ namespace file_paths {
     const char* TEMPPROFILES_TXT = "./shopifybot/Infrastructure/tempprofiles.txt";
     const char* CCARD_TXT = "./shopifybot/Infrastructure/readme.txt";
     const char* TEMPCCARD_TXT = "./shopifybot/Infrastructure/tempreadme.txt";
+    const char* PROXIES_TXT = "./shopifybot/Infrastructure/proxies.txt";
+    const char* TEMPPROXIES_TXT = "./shopifybot/Infrastructure/tempproxies.txt";
 
     // Images
     const char* LOGO_FILE = "./shopifybot/Graphics/Assets/logo.png";
