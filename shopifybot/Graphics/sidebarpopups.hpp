@@ -171,7 +171,34 @@ private:
     std::string getSafeName(bool addingnew = false, int currentIndex = 0, std::string title = "Untitled");
     // Function that retrieves a qcombobox with all the titles of the credit cards for use in the profile
     void resetCreditCardQCB();
+};
 
+// Header for the Proxy Display window which will include a listview of the proxies and functions to add
+// and delete them.
+class ProxyDisplay : public QWidget {
+    Q_OBJECT
+public:
+    // Constructor that builds the Proxy Window
+    explicit ProxyDisplay(QWidget* parent = 0);
+    // Override the window closed
+    void closeEvent(QCloseEvent* event) override;
+
+signals:
+    // Emitted whenever the proxy display is closed
+    void closed();
+private slots:
+    // Refreshes the
+private:
+    // Dark Title Bar widget
+    DarkTitleBar* dtb;
+
+    // Icons for adding and deleting proxies
+    QLabel* proxiesViewTitle;
+    ClickableImage* addProxybutton;
+    ClickableImage* deleteProfileButton;
+
+    // List view of all the proxies
+    QListWidget* proxiesListView;
 };
 
 #endif //SHOPIFY_BOT_SIDEBARPOPUPS_HPP

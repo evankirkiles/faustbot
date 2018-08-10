@@ -238,6 +238,9 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     refresh();
     // Fill in the credit card listview
     refreshCC();
+
+    // Make sure credit card begins correct color
+    ccard->setStyleSheet("color: #baa86a;");
 }
 // Override the column for the profiles display
 void ProfilesDisplay::closeEvent(QCloseEvent* event) {
@@ -862,3 +865,6 @@ void AddCreditCardDisplay::closeEvent(QCloseEvent *event) {
     emit closed();
     QWidget::closeEvent(event);
 }
+
+// PROXY DISPLAY CLASS
+// Constructor that builds the proxy window
