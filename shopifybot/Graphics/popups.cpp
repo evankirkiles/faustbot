@@ -200,17 +200,21 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     profileLabel->setObjectName("addtask_mediocre_text");
     profileLabel->setMaximumWidth(50);
     profile = new QComboBox(this);
+    profile->setFixedWidth(150);
     buildProfilesBox();
     proxyLabel = new QLabel("Proxy: ", this);
     proxyLabel->setObjectName("addtask_mediocre_text");
     proxyLabel->setMaximumWidth(45);
     proxy = new QComboBox(this);
+    proxy->setFixedWidth(75);
     buildProxiesBox();
     // Add row to the layout
+    frequencyLayout->addStretch();
     frequencyLayout->addWidget(profileLabel);
     frequencyLayout->addWidget(profile);
     frequencyLayout->addWidget(proxyLabel);
     frequencyLayout->addWidget(proxy);
+    frequencyLayout->addStretch();
     mainLayout->addLayout(frequencyLayout);
 
     // TITLE ROW
@@ -319,9 +323,7 @@ void AddTaskDisplay::buildProxiesBox() {
 
     // Cycle through each line and get the proxies' ips
     while (getline(filein, tempStr)) {
-        tempStr.erase(0, tempStr.find(R"("proxyip":")") + 11);
-        std::cout << tempStr << std::endl;
-        proxy->addItem(tempStr.substr(0, tempStr.find('"')).c_str());
+        proxy->addItem(tempStr.substr(0, tempStr.find(" :-: ")).c_str());
     }
 
     // Close the filein

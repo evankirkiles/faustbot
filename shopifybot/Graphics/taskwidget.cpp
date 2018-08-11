@@ -416,11 +416,13 @@ EditTaskDisplay::EditTaskDisplay(const QString& p_title, const QString& p_websit
     profileLabel->setObjectName("addtask_mediocre_text");
     profileLabel->setMaximumWidth(50);
     profile = new QComboBox(this);
+    profile->setFixedWidth(150);
     buildProfiles();
     proxyLabel = new QLabel("Proxy: ", this);
     proxyLabel->setObjectName("addtask_mediocre_text");
     proxyLabel->setMaximumWidth(45);
     proxy = new QComboBox(this);
+    proxy->setFixedWidth(75);
     buildProxies();
     // Add row to the layout
     frequencyLayout->addWidget(profileLabel);
@@ -518,9 +520,7 @@ void EditTaskDisplay::buildProxies() {
 
     // Cycle through each line and get the proxies' ips
     while (getline(filein, tempStr)) {
-        tempStr.erase(0, tempStr.find(R"("proxyip":")") + 11);
-        std::cout << tempStr << std::endl;
-        proxy->addItem(tempStr.substr(0, tempStr.find('"')).c_str());
+        proxy->addItem(tempStr.substr(0, tempStr.find(" :-: ")).c_str());
     }
 
     // Close the filein

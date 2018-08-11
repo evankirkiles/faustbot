@@ -245,8 +245,6 @@ QComboBox {
     font-family: "Futura";
     outline: 1px solid #151515;
     font-size: 12px;
-    min-width: 130px;
-    max-width: 140px;
     padding: 0px 3px 0px 3px;
 }
 QComboBox QAbstractItemView {
