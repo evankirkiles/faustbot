@@ -1041,19 +1041,19 @@ void ProxyDisplay::refresh(int selected) {
 // ADD PROXY DISPLAY
 // Constructor that builds the Add Proxy window
 AddProxyDisplay::AddProxyDisplay(QWidget *parent) :
-        proxyIPLabel(new QLabel("IP", this)),
+        proxyIPLabel(new QLabel("IP:", this)),
         proxyIP(new QLineEdit(this)),
-        proxyPortLabel(new QLabel("Port", this)),
+        proxyPortLabel(new QLabel("Port:", this)),
         proxyPort(new QLineEdit(this)),
-        proxyUsernameLabel(new QLabel("Username", this)),
+        proxyUsernameLabel(new QLabel("Username:", this)),
         proxyUsername(new QLineEdit(this)),
-        proxyPasswordLabel(new QLabel("Password", this)),
+        proxyPasswordLabel(new QLabel("Password:", this)),
         proxyPassword(new QLineEdit(this)),
         submit(new QPushButton("ADD", this)),
         QWidget(parent) {
 
     // Set window properties
-    setFixedSize(400, 160);
+    setFixedSize(400, 145);
     setWindowTitle("Add New Proxy");
     setWindowFlags(Qt::FramelessWindowHint);
     setFocusPolicy(Qt::ClickFocus);
@@ -1081,51 +1081,41 @@ AddProxyDisplay::AddProxyDisplay(QWidget *parent) :
     externLayout->addWidget(bg);
 
     // Create the main layout
-    auto mainLayout = new QHBoxLayout();
+    auto mainLayout = new QVBoxLayout();
     mainLayout->setContentsMargins(11, 3, 11, 11);
-    auto leftColWidg = new QWidget();
-    auto leftColumn = new QVBoxLayout();
-    leftColWidg->setLayout(leftColumn);
     auto ipAndPortLayout = new QHBoxLayout();
     auto userLayout = new QHBoxLayout();
     auto passLayout = new QHBoxLayout();
 
-    // Set sizing policies
-    QSizePolicy spLeft(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    spLeft.setHorizontalStretch(4);
-    QSizePolicy spRight(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    spRight.setHorizontalStretch(1);
-    leftColWidg->setSizePolicy(spLeft);
-    submit->setSizePolicy(spRight);
-
     // Set widget properties
     proxyIPLabel->setObjectName("addtask_mediocre_text");
     proxyIP->setObjectName("addtask_editbox");
+    proxyIP->setMinimumHeight(20);
     proxyUsernameLabel->setObjectName("addtask_mediocre_text");
     proxyUsername->setObjectName("addtask_editbox");
     proxyPortLabel->setObjectName("addtask_mediocre_text");
     proxyPort->setObjectName("addtask_editbox");
+    proxyPort->setMinimumHeight(20);
+    proxyPort->setStyleSheet("margin-right: 5px;");
     proxyPasswordLabel->setObjectName("addtask_mediocre_text");
     proxyPassword->setObjectName("addtask_editbox");
     submit->setObjectName("addtaskbutton");
-    submit->setContentsMargins(1, 1, 1, 1);
+    submit->setContentsMargins(4, 1, 1, 1);
+    submit->setFixedSize(100, 30);
 
     // Add the widgets to their layouts
     ipAndPortLayout->addWidget(proxyIPLabel);
     ipAndPortLayout->addWidget(proxyIP);
     ipAndPortLayout->addWidget(proxyPortLabel);
     ipAndPortLayout->addWidget(proxyPort);
+    ipAndPortLayout->addWidget(submit);
     userLayout->addWidget(proxyUsernameLabel);
     userLayout->addWidget(proxyUsername);
     passLayout->addWidget(proxyPasswordLabel);
     passLayout->addWidget(proxyPassword);
-    leftColumn->addLayout(ipAndPortLayout);
-    leftColumn->addLayout(userLayout);
-    leftColumn->addLayout(passLayout);
-    mainLayout->addWidget(leftColWidg);
-
-    // Put the Submit button on the right
-    mainLayout->addWidget(submit);
+    mainLayout->addLayout(ipAndPortLayout);
+    mainLayout->addLayout(userLayout);
+    mainLayout->addLayout(passLayout);
 
     // Finalize layout decisions
     bgLayout->addLayout(mainLayout);
