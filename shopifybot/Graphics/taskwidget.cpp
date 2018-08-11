@@ -421,6 +421,7 @@ EditTaskDisplay::EditTaskDisplay(const QString& p_title, const QString& p_websit
     proxyLabel->setObjectName("addtask_mediocre_text");
     proxyLabel->setMaximumWidth(45);
     proxy = new QComboBox(this);
+    buildProxies();
     // Add row to the layout
     frequencyLayout->addWidget(profileLabel);
     frequencyLayout->addWidget(profile);
@@ -503,5 +504,25 @@ void EditTaskDisplay::buildProfiles() {
     }
 
     // Close the file in
+    filein.close();
+}
+
+// Builds the proxies combobox
+void EditTaskDisplay::buildProxies() {
+    // First add "Random" as an option
+    proxy->addItem("Random");
+
+    // Open the proxies.txt
+    std::ifstream filein(file_paths::PROXIES_TXT);
+    std::string tempStr;
+
+    // Cycle through each line and get the proxies' ips
+    while (getline(filein, tempStr)) {
+        tempStr.erase(0, tempStr.find(R"("proxyip":")") + 11);
+        std::cout << tempStr << std::endl;
+        proxy->addItem(tempStr.substr(0, tempStr.find('"')).c_str());
+    }
+
+    // Close the filein
     filein.close();
 }

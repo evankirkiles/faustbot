@@ -194,6 +194,8 @@ private:
 
     // Builds the qcombobox used for profiles
     void buildProfilesBox();
+    // Builds the qcombobox used for proxies
+    void buildProxiesBox();
 };
 
 #endif //SHOPIFY_BOT_POPUPS_HPP

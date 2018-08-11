@@ -230,6 +230,8 @@ private:
 
     // Builds the profile combobox
     void buildProfiles();
+    // Builds the proxy combobox
+    void buildProxies();
 };
 
 // Contains the class that builds a Task widget to be added to the scroll area

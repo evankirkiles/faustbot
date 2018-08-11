@@ -1,2 +1,1 @@
-1 :-: {"proxyip":"sadasdas","proxyport":"asdasd","proxyusername":"asdasda","proxypassword":"sdasdasdasd"}
-2 :-: {"proxyip":"awdasd","proxyport":"asdasd","proxyusername":"ada","proxypassword":"dasdasdasd"}
+1 :-: {"proxyip":"127.0.0.1","proxyport":"8080","proxyusername":"localhost","proxypassword":"password"}
