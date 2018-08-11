@@ -1,3 +1,2 @@
-1 :-: {"proxyip":"127.0.0.1","proxyport":"1234","proxyusername":"admin","proxypassword":"root"}
-2 :-: {"proxyip":"127.0.0.2","proxyport":"aaaa","proxyusername":"admin","proxypassword":"root"}
-3 :-: {"proxyip":"127.0.0.3","proxyport":"aaaa","proxyusername":"admin","proxypassword":"root"}
+1 :-: {"proxyip":"sadasdas","proxyport":"asdasd","proxyusername":"asdasda","proxypassword":"sdasdasdasd"}
+2 :-: {"proxyip":"awdasd","proxyport":"asdasd","proxyusername":"ada","proxypassword":"dasdasdasd"}

@@ -953,6 +953,7 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
     smallButtonRow->addWidget(addProxyButton);
     smallButtonRow->addWidget(deleteProxyButton);
     mainLayout->addWidget(topRow);
+    mainLayout->addWidget(columnProxies);
 
     proxiesListView->setObjectName("profileslistview");
     proxiesListView->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -969,6 +970,7 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
 
     // Make the connections
     connect(addProxyButton, SIGNAL(clicked()), this, SLOT(openAddProxy()));
+    connect(deleteProxyButton, SIGNAL(clicked()), this, SLOT(deleteProxy()));
 }
 
 // Override the proxy display's close function to emit closed
@@ -986,7 +988,7 @@ void ProxyDisplay::openAddProxy() {
         return;
     }
     // If not, then build a new add proxy window and change bool value
-    apd = new AddProxyDisplay();
+    apd = new AddProxyDisplay(proxiesListView->count() + 1);
     apd->show();
     addWindOpen = true;
 
@@ -994,7 +996,7 @@ void ProxyDisplay::openAddProxy() {
     connect(apd, &AddProxyDisplay::closed, [this] () { addWindOpen = false; });
     connect(apd, &AddProxyDisplay::submitted, [this] () {
         // Refresh with the new proxy selected
-        refresh(proxiesListView->count() + 1);
+        refresh(proxiesListView->count());
     });
 }
 
@@ -1002,13 +1004,6 @@ void ProxyDisplay::openAddProxy() {
 void ProxyDisplay::refresh(int selected) {
     // Clear the proxy display
     proxiesListView->clear();
-
-    // Add the column header in the listwidget
-    auto proxiesListWidgHeader = new QListWidgetItem();
-    proxiesListWidgHeader->setSizeHint(columnProxies->sizeHint());
-    proxiesListView->addItem(proxiesListWidgHeader);
-    proxiesListView->setItemWidget(proxiesListWidgHeader, columnProxies);
-    proxiesListWidgHeader->setFlags(proxiesListWidgHeader->flags() & ~Qt::ItemIsSelectable);
 
     // Read in the Proxy Display file and interpret the JSON
     std::ifstream filein(file_paths::PROXIES_TXT);
@@ -1038,9 +1033,39 @@ void ProxyDisplay::refresh(int selected) {
     proxiesListView->setCurrentRow(selected + 1);
 }
 
+// Deletes the selected proxy in the listview and from the proxies textfile
+void ProxyDisplay::deleteProxy() {
+    // Open both proxy text files
+    std::ifstream filein(file_paths::PROXIES_TXT);
+    std::ofstream fileout(file_paths::TEMPPROXIES_TXT);
+    std::string str;
+    int indices = 0;
+
+    // Cycle through the in file and check for the index to be deleted
+    while (getline(filein, str)) {
+        // Check if the index of the proxy matches that of the selected one
+        const unsigned long indexPos = str.find(" :-: ");
+        if (str.substr(0, indexPos) != std::to_string(proxiesListView->currentRow() + 1)) {
+            indices++;
+            fileout << std::to_string(indices) << str.substr(indexPos) << "\n";
+        }
+    }
+
+    // Finally, close both files
+    filein.close();
+    fileout.close();
+
+    // Rename the temporary proxies file to the real one
+    rename(file_paths::TEMPPROXIES_TXT, file_paths::PROXIES_TXT);
+
+    // Then refresh with the previous one now selected
+    refresh(proxiesListView->currentRow() - 1);
+}
+
 // ADD PROXY DISPLAY
 // Constructor that builds the Add Proxy window
-AddProxyDisplay::AddProxyDisplay(QWidget *parent) :
+AddProxyDisplay::AddProxyDisplay(int newIndex, QWidget *parent) :
+        index(newIndex),
         proxyIPLabel(new QLabel("IP:", this)),
         proxyIP(new QLineEdit(this)),
         proxyPortLabel(new QLabel("Port:", this)),
@@ -1120,10 +1145,37 @@ AddProxyDisplay::AddProxyDisplay(QWidget *parent) :
     // Finalize layout decisions
     bgLayout->addLayout(mainLayout);
     setLayout(externLayout);
+
+    // Make final connections
+    connect(submit, SIGNAL(clicked()), this, SLOT(createNewProxy()));
 }
 
 // Override the close event to emit closed
 void AddProxyDisplay::closeEvent(QCloseEvent *event) {
     emit closed();
     QWidget::closeEvent(event);
+}
+
+// Function to create a new Proxy in the Proxies file
+void AddProxyDisplay::createNewProxy() {
+    // First ensure that there is data in every required field
+    if (proxyIP->text().isEmpty()) { proxyIP->setFocus(); return; }
+    if (proxyPort->text().isEmpty()) { proxyPort->setFocus(); return; }
+
+    // Open the proxy text file
+    std::ofstream fileout(file_paths::PROXIES_TXT, std::ios_base::app | std::ios_base::out);
+    std::string str;
+
+    // Append a new proxy to the file in the given format
+    fileout << std::to_string(index) << R"( :-: {"proxyip":")" << proxyIP->text().toStdString() <<
+            R"(","proxyport":")" << proxyPort->text().toStdString() << R"(","proxyusername":")" <<
+            proxyUsername->text().toStdString() << R"(","proxypassword":")" << proxyPassword->text().toStdString() <<
+            R"("})" << "\n";
+
+    // Close the outfile
+    fileout.close();
+
+    // Close the window and emit submit
+    emit submitted();
+    close();
 }

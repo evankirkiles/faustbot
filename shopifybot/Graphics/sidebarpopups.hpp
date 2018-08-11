@@ -177,12 +177,14 @@ private:
 class ProxyListItem : public QWidget {
     Q_OBJECT
 public:
+    // The index display
+    QLabel* indexDisp;
+
     // Constructor that builds the custom ProxyListItem widget
     explicit ProxyListItem(QString index, QString ip, QString port, QString username, QString password,
                            QString settings = "", QWidget *parent = 0);
 private:
     // Several QLabels which simply display the passed in data
-    QLabel* indexDisp;
     QLabel* ipLabel;
     QLabel* portLabel;
     QLabel* usernameLabel;
@@ -194,7 +196,7 @@ class AddProxyDisplay : public QWidget {
     Q_OBJECT
 public:
     // Constructor that builds the add proxy window
-    explicit AddProxyDisplay(QWidget* parent = 0);
+    explicit AddProxyDisplay(int newIndex, QWidget* parent = 0);
     // Override the window closed
     void closeEvent(QCloseEvent* event) override;
 
@@ -203,7 +205,13 @@ signals:
     void closed();
     // Emitted when a proxy has been added
     void submitted();
+private slots:
+    // Submits the information to a new proxy in the file
+    void createNewProxy();
 private:
+    // The index at which to put the new proxy
+    const int index;
+
     // Dark Title Bar widget
     DarkTitleBar* dtb;
 
@@ -219,7 +227,6 @@ private:
 
     // Submit button which adds it to the list
     QPushButton* submit;
-private slots:
 };
 
 // Header for the Proxy Display window which will include a listview of the proxies and functions to add
@@ -240,6 +247,8 @@ private slots:
     void refresh(int selected);
     // Opens the add proxy display
     void openAddProxy();
+    // Deletes the selected proxy
+    void deleteProxy();
 private:
     // Tells whether an add new proxy window is open
     bool addWindOpen;
