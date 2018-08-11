@@ -966,12 +966,36 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
     // Finally add the layouts to their parents
     bgLayout->addLayout(mainLayout);
     setLayout(externLayout);
+
+    // Make the connections
+    connect(addProxyButton, SIGNAL(clicked()), this, SLOT(openAddProxy()));
 }
 
 // Override the proxy display's close function to emit closed
 void ProxyDisplay::closeEvent(QCloseEvent *event) {
     emit closed();
     QWidget::closeEvent(event);
+}
+
+// Opens the add proxy window
+void ProxyDisplay::openAddProxy() {
+    // Make sure an add proxy window is not already open
+    if (addWindOpen) {
+        apd->raise();
+        apd->setFocus();
+        return;
+    }
+    // If not, then build a new add proxy window and change bool value
+    apd = new AddProxyDisplay();
+    apd->show();
+    addWindOpen = true;
+
+    // Make necessary connections
+    connect(apd, &AddProxyDisplay::closed, [this] () { addWindOpen = false; });
+    connect(apd, &AddProxyDisplay::submitted, [this] () {
+        // Refresh with the new proxy selected
+        refresh(proxiesListView->count() + 1);
+    });
 }
 
 // Refreshes the ProxyDisplay while retaining the selected element
@@ -1012,4 +1036,104 @@ void ProxyDisplay::refresh(int selected) {
     filein.close();
     // Select the desired integer
     proxiesListView->setCurrentRow(selected + 1);
+}
+
+// ADD PROXY DISPLAY
+// Constructor that builds the Add Proxy window
+AddProxyDisplay::AddProxyDisplay(QWidget *parent) :
+        proxyIPLabel(new QLabel("IP", this)),
+        proxyIP(new QLineEdit(this)),
+        proxyPortLabel(new QLabel("Port", this)),
+        proxyPort(new QLineEdit(this)),
+        proxyUsernameLabel(new QLabel("Username", this)),
+        proxyUsername(new QLineEdit(this)),
+        proxyPasswordLabel(new QLabel("Password", this)),
+        proxyPassword(new QLineEdit(this)),
+        submit(new QPushButton("ADD", this)),
+        QWidget(parent) {
+
+    // Set window properties
+    setFixedSize(400, 160);
+    setWindowTitle("Add New Proxy");
+    setWindowFlags(Qt::FramelessWindowHint);
+    setFocusPolicy(Qt::ClickFocus);
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Create the dark title bar
+    dtb = new DarkTitleBar(this, true);
+
+    // Set the stylesheet for the window
+    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    setStyleSheet(StyleSheet);
+
+    // Create external qframe and layouts for dtb
+    auto externLayout = new QVBoxLayout();
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    auto bgLayout = new QVBoxLayout();
+    bgLayout->setContentsMargins(0, 0, 0, 0);
+    bg->setObjectName("main_window");
+    bg->setLayout(bgLayout);
+    bgLayout->addWidget(dtb);
+    externLayout->addWidget(bg);
+
+    // Create the main layout
+    auto mainLayout = new QHBoxLayout();
+    mainLayout->setContentsMargins(11, 3, 11, 11);
+    auto leftColWidg = new QWidget();
+    auto leftColumn = new QVBoxLayout();
+    leftColWidg->setLayout(leftColumn);
+    auto ipAndPortLayout = new QHBoxLayout();
+    auto userLayout = new QHBoxLayout();
+    auto passLayout = new QHBoxLayout();
+
+    // Set sizing policies
+    QSizePolicy spLeft(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    spLeft.setHorizontalStretch(4);
+    QSizePolicy spRight(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    spRight.setHorizontalStretch(1);
+    leftColWidg->setSizePolicy(spLeft);
+    submit->setSizePolicy(spRight);
+
+    // Set widget properties
+    proxyIPLabel->setObjectName("addtask_mediocre_text");
+    proxyIP->setObjectName("addtask_editbox");
+    proxyUsernameLabel->setObjectName("addtask_mediocre_text");
+    proxyUsername->setObjectName("addtask_editbox");
+    proxyPortLabel->setObjectName("addtask_mediocre_text");
+    proxyPort->setObjectName("addtask_editbox");
+    proxyPasswordLabel->setObjectName("addtask_mediocre_text");
+    proxyPassword->setObjectName("addtask_editbox");
+    submit->setObjectName("addtaskbutton");
+    submit->setContentsMargins(1, 1, 1, 1);
+
+    // Add the widgets to their layouts
+    ipAndPortLayout->addWidget(proxyIPLabel);
+    ipAndPortLayout->addWidget(proxyIP);
+    ipAndPortLayout->addWidget(proxyPortLabel);
+    ipAndPortLayout->addWidget(proxyPort);
+    userLayout->addWidget(proxyUsernameLabel);
+    userLayout->addWidget(proxyUsername);
+    passLayout->addWidget(proxyPasswordLabel);
+    passLayout->addWidget(proxyPassword);
+    leftColumn->addLayout(ipAndPortLayout);
+    leftColumn->addLayout(userLayout);
+    leftColumn->addLayout(passLayout);
+    mainLayout->addWidget(leftColWidg);
+
+    // Put the Submit button on the right
+    mainLayout->addWidget(submit);
+
+    // Finalize layout decisions
+    bgLayout->addLayout(mainLayout);
+    setLayout(externLayout);
+}
+
+// Override the close event to emit closed
+void AddProxyDisplay::closeEvent(QCloseEvent *event) {
+    emit closed();
+    QWidget::closeEvent(event);
 }
