@@ -18,6 +18,8 @@ cartLink = sys.argv[2]
 logFileLocation = sys.argv[3]
 # Name of the profile is the fourth argument
 profileName = sys.argv[4]
+# Finally, the proxy identifier is the fifth argument
+proxyName = sys.argv[5]
 
 # Go into the profile file and find the correct profile's json data
 j = None
@@ -37,7 +39,7 @@ with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
     fileLine = -1
     if j['ccard'] == 'Random':
         fileLine = 0
-        for j, mine in enumerate(ccinput_file):
+        for i, line in enumerate(ccinput_file):
             fileLine += 1
         fileLine = random.randint(1, fileLine + 1)
 
@@ -51,6 +53,35 @@ with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
 if c is None:
     # If it gets here (c is undefined), then the credit card has not been found
     raise ValueError("Could not locate credit card in readme.txt")
+
+# Go into the proxy file and find the correct proxy json data
+p = None
+proxyDict = None
+with open('shopifybot/Infrastructure/proxies.txt') as proxyinputfile:
+    fileLine = -1
+    if proxyName == 'Random':
+        fileLine = 0
+        for i, line in enumerate(proxyinputfile):
+            fileLine += 1
+        fileLine = random.randint(1, fileLine + 1)
+
+    currentLine = 0
+    for i, line in enumerate(proxyinputfile):
+        currentLine += 1
+        if line.split(' :-: ', 1)[0] == proxyName or currentLine == fileLine:
+            p = json.loads(line.split(' :-: ', 1)[1])
+            break
+    proxyinputfile.close()
+if p is not None:
+    # Now build the proxy data package to send to the servers
+    if p['proxyusername'] == '' or p['proxypassword'] == '':
+        proxyDict = {'http': 'http://' + p['proxyip'] + ':' + p['proxyport'],
+                     'https': 'https://' + p['proxyip'] + ':' + p['proxyport']}
+    else:
+        proxyDict = {'http': 'http://' + p['proxyip'] + ':' + p['proxyport'],
+                     'https': 'https://' + p['proxyusername'] + ':' + p['proxypassword'] + '@' + p['proxyip'] + ':' + p['proxyport']}
+else:
+    proxyDict = {'http': '', 'https': ''}
 
 # Create requests session
 session = requests.session()
@@ -71,7 +102,7 @@ def send_customer_info():
 
     # Try to access the cart link with requests
     try:
-        resp = session.get(cartLink, allow_redirects=True, headers=customerInfoHeaders, timeout=4)
+        resp = session.get(cartLink, allow_redirects=True, headers=customerInfoHeaders, proxies=proxyDict, timeout=4)
     except Exception as e:
         log(e)
 
@@ -91,7 +122,7 @@ def send_customer_info():
 
         # This should always go through because first one did
         try:
-            resp = session.get(newURL, allow_redirects=True, headers=customerInfoHeaders, timeout=4)
+            resp = session.get(newURL, allow_redirects=True, headers=customerInfoHeaders, proxies=proxyDict, timeout=4)
         except Exception as e:
             log(e)
 
@@ -139,7 +170,7 @@ def send_customer_info():
 
     # Try to send this customer information in a POST request
     try:
-        resp = session.post(shopifyCheckoutLink, data=customerData, allow_redirects=True, timeout=4)
+        resp = session.post(shopifyCheckoutLink, data=customerData, proxies=proxyDict, allow_redirects=True, timeout=4)
     except Exception as e:
         log(e)
 
@@ -150,8 +181,8 @@ def send_customer_info():
         log(str(resp.status_code))
 
     # Now try to access the checkout link asking for the payment method
-    resp = session.get(shopifyCheckoutLink + "?previous_step=shipping_method&step=payment_method", allow_redirects=True,
-                       timeout=4)
+    resp = session.get(shopifyCheckoutLink + "?previous_step=shipping_method&step=payment_method", proxies=proxyDict,
+                       allow_redirects=True, timeout=4)
 
     # Check if successfully got to payment page
     if b'Complete order' or b'Complete order'.upper in resp.content:
@@ -180,7 +211,7 @@ def submitpayment():
 
     # Now try sending the post request to the Shopify Servers
     try:
-        resp = session.post('https://elb.deposit.shopifycs.com/sessions', data=json.dumps(ccInfo),
+        resp = session.post('https://elb.deposit.shopifycs.com/sessions', data=json.dumps(ccInfo), proxies=proxyDict,
                             headers=submitPaymentHeaders, allow_redirects=True, timeout=4)
     except Exception as e:
         log(e)
