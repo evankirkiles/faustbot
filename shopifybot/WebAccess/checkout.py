@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # Imports
-import requests, sys, json, datetime
+import requests, sys, json, datetime, random
 from bs4 import BeautifulSoup
+
 
 # Custom write function
 def log(text):
@@ -9,6 +10,10 @@ def log(text):
         logFile.write('[' + str(datetime.datetime.now())[0:23] + '] ' + text + '\n')
 
 
+# First, must denote the checkout link for the Shopify server for the site
+checkoutLink = sys.argv[1]
+# Also need the cart link for the desired product
+cartLink = sys.argv[2]
 # Log file location is the third argument
 logFileLocation = sys.argv[3]
 # Name of the profile is the fourth argument
@@ -26,12 +31,20 @@ if j is None:
     # If it gets here (j is undefined), then profile has not been found
     raise ValueError("Could not locate profile in profiles.txt")
 
-# TODO: Implement Random credit card selection
 # Go into the credit card file and find the correct credit card json data
 c = None
 with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
+    fileLine = -1
+    if j['ccard'] == 'Random':
+        fileLine = 0
+        for j, mine in enumerate(ccinput_file):
+            fileLine += 1
+        fileLine = random.randint(1, fileLine + 1)
+
+    currentLine = 0
     for i, line in enumerate(ccinput_file):
-        if line.split(' :-: ', 1)[0] == j['ccard']:
+        currentLine += 1
+        if line.split(' :-: ', 1)[0] == j['ccard'] or currentLine == fileLine:
             c = json.loads(line.split(' :-: ', 1)[1])
             break
     ccinput_file.close()
@@ -39,39 +52,12 @@ if c is None:
     # If it gets here (c is undefined), then the credit card has not been found
     raise ValueError("Could not locate credit card in readme.txt")
 
-################################## Cart Links ##########################################
-# First, must denote the checkout link for the Shopify server for the site
-checkoutLink = sys.argv[1]
-# Also need the cart link for the desired product
-cartLink = sys.argv[2]
-################################# User Settings ########################################
-# Define user settings here for the checkout form
-email = "sneakerbot78@gmail.com"
-firstName = "Aiden"
-lastName = "King"
-address1 = "2824 Rosewood Lane"
-address2 = ""
-city = "New York"
-country = "United States"
-province = "New York"
-zipcode = "10016"
-phone = "2129539871"
-# {"email":"sneakerbot78@gmail.com","firstname":"Aiden","lastname":"King","address1":"2824 Rosewood Lane","address2":"","city":"New York","country":"United States","province":"New York","zipcode":"10016","phone":"2129539871"}
-# Credit card settings
-ccnumber = "4621 3861 6179 4239"
-ccname = "Aiden King"
-ccmonth = "1"
-ccyear = "2021"
-ccccv = "567"
-# {"ccnum":"4621 3861 6179 4239","ccname":"Aiden King","ccmonth":"1","ccyear":"2021","ccccv":"567"}
-########################################################################################
-
 # Create requests session
 session = requests.session()
 
+
 # Function that sends the customer info to the Shopify servers
 def send_customer_info():
-
     # Headers to send with data
     customerInfoHeaders = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -97,7 +83,7 @@ def send_customer_info():
 
         # Reformat to fill as much of the order as possible
         soup = BeautifulSoup(resp.content, 'html.parser')
-        newQuantity = soup.findAll('input', {'name':'checkout[line_items][0][quantity]'})[1]['value']
+        newQuantity = soup.findAll('input', {'name': 'checkout[line_items][0][quantity]'})[1]['value']
         newURL = cartLink.split(':')[0] + ':' + cartLink.split(':')[1] + ':' + newQuantity
 
         # Log the reformatted order
@@ -120,12 +106,12 @@ def send_customer_info():
         raise ValueError("Did not reach Customer Information Page!")
 
     # Save the response URL as the Shopify checkout link
-    global shopifyCheckoutLink
+    global shopifyCheckoutLink, resp
     shopifyCheckoutLink = resp.url
 
     # Parse through the html contents and find authenticity tokens
     soup = BeautifulSoup(resp.content, 'html.parser')
-    authenticity_token = soup.findAll('input', {'name':'authenticity_token'})[2]['value']
+    authenticity_token = soup.findAll('input', {'name': 'authenticity_token'})[2]['value']
 
     # Customer data packet to send with POST HTTP request
     customerData = {
@@ -164,16 +150,18 @@ def send_customer_info():
         log(str(resp.status_code))
 
     # Now try to access the checkout link asking for the payment method
-    resp = session.get(shopifyCheckoutLink+"?previous_step=shipping_method&step=payment_method", allow_redirects=True, timeout=4)
+    resp = session.get(shopifyCheckoutLink + "?previous_step=shipping_method&step=payment_method", allow_redirects=True,
+                       timeout=4)
 
     # Check if successfully got to payment page
     if b'Complete order' or b'Complete order'.upper in resp.content:
         log('Successfully bypassed reCAPTCHA and got to payment method page.')
 
-# Function to go through with the payment method
-def submitPayment():
 
+# Function to go through with the payment method
+def submitpayment():
     # Define payment headers
+    global resp
     submitPaymentHeaders = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
         'Content-Type': 'application/json'
@@ -192,7 +180,8 @@ def submitPayment():
 
     # Now try sending the post request to the Shopify Servers
     try:
-        resp = session.post('https://elb.deposit.shopifycs.com/sessions', data=json.dumps(ccInfo), headers=submitPaymentHeaders, allow_redirects=True, timeout=4)
+        resp = session.post('https://elb.deposit.shopifycs.com/sessions', data=json.dumps(ccInfo),
+                            headers=submitPaymentHeaders, allow_redirects=True, timeout=4)
     except Exception as e:
         log(e)
 
@@ -202,6 +191,7 @@ def submitPayment():
     else:
         log(str(resp.status_code))
 
+
 # Run these functions
 send_customer_info()
-submitPayment()
+submitpayment()
