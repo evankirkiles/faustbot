@@ -1,2 +1,1 @@
 1 :-: {"proxyip":"127.0.0.1","proxyport":"8080","proxyusername":"localhost","proxypassword":"password"}
-2 :-: {"proxyip":"127.0.0.1","proxyport":"8080","proxyusername":"localhost2","proxypassword":"password2"}

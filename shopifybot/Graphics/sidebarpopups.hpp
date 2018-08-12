@@ -183,12 +183,20 @@ public:
     // Constructor that builds the custom ProxyListItem widget
     explicit ProxyListItem(QString index, QString ip, QString port, QString username, QString password,
                            QString settings = "", QWidget *parent = 0);
+public slots:
+    // Refreshes the status image with proxy status
+    void checkStatus();
 private:
     // Several QLabels which simply display the passed in data
     QLabel* ipLabel;
     QLabel* portLabel;
     QLabel* usernameLabel;
     QLabel* passwordLabel;
+    QLabel* statusIMG;
+
+    // Pixmaps containing both states of the proxy connection status
+    QPixmap proxyOn;
+    QPixmap proxyOff;
 };
 
 // The window which pops up when adding a proxy to the list
@@ -263,6 +271,7 @@ private:
     QLabel* proxiesViewTitle;
     ClickableImage* addProxyButton;
     ClickableImage* deleteProxyButton;
+    ClickableImage* refreshProxies;
     ProxyListItem* columnProxies;
 
     // List view of all the proxies

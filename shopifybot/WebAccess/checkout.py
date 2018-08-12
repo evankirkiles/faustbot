@@ -24,8 +24,17 @@ proxyName = sys.argv[5]
 # Go into the profile file and find the correct profile's json data
 j = None
 with open('shopifybot/Infrastructure/profiles.txt') as input_file:
+    fileLine = -1
+    if profileName == 'Random':
+        fileLine = 0
+        for i, line in enumerate(input_file):
+            fileLine += 1
+        fileLine = random.randint(1, fileLine + 1)
+
+    currentLine = 0
     for i, line in enumerate(input_file):
-        if line.split(' :-: ', 1)[0] == profileName:
+        currentLine += 1
+        if line.split(' :-: ', 1)[0] == profileName or currentLine == fileLine:
             j = json.loads(line.split(' :-: ', 1)[1])
             break
     input_file.close()

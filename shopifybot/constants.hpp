@@ -111,6 +111,8 @@ namespace file_paths {
     extern const char* MINUS2_IMG;
     extern const char* DUPLICATE_IMG;
     extern const char* DUPLICATE2_IMG;
+    extern const char* REFRESH_IMG;
+    extern const char* REFRESH2_IMG;
 
 }
 

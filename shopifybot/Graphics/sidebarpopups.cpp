@@ -901,11 +901,19 @@ ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString us
     setLayout(mainLayout);
 }
 
+// Function that checks the status of the proxy in the list item
+void ProxyListItem::checkStatus() {
+
+
+
+}
+
 // Constructor that builds the proxy window
 ProxyDisplay::ProxyDisplay(QWidget *parent) :
         proxiesViewTitle(new QLabel("Proxies", this)),
         addProxyButton(new ClickableImage(26, 26, 2, file_paths::ADD2_IMG, file_paths::ADD_IMG, this)),
         deleteProxyButton(new ClickableImage(26, 26, 2, file_paths::MINUS2_IMG, file_paths::MINUS_IMG, this)),
+        refreshProxies(new ClickableImage(26, 26, 2, file_paths::REFRESH2_IMG, file_paths::REFRESH_IMG, this)),
         proxiesListView(new QListWidget(this)),
         columnProxies(new ProxyListItem("#", "IP", "PORT", "USERNAME", "PASSWORD", "color:#c4c0b2;font-size:10px;", this)),
         QWidget(parent) {
@@ -950,6 +958,7 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
     // Add the widgets to their respective layouts
     proxiesViewTitle->setObjectName("addtask_mediocre_text");
     smallButtonRow->addWidget(proxiesViewTitle);
+    smallButtonRow->addWidget(refreshProxies);
     smallButtonRow->addWidget(addProxyButton);
     smallButtonRow->addWidget(deleteProxyButton);
     mainLayout->addWidget(topRow);
