@@ -37,7 +37,7 @@ namespace file_paths {
     const char* PRODUCTS_LOG = "./shopifybot/WebAccess/Contents/products_log_";
 
     const char* TIME_LOG = "./shopifybot/logs.txt";
-    const char* TASK_LOG = "./shopifybot/Logs/";
+    const char* TASK_LOG = "./shopifybot/Infrastructure/Logs/";
 
     const char* PROFILES_TXT = "./shopifybot/Infrastructure/profiles.txt";
     const char* TEMPPROFILES_TXT = "./shopifybot/Infrastructure/tempprofiles.txt";

@@ -146,7 +146,6 @@ def send_customer_info():
         raise ValueError("Did not reach Customer Information Page!")
 
     # Save the response URL as the Shopify checkout link
-    global shopifyCheckoutLink, resp
     shopifyCheckoutLink = resp.url
 
     # Parse through the html contents and find authenticity tokens
@@ -201,7 +200,6 @@ def send_customer_info():
 # Function to go through with the payment method
 def submitpayment():
     # Define payment headers
-    global resp
     submitPaymentHeaders = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
         'Content-Type': 'application/json'

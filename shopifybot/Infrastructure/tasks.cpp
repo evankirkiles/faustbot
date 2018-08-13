@@ -108,7 +108,7 @@ void Task::order(const std::string &url) {
 
     // Essentially just runs the Python Selenium script for the given url
     FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/checkout.py ") + swh.sourceURL.checkoutURL + " " +
-            url + std::string(" shopifybot/Logs/task_logs_") + swh.sourceURL.title + swh.taskID + ".txt \"" + profile + "\"" +
+            url + std::string(" shopifybot/Infrastructure/Logs/task_logs_") + swh.sourceURL.title + swh.taskID + ".txt \"" + profile + "\" " +
                                  proxy).c_str(), "r");
 
     // Wait for the Python script to finish
