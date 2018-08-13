@@ -113,6 +113,9 @@ namespace file_paths {
     extern const char* DUPLICATE2_IMG;
     extern const char* REFRESH_IMG;
     extern const char* REFRESH2_IMG;
+    extern const char* PROXYON_IMG;
+    extern const char* PROXYOFF_IMG;
+    extern const char* PROXYNEUTRAL_IMG;
 
 }
 

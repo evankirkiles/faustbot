@@ -875,6 +875,9 @@ ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString us
         portLabel(new QLabel(port, this)),
         usernameLabel(new QLabel(username, this)),
         passwordLabel(new QLabel(password, this)),
+        proxyOn(QPixmap::fromImage(QImage(file_paths::PROXYON_IMG).scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
+        proxyOff(QPixmap::fromImage(QImage(file_paths::PROXYOFF_IMG).scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
+        proxyNeutral(QPixmap::fromImage(QImage(file_paths::PROXYNEUTRAL_IMG).scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
         QWidget(parent) {
 
     // Set the object name and height
@@ -884,10 +887,15 @@ ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString us
 
     // Give each QLabel a fixed size
     indexDisp->setFixedWidth(20);
-    ipLabel->setFixedWidth(80);
+    ipLabel->setFixedWidth(100);
     portLabel->setFixedWidth(40);
-    usernameLabel->setFixedWidth(100);
-    passwordLabel->setFixedWidth(100);
+    usernameLabel->setFixedWidth(80);
+    passwordLabel->setFixedWidth(70);
+
+    // Build the status code light on the proxylistitem
+    proxyOn.setDevicePixelRatio(2.0);
+    proxyOff.setDevicePixelRatio(2.0);
+    proxyNeutral.setDevicePixelRatio(2.0);
 
     // Add all the QWidgets to a horizontal layout
     auto mainLayout = new QHBoxLayout();
@@ -898,14 +906,44 @@ ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString us
     mainLayout->addWidget(portLabel);
     mainLayout->addWidget(usernameLabel);
     mainLayout->addWidget(passwordLabel);
+    if (indexDisp->text().toStdString() != "#") {
+        statusIMG = new QLabel(this);
+        statusIMG->setFixedWidth(16);
+        statusIMG->setPixmap(proxyNeutral);
+        mainLayout->addWidget(statusIMG);
+    } else {
+        statusIMG = new QLabel("?", this);
+        statusIMG->setFixedWidth(16);
+        mainLayout->addWidget(statusIMG);
+    }
     setLayout(mainLayout);
 }
 
 // Function that checks the status of the proxy in the list item
 void ProxyListItem::checkStatus() {
+    // Do not run for the header row
+    if (indexDisp->text().toStdString() == "#") { return; }
 
+    // Open the python script to check the proxy status
+    FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/proxychecker.py ") + indexDisp->text().toStdString() +
+            " shopifybot/WebAccess/Contents/proxychecker" + indexDisp->text().toStdString()).c_str(), "r");
 
+    // Wait for the python script to finish
+    pclose(fp);
 
+    // Now check the results file
+    std::ifstream filein("shopifybot/WebAccess/Contents/proxychecker" + indexDisp->text().toStdString());
+    int result;
+    filein >> result;
+    if (result == 1) {
+        // Proxy worked
+        statusIMG->setPixmap(proxyOn);
+    } else {
+        // Proxy did not work
+        statusIMG->setPixmap(proxyOff);
+    }
+
+    filein.close();
 }
 
 // Constructor that builds the proxy window
@@ -1034,6 +1072,9 @@ void ProxyDisplay::refresh(int selected) {
         lwidgitem->setSizeHint(newWidgItem->sizeHint());
         proxiesListView->addItem(lwidgitem);
         proxiesListView->setItemWidget(lwidgitem, newWidgItem);
+
+        // Make necessary connections
+        connect(refreshProxies, SIGNAL(clicked()), newWidgItem, SLOT(checkStatus()));
     }
 
     // Close the proxy file

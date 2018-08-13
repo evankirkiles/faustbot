@@ -197,6 +197,7 @@ private:
     // Pixmaps containing both states of the proxy connection status
     QPixmap proxyOn;
     QPixmap proxyOff;
+    QPixmap proxyNeutral;
 };
 
 // The window which pops up when adding a proxy to the list

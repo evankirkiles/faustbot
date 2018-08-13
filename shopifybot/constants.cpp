@@ -73,6 +73,9 @@ namespace file_paths {
     const char* DUPLICATE2_IMG = "./shopifybot/Graphics/Assets/duplicate2.png";
     const char* REFRESH_IMG = "./shopifybot/Graphics/Assets/refresh.png";
     const char* REFRESH2_IMG = "./shopifybot/Graphics/Assets/refresh2.png";
+    const char* PROXYON_IMG = "./shopifybot/Graphics/Assets/proxyon.png";
+    const char* PROXYOFF_IMG = "./shopifybot/Graphics/Assets/proxyoff.png";
+    const char* PROXYNEUTRAL_IMG = "./shopifybot/Graphics/Assets/proxyneutral.png";
 }
 
 namespace constants {
