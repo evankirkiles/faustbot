@@ -887,7 +887,7 @@ ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString us
 
     // Give each QLabel a fixed size
     indexDisp->setFixedWidth(20);
-    ipLabel->setFixedWidth(100);
+    ipLabel->setFixedWidth(110);
     portLabel->setFixedWidth(40);
     usernameLabel->setFixedWidth(80);
     passwordLabel->setFixedWidth(70);
@@ -921,37 +921,57 @@ ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString us
 
 // Function that checks the status of the proxy in the list item
 void ProxyListItem::checkStatus() {
+    emit proxyCheckStart();
     // Do not run for the header row
     if (indexDisp->text().toStdString() == "#") { return; }
 
+    // Set up a concurrent run of the proxy function
+    QFuture<void> future = QtConcurrent::run(this, &ProxyListItem::runCheck);
+    auto *watcher = new QFutureWatcher<void>(this);
+    connect(watcher, SIGNAL(finished()), this, SLOT(proxyEndEmit()));
+    connect(watcher, SIGNAL(finished()), this, SLOT(updateStatus()));
+    connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
+    watcher->setFuture(future);
+}
+
+// Simply emits the proxy check end signal
+void ProxyListItem::proxyEndEmit() { emit proxyCheckEnd(); }
+
+// Function to be run in the new QThread in the checkStatus function
+void ProxyListItem::runCheck() {
     // Open the python script to check the proxy status
-    FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/proxychecker.py ") + indexDisp->text().toStdString() +
-            " shopifybot/WebAccess/Contents/proxychecker" + indexDisp->text().toStdString()).c_str(), "r");
+    FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/proxychecker.py ") +
+            indexDisp->text().toStdString() + " shopifybot/WebAccess/Contents/proxychecker" +
+                                 indexDisp->text().toStdString()).c_str(), "r");
 
     // Wait for the python script to finish
     pclose(fp);
+}
 
+// Function to be
+void ProxyListItem::updateStatus() {
     // Now check the results file
     std::ifstream filein("shopifybot/WebAccess/Contents/proxychecker" + indexDisp->text().toStdString());
     int result;
     filein >> result;
     if (result == 1) {
-        // Proxy worked
         statusIMG->setPixmap(proxyOn);
     } else {
-        // Proxy did not work
         statusIMG->setPixmap(proxyOff);
     }
-
     filein.close();
+    remove(std::string("shopifybot/WebAccess/Contents/proxychecker" + indexDisp->text().toStdString()).c_str());
 }
 
 // Constructor that builds the proxy window
 ProxyDisplay::ProxyDisplay(QWidget *parent) :
         proxiesViewTitle(new QLabel("Proxies", this)),
+        proxyStatusCheck(new QLabel("Idle.", this)),
         addProxyButton(new ClickableImage(26, 26, 2, file_paths::ADD2_IMG, file_paths::ADD_IMG, this)),
         deleteProxyButton(new ClickableImage(26, 26, 2, file_paths::MINUS2_IMG, file_paths::MINUS_IMG, this)),
-        refreshProxies(new ClickableImage(26, 26, 2, file_paths::REFRESH2_IMG, file_paths::REFRESH_IMG, this)),
+        refreshProxies(new ClickableCheckableImage(26, 26, 2, file_paths::REFRESH2_IMG, file_paths::REFRESH_IMG,
+                                                   file_paths::REFRESH2_IMG, file_paths::REFRESH_IMG,
+                                                   file_paths::DISABLEDREFRESH_IMG, this)),
         proxiesListView(new QListWidget(this)),
         columnProxies(new ProxyListItem("#", "IP", "PORT", "USERNAME", "PASSWORD", "color:#c4c0b2;font-size:10px;", this)),
         QWidget(parent) {
@@ -995,7 +1015,11 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
 
     // Add the widgets to their respective layouts
     proxiesViewTitle->setObjectName("addtask_mediocre_text");
+    proxiesViewTitle->setFixedWidth(45);
+    proxyStatusCheck->setObjectName("proxiesstatustext");
+    proxyStatusCheck->setAlignment(Qt::AlignCenter);
     smallButtonRow->addWidget(proxiesViewTitle);
+    smallButtonRow->addWidget(proxyStatusCheck);
     smallButtonRow->addWidget(refreshProxies);
     smallButtonRow->addWidget(addProxyButton);
     smallButtonRow->addWidget(deleteProxyButton);
@@ -1020,10 +1044,15 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
     connect(deleteProxyButton, SIGNAL(clicked()), this, SLOT(deleteProxy()));
 }
 
-// Override the proxy display's close function to emit closed
+// Override the proxy display's close event function to emit closed
 void ProxyDisplay::closeEvent(QCloseEvent *event) {
-    emit closed();
-    QWidget::closeEvent(event);
+    // Make sure a proxy check is not running
+    if (threadsOpen != 0) {
+        event->ignore();
+    } else {
+        emit closed();
+        QWidget::closeEvent(event);
+    }
 }
 
 // Opens the add proxy window
@@ -1035,7 +1064,7 @@ void ProxyDisplay::openAddProxy() {
         return;
     }
     // If not, then build a new add proxy window and change bool value
-    apd = new AddProxyDisplay(proxiesListView->count() + 1);
+    apd = new AddProxyDisplay(proxiesListView->count() + 1, refreshProxies);
     apd->show();
     addWindOpen = true;
 
@@ -1074,7 +1103,20 @@ void ProxyDisplay::refresh(int selected) {
         proxiesListView->setItemWidget(lwidgitem, newWidgItem);
 
         // Make necessary connections
-        connect(refreshProxies, SIGNAL(clicked()), newWidgItem, SLOT(checkStatus()));
+        connect(refreshProxies, SIGNAL(runTask()), newWidgItem, SLOT(checkStatus()));
+        connect(refreshProxies, SIGNAL(interrupt()), newWidgItem, SLOT(checkStatus()));
+        connect(newWidgItem, &ProxyListItem::proxyCheckStart, [this] () {
+            threadsOpen += 1;
+            proxyStatusCheck->setText("Running status check...");
+            refreshProxies->disable();
+        });
+        connect(newWidgItem, &ProxyListItem::proxyCheckEnd, [this] () {
+            threadsOpen -= 1;
+            if (threadsOpen == 0) {
+                proxyStatusCheck->setText("Idle.");
+                refreshProxies->enable();
+            }
+        });
     }
 
     // Close the proxy file
@@ -1085,6 +1127,9 @@ void ProxyDisplay::refresh(int selected) {
 
 // Deletes the selected proxy in the listview and from the proxies textfile
 void ProxyDisplay::deleteProxy() {
+    // Make sure that a proxy check is not currently running
+    if (!refreshProxies->enabled) { return; }
+
     // Open both proxy text files
     std::ifstream filein(file_paths::PROXIES_TXT);
     std::ofstream fileout(file_paths::TEMPPROXIES_TXT);
@@ -1114,7 +1159,8 @@ void ProxyDisplay::deleteProxy() {
 
 // ADD PROXY DISPLAY
 // Constructor that builds the Add Proxy window
-AddProxyDisplay::AddProxyDisplay(int newIndex, QWidget *parent) :
+AddProxyDisplay::AddProxyDisplay(int newIndex, ClickableCheckableImage* refresher, QWidget *parent) :
+        refreshButton(refresher),
         index(newIndex),
         proxyIPLabel(new QLabel("IP:", this)),
         proxyIP(new QLineEdit(this)),
@@ -1208,6 +1254,9 @@ void AddProxyDisplay::closeEvent(QCloseEvent *event) {
 
 // Function to create a new Proxy in the Proxies file
 void AddProxyDisplay::createNewProxy() {
+    // Don't allow creating a new proxy if a proxy check is in action
+    if (!refreshButton->enabled) { return; }
+
     // First ensure that there is data in every required field
     if (proxyIP->text().isEmpty()) { proxyIP->setFocus(); return; }
     if (proxyPort->text().isEmpty()) { proxyPort->setFocus(); return; }

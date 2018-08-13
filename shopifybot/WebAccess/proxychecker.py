@@ -1,5 +1,4 @@
-import requests, sys, json
-from bs4 import BeautifulSoup
+import requests, sys, json, urllib3
 
 # Python script which checks the functionality of the proxy given in the args
 # First argument is the index of the proxy to check, and the second is the filename to write to
@@ -32,7 +31,12 @@ try:
         logfile.write('1')
         logfile.close()
 except requests.exceptions.ProxyError as e:
+    # In this case, the proxy simply had an error and could not connect
     with open(fileToWriteTo, 'w+') as logfile:
         logfile.write('0')
         logfile.close()
-
+except urllib3.exceptions.LocationParseError as e:
+    # In this case, there was a redirect error or some issue with the port and ip
+    with open(fileToWriteTo, 'w+') as logfile:
+        logfile.write('2')
+        logfile.close()

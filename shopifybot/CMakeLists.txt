@@ -8,7 +8,8 @@ set(HEADER_FILES
         Graphics/taskwidget.hpp
         Graphics/popups.hpp
         Graphics/titlebar.hpp
-        Graphics/sidebarpopups.hpp)
+        Graphics/sidebarpopups.hpp
+        Graphics/customwidgets.hpp)
 
 set(SOURCE_FILES
         constants.cpp
@@ -18,6 +19,7 @@ set(SOURCE_FILES
         Graphics/taskwidget.cpp
         Graphics/popups.cpp
         Graphics/titlebar.cpp
-        Graphics/sidebarpopups.cpp)
+        Graphics/sidebarpopups.cpp
+        Graphics/customwidgets.cpp)
 
 add_library(shopifybot STATIC ${SOURCE_FILES} ${HEADER_FILES})

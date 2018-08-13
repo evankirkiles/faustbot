@@ -311,3 +311,10 @@ QComboBox QAbstractItemView {
     selection-color: #fce694;
     selection-background-color: #505050
 }
+
+#proxiesstatustext {
+    color: #323232;
+    font-size: 10px;
+    font-family: "Futura";
+    text-align: center;
+}

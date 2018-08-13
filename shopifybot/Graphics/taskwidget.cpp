@@ -101,7 +101,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     separator2->setObjectName("vertical_line");
 
     // Build the play button
-    play = new ClickableCheckableImage(80, 100, file_paths::PLAY2_IMG, file_paths::PLAY_IMG,
+    play = new ClickableCheckableImage(80, 100, 4, file_paths::PLAY2_IMG, file_paths::PLAY_IMG,
             file_paths::STOP2_IMG, file_paths::STOP_IMG, file_paths::PLAY_DISBL_IMG, this);
     // Build the edit button
     edit = new ClickableImage(100, 100, 4, file_paths::EDIT2_IMG, file_paths::EDIT_IMG, this);

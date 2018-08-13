@@ -5,10 +5,6 @@
 #ifndef SHOPIFY_BOT_SIDEBARPOPUPS_HPP
 #define SHOPIFY_BOT_SIDEBARPOPUPS_HPP
 
-#ifndef NewTaskDisplay
-#include "popups.hpp"
-#endif
-
 #ifndef QListWidget
 #include <QListWidget>
 #endif
@@ -21,6 +17,22 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#ifndef QtConcurrent
+#include <QtConcurrent>
+#endif
+#ifndef QFuture
+#include <QFuture>
+#endif
+#ifndef QFutureWatcher
+#include <QFutureWatcher>
+#endif
+
+#ifndef NewTaskDisplay
+#include "popups.hpp"
+#endif
+#ifndef ClickableCheckableImage
+#include "customwidgets.hpp"
+#endif
 
 // trim from end (in place)
 static inline void rtrim(std::string &s) {
@@ -183,9 +195,19 @@ public:
     // Constructor that builds the custom ProxyListItem widget
     explicit ProxyListItem(QString index, QString ip, QString port, QString username, QString password,
                            QString settings = "", QWidget *parent = 0);
+signals:
+    // Emitted when the proxy check starts
+    void proxyCheckStart();
+    // Emitted when the proxy check ends
+    void proxyCheckEnd();
 public slots:
     // Refreshes the status image with proxy status
     void checkStatus();
+private slots:
+    // Uses the information in the proxy checker file to update the status
+    void updateStatus();
+    // Simply emits a signal from the class itself
+    void proxyEndEmit();
 private:
     // Several QLabels which simply display the passed in data
     QLabel* ipLabel;
@@ -198,6 +220,9 @@ private:
     QPixmap proxyOn;
     QPixmap proxyOff;
     QPixmap proxyNeutral;
+
+    // Process called in the separate thread
+    void runCheck();
 };
 
 // The window which pops up when adding a proxy to the list
@@ -205,7 +230,7 @@ class AddProxyDisplay : public QWidget {
     Q_OBJECT
 public:
     // Constructor that builds the add proxy window
-    explicit AddProxyDisplay(int newIndex, QWidget* parent = 0);
+    explicit AddProxyDisplay(int newIndex, ClickableCheckableImage* refresher,  QWidget* parent = 0);
     // Override the window closed
     void closeEvent(QCloseEvent* event) override;
 
@@ -234,6 +259,9 @@ private:
     QLabel* proxyPasswordLabel;
     QLineEdit* proxyPassword;
 
+    // A clickable checkable image which can be used to deny updates
+    ClickableCheckableImage* refreshButton;
+
     // Submit button which adds it to the list
     QPushButton* submit;
 };
@@ -260,7 +288,9 @@ private slots:
     void deleteProxy();
 private:
     // Tells whether an add new proxy window is open
-    bool addWindOpen;
+    bool addWindOpen = false;
+    // Tells whether a thread is alive with a proxy check running
+    int threadsOpen = 0;
 
     // Dark Title Bar widget
     DarkTitleBar* dtb;
@@ -270,9 +300,10 @@ private:
 
     // Icons for adding and deleting proxies
     QLabel* proxiesViewTitle;
+    QLabel* proxyStatusCheck;
     ClickableImage* addProxyButton;
     ClickableImage* deleteProxyButton;
-    ClickableImage* refreshProxies;
+    ClickableCheckableImage* refreshProxies;
     ProxyListItem* columnProxies;
 
     // List view of all the proxies
