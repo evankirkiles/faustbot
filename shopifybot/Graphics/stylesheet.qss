@@ -248,7 +248,7 @@ QComboBox {
     padding: 0px 3px 0px 3px;
 }
 QComboBox QAbstractItemView {
-    min-width: 100px;
+    min-width: 110px;
     outline: 1px solid #151515;
     border: 1px solid #181818;
     selection-background-color: #e8cb61;

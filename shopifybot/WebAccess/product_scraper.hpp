@@ -41,6 +41,8 @@ struct Product {
             if (position != std::string::npos &&
                 format.substr(position + size.length(), 2) != ".5" &&
                 format.substr(position + size.length(), 2) != "-5") {
+                // In the case of S,M,L sizes, must check for a preceding 'X'
+                if (position != 0 && format.substr(position - 1, 1) == "X") { continue; }
                 return i.operator*().second;
             } else {
                 std::replace(format.begin(), format.end(), '.', '-');

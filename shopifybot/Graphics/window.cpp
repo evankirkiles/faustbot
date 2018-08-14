@@ -7,7 +7,7 @@
 // Constructor for the Bot's main window
 BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Set the size of the window
-    setFixedSize(1000, 610);
+    setFixedSize(1100, 610);
     // Also set the stylesheet for the window
     QFile File("./shopifybot/Graphics/stylesheet.qss");
     File.open(QFile::ReadOnly);

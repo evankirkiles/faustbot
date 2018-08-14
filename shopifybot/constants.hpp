@@ -50,6 +50,8 @@ namespace supported_sites {
     // It should be noted that Hanon requires being logged into an account to proceed to checkout.
     // Also, Hanon has both UK and US sizes, so when specifying the size one should precede it with "UK " or "US "
     extern const URLAndMethod SHOEGALLERY;     // Color is located in the main product's title, no way to remove it unfortunately
+    extern const URLAndMethod SHOPNICEKICKS;   // Colors are located in the main product's title, after the ' - ' substring
+    extern const URLAndMethod NOTRESHOP;       // Colors are located in the product's options, easy to find
 
     // MARK: Specialized Shopify sites
 
