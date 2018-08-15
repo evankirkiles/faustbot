@@ -15,6 +15,16 @@ namespace supported_sites {
     const URLAndMethod SHOEGALLERY = {"https://shoegallerymiami.com", "shoegallerymiami.com", 107, "shoegallery"};
     const URLAndMethod SHOPNICEKICKS = {"https://shopnicekicks.com", "shopnicekicks.com", 108, "shopnicekicks"};
     const URLAndMethod NOTRESHOP = {"https://www.notre-shop.com", "notre-shop.com", 109, "notreshop"};
+    const URLAndMethod TWELVEAMRUN = {"https://www.12amrun.com", "12amrun.com", 110, "12amrun"};
+    const URLAndMethod EIGHTEENMONTROSE = {"https://18montrose.com", "18montrose.com", 111, "18montrose"};
+    const URLAndMethod AMAMANIERE = {"https://www.a-ma-maniere.com", "a-ma-maniere.com", 112, "a-ma-maniere"};
+    const URLAndMethod APBSTORE = {"https://www.apbstore.com", "apbstore.com", 113, "apbstore"};
+    const URLAndMethod ADDICTMIAMI = {"https://www.addictmiami.com", "addictmiami.com", 114, "addictmiami"};
+    const URLAndMethod ASSC = {"https://shop.antisocialsocialclub.com", "shop.antisocialsocialclub.com", 115, "assc"};
+    const URLAndMethod EXCLUSIVEDNA = {"https://www.exclusivedna.com", "exclusivedna.com", 116, "exclusivedna"};
+    const URLAndMethod BBCICECREAM = {"https://www.bbcicecream.com", "bbcicream.com", 117, "billionaireboysclub"};
+
+    // TODO: Work on Billionaire Boys Ice Cream support
 
     const URLAndMethod KITH = {"https://kith.com", "kith.com", 201, "kith"};
 
@@ -24,15 +34,22 @@ namespace supported_sites {
             {{"Social Status", SOCIALSTATUS}, {"Xhibition", XHIBITION}, {"Undefeated", UNDEFEATED},
              {"Blends", BLENDS}, {"WishATL", WISHATL}, {"Kith", KITH}, {"Bodega", BODEGA},
              {"Hanon", HANON}, {"Shoe Gallery", SHOEGALLERY}, {"ShopNiceKicks", SHOPNICEKICKS},
-             {"Notre", NOTRESHOP}};
+             {"Notre", NOTRESHOP}, {"12amrun", TWELVEAMRUN}, {"18montrose", EIGHTEENMONTROSE},
+             {"A Ma Maniére", AMAMANIERE}, {"APB Store", APBSTORE}, {"Addict", ADDICTMIAMI},
+             {"Anti Social Social Club", ASSC}, {"Exclusive DNA", EXCLUSIVEDNA}, {"Billionaire Boys Club", BBCICECREAM}};
     const std::unordered_map<std::string, std::string>WEBSITES_BWD =
             {{SOCIALSTATUS.baseURL, "Social Status"}, {XHIBITION.baseURL, "Xhibition"}, {UNDEFEATED.baseURL, "Undefeated"},
              {BLENDS.baseURL, "Blends"}, {WISHATL.baseURL, "WishATL"}, {KITH.baseURL, "Kith"}, {BODEGA.baseURL, "Bodega"},
              {HANON.baseURL, "Hanon"}, {SHOEGALLERY.baseURL, "Shoe Gallery"}, {SHOPNICEKICKS.baseURL, "ShopNiceKicks"},
-             {NOTRESHOP.baseURL, "Notre"}};
+             {NOTRESHOP.baseURL, "Notre"}, {TWELVEAMRUN.baseURL, "12amrun"}, {EIGHTEENMONTROSE.baseURL, "18montrose"},
+             {AMAMANIERE.baseURL, "A Ma Maniére"}, {APBSTORE.baseURL, "APB Store"}, {ADDICTMIAMI.baseURL, "Addict"},
+             {ASSC.baseURL, "Anti Social Social Club"}, {EXCLUSIVEDNA.baseURL, "Exclusive DNA"},
+             {BBCICECREAM.baseURL, "Billionaire Boys Club"}};
 
-    const QStringList ssStringList({"Blends", "Bodega", "Hanon", "Kith", "Notre", "Shoe Gallery", "ShopNiceKicks",
-                                    "Social Status", "Undefeated", "WishATL", "Xhibition",});
+    const QStringList ssStringList({"12amrun", "18montrose", "A Ma Maniére", "Addict", "Anti Social Social Club",
+                                    "APB Store", "Billionaire Boys Club", "Blends", "Bodega", "Exclusive DNA",
+                                    "Hanon", "Kith", "Notre", "Shoe Gallery", "ShopNiceKicks", "Social Status",
+                                    "Undefeated", "WishATL", "Xhibition"});
 
 }
 

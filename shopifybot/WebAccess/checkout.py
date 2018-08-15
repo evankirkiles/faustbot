@@ -222,6 +222,8 @@ def submitpayment():
                             headers=submitPaymentHeaders, allow_redirects=True, timeout=4)
     except Exception as e:
         log(e)
+    except requests.exceptions.ProxyError as pe:
+        log("Proxy error while submitting credit card.")
 
     # Check if the post request was successful
     if resp.status_code == 200:

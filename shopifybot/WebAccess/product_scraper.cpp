@@ -80,57 +80,75 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                 if (str.find("\"variants\":") > str.find("\"available\":")) {
                     str.erase(0, str.find("\"available\":") + 12);
                     std::string availability = str.substr(0, str.find(','));
+                    if (availability == "false") { continue; }
+                    // Color comes after a space in the size title
                     if (sourceURL.method == 102) {
-                        if (availability != "false") {
-                            if (sscolor.empty()) {
-                                sscolor = size.substr(size.find(' ') + 1);
-                                boost::to_upper(sscolor);
-                                logFile << sscolor << "\n" << size.substr(0, size.find(' ')) << " :-: " << id << "\n";
-                            } else {
-                                logFile << size.substr(0, size.find(' ')) << " :-: " << id << "\n";
-                            }
+                        if (sscolor.empty()) {
+                            sscolor = size.substr(size.find(' ') + 1);
+                            boost::to_upper(sscolor);
+                            logFile << sscolor << "\n" << size.substr(0, size.find(' ')) << " :-: " << id << "\n";
+                        } else {
+                            logFile << size.substr(0, size.find(' ')) << " :-: " << id << "\n";
                         }
-                    } else if (sourceURL.method == 104) {
+                    // Color is in the title, nothing special to do but reformat the size string
+                    } else if (sourceURL.method == 104 || sourceURL.method == 111) {
                         logFile << size.substr(0, size.find(" \\/")) << " :-: " << id << "\n";
-                    } else if (sourceURL.method == 105) {
-                        if (availability != "false") {
-                            if (sscolor.empty()) {
-                                sscolor = size.substr(0, size.find(" \\/"));
-                                boost::to_upper(sscolor);
-                                logFile << sscolor << "\n" << size.substr(size.find(" \\/") + 4) << " :-: " << id << "\n";
-                            } else {
-                                logFile << size.substr(size.find(" \\/") + 4) << " :-: " << id << "\n";
-                            }
+                        // Color is located first in the size titles before a ' \/ '
+                    } else if (sourceURL.method == 105 || sourceURL.method == 116 || sourceURL.method == 117) {
+                        if (sscolor.empty()) {
+                            sscolor = size.substr(0, size.find(" \\/"));
+                            boost::to_upper(sscolor);
+                            logFile << sscolor << "\n" << size.substr(size.find(" \\/") + 4) << " :-: " << id << "\n";
+                        } else {
+                            logFile << size.substr(size.find(" \\/") + 4) << " :-: " << id << "\n";
                         }
+                        // Color is located in the size titles after a ' \/ '
                     } else if (sourceURL.method == 109) {
-                        if (availability != "false") {
-                            if (sscolor.empty()) {
-                                sscolor = size.substr(size.find(" \\/") + 4);
-                                boost::to_upper(sscolor);
-                                logFile << sscolor << "\n" << size.substr(0, size.find(" \\/")) << " :-: " << id << "\n";
-                            } else {
-                                logFile << size.substr(0, size.find(" \\/")) << " :-: " << id << "\n";
-                            }
+                        if (sscolor.empty()) {
+                            sscolor = size.substr(size.find(" \\/") + 4);
+                            boost::to_upper(sscolor);
+                            logFile << sscolor << "\n" << size.substr(0, size.find(" \\/")) << " :-: " << id
+                                    << "\n";
+                        } else {
+                            logFile << size.substr(0, size.find(" \\/")) << " :-: " << id << "\n";
                         }
-                    } else if (availability != "false") {
+                    // For A Ma Maniere, the color simply needs a little reformatting
+                    } else if (sourceURL.method == 112) {
+                        const unsigned long slashesPos = str.find("\\/");
+                        if (slashesPos != std::string::npos) { size = size.substr(0, slashesPos); }
+                        logFile << size << " :-: " << id << "\n";
+                    // For everything else, simply write the size and the id
+                    } else {
                         logFile << size << " :-: " << id << "\n";
                     }
                 } else {
                     boost::to_upper(size);
 
                     // In case of color coming in brackets after title
-                    if (sourceURL.method == 101 && size.find('[') != std::string::npos) {
+                    if ((sourceURL.method == 101 || sourceURL.method == 112 || sourceURL.method == 113) &&
+                            size.find('[') != std::string::npos) {
                         std::string color = size.substr(size.find('[') + 1);
                         color.pop_back();
                         logFile << "TITLE: " << size.substr(0, size.find('[') - 1) << ", COLOR: " << color << "\n";
-                    } else if (sourceURL.method == 102 || sourceURL.method == 105 || sourceURL.method == 109) {
+                    } else if (sourceURL.method == 102 || sourceURL.method == 105 || sourceURL.method == 109 ||
+                               sourceURL.method == 116 || sourceURL.method == 117) {
                         logFile << "TITLE: " << size << ", COLOR: ";
                         sscolor = "";
                     } else if (sourceURL.method == 103 || sourceURL.method == 108) {
-                        logFile << "TITLE: " << size.substr(0, size.find(" - ")) << ", COLOR: " << size.substr(size.find(" - ") + 3) << "\n";
+                        logFile << "TITLE: " << size.substr(0, size.find(" - ")) << ", COLOR: "
+                                << size.substr(size.find(" - ") + 3) << "\n";
                     } else if (sourceURL.method == 106) {
                         logFile << "TITLE: " << size << ", COLOR: " << sscolor << "\n";
+                    } else if (sourceURL.method == 110) {
+                        logFile << "TITLE: " << size.substr(0, size.find(" : ")) << ", COLOR: " << size.substr(size.find(" : " + 3)) << "\n";
+                    } else if (sourceURL.method == 111) {
+                        // Color is located in the title after an " IN " substring
+                        const unsigned long inPosition = size.find(" IN ");
+                        logFile << "TITLE: " << size.substr(0, inPosition);
+                        size = size.substr(inPosition + 4);
+                        logFile << ", COLOR: " << size << "\n";
                     } else {
+                        // Bodega (104), Shoegallery (107), Addict Miami (114), Anti Social Social Club (115)
                         logFile << "TITLE: " << size << "\n";
                     }
                 }
@@ -411,7 +429,10 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
     // Uses a switch function to specify different color locators for different websites
     switch (sourceURL.method) {
 
-        case 104: {
+        case 104:
+        case 107:
+        case 114:
+        case 115: {
             // In the case of BlendsUS, format is TITLE: [title + color] \n [size] : [id]
             bool titleMatch = false;
             bool prodFound = false;
@@ -456,7 +477,8 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                 }
             }
         }
-            // Default is for format in TITLE: [title], COLOR: [color] \n [size] : [id]
+
+        // Default is for format in TITLE: [title], COLOR: [color] \n [size] : [id]
         default: {
             bool titleMatch = false;
             bool prodFound = false;

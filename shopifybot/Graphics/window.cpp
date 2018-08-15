@@ -17,7 +17,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_QuitOnClose);
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
-    setWindowTitle(tr("Shopify Bot"));
+    setWindowTitle(tr("CIGNO D'ORO"));
     setObjectName("main_window");
 
     // Create URLAndMethod metatype
@@ -70,7 +70,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     logoimg.setDevicePixelRatio(2.0);
     logo = new QLabel();
     logo->setPixmap(logoimg);
-    title = new QLabel("SHOPIFY BOT", this);
+    title = new QLabel("IL CIGNO D'ORO", this);
     title->setAlignment(Qt::AlignCenter);
     title->setObjectName("bot_title");
     startAllTasks = new QPushButton("Start All", this);

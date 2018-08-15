@@ -52,6 +52,14 @@ namespace supported_sites {
     extern const URLAndMethod SHOEGALLERY;     // Color is located in the main product's title, no way to remove it unfortunately
     extern const URLAndMethod SHOPNICEKICKS;   // Colors are located in the main product's title, after the ' - ' substring
     extern const URLAndMethod NOTRESHOP;       // Colors are located in the product's options, easy to find
+    extern const URLAndMethod TWELVEAMRUN;     // Colors are located in the product's title, after a ' : '
+    extern const URLAndMethod EIGHTEENMONTROSE;// Colors are located in the product's sizes, after a ' \/ ' but before a ' \/ '
+    extern const URLAndMethod AMAMANIERE;      // Colors are located in the product's title, after a '[' and before a ']'
+    extern const URLAndMethod APBSTORE;        // Colors are located in the product's title, after a '[' and before a ']'
+    extern const URLAndMethod ADDICTMIAMI;     // Colors are located in the product's title, inseparable unfortunately
+    extern const URLAndMethod ASSC;            // Colors are located in the product's title, inseparable unfortunately
+    extern const URLAndMethod EXCLUSIVEDNA;    // Colors are located in the product's sizes before a ' \/ '
+    extern const URLAndMethod BBCICECREAM;     // Colors are located in the product's sizes before a ' \/ '
 
     // MARK: Specialized Shopify sites
 
