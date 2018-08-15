@@ -472,7 +472,6 @@ void EditTaskDisplay::attemptToSend() {
     // Non-required fields: collection, color keywords
     // Check each required input field to make sure a valid task can be built
     if (keywords->text().isEmpty()) { keywords->setFocus(); return; }
-    if (size->text().isEmpty()) { size->setFocus(); return; }
     if (title->text().isEmpty()) { title->setFocus(); return; }
 
     // Send the signal with all the data to the main window if all required fields have text in them

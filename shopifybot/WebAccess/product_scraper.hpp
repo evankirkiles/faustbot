@@ -37,18 +37,20 @@ struct Product {
         for (auto i = sizes.begin(); i != sizes.end(); ++i) {
             std::string format = i.operator*().first;
             format.erase(std::remove_if(format.begin(), format.end(), isspace), format.end());
-            const unsigned long position = format.find(size);
+            unsigned long position = format.find(size);
             if (position != std::string::npos &&
                 format.substr(position + size.length(), 2) != ".5" &&
                 format.substr(position + size.length(), 2) != "-5") {
                 // In the case of S,M,L sizes, must check for a preceding 'X'
                 if (position != 0 && format.substr(position - 1, 1) == "X") { continue; }
                 return i.operator*().second;
-            } else {
-                std::replace(format.begin(), format.end(), '.', '-');
-                if (format.find(size) != std::string::npos){
+            }
+            std::replace(format.begin(), format.end(), '-', '.');
+            position = format.find(size);
+            if (position != std::string::npos &&
+                format.substr(position + size.length(), 2) != ".5" &&
+                format.substr(position + size.length(), 2) != "-5") {
                     return i.operator*().second;
-                }
             }
         }
         // Shouldn't get here if the size exists

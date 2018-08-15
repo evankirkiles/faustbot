@@ -23,8 +23,8 @@ namespace supported_sites {
     const URLAndMethod ASSC = {"https://shop.antisocialsocialclub.com", "shop.antisocialsocialclub.com", 115, "assc"};
     const URLAndMethod EXCLUSIVEDNA = {"https://www.exclusivedna.com", "exclusivedna.com", 116, "exclusivedna"};
     const URLAndMethod BBCICECREAM = {"https://www.bbcicecream.com", "bbcicream.com", 117, "billionaireboysclub"};
-
-    // TODO: Work on Billionaire Boys Ice Cream support
+    const URLAndMethod BAPE = {"https://bapeonline.com", "bapeonline.com", 118, "bape"};
+    const URLAndMethod BEATNIC = {"https://beatniconline.com", "beatniconline.com", 119, "beatnic"};
 
     const URLAndMethod KITH = {"https://kith.com", "kith.com", 201, "kith"};
 
@@ -36,7 +36,8 @@ namespace supported_sites {
              {"Hanon", HANON}, {"Shoe Gallery", SHOEGALLERY}, {"ShopNiceKicks", SHOPNICEKICKS},
              {"Notre", NOTRESHOP}, {"12amrun", TWELVEAMRUN}, {"18montrose", EIGHTEENMONTROSE},
              {"A Ma Maniére", AMAMANIERE}, {"APB Store", APBSTORE}, {"Addict", ADDICTMIAMI},
-             {"Anti Social Social Club", ASSC}, {"Exclusive DNA", EXCLUSIVEDNA}, {"Billionaire Boys Club", BBCICECREAM}};
+             {"Anti Social Social Club", ASSC}, {"Exclusive DNA", EXCLUSIVEDNA}, {"Billionaire Boys Club", BBCICECREAM},
+             {"BAPE", BAPE}, {"BEATNIC", BEATNIC}};
     const std::unordered_map<std::string, std::string>WEBSITES_BWD =
             {{SOCIALSTATUS.baseURL, "Social Status"}, {XHIBITION.baseURL, "Xhibition"}, {UNDEFEATED.baseURL, "Undefeated"},
              {BLENDS.baseURL, "Blends"}, {WISHATL.baseURL, "WishATL"}, {KITH.baseURL, "Kith"}, {BODEGA.baseURL, "Bodega"},
@@ -44,12 +45,12 @@ namespace supported_sites {
              {NOTRESHOP.baseURL, "Notre"}, {TWELVEAMRUN.baseURL, "12amrun"}, {EIGHTEENMONTROSE.baseURL, "18montrose"},
              {AMAMANIERE.baseURL, "A Ma Maniére"}, {APBSTORE.baseURL, "APB Store"}, {ADDICTMIAMI.baseURL, "Addict"},
              {ASSC.baseURL, "Anti Social Social Club"}, {EXCLUSIVEDNA.baseURL, "Exclusive DNA"},
-             {BBCICECREAM.baseURL, "Billionaire Boys Club"}};
+             {BBCICECREAM.baseURL, "Billionaire Boys Club"}, {BAPE.baseURL, "BAPE"}, {BEATNIC.baseURL, "BEATNIC"}};
 
     const QStringList ssStringList({"12amrun", "18montrose", "A Ma Maniére", "Addict", "Anti Social Social Club",
-                                    "APB Store", "Billionaire Boys Club", "Blends", "Bodega", "Exclusive DNA",
-                                    "Hanon", "Kith", "Notre", "Shoe Gallery", "ShopNiceKicks", "Social Status",
-                                    "Undefeated", "WishATL", "Xhibition"});
+                                    "APB Store", "BAPE", "BEATNIC", "Billionaire Boys Club", "Blends", "Bodega",
+                                    "Exclusive DNA", "Hanon", "Kith", "Notre", "Shoe Gallery", "ShopNiceKicks",
+                                    "Social Status", "Undefeated", "WishATL", "Xhibition"});
 
 }
 
@@ -102,6 +103,7 @@ namespace file_paths {
 
 namespace constants {
     const unsigned int BASE_FREQ = 5;
+    // TODO: Make a base numresults checker
     const unsigned int BASE_NUMRESULTS = 10;
 }
 

@@ -1,7 +1,0 @@
-[2018-08-14 21:40:06.585] Beginning "Billionaire Boys Club".
-[2018-08-14 21:40:07.631] Failed because: "Could not find product.", checking again in 5 seconds.
-[2018-08-14 21:40:13.033] Failed because: "Could not find product.", checking again in 5 seconds.
-[2018-08-14 21:40:18.425] Failed because: "Could not find product.", checking again in 5 seconds.
-[2018-08-14 21:40:23.812] Failed because: "Could not find product.", checking again in 5 seconds.
-[2018-08-14 21:40:29.205] Failed because: "Could not find product.", checking again in 5 seconds.
-[2018-08-14 21:40:34.629] Failed because: "Could not find product.", checking again in 5 seconds.

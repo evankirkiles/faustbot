@@ -60,6 +60,14 @@ namespace supported_sites {
     extern const URLAndMethod ASSC;            // Colors are located in the product's title, inseparable unfortunately
     extern const URLAndMethod EXCLUSIVEDNA;    // Colors are located in the product's sizes before a ' \/ '
     extern const URLAndMethod BBCICECREAM;     // Colors are located in the product's sizes before a ' \/ '
+    extern const URLAndMethod BAPE;            // Colors are located in the product's sizes before a ' \/ '
+    // It should be noted that Bape's products.json do not correspond to the items on the page. There may be some overlap
+    // but for the most part it is not efficient to scrape this way. Solutions include maybe just scraping the entire
+    // products list, which is extremely inefficient but works? I guess. Bape only has 150 products so I can maneuver
+    // around their catalogue semiquickly with ?limit= and ?page= ('&' for a combo).
+    // TODO: Make Bape search more efficient
+    extern const URLAndMethod BEATNIC;          // Colors are located in the products.json after the term "Color: "
+    // TODO: Debug Beatnic scraping as well
 
     // MARK: Specialized Shopify sites
 
