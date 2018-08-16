@@ -67,7 +67,8 @@ namespace supported_sites {
     // around their catalogue semiquickly with ?limit= and ?page= ('&' for a combo).
     // TODO: Make Bape search more efficient
     extern const URLAndMethod BEATNIC;          // Colors are located in the products.json after the term "Color: "
-    // TODO: Debug Beatnic scraping as well
+    // TODO: Debug Beatnic scraping as well, currently UNSUPPORTED
+    extern const URLAndMethod BLACKMARKETUSA;   // Colors are located in the product's title, after a '(' but before a ')'
 
     // MARK: Specialized Shopify sites
 

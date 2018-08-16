@@ -23,18 +23,20 @@ proxyName = sys.argv[5]
 
 # Go into the profile file and find the correct profile's json data
 j = None
+profileLine = -1
 with open('shopifybot/Infrastructure/profiles.txt') as input_file:
-    fileLine = -1
     if profileName == 'Random':
-        fileLine = 0
+        profileLine = 0
         for i, line in enumerate(input_file):
-            fileLine += 1
-        fileLine = random.randint(1, fileLine + 1)
+            profileLine += 1
+        profileLine = random.randint(1, profileLine + 1)
+    input_file.close()
 
+with open('shopifybot/Infrastructure/profiles.txt') as input_file:
     currentLine = 0
     for i, line in enumerate(input_file):
         currentLine += 1
-        if line.split(' :-: ', 1)[0] == profileName or currentLine == fileLine:
+        if line.split(' :-: ', 1)[0] == profileName or currentLine == profileLine:
             j = json.loads(line.split(' :-: ', 1)[1])
             break
     input_file.close()
@@ -44,18 +46,21 @@ if j is None:
 
 # Go into the credit card file and find the correct credit card json data
 c = None
+ccardLine = -1
 with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
-    fileLine = -1
-    if j['ccard'] == 'Random':
-        fileLine = 0
-        for i, line in enumerate(ccinput_file):
-            fileLine += 1
-        fileLine = random.randint(1, fileLine + 1)
 
+    if j['ccard'] == 'Random':
+        ccardLine = 0
+        for i, line in enumerate(ccinput_file):
+            ccardLine += 1
+        ccardLine = random.randint(1, ccardLine + 1)
+    ccinput_file.close()
+
+with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
     currentLine = 0
     for i, line in enumerate(ccinput_file):
         currentLine += 1
-        if line.split(' :-: ', 1)[0] == j['ccard'] or currentLine == fileLine:
+        if line.split(' :-: ', 1)[0] == j['ccard'] or currentLine == ccardLine:
             c = json.loads(line.split(' :-: ', 1)[1])
             break
     ccinput_file.close()
@@ -66,18 +71,20 @@ if c is None:
 # Go into the proxy file and find the correct proxy json data
 p = None
 proxyDict = None
+proxyLine = -1
 with open('shopifybot/Infrastructure/proxies.txt') as proxyinputfile:
-    fileLine = -1
     if proxyName == 'Random':
-        fileLine = 0
+        proxyLine = 0
         for i, line in enumerate(proxyinputfile):
-            fileLine += 1
-        fileLine = random.randint(1, fileLine + 1)
+            proxyLine += 1
+        proxyLine = random.randint(1, proxyLine + 1)
+    proxyinputfile.close()
 
+with open('shopifybot/Infrastructure/proxies.txt') as proxyinputfile:
     currentLine = 0
     for i, line in enumerate(proxyinputfile):
         currentLine += 1
-        if line.split(' :-: ', 1)[0] == proxyName or currentLine == fileLine:
+        if line.split(' :-: ', 1)[0] == proxyName or currentLine == proxyLine:
             p = json.loads(line.split(' :-: ', 1)[1])
             break
     proxyinputfile.close()

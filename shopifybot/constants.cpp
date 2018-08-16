@@ -25,6 +25,7 @@ namespace supported_sites {
     const URLAndMethod BBCICECREAM = {"https://www.bbcicecream.com", "bbcicream.com", 117, "billionaireboysclub"};
     const URLAndMethod BAPE = {"https://bapeonline.com", "bapeonline.com", 118, "bape"};
     const URLAndMethod BEATNIC = {"https://beatniconline.com", "beatniconline.com", 119, "beatnic"};
+    const URLAndMethod BLACKMARKETUS = {"https://www.blkmkt.us", "blkmkt.us", 120, "blkmkt"};
 
     const URLAndMethod KITH = {"https://kith.com", "kith.com", 201, "kith"};
 
@@ -37,7 +38,7 @@ namespace supported_sites {
              {"Notre", NOTRESHOP}, {"12amrun", TWELVEAMRUN}, {"18montrose", EIGHTEENMONTROSE},
              {"A Ma Maniére", AMAMANIERE}, {"APB Store", APBSTORE}, {"Addict", ADDICTMIAMI},
              {"Anti Social Social Club", ASSC}, {"Exclusive DNA", EXCLUSIVEDNA}, {"Billionaire Boys Club", BBCICECREAM},
-             {"BAPE", BAPE}, {"BEATNIC", BEATNIC}};
+             {"BAPE", BAPE}, {"BEATNIC", BEATNIC}, {"Black Market USA", BLACKMARKETUS}};
     const std::unordered_map<std::string, std::string>WEBSITES_BWD =
             {{SOCIALSTATUS.baseURL, "Social Status"}, {XHIBITION.baseURL, "Xhibition"}, {UNDEFEATED.baseURL, "Undefeated"},
              {BLENDS.baseURL, "Blends"}, {WISHATL.baseURL, "WishATL"}, {KITH.baseURL, "Kith"}, {BODEGA.baseURL, "Bodega"},
@@ -45,10 +46,12 @@ namespace supported_sites {
              {NOTRESHOP.baseURL, "Notre"}, {TWELVEAMRUN.baseURL, "12amrun"}, {EIGHTEENMONTROSE.baseURL, "18montrose"},
              {AMAMANIERE.baseURL, "A Ma Maniére"}, {APBSTORE.baseURL, "APB Store"}, {ADDICTMIAMI.baseURL, "Addict"},
              {ASSC.baseURL, "Anti Social Social Club"}, {EXCLUSIVEDNA.baseURL, "Exclusive DNA"},
-             {BBCICECREAM.baseURL, "Billionaire Boys Club"}, {BAPE.baseURL, "BAPE"}, {BEATNIC.baseURL, "BEATNIC"}};
+             {BBCICECREAM.baseURL, "Billionaire Boys Club"}, {BAPE.baseURL, "BAPE"}, {BEATNIC.baseURL, "BEATNIC"},
+             {BLACKMARKETUS.baseURL, "Black Market USA"}};
 
+    // BEATNIC CURRENTLY UNSUPPORTED, ADD IN WHEN FIXED
     const QStringList ssStringList({"12amrun", "18montrose", "A Ma Maniére", "Addict", "Anti Social Social Club",
-                                    "APB Store", "BAPE", "BEATNIC", "Billionaire Boys Club", "Blends", "Bodega",
+                                    "APB Store", "BAPE", "Billionaire Boys Club", "Black Market USA", "Blends", "Bodega",
                                     "Exclusive DNA", "Hanon", "Kith", "Notre", "Shoe Gallery", "ShopNiceKicks",
                                     "Social Status", "Undefeated", "WishATL", "Xhibition"});
 

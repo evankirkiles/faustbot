@@ -78,11 +78,10 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
                 // In the case of Beatnic, the color is located after the "Color: " string
                 if (sourceURL.method == 119) {
-                    const unsigned long colourWayPos = str.find("Color: ");
+                    const unsigned long colourWayPos = str.find("Color: ") + 7;
                     if (colourWayPos != std::string::npos) {
-                        str = str.substr(colourWayPos + 7);
-                        const unsigned long asciiLoc = str.find("u003c");
-                        sscolor = str.substr(0, asciiLoc - 1);
+                        const unsigned long asciiLoc = str.find_first_of("u003c", colourWayPos);
+                        sscolor = str.substr(colourWayPos, asciiLoc - colourWayPos - 1);
                         boost::to_upper(sscolor);
                     }
                 }
@@ -159,6 +158,11 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                         logFile << "\nTITLE: " << size.substr(0, inPosition);
                         size = size.substr(inPosition + 4);
                         logFile << ", COLOR: " << size << "\n";
+                    } else if (sourceURL.method == 120 && size.find('(') != std::string::npos) {
+                        // Color comes in the title between parentheses '(' color ')'
+                        std::string color = size.substr(size.find('(') + 1);
+                        color.pop_back();
+                        logFile << "\nTITLE: " << size.substr(0, size.find('(') - 1) << ", COLOR: " << color << "\n";
                     } else {
                         // Bodega (104), Shoegallery (107), Addict Miami (114), Anti Social Social Club (115), BBC (117)
                         logFile << "\nTITLE: " << size << "\n";
@@ -589,9 +593,11 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                             }
                         }
                     }
-                } else if (stringpos == std::string::npos && prodFound) {
+                } else if (stringpos == std::string::npos && prodFound && !str.empty()) {
                     // If the product has been found, then this line will be the size and its id
-                    prdct.sizes[str.substr(0, str.find(" :-:"))] = str.substr(str.find(" :-: ") + 5);
+                    std::string sizeID = str.substr(str.find(" :-: ") + 5);
+                    if (sizeID.front() == ':') { sizeID.erase(sizeID.begin()); }
+                    prdct.sizes[str.substr(0, str.find(" :-:"))] = sizeID;
                 } else if (stringpos != std::string::npos && prodFound) {
                     // Mark how much time has passed since function began
                     timeLogs << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds to find product. \n";
