@@ -34,6 +34,7 @@ class Task : public QObject {
         Q_OBJECT
 public:
 
+    // TODO: Add a frequency and base num results slider
     // Constructor that creates an instance of the task for the specified website, title keywords, color keywords,
     // size, results to check, and frequency (default is to check every 30 seconds to preserve performance).
     explicit Task(const std::string& title, const URLAndMethod& url, const std::string& identifier,
@@ -59,7 +60,7 @@ public:
     std::vector<std::string> colorKeywords;
     // Size to check for
     std::string size;
-    // Quantity of products to try for
+    // Time at which to start at
     QDateTime startat;
     // Profile identifier to be given to the Python script to use
     std::string profile;
@@ -84,8 +85,57 @@ private:
     // Called to log a message to the tasks log file
     void log(const std::string& message);
 
-    // Orders the product from the given URL using PayPal to ensure consistency
+    // Orders the product from the given URL
     void order(const std::string& url);
+};
+
+// Special task which is tailored for knowing variant ID beforehand.
+// Repeatedly checks the Shopify cart page, once the product is available then proceeds with the checkout script.
+// QOBject to allow for QThread functionality again
+class VariantIDTask : public QObject {
+    Q_OBJECT
+public:
+
+    // Constructor that creates an instance of the task for the specified website, variant ID, etc
+    explicit VariantIDTask(const std::string& title, const URLAndMethod& url, const std::string& identifier,
+                           const std::string& variantID, const QDateTime& startat, const std::string& profile,
+                           const std::string& proxy, unsigned int frequency=constants::BASE_FREQ);
+
+    // Boolean which can be disabled to stop the running of the task
+    bool shouldcontinue = false;
+
+    // Title of the task
+    const std::string& title;
+
+    // Shopify website handler
+    ShopifyWebsiteHandler swh;
+    // Copy of the variant ID
+    std::string variantID;
+    // Time at which to start the task
+    QDateTime startat;
+    // Profile identifier to be given to the Python script to use
+    std::string profile;
+    // Proxy identifier to be given to the Python script to use
+    std::string proxy;
+    // How frequently the check should be run (in seconds)
+    unsigned int frequency;
+
+public slots:
+    // Runs the task, essentially creating a while loop that runs every [frequency] seconds and continuously checks
+    // if the variant ID is available to buy through shopify.
+    void run();
+signals:
+    // Emitted when the task has finished running
+    void finished();
+    // Emitted to update the status text
+    void status(QString text, QString hexColor);
+
+private:
+    // Called to log a message to the tasks log file
+    void log(const std::string& message);
+    // Orders the product from the given URL through the python script
+    void order(const std::string& url);
+
 };
 
 // Function which interprets the string form of a vector back into the vector

@@ -228,6 +228,10 @@ private slots:
     void acceptTaskEdit(QString title, URLAndMethod website, QString variantID, QDateTime start, QString profile, QString proxy);
     // Called when the edit window is closed
     void editClosed();
+
+private:
+    // Variant task ID instance
+    VariantTask* task;
 };
 
 #endif //SHOPIFY_BOT_TASKWIDGET_HPP

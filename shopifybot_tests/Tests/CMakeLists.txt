@@ -14,8 +14,7 @@ set(CMAKE_AUTORCC ON)
 add_executable(runshopifytests
         WebHandler_UTESTS.cpp)
 
-include_directories(shopifybot_tests/lib/googletest/include shopifybot_tests/lib/googletest)
-include_directories(shopifybot)
+include_directories(shopifybot_tests/lib/googletest/include shopifybot_tests/lib/googletest shopifybot)
 
 find_package(CURL REQUIRED)
 IF (CURL_FOUND)
@@ -38,8 +37,7 @@ IF (Qt5Concurrent_FOUND)
     target_link_libraries(runshopifytests ${Qt5Concurrent_LIBRARIES})
 endif()
 
-target_link_libraries(runshopifytests gtest gtest_main)
-target_link_libraries(runshopifytests shopifybot)
+target_link_libraries(runshopifytests shopifybot gtest gtest_main)
 
 include_directories(${APP_DOMAIN})
 include_directories(${APP_CALC})

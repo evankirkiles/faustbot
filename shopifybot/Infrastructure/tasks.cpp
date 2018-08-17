@@ -137,3 +137,55 @@ std::vector<std::string> vectorFromString(const std::string& interpret) {
     // Return the vector built from the comma-separated string
     return toReturn;
 }
+
+// MARK: VARIANT ID TASK
+// Task which runs given a single variant ID, which is continuously checked whether or not it is available.
+// Constructor that simply initializes all the instance variables to be used
+VariantIDTask::VariantIDTask(const std::string &p_title, const URLAndMethod &p_url, const std::string &p_identifier,
+                             const std::string &p_variantID, const QDateTime &p_startat, const std::string &p_profile,
+                             const std::string &p_proxy, unsigned int p_frequency) :
+        title(p_title),
+        swh(p_url, p_identifier),
+        variantID(p_variantID),
+        startat(p_startat),
+        profile(p_profile),
+        proxy(p_proxy),
+        frequency(p_frequency) { }
+
+// Run function which begins the while loop to be run in a separate thread for each task
+void VariantIDTask::run() {
+    log("Beginning \"" + title + "\".");
+    emit status("Checking availability...", "#a4ead5");
+
+    shouldcontinue = true;
+
+    // Search for the product periodically at the frequency specified
+    while (shouldcontinue) {
+        try  {
+            // Check if the variant ID is available to be purchased
+            if (swh.productAvailable(variantID)) {
+                // If it is, then order it
+                order(std::string(swh.sourceURL.baseURL) + "/cart/" + variantID + ":1");
+            } else {
+                // If product is unavailable, then exit the while loop
+                throw std::runtime_error("Product not available yet.");
+            }
+        } catch (std::runtime_error& e) {
+            log("Failed because: \"" + std::string(e.what()) + "\", checking again in " + std::to_string(frequency) + " seconds.");
+            // Sleep the while loop check for another [frequency] seconds
+            std::this_thread::sleep_for(std::chrono::seconds(frequency));
+            continue;
+        }
+    }
+}
+
+// Order function which runs the checkout python file
+void VariantIDTask::order(const std::string &url) {
+    // Essentially just runs the Python Selenium script for the given url
+    FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/checkout.py ") + swh.sourceURL.checkoutURL + " " +
+                                 url + std::string(" shopifybot/Infrastructure/Logs/task_logs_") + swh.sourceURL.title + swh.taskID + ".txt \"" + profile + "\" " +
+                                 proxy).c_str(), "r");
+
+    // Wait for the Python script to finish
+    pclose(fp);
+}

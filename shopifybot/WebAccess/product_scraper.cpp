@@ -613,3 +613,25 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
     }
 }
 
+// Returns true if the product is available, false if the product is not available
+bool ShopifyWebsiteHandler::productAvailable(const std::string &variantID) {
+
+    // Perform the cURL for the product's cart page
+    performCURL(std::string(sourceURL.baseURL) + "/cart/" + variantID + ":1");
+
+    // Go through the scraped file and check if the product is available
+    std::ifstream filein(std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
+    std::string str;
+    bool productAvailable = true;
+    while (getline(filein, str)) {
+        if (str.find("Inventory issues") != std::string::npos) {
+            productAvailable = false;
+            break;
+        }
+    }
+
+    // Returns whatever the verdict is based on the body of the cart's page
+    filein.close();
+    return productAvailable;
+}
+

@@ -85,6 +85,9 @@ public:
     Product lookForKeywords(const std::string& collection, const std::vector<std::string>& keywords,
                             const std::vector<std::string>& colorKeywords = {""}, const std::string& numresults="25");
 
+    // Function that returns true if the product for the given variant ID is available and false if it is not.
+    bool productAvailable(const std::string& variantID);
+
 private:
     // Perform a cURL download to get the body of a page
     void performCURL(const std::string& URL);
