@@ -129,6 +129,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     firstcol->addWidget(website);
     firstcol->addWidget(collection);
     row->addLayout(firstcol);
+    row->addStretch();
     row->addWidget(separator1);
     secondcol->addLayout(keywordHor);
     secondcol->addLayout(colorKeywordHor);
