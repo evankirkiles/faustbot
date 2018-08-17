@@ -112,7 +112,7 @@ private:
 
 // Contains the class that builds a Task widget to be added to the scroll area
 class TaskWidget : public QFrame {
-Q_OBJECT
+    Q_OBJECT
 public:
     // Constructor
     explicit TaskWidget(const std::string& title, const URLAndMethod& website, const std::string& identifier,
@@ -189,6 +189,45 @@ private:
 
     // Delete button
     ClickableImage* deleteButton;
+};
+
+// Task widget for a variant-ID specific task
+class VIDTaskWidget : public QFrame {
+    Q_OBJECT
+public:
+    // Constructor
+    explicit VIDTaskWidget(const std::string& title, const URLAndMethod& website, const std::string& variantID,
+                           const std::string& profile, const std::string& proxy, const QDateTime& startAt,
+                           QWidget* parent = 0);
+
+    // Title label, public so edit task can access it
+    QLabel* title;
+
+signals:
+    // Emitted to the running task to tell it to stop
+    void stopTask();
+public slots:
+    // Run every time the main window's QTimer updates
+    void checkTime(QDateTime time);
+private slots:
+    // Runs the task, performed when user clicks the play button
+    void run();
+    // Stops the task, performed when user clicks the stop button
+    void stopWidget();
+    // Updates the status with the given message for the given color
+    void setStatus(QString text, QString hexColor);
+    // Deletes the slot, but only if there is no thread currently running
+    void exit();
+    // Builds a logfile window with the task's title and file specifiers
+    void showLogs();
+    // Called when the logfile window is closed by the user
+    void logsClosed();
+    // Builds the edit window with all the task's information
+    void showEdit();
+    // Receives the task edit from the window
+    void acceptTaskEdit(QString title, URLAndMethod website, QString variantID, QDateTime start, QString profile, QString proxy);
+    // Called when the edit window is closed
+    void editClosed();
 };
 
 #endif //SHOPIFY_BOT_TASKWIDGET_HPP
