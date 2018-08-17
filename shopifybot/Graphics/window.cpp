@@ -142,6 +142,11 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     connect(billing, SIGNAL(clicked()), this, SLOT(openProfiles()));
     // Open the proxies window when the proxies button is clicked
     connect(proxies, SIGNAL(clicked()), this, SLOT(openProxies()));
+
+    // Build the timer updated on second intervals
+    timeChecker = new QTimer(this);
+    timeChecker->setInterval(1000);
+    timeChecker->start();
 }
 
 // Slot which takes information from the new task window and builds a task
@@ -176,6 +181,9 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
     // Connect the signals of the window to this new task's start and stop
     connect(startAllTasks, SIGNAL(clicked()), newtask, SLOT(run()));
     connect(stopAllTasks, SIGNAL(clicked()), newtask, SLOT(stopWidget()));
+
+    // Connect the 1 second interval timer to the taskwidget's time check function
+    connect(timeChecker, &QTimer::timeout, [newtask] () { newtask->checkTime(QDateTime::currentDateTime()); });
 
     // Adds the task to the qvboxlayout
     tasklistLayout->addWidget(newtask);

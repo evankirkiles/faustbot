@@ -1,74 +1,16 @@
-[2018-08-16 02:01:04.583] Beginning "pls work".
-[2018-08-16 02:01:04.922] Product found! Link: https://www.blkmkt.us/cart/12745857597522:1
-[2018-08-16 02:01:04.922] Placing order...
-[2018-08-16 02:01:05.185] Task finished.
-[2018-08-16 02:01:18.215] Beginning "pls work".
-[2018-08-16 02:01:18.565] Product found! Link: https://www.blkmkt.us/cart/12758379364434:1
-[2018-08-16 02:01:18.565] Placing order...
-[2018-08-16 02:01:21.377] Got to customer information form.
-[2018-08-16 02:01:23.108] Successfully submitted customer info to Shopify server.
-[2018-08-16 02:01:24.033] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-08-16 02:01:25.296] Got unique session ID from Shopify.
-[2018-08-16 02:01:25.314] Task finished.
-[2018-08-16 02:04:17.262] Beginning "sadwadasd".
-[2018-08-16 02:04:17.636] Product found! Link: https://www.blkmkt.us/cart/12758379331666:1
-[2018-08-16 02:04:17.636] Placing order...
-[2018-08-16 02:04:17.868] Randoma
-[2018-08-16 02:04:17.879] Task finished.
-[2018-08-16 02:04:58.056] Beginning "sadwadasd".
-[2018-08-16 02:04:58.532] Product found! Link: https://www.blkmkt.us/cart/12758379331666:1
-[2018-08-16 02:04:58.533] Placing order...
-[2018-08-16 02:04:58.771] Randoma
-[2018-08-16 02:04:58.783] Task finished.
-[2018-08-16 02:05:22.393] Beginning "sadwadasd".
-[2018-08-16 02:05:22.718] Product found! Link: https://www.blkmkt.us/cart/12758379331666:1
-[2018-08-16 02:05:22.718] Placing order...
-[2018-08-16 02:05:22.956] Randoma
-[2018-08-16 02:05:22.969] Task finished.
-[2018-08-16 02:06:00.076] Beginning "sadawdasd".
-[2018-08-16 02:06:00.413] Product found! Link: https://www.blkmkt.us/cart/12758379331666:1
-[2018-08-16 02:06:00.413] Placing order...
-[2018-08-16 02:06:00.654] Randoma
-[2018-08-16 02:06:00.666] Task finished.
-[2018-08-16 02:07:07.920] Beginning "sadawdasd".
-[2018-08-16 02:07:08.260] Product found! Link: https://www.blkmkt.us/cart/12758379331666:1
-[2018-08-16 02:07:08.260] Placing order...
-[2018-08-16 02:07:08.501] GOTHERE
-[2018-08-16 02:07:08.514] Task finished.
-[2018-08-16 02:07:42.695] Beginning "sadawdasd".
-[2018-08-16 02:07:43.033] Product found! Link: https://www.blkmkt.us/cart/12758379331666:1
-[2018-08-16 02:07:43.033] Placing order...
-[2018-08-16 02:07:43.287] Task finished.
-[2018-08-16 02:09:34.772] Beginning "sadawdasd".
-[2018-08-16 02:09:35.092] Product found! Link: https://www.blkmkt.us/cart/12758379331666:1
-[2018-08-16 02:09:35.092] Placing order...
-[2018-08-16 02:09:35.345] Task finished.
-[2018-08-16 02:09:47.773] Beginning "sadawdasd".
-[2018-08-16 02:09:48.172] Product found! Link: https://www.blkmkt.us/cart/12758379331666:1
-[2018-08-16 02:09:48.172] Placing order...
-[2018-08-16 02:09:48.426] 1
-[2018-08-16 02:09:48.441] Task finished.
-[2018-08-16 02:11:08.476] Beginning "sadawdasd".
-[2018-08-16 02:11:08.820] Product found! Link: https://www.blkmkt.us/cart/12758379331666:1
-[2018-08-16 02:11:08.820] Placing order...
-[2018-08-16 02:11:09.068] 1
-[2018-08-16 02:11:09.068] 2
-[2018-08-16 02:11:09.069] 3
-[2018-08-16 02:11:09.082] Task finished.
-[2018-08-16 02:14:02.567] Beginning "sadawdasd".
-[2018-08-16 02:14:02.949] Product found! Link: https://www.blkmkt.us/cart/12758379331666:1
-[2018-08-16 02:14:02.949] Placing order...
-[2018-08-16 02:14:03.190] WE GOT EM
-[2018-08-16 02:14:04.388] Got to customer information form.
-[2018-08-16 02:14:05.579] Successfully submitted customer info to Shopify server.
-[2018-08-16 02:14:06.437] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-08-16 02:14:06.654] Got unique session ID from Shopify.
-[2018-08-16 02:14:06.673] Task finished.
-[2018-08-17 00:25:32.148] Beginning "wdasdsadasd".
-[2018-08-17 00:25:32.841] Product found! Link: https://www.blkmkt.us/cart/12758371827794:1
-[2018-08-17 00:25:32.841] Placing order...
-[2018-08-17 00:25:38.458] Got to customer information form.
-[2018-08-17 00:25:39.875] Successfully submitted customer info to Shopify server.
-[2018-08-17 00:25:41.014] Successfully bypassed reCAPTCHA and got to payment method page.
-[2018-08-17 00:25:42.130] Got unique session ID from Shopify.
-[2018-08-17 00:25:42.147] Task finished.
+[2018-08-17 01:09:38.456] Beginning "sadwdasdadasd".
+[2018-08-17 01:09:38.808] Product found! Link: https://www.blkmkt.us/cart/12758379200594:1
+[2018-08-17 01:09:38.808] Placing order...
+[2018-08-17 01:09:41.084] Got to customer information form.
+[2018-08-17 01:09:42.826] Successfully submitted customer info to Shopify server.
+[2018-08-17 01:09:43.649] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-08-17 01:09:47.571] Got unique session ID from Shopify.
+[2018-08-17 01:09:47.588] Task finished.
+[2018-08-17 01:29:59.611] Beginning "sadadwsadasdad".
+[2018-08-17 01:30:00.076] Product found! Link: https://www.blkmkt.us/cart/12758371827794:1
+[2018-08-17 01:30:00.076] Placing order...
+[2018-08-17 01:30:02.722] Got to customer information form.
+[2018-08-17 01:30:04.976] Successfully submitted customer info to Shopify server.
+[2018-08-17 01:30:05.791] Successfully bypassed reCAPTCHA and got to payment method page.
+[2018-08-17 01:30:07.112] Got unique session ID from Shopify.
+[2018-08-17 01:30:07.131] Task finished.

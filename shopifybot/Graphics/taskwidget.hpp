@@ -129,6 +129,9 @@ signals:
     // Emitted to the running task to tell it to stop
     void stopTask();
 
+public slots:
+    // Run every time the main window's QTimer updates
+    void checkTime(QDateTime time);
 private slots:
     // Runs the task, performed when user clicks the play button
     void run();

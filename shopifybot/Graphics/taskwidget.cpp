@@ -79,8 +79,9 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     auto startAtTitle = new QLabel("START AT: ", this);
     startAtTitle->setObjectName("task_tiny_text");
     startAt->setObjectName("task_dateedit");
-    startAt->setDisplayFormat("yyyy-MM-dd hh:mm");
+    startAt->setDisplayFormat("yyyy-MM-dd hh:mm:ss");
     startAt->setDateTime(task->startat);
+    startAt->setReadOnly(true);
     auto sizeHor = new QHBoxLayout();
     auto sizetitle = new QLabel("Size: ", this);
     sizetitle->setObjectName("task_mediocre_title_v2");
@@ -200,6 +201,14 @@ void TaskWidget::run() {
 
     // Begin the thread!
     taskthread->start();
+}
+
+// Checks the time against the taskwidget's start time. If there is a match (or if early by a second), then run the task.
+void TaskWidget::checkTime(QDateTime time) {
+    // Check the difference between times, making sure it is within a second of accuracy
+    if (time.secsTo(task->startat) < 1 && time.secsTo(task->startat) > -1) {
+        run();
+    }
 }
 
 // Tells the task to interrupt after the loop has finished
@@ -402,7 +411,7 @@ EditTaskDisplay::EditTaskDisplay(const QString& p_title, const QString& p_websit
     etaLabel->setMaximumWidth(60);
     eta = new QDateTimeEdit(this);
     eta->setObjectName("addtask_datetime");
-    eta->setDisplayFormat("[MMMM d, yyyy] hh:mm");
+    eta->setDisplayFormat("[MMMM d, yyyy] hh:mm::ss");
     eta->setDateTime(QDateTime::currentDateTime());
     // Add row to the layout
     sizeEtaLayout->addStretch();

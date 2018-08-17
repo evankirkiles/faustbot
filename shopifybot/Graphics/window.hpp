@@ -21,6 +21,7 @@
 #include <QLabel>
 #include <QPixmap>
 #include <QBitmap>
+#include <QTimer>
 
 // Include the task class
 #include "../Infrastructure/tasks.hpp"
@@ -97,6 +98,9 @@ private:
     QScrollArea *tasklist;
     QWidget* tasklistwidget;
     QVBoxLayout *tasklistLayout;
+
+    // Timer which keeps track of task start times
+    QTimer* timeChecker;
 
 private slots:
     // Opens the add task window
