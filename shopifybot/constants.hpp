@@ -136,7 +136,8 @@ namespace file_paths {
     extern const char* PROXYON_IMG;
     extern const char* PROXYOFF_IMG;
     extern const char* PROXYNEUTRAL_IMG;
-
+    extern const char* REFRESHICON_IMG;
+    extern const char* REFRESHICON2_IMG;
 }
 
 namespace constants {

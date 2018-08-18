@@ -11,8 +11,9 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
 
     // Fixed size of the window
     setFixedSize(500, 300);
-    setWindowTitle("Logs");
+    setWindowTitle(std::string(p_title + " Logs").c_str());
     setWindowFlags(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_TranslucentBackground);
     setObjectName("logs_window");
     setAttribute(Qt::WA_QuitOnClose, false);
 
@@ -22,19 +23,22 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
     QString StyleSheet = QLatin1String(File.readAll());
     setStyleSheet(StyleSheet);
 
+    // Initialize dark title bar
+    dtb = new DarkTitleBar(this, false, true);
+    auto externLayout = new QVBoxLayout;
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto inFrameLayout = new QVBoxLayout;
+    inFrameLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    bg->setObjectName("main_window");
+    bg->setLayout(inFrameLayout);
+    inFrameLayout->addWidget(dtb);
+
     // Create the window layouts
     auto mainLayout = new QVBoxLayout();
-    auto topLayout = new QHBoxLayout();
-
-    // Add the title and the refresh button to the top of the window
-    titledisplay = new QLabel(title.c_str(), this);
-    titledisplay->setObjectName("task_important_text");
-    refreshButton = new QPushButton("REFRESH", this);
-    refreshButton->setObjectName("sidebuttons");
-
-    // Add the top layer widgets to the horizontal layout
-    topLayout->addWidget(titledisplay);
-    topLayout->addWidget(refreshButton);
+    mainLayout->setContentsMargins(11, 3, 11, 11);
+    inFrameLayout->addLayout(mainLayout);
+    externLayout->addWidget(bg);
 
     // Initialize the logFile and the textstream
     logFile = new QFile(LFlocation.c_str());
@@ -52,14 +56,13 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
     logDisplay->setObjectName("logs_text");
 
     // Add these things to the main layout
-    mainLayout->addLayout(topLayout);
     mainLayout->addWidget(logDisplay);
 
     // Set the window's layout
-    setLayout(mainLayout);
+    setLayout(externLayout);
 
-    // Connect the refresh button to its slot
-    connect(refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
+    // Connect the refresh button
+    connect(dtb->refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
 }
 
 // Refresh slot which reloads the filestream into the textbrowser

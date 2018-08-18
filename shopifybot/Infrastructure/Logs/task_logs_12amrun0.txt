@@ -1,0 +1,2 @@
+[2018-08-18 02:19:15.491] Beginning "asdasdasdasd".
+[2018-08-18 02:19:15.573] Failed because: "Could not find product.", checking again in 5 seconds.

@@ -113,15 +113,13 @@ private:
     // File location is saved in a member string to allow for continuous refreshal
     const std::string title;
 
+    // Dark title bar
+    DarkTitleBar* dtb;
+
     // Widgets on the window
-    QLabel* titledisplay;
-    QPushButton* refreshButton;
     QFile* logFile;
     QTextStream* logStream;
     QTextBrowser* logDisplay;
-protected:
-    // Override the lose focus event so it closes whenever the window is left
-    void focusOutEvent(QFocusEvent *event) override { close(); }
 };
 
 // Window that pops up when you try to add a task

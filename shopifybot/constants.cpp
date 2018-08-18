@@ -102,6 +102,8 @@ namespace file_paths {
     const char* PROXYON_IMG = "./shopifybot/Graphics/Assets/proxyon.png";
     const char* PROXYOFF_IMG = "./shopifybot/Graphics/Assets/proxyoff.png";
     const char* PROXYNEUTRAL_IMG = "./shopifybot/Graphics/Assets/proxyneutral.png";
+    const char* REFRESHICON_IMG = "./shopifybot/Graphics/Assets/refreshicon.png";
+    const char* REFRESHICON2_IMG = "./shopifybot/Graphics/Assets/refreshicon2.png";
 }
 
 namespace constants {

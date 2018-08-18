@@ -5,10 +5,11 @@
 #include "titlebar.hpp"
 
 // Builds the dark title bar
-DarkTitleBar::DarkTitleBar(QWidget *parent, bool moreInfo) : parentWidg(parent){
+DarkTitleBar::DarkTitleBar(QWidget *parent, bool moreInfo, bool refresh) : parentWidg(parent){
 
     // Build the title bar's necessary components
     title = new QLabel(parent->windowTitle(), this);
+    title->setStyleSheet("margin-right: 56px;");
 
     // Clickable buttons in top left
     closeWindow = new ClickableImage(24, 24, 2, file_paths::EXIT2_IMG, file_paths::EXIT_IMG, this);
@@ -21,6 +22,14 @@ DarkTitleBar::DarkTitleBar(QWidget *parent, bool moreInfo) : parentWidg(parent){
     auto mainLayout = new QHBoxLayout(this);
     mainLayout->setContentsMargins(5, 1, 5, 1);
     mainLayout->addWidget(closeWindow);
+
+    // If the refresh option is enabled, add a refresh button to the top right
+    if (refresh) {
+        // Clickable buttons in top right
+        refreshButton = new ClickableImage(26, 26, 2, file_paths::REFRESHICON2_IMG, file_paths::REFRESHICON_IMG, this);
+        mainLayout->addWidget(refreshButton);
+    }
+
     mainLayout->addStretch();
     mainLayout->addWidget(title);
     mainLayout->addStretch();

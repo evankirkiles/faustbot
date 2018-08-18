@@ -67,7 +67,7 @@ protected:
 class DarkTitleBar : public QFrame {
     Q_OBJECT
 private:
-    // References to the parent widget and th eposition of the cursor
+    // References to the parent widget and the position of the cursor
     QWidget* parentWidg;
     QPoint cursorPoint;
 
@@ -83,9 +83,11 @@ private:
 
 public:
     // Constructor that builds the title bar
-    DarkTitleBar(QWidget* parent, bool moreInfo = false);
+    DarkTitleBar(QWidget* parent, bool moreInfo = false, bool refresh = false);
     // Optional moreinfo button
     ClickableImage* moreInfoButton;
+    // Optional refresh button
+    ClickableImage* refreshButton;
 signals:
     // MoreInfo-related signals to specify when to show and not show the moreinfo window
     void showMIW();
