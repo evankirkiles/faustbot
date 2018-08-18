@@ -165,7 +165,21 @@ void VariantIDTask::run() {
             // Check if the variant ID is available to be purchased
             if (swh.productAvailable(variantID)) {
                 // If it is, then order it
+                emit status("Placing order...", "#8dd888");
+                log("Placing order...");
                 order(std::string(swh.sourceURL.baseURL) + "/cart/" + variantID + ":1");
+
+                // When finished, order should be completed
+                log("Task finished.");
+
+                // Remove the files used
+                remove(std::string("./shopifybot/WebAccess/Contents/html_body_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+                remove(std::string("./shopifybot/WebAccess/Contents/products_log_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+
+                // Successfully finished if it got here
+                emit status("Finished!", "#8dd888");
+                emit finished();
+                return;
             } else {
                 // If product is unavailable, then exit the while loop
                 throw std::runtime_error("Product not available yet.");
@@ -177,6 +191,15 @@ void VariantIDTask::run() {
             continue;
         }
     }
+
+    // If while loop gets broken, then process is also finished, so emit finished and return to main thread
+    emit status("Interrupted.", "#e26c6c");
+
+    // Delete the files used
+    remove(std::string("./shopifybot/WebAccess/Contents/html_body_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+    remove(std::string("./shopifybot/WebAccess/Contents/products_log_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+
+    emit finished();
 }
 
 // Order function which runs the checkout python file
@@ -188,4 +211,21 @@ void VariantIDTask::order(const std::string &url) {
 
     // Wait for the Python script to finish
     pclose(fp);
+}
+
+// Log function which logs a message to the logfile
+void VariantIDTask::log(const std::string &message) {
+    // Open the log file for logging
+    std::ofstream fp;
+    fp.open(std::string(file_paths::TASK_LOG).append("task_logs_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str(), std::ios::app);
+
+    // Gets the current time
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()) % 1000;
+    fp << std::put_time(&tm, "[%Y-%m-%d %T.") << std::setfill('0') << std::setw(3) << ms.count() << "] " << message << "\n";
+
+    // Close the logging file
+    fp.close();
+
 }

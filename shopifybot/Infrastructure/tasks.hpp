@@ -105,7 +105,7 @@ public:
     bool shouldcontinue = false;
 
     // Title of the task
-    const std::string& title;
+    const std::string title;
 
     // Shopify website handler
     ShopifyWebsiteHandler swh;

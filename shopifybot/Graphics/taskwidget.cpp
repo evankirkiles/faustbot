@@ -317,6 +317,55 @@ void TaskWidget::logsClosed() {
     *logWindowOpen = false;
 }
 
+// VARIANT ID TASK CLASS
+// Constructor that initializes the variant ID task widget
+VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_website, const std::string& p_identifier,
+                             const std::string &p_variantID, const std::string &p_profile, const std::string &p_proxy,
+                             const QDateTime &p_startAt, const std::string &prodTitle, const std::string& prodSize,
+                             bool* p_logWindowOpen, bool* p_editWindowOpen, unsigned int frequency, QWidget *parent) :
+        title(new QLabel(p_title.c_str(), this)),
+        task(new VariantIDTask(p_title, p_website, p_identifier, p_variantID, p_startAt, p_profile, p_proxy, frequency)),
+        website(new QLabel(p_website.baseURL, this)),
+        variantId(new QLabel(p_variantID.c_str(), this)),
+        variantName(new QLabel(prodTitle.c_str(), this)),
+        variantSize(new QLabel(prodSize.c_str(), this)),
+        startAt(new QDateTimeEdit(this)),
+        editWindowOpen(p_editWindowOpen),
+        logWindowOpen(p_logWindowOpen) {
+
+    // Ensure the widget deletes itself when it is closed
+    setAttribute(Qt::WA_DeleteOnClose);
+
+    // Set the style sheet of the frame
+    setObjectName("task");
+
+    // Stylesheet settings for the different labels
+    title->setObjectName("task_important_text");
+    title->setMaximumWidth(250);
+    title->setMinimumWidth(150);
+    website->setObjectName("task_mediocre_text");
+    website->setMaximumWidth(150);
+    variantId->setObjectName("task_mediocre_text");
+    variantId->setMaximumWidth(150);
+    variantName->setObjectName("task_important_var");
+    variantSize->setObjectName("task_important_var");
+    startAt->setObjectName("task_important_var");
+
+    // Create the layouts for the QLabels
+    // Vertical layouts
+    auto firstcol = new QVBoxLayout();
+    auto secondcol = new QVBoxLayout();
+    auto thirdcol = new QVBoxLayout();
+    auto fourthcol = new QVBoxLayout();
+    auto fifthcol = new QVBoxLayout();
+    fifthcol->setAlignment(Qt::AlignHCenter);
+    // Main horizontal layouts
+    auto row = new QHBoxLayout();
+    // Sub horizontal layouts
+    auto titleAndSize = new QHBoxLayout();
+
+}
+
 // EDIT TASK DISPLAY CLASS
 // Constructor that builds the window for adding a task
 EditTaskDisplay::EditTaskDisplay(const QString& p_title, const QString& p_website, const QString& p_collection,
