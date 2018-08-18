@@ -168,6 +168,8 @@ private:
     EditTaskDisplay* etd;
 
     // Labels on the task
+    QLabel* identifier;
+    QFrame* separator0;
     QLabel* website;
     QLabel* collection;
     QFrame* separator1;

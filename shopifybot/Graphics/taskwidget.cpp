@@ -13,6 +13,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
                        unsigned int p_frequency, QWidget *parent) :
                                task(new Task(p_title, p_website, p_identifier, p_collection, p_keywords, p_colorKeywords,
                                p_size, p_startDate, p_profile, p_proxy, p_resultsToCheck, p_frequency)),
+                               identifier(new QLabel(p_identifier.c_str(), this)),
                                title(new QLabel(p_title.c_str(), this)),
                                website(new QLabel(p_website.baseURL, this)),
                                collection(new QLabel(p_collection.c_str(), this)),
@@ -45,6 +46,10 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     setObjectName("task");
 
     // Stylesheet settings for the different labels
+    identifier->setObjectName("task_identifier");
+    identifier->setContentsMargins(0, 0, 0, 0);
+    identifier->setAlignment(Qt::AlignCenter);
+    identifier->setFixedWidth(20);
     title->setObjectName("task_important_text");
     title->setMaximumWidth(250);
     title->setMinimumWidth(150);
@@ -57,6 +62,8 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
 
     // Create the layouts for the QLabels
     // Vertical layouts
+    auto zerocol = new QHBoxLayout();
+    zerocol->setSpacing(0);
     auto firstcol = new QVBoxLayout();
     auto secondcol = new QVBoxLayout();
     auto thirdcol = new QVBoxLayout();
@@ -89,6 +96,13 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     sizeHor->addWidget(sizetitle);
     sizeHor->addWidget(size);
     auto statusHor = new QHBoxLayout();
+
+    // Separator line between identifier and first column
+    separator0 = new QFrame(this);
+    separator0->setFrameShape(QFrame::VLine);
+    separator0->setFrameShadow(QFrame::Sunken);
+    separator0->setContentsMargins(0, 0, 0, 0);
+    separator0->setObjectName("vertical_line");
 
     // Separator line between first column and second column
     separator1 = new QFrame(this);
@@ -126,6 +140,9 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     deleteButton = new ClickableImage(60, 60, 4, file_paths::DELETE2_IMG, file_paths::DELETE_IMG, this);
 
     // Add the labels and layouts to the main row
+    zerocol->addWidget(identifier);
+    zerocol->addWidget(separator0);
+    row->addLayout(zerocol);
     firstcol->addWidget(title);
     firstcol->addWidget(website);
     firstcol->addWidget(collection);
@@ -150,6 +167,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
 
     // Set the qframe's layout to the row
     setLayout(row);
+    row->setContentsMargins(0, 11, 11, 11);
 
     // Connect clicking play to beginning the task.
     connect(play, SIGNAL(runTask()), this, SLOT(run()));

@@ -55,6 +55,14 @@ QLabel {
     max-height: 30px;
     font-family: "Futura";
 }
+#task_identifier {
+    color: #404040;
+    font-size: 13px;
+    max-width: 17px;
+    margin-right: 3px;
+    margin-left: 3px;
+    font-family: "Futura";
+}
 #task_important_var {
     color: #D2A15A;
     font-size: 15px;
