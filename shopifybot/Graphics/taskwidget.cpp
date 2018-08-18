@@ -363,7 +363,22 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     auto row = new QHBoxLayout();
     // Sub horizontal layouts
     auto titleAndSize = new QHBoxLayout();
+    titleAndSize->addWidget(variantName);
+    titleAndSize->addWidget(variantSize);
 
+    // Separators in between select columns
+    separator1 = new QFrame(this);
+    separator1->setFrameShape(QFrame::VLine);
+    separator1->setFrameShadow(QFrame::Sunken);
+    separator1->setObjectName("vertical_line");
+
+    // Add the labels and layouts to the main row
+    firstcol->addWidget(title);
+    firstcol->addWidget(website);
+    firstcol->addWidget(variantId);
+    row->addLayout(firstcol);
+    row->addStretch();
+    row->addWidget(separator1);
 }
 
 // EDIT TASK DISPLAY CLASS
