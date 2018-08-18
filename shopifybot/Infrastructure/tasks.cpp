@@ -9,7 +9,7 @@ Task::Task(const std::string &p_title, const URLAndMethod &p_url, const std::str
            const std::string& p_collection, const std::vector<std::string> &p_keywords,
            const std::vector<std::string> &p_colorKeywords, const std::string &p_size, const QDateTime& startDate,
            const std::string& p_profile, const std::string& p_proxy,
-           const unsigned int p_resultsToCheck, const unsigned int p_frequency) :
+           const unsigned int p_frequency, const unsigned int p_resultsToCheck)  :
                                              title(p_title),
                                              swh(p_url, p_identifier),
                                              collection(p_collection),

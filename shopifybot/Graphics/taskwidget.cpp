@@ -21,6 +21,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
                                startAt(new QDateTimeEdit(this)),
                                editWindowOpen(p_editWindowOpen),
                                logWindowOpen(p_logWindowOpen),
+                               taskfreq(p_frequency),
                                QFrame(parent) {
 
     // Ensure the widget deletes itself when it is closed
@@ -193,7 +194,7 @@ void TaskWidget::run() {
     // Add a small delay to prevent strange error code
     std::this_thread::sleep_for(std::chrono::nanoseconds(10000000));
 
-    // Initializes the thread and moves the task onto it
+    // Initializes the thread and moves a copy of the task onto it
     taskthread = new QThread;
     auto temptask = new Task(task->title, task->swh.sourceURL, task->swh.taskID, task->collection, task->keywords,
             task->colorKeywords, task->size, task->startat, task->profile, task->proxy, task->resultsToCheck, task->frequency);
@@ -283,7 +284,7 @@ void TaskWidget::showLogs() {
     *logWindowOpen = true;
 }
 
-// Create a logs window and display it
+// Create an edit window and display it
 void TaskWidget::showEdit() {
     // Make sure a log window is not already open
     if (*editWindowOpen) { if (etd) { etd->raise(); } return; }
@@ -308,7 +309,8 @@ void TaskWidget::showEdit() {
 
 // Receives a packet of information and rebuilds the task and the task widget with edited info
 void TaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QString p_collection, QString p_keywords,
-                                QString p_colorKeywords, QString p_size, QDateTime p_start, QString p_profile, QString p_proxy) {
+                                QString p_colorKeywords, QString p_size, QDateTime p_start, QString p_profile,
+                                QString p_proxy, unsigned int frequency) {
 
     // First, change the visuals of the task widget to match the new task
     title->setText(p_title);
@@ -318,11 +320,12 @@ void TaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QString
     colorKeywords->setText(p_colorKeywords);
     size->setText(p_size);
     startAt->setDateTime(p_start);
+    taskfreq = frequency;
 
     // Then, delete the current task and rebuild it with the edited task
     task = new Task(p_title.toStdString(), p_website, task->swh.taskID, p_collection.toStdString(),
             vectorFromString(p_keywords.toStdString()), vectorFromString(p_colorKeywords.toStdString()),
-                    p_size.toStdString(), p_start, p_profile.toStdString(), p_proxy.toStdString());
+                    p_size.toStdString(), p_start, p_profile.toStdString(), p_proxy.toStdString(), frequency);
 }
 
 // Called when the edit task window is closed
@@ -358,6 +361,10 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     setObjectName("task");
 
     // Stylesheet settings for the different labels
+    identifier->setObjectName("task_identifier");
+    identifier->setContentsMargins(0, 0, 0, 0);
+    identifier->setAlignment(Qt::AlignCenter);
+    identifier->setFixedWidth(20);
     title->setObjectName("task_important_text");
     title->setMaximumWidth(250);
     title->setMinimumWidth(150);
@@ -371,6 +378,8 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
 
     // Create the layouts for the QLabels
     // Vertical layouts
+    auto zerocol = new QHBoxLayout();
+    zerocol->setSpacing(0);
     auto firstcol = new QVBoxLayout();
     auto secondcol = new QVBoxLayout();
     auto thirdcol = new QVBoxLayout();
@@ -380,23 +389,240 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     // Main horizontal layouts
     auto row = new QHBoxLayout();
     // Sub horizontal layouts
-    auto titleAndSize = new QHBoxLayout();
-    titleAndSize->addWidget(variantName);
-    titleAndSize->addWidget(variantSize);
+    auto variantTitleLabel = new QLabel("Title: ", this);
+    variantTitleLabel->setObjectName("task_mediocre_title_v2");
+    auto startAtTitle = new QLabel("START AT: ", this);
+    startAtTitle->setObjectName("task_tiny_text");
+    startAt->setObjectName("task_dateedit");
+    startAt->setDisplayFormat("yyyy-MM-dd hh:mm:ss");
+    startAt->setDateTime(task->startat);
+    startAt->setReadOnly(true);
+    auto sizeLayout = new QHBoxLayout();
+    auto sizeLabel = new QLabel("Size: ", this);
+    sizeLabel->setObjectName("task_mediocre_title_v2");
+    variantSize->setMinimumWidth(50);
+    sizeLayout->addWidget(sizeLabel);
+    sizeLayout->addWidget(variantSize);
+    auto statusHor = new QHBoxLayout();
 
-    // Separators in between select columns
+    // Separator line between identifier and first column
+    separator0 = new QFrame(this);
+    separator0->setFrameShape(QFrame::VLine);
+    separator0->setFrameShadow(QFrame::Sunken);
+    separator0->setContentsMargins(0, 0, 0, 0);
+    separator0->setObjectName("vertical_line");
+
+    // Separators in between first column and second column
     separator1 = new QFrame(this);
     separator1->setFrameShape(QFrame::VLine);
     separator1->setFrameShadow(QFrame::Sunken);
     separator1->setObjectName("vertical_line");
 
+    // Separator line between third column and fourth column
+    separator2 = new QFrame(this);
+    separator2->setFrameShape(QFrame::VLine);
+    separator2->setFrameShadow(QFrame::Sunken);
+    separator2->setObjectName("vertical_line");
+
+    // Build the play button
+    play = new ClickableCheckableImage(80, 100, 4, file_paths::PLAY2_IMG, file_paths::PLAY_IMG,
+                                       file_paths::STOP2_IMG, file_paths::STOP_IMG, file_paths::PLAY_DISBL_IMG, this);
+    // Build the edit button
+    edit = new ClickableImage(100, 100, 4, file_paths::EDIT2_IMG, file_paths::EDIT_IMG, this);
+
+    // Builds the status identifier
+    auto statusFixed = new QLabel("STATUS:", this);
+    statusFixed->setObjectName("status_title");
+    status = new QTextEdit("Idle", this);
+    status->setObjectName("status_text");
+    status->setReadOnly(true);
+    status->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    status->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    status->setAlignment(Qt::AlignHCenter);
+    status->setFixedWidth(100);
+    logsButton = new ClickableImage(80, 80, 4, file_paths::LOGS2_IMG, file_paths::LOGS_IMG, this);
+    statusHor->addWidget(statusFixed);
+    statusHor->addWidget(logsButton);
+
+    // Delete button
+    deleteButton = new ClickableImage(60, 60, 4, file_paths::DELETE2_IMG, file_paths::DELETE_IMG, this);
+
     // Add the labels and layouts to the main row
+    zerocol->addWidget(identifier);
+    zerocol->addWidget(separator0);
+    row->addLayout(zerocol);
     firstcol->addWidget(title);
     firstcol->addWidget(website);
     firstcol->addWidget(variantId);
     row->addLayout(firstcol);
     row->addStretch();
     row->addWidget(separator1);
+    secondcol->addWidget(variantTitleLabel);
+    secondcol->addWidget(variantName);
+    row->addLayout(secondcol);
+    thirdcol->addLayout(sizeLayout);
+    thirdcol->addWidget(startAtTitle);
+    thirdcol->addWidget(startAt);
+    row->addLayout(thirdcol);
+    row->addWidget(separator2);
+    fourthcol->addWidget(play);
+    fourthcol->addWidget(edit);
+    row->addLayout(fourthcol);
+    fifthcol->addLayout(statusHor);
+    fifthcol->addWidget(status);
+    row->addLayout(fifthcol);
+    row->addWidget(deleteButton);
+
+    // Set the qframe's layout to the row
+    setLayout(row);
+    row->setContentsMargins(0, 11, 11, 11);
+
+    // Connect clicking play to beginning the task.
+    connect(play, SIGNAL(runTask()), this, SLOT(run()));
+    // Connect the close button to deleting the task as well
+    connect(deleteButton, SIGNAL(clicked()), this, SLOT(exit()));
+
+    // Connect the log button to showing the logfile window
+    connect(logsButton, SIGNAL(clicked()), this, SLOT(showLogs()));
+    // Connect the edit button to showing the edit window
+    connect(edit, SIGNAL(clicked()), this, SLOT(showEdit()));
+}
+
+// Tells the event loop to run the task
+void VIDTaskWidget::run() {
+
+    // Make sure the play button changes if it is called not by the play button
+    // If the play button is not available when run is called, then do nothing
+    if (play->isChecked) { return; }
+    play->clickedPlay();
+
+    // Add a small delay to prevent strange error code
+    std::this_thread::sleep_for(std::chrono::nanoseconds(10000000));
+
+    // Initializes the thread and moves a copy of the task onto it
+    taskthread = new QThread;
+    auto temptask = new VariantIDTask(task->title, task->swh.sourceURL, task->swh.taskID, task->variantID, task->startat,
+            task->profile, task->proxy, task->frequency);
+    temptask->moveToThread(taskthread);
+
+    // Remove all connections to play so do not set multiple shouldcontinues
+    play->disconnect();
+    connect(play, SIGNAL(runTask()), this, SLOT(run()));
+
+    // Connects all the necessary signals and slots for communication between the two
+    connect(taskthread, SIGNAL(started()), temptask, SLOT(run()));
+    connect(play, SIGNAL(interrupt()), this, SLOT(stopWidget()));
+    connect(this, &VIDTaskWidget::stopTask, [temptask] () {
+        temptask->shouldcontinue = false;
+    });
+    connect(temptask, SIGNAL(finished()), play, SLOT(enable()));
+    connect(temptask, SIGNAL(finished()), taskthread, SLOT(quit()));
+    connect(temptask, SIGNAL(finished()), temptask, SLOT(deleteLater()));
+    connect(temptask, SIGNAL(finished()), taskthread, SLOT(deleteLater()));
+
+    // Also connect the status signal
+    connect(temptask, SIGNAL(status(QString, QString)), this, SLOT(setStatus(QString, QString)));
+
+    // Begin the thread!
+    taskthread->start();
+}
+
+// Checks the time against the vidtaskwidget's start time. If there is a match (or if early by a second), then run the task.
+void VIDTaskWidget::checkTime(QDateTime time) {
+    // Check the difference between times, making sure it is within a second of accuracy
+    if (time.secsTo(task->startat) < 1 && time.secsTo(task->startat) > -1) {
+        run();
+    }
+}
+
+// Tells the task to interrupr after the loop has finished
+void VIDTaskWidget::stopWidget() {
+    if (play->isChecked) {
+        play->disable();
+        setStatus("Stopping...", "#e26c26c");
+        emit stopTask();
+    }
+}
+
+// Sets the text in the status textedit
+void VIDTaskWidget::setStatus(QString text, QString hexColor) {
+
+    // Simply change the text in the status bar to the given text with the given color
+    status->setText(text);
+    status->setStyleSheet(std::string("color: ").append(hexColor.toStdString()).append(";").c_str());
+
+    // If task has actually finished, change the play button to the replay button
+    if (text == "Finished!") {
+        play->changeCheckedImg(file_paths::REPLAY2_IMG, file_paths::REPLAY_IMG);
+        play->isChecked = false;
+    } else if (text == "Interrupted.") {
+        play->isChecked = false;
+    }
+}
+
+// Deletes the widget as long as no task is currently running
+void VIDTaskWidget::exit() {
+
+    // Check if task is running by seeing what state the play button is
+    if (play->isChecked || !play->enabled) {
+        return;
+    } else {
+        // Delete the log file when this task is deleted
+        remove(std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str());
+        this->close();
+    }
+}
+
+// Create a logs window and display it
+void VIDTaskWidget::showLogs() {
+    // Make sure a log window is not already open
+    if (*logWindowOpen) { if (lfd) { lfd->raise(); } return; }
+
+    // Otherwise create a new log window and show it
+    lfd = new LogFileDisplay(task->title, std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt"));
+    lfd->show();
+    lfd->setFocus();
+    // Connect the closeLogs function of lfd to the delete button of the task
+    connect(deleteButton, SIGNAL(clicked()), lfd, SLOT(close()));
+    connect(lfd, SIGNAL(closed()), this, SLOT(logsClosed()));
+    // Notify the main window that a log window is open
+    *logWindowOpen = true;
+}
+
+// TODO: Create custom variant id edit task window as well as custom variant id new task window
+// TODO: Make frequency editable in edit window and in new task window
+// Create an edit window and display it
+void VIDTaskWidget::showEdit() {
+
+}
+
+// Receives a packet of information and rebuilds the task and the task widget with edited info
+void VIDTaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QString p_variantID, QString p_variantName,
+                                   QString p_variantSize, QDateTime p_start, QString p_profile, QString p_proxy,
+                                   unsigned int frequency) {
+
+    // First, change the visuals fo the task widget to match the new task
+    title->setText(p_title);
+    website->setText(p_website.baseURL);
+    variantId->setText(p_variantID);
+    variantName->setText(p_variantName);
+    variantSize->setText(p_variantSize);
+    startAt->setDateTime(p_start);
+    taskfreq = frequency;
+
+    // Then, delete the current task and rebuild it with the edited task
+    task = new VariantIDTask(p_title.toStdString(), p_website, task->swh.taskID, p_variantID.toStdString(), p_start,
+            p_profile.toStdString(), p_proxy.toStdString(), frequency);
+}
+
+// Called when the edit task window is closed
+void VIDTaskWidget::editClosed() {
+    *editWindowOpen = false;
+}
+
+// Called when the logFile window is closed
+void VIDTaskWidget::logsClosed() {
+    *logWindowOpen = false;
 }
 
 // EDIT TASK DISPLAY CLASS

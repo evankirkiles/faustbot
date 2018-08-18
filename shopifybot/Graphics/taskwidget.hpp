@@ -101,10 +101,69 @@ private:
     // Title row is last with the finished button
     QLabel* titleLabel;
     QLineEdit* title;
-    QPushButton* cancel;
     QPushButton* submit;
 
     // Builds the profile combobox
+    void buildProfiles();
+    // Builds the proxy combobox
+    void buildProxies();
+};
+
+// Window that pops up when you try to edit a variant ID task
+class VIDTaskEditDisplay : public QWidget {
+    Q_OBJECT
+public:
+    // Constructor that builds the window with the given information
+    explicit VIDTaskEditDisplay(const QString& title, const QString& website, const QString& variantID,
+                                const QDateTime& start, const QString& profile, const QString& proxy, QWidget* parent = 0);
+
+    // Override winow closed event to notify main window when current edit task is open
+    void closeEvent(QCloseEvent* event) override;
+signals:
+    // Called whenever the edit task window closes
+    void closed();
+    // Sends the edited task information back to the task to restructure
+    void sendTaskEdit(QString title, URLAndMethod website, QString variantId, QString variantName, QString variantSize,
+                      QDateTime startAt, QString profile, QString proxy, unsigned int frequnecy);
+
+private slots:
+    // Tries to send the information in the form to the task widget to edit the task.
+    // If not all required fields are filled, then does not send the form.
+    void attempToSend();
+
+private:
+    // Dark title bar widget
+    DarkTitleBar* dtb;
+
+    // The widgets through which the new task will  be added to the client
+    // Website and variant ID row
+    QLabel* websitesLabel;
+    QComboBox* websites;
+    QLabel* variantIDLabel;
+    QLineEdit* variantID;
+    QPushButton* checkForNameButton;
+
+    // Row for title and size
+    QLabel* variantTitleLabel;
+    QLineEdit* variantTitle;
+    QLabel* variantSizeLabel;
+    QLineEdit* variantSize;
+
+    // Start at, proxy, and profile row
+    QLabel* startAtLabel;
+    QDateTimeEdit* startAt;
+    QLabel* profileLabel;
+    QComboBox* profile;
+    QLabel* proxyLabel;
+    QComboBox* proxy;
+
+    // Finished button row is last
+    // Title row is last with the finished button
+    QLabel* titleLabel;
+    QLineEdit* title;
+    QPushButton* submit;
+
+    // Builds hte profile combobox
     void buildProfiles();
     // Builds the proxy combobox
     void buildProxies();
@@ -150,11 +209,14 @@ private slots:
     // Receives the task edit from the window
     void acceptTaskEdit(QString title, URLAndMethod website, QString collection,
                         QString keywords, QString colorKeywords, QString size,
-                        QDateTime start, QString profile, QString proxy);
+                        QDateTime start, QString profile, QString proxy, unsigned int frequency = constants::BASE_FREQ);
     // Called when the edit window is closed/cancelled by user
     void editClosed();
 
 private:
+    // Frequency of the task
+    unsigned int taskfreq;
+
     // Actual task instance
     Task* task;
 
@@ -209,30 +271,34 @@ public:
 signals:
     // Emitted to the running task to tell it to stop
     void stopTask();
-//public slots:
-//    // Run every time the main window's QTimer updates
-//    void checkTime(QDateTime time);
-//private slots:
-//    // Runs the task, performed when user clicks the play button
-//    void run();
-//    // Stops the task, performed when user clicks the stop button
-//    void stopWidget();
-//    // Updates the status with the given message for the given color
-//    void setStatus(QString text, QString hexColor);
-//    // Deletes the slot, but only if there is no thread currently running
-//    void exit();
-//    // Builds a logfile window with the task's title and file specifiers
-//    void showLogs();
-//    // Called when the logfile window is closed by the user
-//    void logsClosed();
-//    // Builds the edit window with all the task's information
-//    void showEdit();
-//    // Receives the task edit from the window
-//    void acceptTaskEdit(QString title, URLAndMethod website, QString variantID, QDateTime start, QString profile, QString proxy);
-//    // Called when the edit window is closed
-//    void editClosed();
+public slots:
+    // Run every time the main window's QTimer updates
+    void checkTime(QDateTime time);
+private slots:
+    // Runs the task, performed when user clicks the play button
+    void run();
+    // Stops the task, performed when user clicks the stop button
+    void stopWidget();
+    // Updates the status with the given message for the given color
+    void setStatus(QString text, QString hexColor);
+    // Deletes the slot, but only if there is no thread currently running
+    void exit();
+    // Builds a logfile window with the task's title and file specifiers
+    void showLogs();
+    // Called when the logfile window is closed by the user
+    void logsClosed();
+    // Builds the edit window with all the task's information
+    void showEdit();
+    // Receives the task edit from the window
+    void acceptTaskEdit(QString title, URLAndMethod website, QString variantID, QString variantName, QString variantSize,
+                        QDateTime start, QString profile, QString proxy, unsigned int frequency = constants::BASE_FREQ);
+    // Called when the edit window is closed
+    void editClosed();
 
 private:
+    // Frequency of the while loop
+    unsigned int taskfreq;
+
     // Variant task ID instance
     VariantIDTask* task;
 
@@ -246,6 +312,8 @@ private:
     EditTaskDisplay* etd;
 
     // Labels on the task
+    QLabel* identifier;
+    QFrame* separator0;
     QLabel* website;
     QLabel* variantId;
     QFrame* separator1;

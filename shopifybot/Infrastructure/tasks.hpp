@@ -41,7 +41,7 @@ public:
                   const std::string& collection, const std::vector<std::string>& keywords,
                   const std::vector<std::string>& colorKeywords, const std::string& size, const QDateTime& startat,
                   const std::string& profile, const std::string& proxy,
-                  unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ);
+                  unsigned int frequency=constants::BASE_FREQ, unsigned int resultsToCheck=constants::BASE_NUMRESULTS);
 
     // Boolean which can be disabled to stop the running of the task
     bool shouldcontinue = false;
