@@ -196,4 +196,74 @@ private:
     void buildProxiesBox();
 };
 
+// Window that pops up when you try to add a task
+class AddVIDTaskDisplay : public QWidget {
+    Q_OBJECT
+public:
+    // Constructor that builds the window
+    explicit AddVIDTaskDisplay(QWidget *parent = 0);
+
+    // Override window closed event
+    void closeEvent(QCloseEvent *event) override;
+signals:
+    // Called whenever the addtask window is closed
+    void closed();
+    // Sends the information of the new task to the main window to add it
+    void sendTask(QString title, URLAndMethod website, QString variantID,
+                  QString variantName, QString variantSize, QDateTime start, QString profile,
+                  QString proxy, int numCopies);
+private slots:
+    // Tries to send the information in the form to the main window to add it to the task list
+    // If not all required fields are filled, then does not send the form yet.
+    void attemptToSend();
+    // Opens the moreInfoDisplay which gives a basic tutorial on how to create a new task
+    void buildMoreInfoDisplay();
+    // Called whenever the moreinfodisplay window is closed
+    void MIDClosed();
+
+private:
+
+    // Specifies whether the moreInfoDisplay is open or not
+    bool moreInfoDisplayOpen = false;
+    MoreInfoDisplay* mid;
+
+    // Dark title bar widget
+    DarkTitleBar* dtb;
+
+    // The widgets through which the new task will  be added to the client
+    // Website and variant ID row
+    QLabel* websitesLabel;
+    QComboBox* websites;
+    QLabel* variantIDLabel;
+    QLineEdit* variantID;
+    QPushButton* checkForNameButton;
+
+    // Row for title
+    QLabel* variantTitleLabel;
+    QLineEdit* variantTitle;
+    QLabel* variantSizeLabel;
+    QLineEdit* variantSize;
+
+    // Start at, proxy, and profile row
+    QLabel* startAtLabel;
+    QDateTimeEdit* startAt;
+    QLabel* profileLabel;
+    QComboBox* profile;
+    QLabel* proxyLabel;
+    QComboBox* proxy;
+
+    // Finished button row is last
+    // Title row is last with the finished button
+    QLabel* titleLabel;
+    QLineEdit* title;
+    QLabel* copiesLabel;
+    QLineEdit* copies;
+    QPushButton* submit;
+
+    // Builds the profile combobox
+    void buildProfiles();
+    // Builds the proxy combobox
+    void buildProxies();
+};
+
 #endif //SHOPIFY_BOT_POPUPS_HPP

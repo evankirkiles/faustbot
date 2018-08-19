@@ -589,11 +589,27 @@ void VIDTaskWidget::showLogs() {
     *logWindowOpen = true;
 }
 
-// TODO: Create custom variant id edit task window as well as custom variant id new task window
 // TODO: Make frequency editable in edit window and in new task window
 // Create an edit window and display it
 void VIDTaskWidget::showEdit() {
+    // Make sure a log window is not already open
+    if (*editWindowOpen) { if (etd) { etd->raise(); } return; }
 
+    // Otherwise create a new edit window and show it
+    etd = new VIDTaskEditDisplay(title->text(), website->text(), variantId->text(), variantName->text(), variantSize->text(),
+            startAt->dateTime(), task->profile.c_str(), task->proxy.c_str());
+    etd->show();
+    etd->setFocus();
+    // Connect the closeLogs function of lfd to the delete button of the task
+    connect(deleteButton, SIGNAL(clicked()), etd, SLOT(close()));
+    connect(etd, SIGNAL(closed()), this, SLOT(editClosed()));
+
+    // Finally connect the task edited signal of the display to the receiving end of the taskwidget
+    connect(etd, SIGNAL(sendTaskEdit(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, unsigned int)),
+            this, SLOT(acceptTaskEdit(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, unsigned int)));
+
+    // Notify the main window that a log window is open
+    *editWindowOpen = true;
 }
 
 // Receives a packet of information and rebuilds the task and the task widget with edited info
@@ -735,7 +751,7 @@ EditTaskDisplay::EditTaskDisplay(const QString& p_title, const QString& p_websit
     profileLabel->setObjectName("addtask_mediocre_text");
     profileLabel->setMaximumWidth(50);
     profile = new QComboBox(this);
-    profile->setFixedWidth(150);
+    profile->setFixedWidth(100);
     buildProfiles();
     proxyLabel = new QLabel("Proxy: ", this);
     proxyLabel->setObjectName("addtask_mediocre_text");
@@ -829,6 +845,215 @@ void EditTaskDisplay::buildProfiles() {
 
 // Builds the proxies combobox
 void EditTaskDisplay::buildProxies() {
+    // First add "Random" as an option
+    proxy->addItem("Random");
+
+    // Open the proxies.txt
+    std::ifstream filein(file_paths::PROXIES_TXT);
+    std::string tempStr;
+
+    // Cycle through each line and get the proxies' ips
+    while (getline(filein, tempStr)) {
+        proxy->addItem(tempStr.substr(0, tempStr.find(" :-: ")).c_str());
+    }
+
+    // Close the filein
+    filein.close();
+}
+
+// VARIANT ID TASK EDIT DISPLAY CLASS
+// Constructor that builds the window for editing a task
+VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_website, const QString &p_variantID,
+                                       const QString &p_variantName, const QString &p_variantSize,
+                                       const QDateTime &p_start, const QString &p_profile, const QString &p_proxy,
+                                       QWidget *parent) : QWidget(parent) {
+
+    // Set window properties
+    setFixedSize(500, 270);
+    setObjectName("newtaskwindow");
+    setWindowTitle(std::string("Edit ").append(p_title.toStdString()).c_str());
+    setWindowFlags(Qt::FramelessWindowHint);
+    setFocusPolicy(Qt::ClickFocus);
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Add the dark title bar
+    dtb = new DarkTitleBar(this, true);
+
+    // Set the stylesheet for the window
+    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    setStyleSheet(StyleSheet);
+
+    // Create layouts
+    auto externLayout = new QVBoxLayout();
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    auto bgLayout = new QVBoxLayout();
+    bgLayout->setContentsMargins(0, 0, 0, 0);
+    bg->setObjectName("main_window");
+    bg->setLayout(bgLayout);
+    bgLayout->addWidget(dtb);
+    bgLayout->addStretch();
+    externLayout->addWidget(bg);
+    auto mainLayout = new QVBoxLayout;
+    mainLayout->setContentsMargins(11, 3, 11, 11);
+    // Individual horizontal row layouts
+    auto websiteVariantLayout = new QHBoxLayout;
+    auto titleSizeLayout = new QHBoxLayout;
+    auto startAtLayout = new QHBoxLayout;
+    auto profileProxyLayout = new QHBoxLayout;
+    auto titleLayout = new QHBoxLayout;
+
+    // Create the widgets
+    // WEBSITE & VARIANT ID ROW
+    websitesLabel = new QLabel("Websites: ", this);
+    websitesLabel->setObjectName("addtask_mediocre_text");
+    websites = new QComboBox(this);
+    websites->addItems(supported_sites::ssStringList);
+    variantIDLabel = new QLabel("Variant ID: ");
+    variantIDLabel->setObjectName("addtask_mediocre_text");
+    variantID = new QLineEdit(this);
+    variantID->setObjectName("addtask_editbox");
+    checkForNameButton = new QPushButton("FILL", this);
+    checkForNameButton->setObjectName("checkfornamebutton");
+
+    // Add the row to the layout
+    websiteVariantLayout->addWidget(websitesLabel);
+    websiteVariantLayout->addWidget(websites);
+    websiteVariantLayout->addWidget(variantIDLabel);
+    websiteVariantLayout->addWidget(variantID);
+    websiteVariantLayout->addWidget(checkForNameButton);
+    mainLayout->addLayout(websiteVariantLayout);
+
+    // TITLE ROW
+    variantTitleLabel = new QLabel("Product Title: ", this);
+    variantTitleLabel->setObjectName("addtask_mediocre_text");
+    variantTitle = new QLineEdit(this);
+    variantTitle->setObjectName("addtask_editbox");
+    // Add the row to the layout
+    titleSizeLayout->addWidget(variantTitleLabel);
+    titleSizeLayout->addWidget(variantTitle);
+    mainLayout->addLayout(titleSizeLayout);
+
+    // SIZE & STARTAT ROW
+    variantSizeLabel = new QLabel("Size: ", this);
+    variantSizeLabel->setObjectName("addtask_mediocre_text");
+    variantSize = new QLineEdit(this);
+    variantSize->setObjectName("addtask_editbox");
+    startAtLabel = new QLabel("Start at: ", this);
+    startAtLabel->setObjectName("addtask_mediocre_text");
+    startAtLabel->setMaximumWidth(60);
+    startAt = new QDateTimeEdit(this);
+    startAt->setObjectName("addtask_datetime");
+    startAt->setDisplayFormat("[MMMM d, yyyy] hh:mm::ss");
+    startAt->setDateTime(QDateTime::currentDateTime());
+    // Add the row to the layout
+    startAtLayout->addWidget(variantSizeLabel);
+    startAtLayout->addWidget(variantSize);
+    startAtLayout->addWidget(startAtLabel);
+    startAtLayout->addWidget(startAt);
+    mainLayout->addLayout(startAtLayout);
+
+    // PROFILE & PROXY ROW
+    profileLabel = new QLabel("Profile: ", this);
+    profileLabel->setObjectName("addtask_mediocre_text");
+    profileLabel->setFixedWidth(50);
+    profile = new QComboBox;
+    profile->setFixedWidth(100);
+    buildProfiles();
+    proxyLabel = new QLabel("Proxy: ", this);
+    proxyLabel->setObjectName("addtask_mediocre_text");
+    proxyLabel->setFixedWidth(45);
+    proxy = new QComboBox;
+    proxy->setFixedWidth(75);
+    buildProxies();
+    // Add row to the layout
+    profileProxyLayout->addWidget(profileLabel);
+    profileProxyLayout->addWidget(profile);
+    profileProxyLayout->addWidget(proxyLabel);
+    profileProxyLayout->addWidget(proxy);
+    mainLayout->addLayout(profileProxyLayout);
+
+    // TITLE ROW
+    titleLabel = new QLabel("Title: ", this);
+    titleLabel->setObjectName("task_important_text");
+    title = new QLineEdit(this);
+    title->setObjectName("task_title_lineedit");
+    submit = new QPushButton("SUBMIT", this);
+    submit->setObjectName("addtaskbutton");
+    submit->setFixedSize(100, 35);
+    // Add row to the layout
+    titleLayout->addWidget(titleLabel);
+    titleLayout->addWidget(title);
+    titleLayout->addSpacing(10);
+    titleLayout->addWidget(submit);
+    mainLayout->addLayout(titleLayout);
+
+    // Set the contents of each edit box
+    websites->setCurrentText(p_website);
+    variantID->setText(p_variantID);
+    variantTitle->setText(p_variantName);
+    variantSize->setText(p_variantSize);
+    startAt->setDateTime(p_start);
+    profile->setCurrentText(p_profile);
+    proxy->setCurrentText(p_proxy);
+    title->setText(p_title);
+
+    // Set the layout
+    bgLayout->addLayout(mainLayout);
+    setLayout(externLayout);
+
+    // Connect the submit button to the attemptToSend slot
+    connect(submit, SIGNAL(clicked()), this, SLOT(attempToSend()));
+}
+
+// Tries to send the data in the input fields to the main window to edit the task
+void VIDTaskEditDisplay::attempToSend() {
+
+    // Non-required fields: collection, color keywords
+    // Check each required input field to make sure a valid task can be built
+    if (variantID->text().isEmpty()) { variantID->setFocus(); return; }
+    if (variantTitle->text().isEmpty()) { variantTitle->setFocus(); return; }
+    if (variantSize->text().isEmpty()) { variantSize->setFocus(); return; }
+    if (title->text().isEmpty()) { title->setFocus(); return; }
+
+    // Send the signal with all the data to the main window if all required fields have text in them
+    emit sendTaskEdit(title->text(), supported_sites::WEBSITES.at(websites->currentText().toStdString()), variantID->text(),
+                      variantTitle->text(), variantSize->text(), startAt->dateTime(), profile->currentText(), proxy->currentText());
+
+    // Now close the window because the task edit package has been sent
+    close();
+}
+
+// Custom close event function that just emits a signal signifying it has closed
+void VIDTaskEditDisplay::closeEvent(QCloseEvent *event) {
+    // Emit the closed signal and then proceed to cleanup
+    emit closed();
+    QWidget::closeEvent(event);
+}
+
+// Builds the profiles combobox
+void VIDTaskEditDisplay::buildProfiles() {
+    // First add "Random" as an option
+    profile->addItem("Random");
+
+    // Open the profiles.txt
+    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::string tempStr;
+
+    // Cycle through each line and get the profiles' titles
+    while (getline(filein, tempStr)) {
+        profile->addItem(tempStr.substr(0, tempStr.find(" :-:")).c_str());
+    }
+
+    // Close the file in
+    filein.close();
+}
+
+// Builds the proxies combobox
+void VIDTaskEditDisplay::buildProxies() {
     // First add "Random" as an option
     proxy->addItem("Random");
 

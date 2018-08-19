@@ -114,8 +114,9 @@ class VIDTaskEditDisplay : public QWidget {
     Q_OBJECT
 public:
     // Constructor that builds the window with the given information
-    explicit VIDTaskEditDisplay(const QString& title, const QString& website, const QString& variantID,
-                                const QDateTime& start, const QString& profile, const QString& proxy, QWidget* parent = 0);
+    explicit VIDTaskEditDisplay(const QString& title, const QString& website, const QString& variantID, const QString& variantName,
+                                const QString& variantSize, const QDateTime& start, const QString& profile,
+                                const QString& proxy, QWidget* parent = 0);
 
     // Override winow closed event to notify main window when current edit task is open
     void closeEvent(QCloseEvent* event) override;
@@ -124,7 +125,7 @@ signals:
     void closed();
     // Sends the edited task information back to the task to restructure
     void sendTaskEdit(QString title, URLAndMethod website, QString variantId, QString variantName, QString variantSize,
-                      QDateTime startAt, QString profile, QString proxy, unsigned int frequnecy);
+                      QDateTime startAt, QString profile, QString proxy, unsigned int frequency = constants::BASE_FREQ;
 
 private slots:
     // Tries to send the information in the form to the task widget to edit the task.
@@ -163,7 +164,7 @@ private:
     QLineEdit* title;
     QPushButton* submit;
 
-    // Builds hte profile combobox
+    // Builds the profile combobox
     void buildProfiles();
     // Builds the proxy combobox
     void buildProxies();
@@ -309,7 +310,7 @@ private:
     LogFileDisplay* lfd;
 
     // Edit window
-    EditTaskDisplay* etd;
+    VIDTaskEditDisplay* etd;
 
     // Labels on the task
     QLabel* identifier;
