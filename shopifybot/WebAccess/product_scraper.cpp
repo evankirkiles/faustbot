@@ -624,7 +624,8 @@ bool ShopifyWebsiteHandler::productAvailable(const std::string &variantID) {
     std::string str;
     bool productAvailable = true;
     while (getline(filein, str)) {
-        if (str.find("Inventory issues") != std::string::npos) {
+        // If the product is not available, the html body is an HTML redirect page to inventory issues page
+        if (str.find("http-equiv=\"refresh\"") != std::string::npos) {
             productAvailable = false;
             break;
         }

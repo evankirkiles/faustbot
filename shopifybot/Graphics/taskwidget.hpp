@@ -125,7 +125,7 @@ signals:
     void closed();
     // Sends the edited task information back to the task to restructure
     void sendTaskEdit(QString title, URLAndMethod website, QString variantId, QString variantName, QString variantSize,
-                      QDateTime startAt, QString profile, QString proxy, unsigned int frequency = constants::BASE_FREQ;
+                      QDateTime startAt, QString profile, QString proxy, unsigned int frequency = constants::BASE_FREQ);
 
 private slots:
     // Tries to send the information in the form to the task widget to edit the task.

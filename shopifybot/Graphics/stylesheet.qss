@@ -140,15 +140,16 @@ QPushButton#checkfornamebutton:pressed {
 }
 QPushButton#checkfornamebutton {
     background-color: #D2A15A;
-        border-width: 1px;
-        border-style: solid;
-        border-color: #2b2e33;
-    	border-radius: 10px;
-    	color: #2b2e33;
-    	font-family: "Futura";
-    	max-width: 50px;
-    	margin-top: 5px;
-    	margin-bottom: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #2b2e33;
+    border-radius: 5px;
+    color: #2b2e33;
+    font-family: "Futura";
+    width: 40px;
+    height: 23px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 QPushButton#startallbutton:pressed {
     background-color: #4f755b;
@@ -158,7 +159,7 @@ QPushButton#startallbutton:pressed {
 QPushButton#startallbutton {
     background-color: #6ea37f;
     border: none;
-	border-radius: 3px;
+	border-radius: 8px;
 	color: #2b2e33;
 	font-family: "Futura";
 	min-height: 25px;
@@ -185,7 +186,7 @@ QPushButton#stopallbutton {
 	margin-bottom: 0px;
 }
 QPushButton#addtaskbutton:pressed {
-    background-color: #dbc987;
+    background-color: #dbab67;
     border-style: inset;
     border: 1px solid gray;
 }
@@ -197,7 +198,23 @@ QPushButton#addtaskbutton {
 	border-radius: 10px;
 	color: #2b2e33;
 	font-family: "Futura";
-	margin-top: 5px;
+	margin-top: 2px;
+	margin-bottom: 5px;
+}
+QPushButton#addtaskbuttonv2:pressed {
+    background-color: #dbab67;
+    border-style: inset;
+    border: 1px solid gray;
+}
+QPushButton#addtaskbuttonv2 {
+    background-color: #a87f45;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #a87f45;
+	border-radius: 10px;
+	color: #2b2e33;
+	font-family: "Futura";
+	margin-top: 3px;
 	margin-bottom: 5px;
 }
 #copyrightlabel {

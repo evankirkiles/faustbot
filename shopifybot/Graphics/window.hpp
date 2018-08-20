@@ -50,11 +50,17 @@ public:
     bool editWindowOpen = false;
 
     // Adds a task to the list
-    void addTask(const std::string& title, const URLAndMethod& website, const std::string& collection,
-                 const std::string& identifier, const std::vector<std::string>& keywords,
+    void addTask(const std::string& title, const URLAndMethod& website, const std::string& identifier,
+                 const std::string& collection, const std::vector<std::string>& keywords,
                  const std::vector<std::string>& colorKeywords, const std::string& size, const QDateTime& startAt,
                  const std::string& profile, const std::string& proxy,
                  unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ);
+
+    // Adds a VID task to the list
+    void addVIDTaskFunc(const std::string& title, const URLAndMethod& website, const std::string& identifier,
+                        const std::string& variantID, const std::string& variantName, const std::string& variantSize,
+                        const QDateTime& startAt, const std::string& profile, const std::string& proxy,
+                        unsigned int frequency = constants::BASE_FREQ);
 
 private:
 
@@ -63,6 +69,7 @@ private:
 
     // Bool telling whether windows are open
     bool addTaskOpen = false;
+    bool addVIDTaskOpen = false;
     bool profilesOpen = false;
     bool proxiesOpen = false;
     // Number of tasks created, incremented every time a task is added
@@ -79,12 +86,13 @@ private:
     // Add new task button
     QPushButton *addtask;
     AddTaskDisplay* atd;
+    QPushButton *addVIDtask;
+    AddVIDTaskDisplay* avidtd;
 
     // Other sidebar buttons
     QPushButton *billing;
     QPushButton *proxies;
     QPushButton *logs;
-    QPushButton *about;
     QLabel *copyrightLabel;
 
     // Sidebar windows
@@ -105,17 +113,19 @@ private:
 private slots:
     // Opens the add task window
     void openNewTask();
-    // Tells the main window that the add task window was closed
-    void addTaskClosed();
+    // Opens an add VID task window
+    void openNewVIDTask();
     // Opens the profiles window
     void openProfiles();
     // Opens the proxies window
     void openProxies();
-    // Tells the main window that the proxies window was closed
-    // Connects to the submit slot in the main window, and adds a task with the given information
+    // Connects to the submit slot in the new task window, and adds a task with the given information
     void buildTask(QString title, URLAndMethod website, QString collection,
                    QString keywords, QString colorKeywords, QString size,
                    QDateTime start, QString profile, QString proxy, int copies);
+    // Connects to the submit slot in the new VID task window, and adds a VID task with the given information
+    void buildVIDTask(QString title, URLAndMethod website, QString variantID, QString variantName, QString variantSize,
+                      QDateTime start, QString profile, QString proxy, int copies);
 };
 
 

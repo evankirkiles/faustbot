@@ -53,6 +53,9 @@
 #ifndef ifstream
 #include <fstream>
 #endif
+#ifndef QScrollBar
+#include <QScrollBar>
+#endif
 
 #include "titlebar.hpp"
 
@@ -261,9 +264,9 @@ private:
     QPushButton* submit;
 
     // Builds the profile combobox
-    void buildProfiles();
+    void buildProfilesBox();
     // Builds the proxy combobox
-    void buildProxies();
+    void buildProxiesBox();
 };
 
 #endif //SHOPIFY_BOT_POPUPS_HPP

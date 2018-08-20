@@ -42,7 +42,7 @@ with open('shopifybot/Infrastructure/profiles.txt') as input_file:
     input_file.close()
 if j is None:
     # If it gets here (j is undefined), then profile has not been found
-    raise ValueError("Could not locate profile in profiles.txt")
+    raise ValueError("Could not locate profile \"" + profileName + "\" in profiles.txt")
 
 # Go into the credit card file and find the correct credit card json data
 c = None
@@ -126,30 +126,10 @@ def send_customer_info():
     if b'Continue to shipping method' in resp.content:
         log('Got to customer information form.')
     elif b'Inventory issues' in resp.content:
-        log('Could not fill complete order, reordering to get as many as possible.')
-
-        # Reformat to fill as much of the order as possible
-        soup = BeautifulSoup(resp.content, 'html.parser')
-        newQuantity = soup.findAll('input', {'name': 'checkout[line_items][0][quantity]'})[1]['value']
-        newURL = cartLink.split(':')[0] + ':' + cartLink.split(':')[1] + ':' + newQuantity
-
-        # Log the reformatted order
-        log('Reordered for max of ' + newQuantity + ' products. New link: ' + newURL)
-
-        # This should always go through because first one did
-        try:
-            resp = session.get(newURL, allow_redirects=True, headers=customerInfoHeaders, proxies=proxyDict, timeout=4)
-        except Exception as e:
-            log(e)
-
-        if b'Continue to shipping method' in resp.content:
-            log('Got to customer information form.')
-        else:
-            log('Customer Information page not reached. Aborting.')
-            raise ValueError("Did not reach Customer Information Page!")
-
+        log('Product out of stock. Aborting...')
+        raise ValueError("Product out of stock!")
     else:
-        log('Customer Information page not reached. Aborting.')
+        log('Customer Information page not reached. Aborting...')
         raise ValueError("Did not reach Customer Information Page!")
 
     # Save the response URL as the Shopify checkout link

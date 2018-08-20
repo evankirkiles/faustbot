@@ -17,7 +17,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_QuitOnClose);
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
-    setWindowTitle(tr("CIGNO D'ORO"));
+    setWindowTitle(tr("SHOPIFY BOT"));
     setObjectName("main_window");
 
     // Create URLAndMethod metatype
@@ -70,37 +70,40 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     logoimg.setDevicePixelRatio(2.0);
     logo = new QLabel();
     logo->setPixmap(logoimg);
-    title = new QLabel("IL CIGNO D'ORO", this);
+    logo->setFixedSize(210, 200);
+    title = new QLabel("SHOPIFY BOT", this);
     title->setAlignment(Qt::AlignCenter);
     title->setObjectName("bot_title");
+    title->setFixedHeight(30);
     startAllTasks = new QPushButton("Start All", this);
     startAllTasks->setObjectName("startallbutton");
     stopAllTasks = new QPushButton("Stop All", this);
     stopAllTasks->setObjectName("stopallbutton");
     alltaskButtonsLayout->addWidget(startAllTasks);
     alltaskButtonsLayout->addWidget(stopAllTasks);
-    addtask = new QPushButton("NEW TASK", this);
+    addtask = new QPushButton("NEW KEYWORD TASK", this);
     addtask->setObjectName("addtaskbutton");
     addtask->setFixedHeight(70);
+    addVIDtask = new QPushButton("NEW VARIANT ID TASK", this);
+    addVIDtask->setObjectName("addtaskbuttonv2");
+    addVIDtask->setFixedHeight(50);
     billing = new QPushButton("Profiles", this);
     billing->setObjectName("sidebuttons");
     proxies = new QPushButton("Proxies", this);
     proxies->setObjectName("sidebuttons");
     logs = new QPushButton("Logs", this);
     logs->setObjectName("sidebuttons");
-    about = new QPushButton("About", this);
-    about->setObjectName("sidebuttons");
-    copyrightLabel = new QLabel("© 2018 Evan Kirkiles", this);
+    copyrightLabel = new QLabel("© 2018 Evan Kirkiles - All Rights Reserved", this);
     copyrightLabel->setObjectName("copyrightlabel");
     // Add widgets to the left column
     leftColumn->addWidget(logo);
     leftColumn->addWidget(title);
     leftColumn->addLayout(alltaskButtonsLayout);
     leftColumn->addWidget(addtask);
+    leftColumn->addWidget(addVIDtask);
     leftColumn->addWidget(billing);
     leftColumn->addWidget(proxies);
     leftColumn->addWidget(logs);
-    leftColumn->addWidget(about);
     leftColumn->addWidget(copyrightLabel);
     leftColumn->setAlignment(Qt::AlignTop);
 
@@ -138,6 +141,8 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
 
     // Open the add task window when the add task button is clicked
     connect(addtask, SIGNAL(clicked()), this, SLOT(openNewTask()));
+    // Open the add VID task window when the add VID task buton is clicked
+    connect(addVIDtask, SIGNAL(clicked()), this, SLOT(openNewVIDTask()));
     // Open the profiles window when the profiles button is clicked
     connect(billing, SIGNAL(clicked()), this, SLOT(openProfiles()));
     // Open the proxies window when the proxies button is clicked
@@ -161,6 +166,21 @@ void BotWindow::buildTask(QString title, URLAndMethod website, QString collectio
         addTask(title.toStdString(), website, std::to_string(numTasksCreated), collection.toStdString(),
                 vectorFromString(keywords.toStdString()), vectorFromString(colorKeywords.toStdString()),
                 size.toStdString(), start, profile.toStdString(), proxy.toStdString());
+        // Increment the task identifier
+        numTasksCreated++;
+    }
+}
+
+// Slot which takes information from the new VID task window and builds necessary VID tasks
+void BotWindow::buildVIDTask(QString title, URLAndMethod website, QString variantID, QString variantName,
+                             QString variantSize, QDateTime start, QString profile, QString proxy, int copies) {
+
+    // Gets an identifier by checking how many task widgets there are on the tasklist
+    // Builds a task based on the number of copies sent
+    for (int i = 0; i < copies; i++) {
+        addVIDTaskFunc(title.toStdString(), website, std::to_string(numTasksCreated), variantID.toStdString(),
+                       variantName.toStdString(), variantSize.toStdString(), start, profile.toStdString(),
+                       proxy.toStdString());
         // Increment the task identifier
         numTasksCreated++;
     }
@@ -191,6 +211,30 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
     newtask->show();
 }
 
+// Creates a tasl and adds it to the tasklist
+void BotWindow::addVIDTaskFunc(const std::string &title, const URLAndMethod &website, const std::string &identifier,
+                               const std::string &variantID, const std::string &variantName,
+                               const std::string &variantSize, const QDateTime &startAt, const std::string &profile,
+                               const std::string &proxy, unsigned int frequency) {
+
+    // Create a new task
+    auto newtask = new VIDTaskWidget(title, website, identifier, variantID, profile, proxy, startAt, variantName,
+            variantSize, &logWindowOpen, &editWindowOpen, frequency, tasklistwidget);
+
+    // Connect the signals of the window to this new task's start and stop
+    connect(startAllTasks, SIGNAL(clicked()), newtask, SLOT(run()));
+    connect(stopAllTasks, SIGNAL(clicked()), newtask, SLOT(stopWidget()));
+
+    // Connect the 1 second interval timer to the taskwidget's time check function
+    connect(timeChecker, &QTimer::timeout, [newtask] () { newtask->checkTime(QDateTime::currentDateTime()); });
+
+    // Add the task to the qvboxlayout
+    tasklistLayout->addWidget(newtask);
+    // Show the new task
+    newtask->show();
+
+}
+
 // Opens the add task window
 void BotWindow::openNewTask() {
     if (addTaskOpen) {
@@ -199,20 +243,44 @@ void BotWindow::openNewTask() {
         atd->setFocus();
         return;
     }
+
+    // If there is a VID new task open, just close it
+    if (addVIDTaskOpen) { avidtd->close(); }
+
     // Build the window if it does not exist, otherwise just show it
     atd = new AddTaskDisplay();
     atd->show();
     addTaskOpen = true;
 
     // Make necessary connections
-    connect(atd, SIGNAL(closed()), this, SLOT(addTaskClosed()));
+    connect(atd, &AddTaskDisplay::closed, [this] () { addTaskOpen = false; });
     // Connect the buildtask symbol to the addtask slot of the mainwindow
     connect(atd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString, int)),
             this, SLOT(buildTask(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString, int)));
 }
-// Called when the task window closes
-void BotWindow::addTaskClosed() {
-    addTaskOpen = false;
+
+// Opens the add VID task window
+void BotWindow::openNewVIDTask() {
+    if (addVIDTaskOpen) {
+        // Show the currently open task window
+        avidtd->raise();
+        avidtd->setFocus();
+        return;
+    }
+
+    // If there is a normal new task open, just close it
+    if (addTaskOpen) { atd->close(); }
+
+    // Build the window if it does not exist, otherwise just show it
+    avidtd = new AddVIDTaskDisplay();
+    avidtd->show();
+    addVIDTaskOpen = true;
+
+    // Make necessary connections
+    connect(avidtd, &AddVIDTaskDisplay::closed, [this] () { addVIDTaskOpen = false; });
+    // Connect the buildtask symbol to the addtask slot of the mainwindow
+    connect(avidtd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, int)),
+            this, SLOT(buildVIDTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, int)));
 }
 
 // Opens the profiles window

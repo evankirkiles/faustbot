@@ -47,6 +47,8 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
         logStream = new QTextStream(logFile);
         logDisplay = new QTextBrowser();
         logDisplay->setText(logStream->readAll());
+        QScrollBar* vsb = logDisplay->verticalScrollBar();
+        vsb->setValue(vsb->minimum());
     } else {
         logDisplay = new QTextBrowser();
         logDisplay->setText(QString("Log file not yet generated."));
@@ -208,7 +210,7 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     profileLabel->setObjectName("addtask_mediocre_text");
     profileLabel->setMaximumWidth(50);
     profile = new QComboBox(this);
-    profile->setFixedWidth(150);
+    profile->setFixedWidth(100);
     buildProfilesBox();
     proxyLabel = new QLabel("Proxy: ", this);
     proxyLabel->setObjectName("addtask_mediocre_text");
@@ -249,6 +251,8 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     // Connect the moreinfo button the moreinfodisplay slot
     connect(dtb, SIGNAL(showMIW()), this, SLOT(buildMoreInfoDisplay()));
 }
+
+
 
 // Tries to send the data in the input fields to the main window to build a new task
 void AddTaskDisplay::attemptToSend() {
@@ -321,6 +325,264 @@ void AddTaskDisplay::buildProfilesBox() {
 
 // Scans the proxies.txt file for the IPs of each proxies
 void AddTaskDisplay::buildProxiesBox() {
+    // First add "Random" as an option
+    proxy->addItem("Random");
+
+    // Open the proxies.txt
+    std::ifstream filein(file_paths::PROXIES_TXT);
+    std::string tempStr;
+
+    // Cycle through each line and get the proxies' ips
+    while (getline(filein, tempStr)) {
+        proxy->addItem(tempStr.substr(0, tempStr.find(" :-: ")).c_str());
+    }
+
+    // Close the filein
+    filein.close();
+}
+
+// ADD VARIANT ID TASK DISPLAY CLASS
+// Constructor that builds the window for adding a task
+AddVIDTaskDisplay::AddVIDTaskDisplay(QWidget *parent) : QWidget(parent) {
+
+    // Set window properties
+    setFixedSize(500, 230);
+    setObjectName("newtaskwindow");
+    setWindowTitle("New Variant ID Task");
+    setWindowFlags(Qt::FramelessWindowHint);
+    setFocusPolicy(Qt::ClickFocus);
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Add the dark title bar
+    dtb = new DarkTitleBar(this, true);
+
+    // Set the stylesheet for the window
+    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    setStyleSheet(StyleSheet);
+
+    // Create layouts
+    auto externLayout = new QVBoxLayout();
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    auto bgLayout = new QVBoxLayout();
+    bgLayout->setContentsMargins(0, 0, 0, 0);
+    bg->setObjectName("main_window");
+    bg->setLayout(bgLayout);
+    bgLayout->addWidget(dtb);
+    bgLayout->addStretch();
+    externLayout->addWidget(bg);
+    auto mainLayout = new QVBoxLayout;
+    mainLayout->setContentsMargins(11, 3, 11, 11);
+    mainLayout->setSpacing(0);
+    // Individual horizontal row layouts
+    auto websiteVariantLayout = new QHBoxLayout;
+    auto titleSizeLayout = new QHBoxLayout;
+    auto startAtLayout = new QHBoxLayout;
+    auto profileProxyLayout = new QHBoxLayout;
+    auto titleLayout = new QHBoxLayout;
+
+    // Create the widgets
+    // WEBSITE & VARIANT ID ROW
+    websitesLabel = new QLabel("Websites: ", this);
+    websitesLabel->setObjectName("addtask_mediocre_text");
+    websites = new QComboBox(this);
+    websites->addItems(supported_sites::ssStringList);
+    variantIDLabel = new QLabel("Variant ID: ");
+    variantIDLabel->setObjectName("addtask_mediocre_text");
+    variantID = new QLineEdit(this);
+    variantID->setObjectName("addtask_editbox");
+    variantID->setFixedWidth(150);
+    checkForNameButton = new QPushButton("FILL", this);
+    checkForNameButton->setObjectName("checkfornamebutton");
+
+    // Add the row to the layout
+    websiteVariantLayout->addWidget(websitesLabel);
+    websiteVariantLayout->addWidget(websites);
+    websiteVariantLayout->addSpacing(10);
+    websiteVariantLayout->addWidget(variantIDLabel);
+    websiteVariantLayout->addWidget(variantID);
+    websiteVariantLayout->addSpacing(20);
+    websiteVariantLayout->addWidget(checkForNameButton);
+    mainLayout->addLayout(websiteVariantLayout);
+    mainLayout->addSpacing(5);
+
+    // TITLE ROW WITH COPIES
+    variantTitleLabel = new QLabel("Product Title: ", this);
+    variantTitleLabel->setObjectName("addtask_mediocre_text");
+    variantTitle = new QLineEdit(this);
+    variantTitle->setObjectName("addtask_editbox");
+    // Add the row to the layout
+    titleSizeLayout->addWidget(variantTitleLabel);
+    titleSizeLayout->addWidget(variantTitle);
+    mainLayout->addLayout(titleSizeLayout);
+    mainLayout->addSpacing(10);
+
+    // SIZE & STARTAT ROW
+    variantSizeLabel = new QLabel("Size: ", this);
+    variantSizeLabel->setObjectName("addtask_mediocre_text");
+    variantSizeLabel->setMaximumWidth(35);
+    variantSize = new QLineEdit(this);
+    variantSize->setObjectName("addtask_editbox");
+    variantSize->setMaximumWidth(35);
+    startAtLabel = new QLabel("Start at: ", this);
+    startAtLabel->setObjectName("addtask_mediocre_text");
+    startAtLabel->setMaximumWidth(60);
+    startAt = new QDateTimeEdit(this);
+    startAt->setObjectName("addtask_datetime");
+    startAt->setDisplayFormat("[MMMM d, yyyy] hh:mm:ss");
+    // Format the time to minute 00
+    QDateTime thecurrent = QDateTime::currentDateTime();
+    QTime thetime = thecurrent.time();
+    if (thetime.second() != 0) { thetime.setHMS(thetime.hour(), thetime.minute(), 0); }
+    thecurrent.setTime(thetime);
+    startAt->setDateTime(thecurrent);
+    copiesLabel = new QLabel("Copies: ", this);
+    copiesLabel->setObjectName("addtask_mediocre_text");
+    copiesLabel->setMaximumWidth(45);
+    copies = new QLineEdit(this);
+    copies->setObjectName("addtask_editbox");
+    copies->setValidator(new QIntValidator(0, 20, this));
+    copies->setText("1");
+    copies->setMaximumWidth(35);
+    // Add the row to the layout
+    startAtLayout->addStretch();
+    startAtLayout->addWidget(variantSizeLabel);
+    startAtLayout->addWidget(variantSize);
+    startAtLayout->addSpacing(10);
+    startAtLayout->addWidget(startAtLabel);
+    startAtLayout->addWidget(startAt);
+    startAtLayout->addSpacing(10);
+    startAtLayout->addWidget(copiesLabel);
+    startAtLayout->addWidget(copies);
+    startAtLayout->addStretch();
+    mainLayout->addLayout(startAtLayout);
+    mainLayout->addSpacing(10);
+
+    // PROFILE & PROXY ROW
+    profileLabel = new QLabel("Profile: ", this);
+    profileLabel->setObjectName("addtask_mediocre_text");
+    profileLabel->setFixedWidth(50);
+    profile = new QComboBox;
+    profile->setFixedWidth(100);
+    buildProfilesBox();
+    proxyLabel = new QLabel("Proxy: ", this);
+    proxyLabel->setObjectName("addtask_mediocre_text");
+    proxyLabel->setFixedWidth(45);
+    proxy = new QComboBox;
+    proxy->setFixedWidth(75);
+    buildProxiesBox();
+    // Add row to the layout
+    profileProxyLayout->addStretch();
+    profileProxyLayout->addWidget(profileLabel);
+    profileProxyLayout->addWidget(profile);
+    profileProxyLayout->addSpacing(10);
+    profileProxyLayout->addWidget(proxyLabel);
+    profileProxyLayout->addWidget(proxy);
+    profileProxyLayout->addStretch();
+    mainLayout->addLayout(profileProxyLayout);
+    mainLayout->addSpacing(10);
+
+    // TITLE ROW
+    titleLabel = new QLabel("Title: ", this);
+    titleLabel->setObjectName("task_important_text");
+    title = new QLineEdit(this);
+    title->setObjectName("task_title_lineedit");
+    submit = new QPushButton("SUBMIT", this);
+    submit->setObjectName("addtaskbutton");
+    submit->setFixedSize(100, 35);
+    // Add row to the layout
+    titleLayout->addWidget(titleLabel);
+    titleLayout->addWidget(title);
+    titleLayout->addSpacing(20);
+    titleLayout->addWidget(submit);
+    mainLayout->addLayout(titleLayout);
+
+    // Set the layout
+    bgLayout->addLayout(mainLayout);
+    setLayout(externLayout);
+
+    // Connect the submit button to the attemptToSend slot
+    connect(submit, SIGNAL(clicked()), this, SLOT(attemptToSend()));
+    // Connect the moreinfo button the moreinfodisplay slot
+    connect(dtb, SIGNAL(showMIW()), this, SLOT(buildMoreInfoDisplay()));
+}
+
+// Tries to send the data in the input fields to the main window to build a new task
+void AddVIDTaskDisplay::attemptToSend() {
+
+    // Non-required fields: collection, color keywords
+    // Check each required input field to make sure a valid task can be built
+    if (variantID->text().isEmpty()) { variantID->setFocus(); return; }
+    if (variantTitle->text().isEmpty()) { variantTitle->setFocus(); return; }
+    if (variantSize->text().isEmpty()) { variantSize->setFocus(); return; }
+    if (title->text().isEmpty()) { title->setFocus(); return; }
+
+    // Send the signal with all the data to the main window if all required fields have text in them
+    emit sendTask(title->text(), supported_sites::WEBSITES.at(websites->currentText().toStdString()), variantID->text(),
+                      variantTitle->text(), variantSize->text(), startAt->dateTime(), profile->currentText(),
+                  proxy->currentText(), copies->text().toInt());
+
+    // Now close the window because the new task has been made
+    close();
+}
+
+// Opens the moreinfo display to give a basic tutorial on how to create a new task
+void AddVIDTaskDisplay::buildMoreInfoDisplay() {
+
+    // Make sure that a tutorial display is not open already
+    if (moreInfoDisplayOpen) { if (mid) { mid->raise(); } return; }
+
+    // Otherwise create a tutorial display and show it
+    mid = new MoreInfoDisplay(400, 400, file_paths::MOREINFO_IMG);
+    mid->fadeIn();
+    mid->setFocus();
+
+    // Connect the close situations
+    connect(submit, SIGNAL(clicked()), mid, SLOT(fadeOut()));
+    connect(this, SIGNAL(closed()), mid, SLOT(fadeOut()));
+    connect(dtb, SIGNAL(hideMIW()), mid, SLOT(fadeOut()));
+    // Also notify the add new task window when the window is closed
+    connect(mid, SIGNAL(closed()), this, SLOT(MIDClosed()));
+
+    // More info bool set to true
+    moreInfoDisplayOpen = true;
+}
+
+// Function that simply changes the boolean when the more info display is closed
+void AddVIDTaskDisplay::MIDClosed() {
+    moreInfoDisplayOpen = false;
+}
+
+// Custom close event function that just emits a signal signifying it has closed
+void AddVIDTaskDisplay::closeEvent(QCloseEvent *event) {
+    // Emit the closed signal and then proceed to cleanup
+    emit closed();
+    QWidget::closeEvent(event);
+}
+
+// Scans the profiles.txt file for the titles of each profile
+void AddVIDTaskDisplay::buildProfilesBox() {
+    // First add "Random" as an option
+    profile->addItem("Random");
+
+    // Open the profiles.txt
+    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::string tempStr;
+
+    // Cycle through each line and get the profiles' titles
+    while (getline(filein, tempStr)) {
+        profile->addItem(tempStr.substr(0, tempStr.find(" :-:")).c_str());
+    }
+
+    // Close the file in
+    filein.close();
+}
+
+// Scans the proxies.txt file for the IPs of each proxies
+void AddVIDTaskDisplay::buildProxiesBox() {
     // First add "Random" as an option
     proxy->addItem("Random");
 

@@ -346,6 +346,7 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
                              bool* p_logWindowOpen, bool* p_editWindowOpen, unsigned int frequency, QWidget *parent) :
         title(new QLabel(p_title.c_str(), this)),
         task(new VariantIDTask(p_title, p_website, p_identifier, p_variantID, p_startAt, p_profile, p_proxy, frequency)),
+        identifier(new QLabel(p_identifier.c_str(), this)),
         website(new QLabel(p_website.baseURL, this)),
         variantId(new QLabel(p_variantID.c_str(), this)),
         variantName(new QLabel(prodTitle.c_str(), this)),
@@ -539,7 +540,7 @@ void VIDTaskWidget::checkTime(QDateTime time) {
 void VIDTaskWidget::stopWidget() {
     if (play->isChecked) {
         play->disable();
-        setStatus("Stopping...", "#e26c26c");
+        setStatus("Stopping...", "#e26c6c");
         emit stopTask();
     }
 }
