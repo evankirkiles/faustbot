@@ -56,6 +56,9 @@
 #ifndef QScrollBar
 #include <QScrollBar>
 #endif
+#ifndef tuple
+#include <tuple>
+#endif
 
 #include "titlebar.hpp"
 
@@ -224,6 +227,7 @@ private slots:
     // Called whenever the moreinfodisplay window is closed
     void MIDClosed();
     // Retrieves the product's name, size, and image and stores it in the
+    void fillFromVariant();
 
 private:
 

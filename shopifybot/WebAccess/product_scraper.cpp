@@ -393,11 +393,27 @@ void ShopifyWebsiteHandler::performCURL(const std::string& URL) {
     // Allow for HTTP 3xx redirects
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
 
+    // Save cookies so can traverse a session easily
+    // Netscape format for the cookie file
+    char nline[256];
+    snprintf(nline, sizeof(nline), "%s\t%s\t%s\t%s\t%lu\t%s\t%s", ".example.com", "TRUE", "/", "FALSE",
+             (unsigned long)time(nullptr) + 31337UL, "PREF", "hello example");
+    // Set cookie file
+    curl_easy_setopt(curl, CURLOPT_COOKIEFILE, file_paths::COOKIES_TXT);
+    curl_easy_setopt(curl, CURLOPT_COOKIELIST, "ALL");
+    // Set the cookie file as the cookie jar
+    curl_easy_setopt(curl, CURLOPT_COOKIESESSION, true);
+    curl_easy_setopt(curl, CURLOPT_COOKIEJAR, file_paths::COOKIES_TXT);
+    // Format the cookie in Netscape format
+    curl_easy_setopt(curl, CURLOPT_COOKIELIST, nline);
+
     // Build the headers for the cURL request
     struct curl_slist* headers = nullptr;
     headers = curl_slist_append(headers, "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
+    // First clear the file if it already exists
+    remove(std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
     // Open the file to write to
     FILE *fp = fopen(std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str(), "wb");
     if (fp) {
@@ -629,7 +645,7 @@ int ShopifyWebsiteHandler::productAvailable(const std::string &variantID) {
             filein.close();
             return 0;
         // If the product is not available bc of stock, the html body is an HTML redirect page to inventory issues page
-        } else if (str.find("http-equiv=\"refresh\"") != std::string::npos && str.find("stock_problems") != std::string::npos) {
+        } else if (str.find("Inventory issues") != std::string::npos) {
             // Product is not in stock
             filein.close();
             return 1;
@@ -651,25 +667,32 @@ std::tuple<std::string, std::string, std::string> ShopifyWebsiteHandler::getName
     // Check if the product is available. If it is, then the HTML body will contain the product's name & size.
     // If it doesn't, the HTML body will contain a redirect link to the inventory issues page for that product.
     // This HTML redirect will need to be re-cURL'd to get the product's name and size.
-    if (!productAvailable(variantID)) {
-        // In this case, a cURL will first need to be performed on the URL given in the redirect
-        std::ifstream filein(
-                std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
-        std::string redirURL;
-        while (getline(filein, str)) {
-            // If the product is not available, the html body is an HTML redirect page to inventory issues page
-            // <meta http-equiv="refresh" content="0; url=
-            const unsigned long redirPos = str.find("http-equiv=\"refresh\"");
-            if (redirPos != std::string::npos) {
-                str.erase(0, redirPos + 43);
-                redirURL = str.substr(0, '"');
-                break;
-            }
-        }
-
-        // Perform a cURL on the new URL
-        performCURL(redirURL);
-    }
+    const int available = productAvailable(variantID);
+    // If no product exists or there is an unknown error, simply return nothing
+    if (available == 2) { return std::make_tuple<std::string, std::string, std::string>("", "", ""); }
+//    if (available == 1) {
+//        // In this case, a cURL will first need to be performed on the URL given in the redirect
+//        std::ifstream filein(
+//                std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
+//        std::string redirURL;
+//        while (getline(filein, str)) {
+//            // If the product is not available, the html body is an HTML redirect page to inventory issues page
+//            // <meta http-equiv="refresh" content="0; url=
+//            const unsigned long redirPos = str.find("http-equiv=\"refresh\"");
+//            if (redirPos != std::string::npos) {
+//                str.erase(0, redirPos + 37);
+//                redirURL = str.substr(0, str.find('?'));
+//                filein.close();
+//                break;
+//            }
+//        }
+//
+//        // Make sure the redirect URL exists
+//        if (redirURL.empty()) { filein.close(); throw std::runtime_error("Redirect URL not found."); }
+//        // Perform a cURL on the new URL
+//        std::cout << "Performing curl." << std::endl;
+//        performCURL(redirURL);
+//    }
 
     // Both available and unavailable products should follow the same format now after following through
     // with the HTML redirect (if necessary).
@@ -681,7 +704,7 @@ std::tuple<std::string, std::string, std::string> ShopifyWebsiteHandler::getName
             const unsigned long keywdPos = str.find("product-thumbnail__image");
             if (keywdPos != std::string::npos) {
                 str.erase(0, keywdPos + 33);
-                image = std::string("https:") + str.substr(0, str.find('"'));
+                image = std::string("https://") + str.substr(0, str.find('"'));
                 imgFound = true;
                 continue;
             }
@@ -690,7 +713,11 @@ std::tuple<std::string, std::string, std::string> ShopifyWebsiteHandler::getName
             // Title is on the line with the keyword 'product__description__name'
             const unsigned long keywdPos = str.find("product__description__name");
             if (keywdPos != std::string::npos) {
-                str.erase(0, keywdPos + 52);
+                if (available == 1) {
+                    str.erase(0, keywdPos + 48);
+                } else {
+                    str.erase(0, keywdPos + 52);
+                }
                 title = str.substr(0, str.find('<'));
                 titleFound = true;
                 continue;
@@ -701,7 +728,12 @@ std::tuple<std::string, std::string, std::string> ShopifyWebsiteHandler::getName
             // product__description__variant order-summary__small-text">
             const unsigned long keywdPos = str.find("product__description__variant");
             if (keywdPos != std::string::npos) {
-                str.erase(0, keywdPos + 57);
+                // Weird string format for two differnet types of availability
+                if (available == 1) {
+                    str.erase(0, keywdPos + 53);
+                } else {
+                    str.erase(0, keywdPos + 57);
+                }
                 size = str.substr(0, str.find('<'));
                 sizeFound = true;
                 continue;

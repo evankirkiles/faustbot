@@ -2,6 +2,7 @@
 // Created by Evan Kirkiles on 7/23/18.
 //
 
+#include <shopifybot/WebAccess/product_scraper.hpp>
 #include "popups.hpp"
 
 // LOG FILE DISPLAY CLASS
@@ -509,6 +510,8 @@ AddVIDTaskDisplay::AddVIDTaskDisplay(QWidget *parent) : QWidget(parent) {
     connect(submit, SIGNAL(clicked()), this, SLOT(attemptToSend()));
     // Connect the moreinfo button the moreinfodisplay slot
     connect(dtb, SIGNAL(showMIW()), this, SLOT(buildMoreInfoDisplay()));
+    // Connect the fill button to the get name size data slot
+    connect(checkForNameButton, SIGNAL(clicked()), this, SLOT(fillFromVariant()));
 }
 
 // Tries to send the data in the input fields to the main window to build a new task
@@ -598,6 +601,22 @@ void AddVIDTaskDisplay::buildProxiesBox() {
 
     // Close the filein
     filein.close();
+}
+
+// Fills the add task edits based on the given ID
+void AddVIDTaskDisplay::fillFromVariant() {
+    // Make sure there is a variant ID
+    if (variantID->text().isEmpty()) { variantID->setFocus(); return; }
+
+    // Build a temporary shopify website handler for the given URL and a temporary task ID
+    ShopifyWebsiteHandler shopwh(supported_sites::WEBSITES.at(websites->currentText().toStdString()), "temp");
+
+    // Get the tuple of the necessary information
+    std::tuple<std::string, std::string, std::string> dataPack = shopwh.getNameSizeImage(variantID->text().toStdString());
+
+    // Finally set the current texts for each lineedit to their respective data
+    variantTitle->setText(std::get<0>(dataPack).c_str());
+    variantSize->setText(std::get<1>(dataPack).c_str());
 }
 
 // MORE INFO DISPLAY ClASS

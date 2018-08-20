@@ -103,6 +103,7 @@ namespace file_paths {
     extern const char* TEMPCCARD_TXT;
     extern const char* PROXIES_TXT;
     extern const char* TEMPPROXIES_TXT;
+    extern const char* COOKIES_TXT;
 
     // Image locations
     extern const char* LOGO_FILE;
