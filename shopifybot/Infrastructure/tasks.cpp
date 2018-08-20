@@ -155,7 +155,7 @@ VariantIDTask::VariantIDTask(const std::string &p_title, const URLAndMethod &p_u
 // Run function which begins the while loop to be run in a separate thread for each task
 void VariantIDTask::run() {
     log("Beginning \"" + title + "\".");
-    emit status("Checking availability...", "#a4ead5");
+    emit status("Checking...", "#a4ead5");
 
     shouldcontinue = true;
 

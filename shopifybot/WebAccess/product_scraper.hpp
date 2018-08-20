@@ -88,6 +88,10 @@ public:
     // Function that returns true if the product for the given variant ID is available and false if it is not.
     bool productAvailable(const std::string& variantID);
 
+    // Function that scrapes the cart page of Shopify for a product's variant name and size
+    // Return format: title, size, imageURL
+    std::tuple<std::string, std::string, std::string> getNameSizeImage(const std::string& variantID);
+
 private:
     // Perform a cURL download to get the body of a page
     void performCURL(const std::string& URL);

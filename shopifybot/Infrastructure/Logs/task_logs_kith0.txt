@@ -1,0 +1,6 @@
+[2018-08-20 13:47:00.767] Beginning "asdasdasdasdasdasdsad".
+[2018-08-20 13:47:02.003] Failed because: "Product not available yet.", checking again in 5 seconds.
+[2018-08-20 13:47:08.114] Failed because: "Product not available yet.", checking again in 5 seconds.
+[2018-08-20 13:47:14.314] Failed because: "Product not available yet.", checking again in 5 seconds.
+[2018-08-20 13:47:20.240] Failed because: "Product not available yet.", checking again in 5 seconds.
+[2018-08-20 13:47:26.365] Failed because: "Product not available yet.", checking again in 5 seconds.

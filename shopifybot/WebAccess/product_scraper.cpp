@@ -636,3 +636,79 @@ bool ShopifyWebsiteHandler::productAvailable(const std::string &variantID) {
     return productAvailable;
 }
 
+// Returns the name and size of a product in a tuple of strings
+std::tuple<std::string, std::string, std::string> ShopifyWebsiteHandler::getNameSizeImage(const std::string& variantID) {
+    std::string title, size, image, str;
+    bool titleFound = false;
+    bool sizeFound = false;
+    bool imgFound = false;
+
+    // Check if the product is available. If it is, then the HTML body will contain the product's name & size.
+    // If it doesn't, the HTML body will contain a redirect link to the inventory issues page for that product.
+    // This HTML redirect will need to be re-cURL'd to get the product's name and size.
+    if (!productAvailable(variantID)) {
+        // In this case, a cURL will first need to be performed on the URL given in the redirect
+        std::ifstream filein(
+                std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
+        std::string redirURL;
+        while (getline(filein, str)) {
+            // If the product is not available, the html body is an HTML redirect page to inventory issues page
+            // <meta http-equiv="refresh" content="0; url=
+            const unsigned long redirPos = str.find("http-equiv=\"refresh\"");
+            if (redirPos != std::string::npos) {
+                str.erase(0, redirPos + 43);
+                redirURL = str.substr(0, '"');
+                break;
+            }
+        }
+
+        // Perform a cURL on the new URL
+        performCURL(redirURL);
+    }
+
+    // Both available and unavailable products should follow the same format now after following through
+    // with the HTML redirect (if necessary).
+    std::ifstream filein(std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
+    while (getline(filein, str)) {
+        // Only do each check if the keyword has not been found
+        if (!imgFound) {
+            // URL is on the line with the keyword 'product-thumbnail__image'
+            const unsigned long keywdPos = str.find("product-thumbnail__image");
+            if (keywdPos != std::string::npos) {
+                str.erase(0, keywdPos + 33);
+                image = std::string("https:") + str.substr(0, str.find('"'));
+                imgFound = true;
+                continue;
+            }
+        }
+        if (!titleFound) {
+            // Title is on the line with the keyword 'product__description__name'
+            const unsigned long keywdPos = str.find("product__description__name");
+            if (keywdPos != std::string::npos) {
+                str.erase(0, keywdPos + 52);
+                title = str.substr(0, str.find('<'));
+                titleFound = true;
+                continue;
+            }
+        }
+        if (!sizeFound) {
+            // Size is on the line with the keyword 'product-description__size'
+            // product__description__variant order-summary__small-text">
+            const unsigned long keywdPos = str.find("product__description__variant");
+            if (keywdPos != std::string::npos) {
+                str.erase(0, keywdPos + 57);
+                size = str.substr(0, str.find('<'));
+                sizeFound = true;
+                continue;
+            }
+        }
+    }
+
+    // Make sure each phrase is found when returning the tuple
+    if (!imgFound) { throw std::runtime_error("Could not find product thumbnail."); }
+    if (!titleFound) { throw std::runtime_error("Could not find product title."); }
+    if (!sizeFound) { throw std::runtime_error("Could not find product size."); }
+
+    // Return the tuple!
+    return std::make_tuple(title, size, image);
+};
