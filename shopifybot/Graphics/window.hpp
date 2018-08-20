@@ -61,6 +61,9 @@ public:
                         const std::string& variantID, const std::string& variantName, const std::string& variantSize,
                         const QDateTime& startAt, const std::string& profile, const std::string& proxy,
                         unsigned int frequency = constants::BASE_FREQ);
+signals:
+    // Emitted every time the qtimer timesout
+    void timeUpdated(QDateTime time);
 
 private:
 

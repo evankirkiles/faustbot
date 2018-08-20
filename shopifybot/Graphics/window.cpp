@@ -150,6 +150,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
 
     // Build the timer updated on second intervals
     timeChecker = new QTimer(this);
+    connect(timeChecker, &QTimer::timeout, [this] () { emit timeUpdated(QDateTime::currentDateTime()); } );
     timeChecker->setInterval(1000);
     timeChecker->start();
 }
@@ -203,7 +204,7 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
     connect(stopAllTasks, SIGNAL(clicked()), newtask, SLOT(stopWidget()));
 
     // Connect the 1 second interval timer to the taskwidget's time check function
-    connect(timeChecker, &QTimer::timeout, [newtask] () { newtask->checkTime(QDateTime::currentDateTime()); });
+    connect(this, SIGNAL(timeUpdated(QDateTime)), newtask, SLOT(checkTime(QDateTime)));
 
     // Adds the task to the qvboxlayout
     tasklistLayout->addWidget(newtask);
@@ -226,7 +227,7 @@ void BotWindow::addVIDTaskFunc(const std::string &title, const URLAndMethod &web
     connect(stopAllTasks, SIGNAL(clicked()), newtask, SLOT(stopWidget()));
 
     // Connect the 1 second interval timer to the taskwidget's time check function
-    connect(timeChecker, &QTimer::timeout, [newtask] () { newtask->checkTime(QDateTime::currentDateTime()); });
+    connect(this, SIGNAL(timeUpdated(QDateTime)), newtask, SLOT(checkTime(QDateTime)));
 
     // Add the task to the qvboxlayout
     tasklistLayout->addWidget(newtask);
