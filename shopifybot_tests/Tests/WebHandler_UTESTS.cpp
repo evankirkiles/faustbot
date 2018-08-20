@@ -53,20 +53,3 @@ TEST(WebHandlerFixture, getsProductData) {
     file.open(std::string(std::string(file_paths::PRODUCTS_LOG) + supported_sites::KITH.title + "1.txt").c_str());
     EXPECT_NE(std::ifstream::traits_type::eof(), file.peek());
 }
-
-// Tests whether the Web Handler product availability check works
-TEST(WebHandlerFixture, availabilityCheck) {
-
-    // Clear the html body text file first
-    std::ifstream file;
-    file.open(std::string(std::string(file_paths::HTML_BODY) + supported_sites::KITH.title + "1.txt").c_str(), std::ios::trunc);
-    file.close();
-
-    // Instantiate a Shopify Web Handler and pull all models
-    ShopifyWebsiteHandler swh(supported_sites::KITH, "1");
-    swh.productAvailable("2189076070407");
-
-    // Check the file again now and make sure that it is not empty
-    file.open(std::string(std::string(file_paths::HTML_BODY) + supported_sites::KITH.title + "1.txt").c_str());
-    EXPECT_NE(std::ifstream::traits_type::eof(), file.peek());
-}

@@ -163,7 +163,8 @@ void VariantIDTask::run() {
     while (shouldcontinue) {
         try  {
             // Check if the variant ID is available to be purchased
-            if (swh.productAvailable(variantID)) {
+            const int availabilityCode = swh.productAvailable(variantID);
+            if (availabilityCode == 0) {
                 // If it is, then order it
                 emit status("Placing order...", "#8dd888");
                 log("Placing order...");
@@ -180,9 +181,12 @@ void VariantIDTask::run() {
                 emit status("Finished!", "#8dd888");
                 emit finished();
                 return;
-            } else {
+            } else if (availabilityCode == 1) {
                 // If product is unavailable, then exit the while loop
-                throw std::runtime_error("Product not available yet.");
+                throw std::runtime_error("Inventory issues with product (not in stock).");
+            } else if (availabilityCode == 2) {
+                // Some other error occurred with the variant ID
+                throw std::runtime_error("Unknown error occurred with product availability check.");
             }
         } catch (std::runtime_error& e) {
             log("Failed because: \"" + std::string(e.what()) + "\", checking again in " + std::to_string(frequency) + " seconds.");

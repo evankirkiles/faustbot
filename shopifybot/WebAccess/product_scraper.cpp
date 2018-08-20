@@ -614,7 +614,7 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
 }
 
 // Returns true if the product is available, false if the product is not available
-bool ShopifyWebsiteHandler::productAvailable(const std::string &variantID) {
+int ShopifyWebsiteHandler::productAvailable(const std::string &variantID) {
 
     // Perform the cURL for the product's cart page
     performCURL(std::string(sourceURL.baseURL) + "/cart/" + variantID + ":1");
@@ -622,18 +622,23 @@ bool ShopifyWebsiteHandler::productAvailable(const std::string &variantID) {
     // Go through the scraped file and check if the product is available
     std::ifstream filein(std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
     std::string str;
-    bool productAvailable = true;
     while (getline(filein, str)) {
-        // If the product is not available, the html body is an HTML redirect page to inventory issues page
-        if (str.find("http-equiv=\"refresh\"") != std::string::npos) {
-            productAvailable = false;
-            break;
+        // If the product is available, say so
+        if (str.find("Continue to shipping method") != std::string::npos) {
+            // Product is available
+            filein.close();
+            return 0;
+        // If the product is not available bc of stock, the html body is an HTML redirect page to inventory issues page
+        } else if (str.find("http-equiv=\"refresh\"") != std::string::npos && str.find("stock_problems") != std::string::npos) {
+            // Product is not in stock
+            filein.close();
+            return 1;
         }
     }
 
-    // Returns whatever the verdict is based on the body of the cart's page
+    // If neither of these are fulfilled, return 2
     filein.close();
-    return productAvailable;
+    return 2;
 }
 
 // Returns the name and size of a product in a tuple of strings

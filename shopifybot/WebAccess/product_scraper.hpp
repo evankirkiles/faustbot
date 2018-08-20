@@ -85,8 +85,11 @@ public:
     Product lookForKeywords(const std::string& collection, const std::vector<std::string>& keywords,
                             const std::vector<std::string>& colorKeywords = {""}, const std::string& numresults="25");
 
-    // Function that returns true if the product for the given variant ID is available and false if it is not.
-    bool productAvailable(const std::string& variantID);
+    // Function that returns a specific number based on the status of the product.
+    // 0: Product available.
+    // 1: Product not in stock.
+    // 2: Some other error with pulling webpage.
+    int productAvailable(const std::string& variantID);
 
     // Function that scrapes the cart page of Shopify for a product's variant name and size
     // Return format: title, size, imageURL

@@ -223,6 +223,7 @@ private slots:
     void buildMoreInfoDisplay();
     // Called whenever the moreinfodisplay window is closed
     void MIDClosed();
+    // Retrieves the product's name, size, and image and stores it in the
 
 private:
 

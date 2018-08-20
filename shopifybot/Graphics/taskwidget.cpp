@@ -317,6 +317,10 @@ void TaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QString
                                 QString p_colorKeywords, QString p_size, QDateTime p_start, QString p_profile,
                                 QString p_proxy, unsigned int frequency) {
 
+    // Rename the old logs file to the new one
+    std::rename(std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str(),
+                std::string(file_paths::TASK_LOG).append("task_logs_").append(p_website.title).append(task->swh.taskID).append(".txt").c_str());
+
     // First, change the visuals of the task widget to match the new task
     title->setText(p_title);
     website->setText(p_website.baseURL);
@@ -330,7 +334,10 @@ void TaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QString
     // Then, delete the current task and rebuild it with the edited task
     task = new Task(p_title.toStdString(), p_website, task->swh.taskID, p_collection.toStdString(),
             vectorFromString(p_keywords.toStdString()), vectorFromString(p_colorKeywords.toStdString()),
-                    p_size.toStdString(), p_start, p_profile.toStdString(), p_proxy.toStdString(), frequency);
+                    p_size.toStdString(), p_start, p_profile.toStdString(), p_proxy.toStdString(), frequency);\
+
+    // If a log window was open, then close it
+    if (logWindowOpen) { lfd->close(); }
 }
 
 // Called when the edit task window is closed
@@ -613,8 +620,8 @@ void VIDTaskWidget::showEdit() {
     if (*editWindowOpen) { if (etd) { etd->raise(); } return; }
 
     // Otherwise create a new edit window and show it
-    etd = new VIDTaskEditDisplay(title->text(), website->text(), variantId->text(), variantName->toPlainText(),
-            variantSize->text(), startAt->dateTime(), task->profile.c_str(), task->proxy.c_str());
+    etd = new VIDTaskEditDisplay(title->text(), supported_sites::WEBSITES_BWD.at(website->text().toStdString()).c_str(),
+            variantId->text(), variantName->toPlainText(), variantSize->text(), startAt->dateTime(), task->profile.c_str(), task->proxy.c_str());
     etd->show();
     etd->setFocus();
     // Connect the closeLogs function of lfd to the delete button of the task
@@ -634,6 +641,10 @@ void VIDTaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QStr
                                    QString p_variantSize, QDateTime p_start, QString p_profile, QString p_proxy,
                                    unsigned int frequency) {
 
+    // Rename the old logs file to the new one
+    std::rename(std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str(),
+                std::string(file_paths::TASK_LOG).append("task_logs_").append(p_website.title).append(task->swh.taskID).append(".txt").c_str());
+
     // First, change the visuals fo the task widget to match the new task
     title->setText(p_title);
     website->setText(p_website.baseURL);
@@ -646,6 +657,9 @@ void VIDTaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QStr
     // Then, delete the current task and rebuild it with the edited task
     task = new VariantIDTask(p_title.toStdString(), p_website, task->swh.taskID, p_variantID.toStdString(), p_start,
             p_profile.toStdString(), p_proxy.toStdString(), frequency);
+
+    // If a log window is open currently, then close it as well because log file has changed location
+    if (logWindowOpen) { lfd->close(); }
 }
 
 // Called when the edit task window is closed
@@ -1008,6 +1022,7 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
     titleLayout->addWidget(submit);
     mainLayout->addLayout(titleLayout);
 
+    // TODO: Fix log window not showing correct log when website is changed
     // Set the contents of each edit box
     websites->setCurrentText(p_website);
     variantID->setText(p_variantID);

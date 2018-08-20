@@ -1,6 +1,9 @@
-[2018-08-20 13:47:00.767] Beginning "asdasdasdasdasdasdsad".
-[2018-08-20 13:47:02.003] Failed because: "Product not available yet.", checking again in 5 seconds.
-[2018-08-20 13:47:08.114] Failed because: "Product not available yet.", checking again in 5 seconds.
-[2018-08-20 13:47:14.314] Failed because: "Product not available yet.", checking again in 5 seconds.
-[2018-08-20 13:47:20.240] Failed because: "Product not available yet.", checking again in 5 seconds.
-[2018-08-20 13:47:26.365] Failed because: "Product not available yet.", checking again in 5 seconds.
+[2018-08-20 16:15:45.928] Beginning "sadasdasdasd".
+[2018-08-20 16:15:47.054] Failed because: "Inventory issues with product (not in stock).", checking again in 5 seconds.
+[2018-08-20 16:15:53.454] Failed because: "Inventory issues with product (not in stock).", checking again in 5 seconds.
+[2018-08-20 16:15:59.581] Failed because: "Inventory issues with product (not in stock).", checking again in 5 seconds.
+[2018-08-20 16:16:28.341] Beginning "sadasdasdasd".
+[2018-08-20 16:16:30.382] Placing order...
+[2018-08-20 16:16:30.617] 1 : 2
+[2018-08-20 16:16:30.617] 2 : 2
+[2018-08-20 16:16:34.849] Task finished.

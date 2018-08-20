@@ -36,6 +36,7 @@ with open('shopifybot/Infrastructure/profiles.txt') as input_file:
     currentLine = 0
     for i, line in enumerate(input_file):
         currentLine += 1
+        log(str(currentLine) + " : " + str(profileLine))
         if line.split(' :-: ', 1)[0] == profileName or currentLine == profileLine:
             j = json.loads(line.split(' :-: ', 1)[1])
             break
@@ -106,7 +107,7 @@ session = requests.session()
 # Function that sends the customer info to the Shopify servers
 def send_customer_info():
     # Headers to send with data
-    customerInfoHeaders = {
+    customer_info_headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Encoding': 'gzip, deflate, br',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -118,9 +119,12 @@ def send_customer_info():
 
     # Try to access the cart link with requests
     try:
-        resp = session.get(cartLink, allow_redirects=True, headers=customerInfoHeaders, proxies=proxyDict, timeout=4)
+        resp = session.get(cartLink, allow_redirects=True, headers=customer_info_headers, proxies=proxyDict, timeout=4)
     except Exception as e:
         log(e)
+    except requests.exceptions.ProxyError:
+        log("Proxy error while accessing cart link.")
+        raise ValueError("Proxy error occurred in cart link GET.")
 
     # Check progress of response
     if b'Continue to shipping method' in resp.content:
@@ -133,14 +137,14 @@ def send_customer_info():
         raise ValueError("Did not reach Customer Information Page!")
 
     # Save the response URL as the Shopify checkout link
-    shopifyCheckoutLink = resp.url
+    shopify_checkout_link = resp.url
 
     # Parse through the html contents and find authenticity tokens
     soup = BeautifulSoup(resp.content, 'html.parser')
     authenticity_token = soup.findAll('input', {'name': 'authenticity_token'})[2]['value']
 
     # Customer data packet to send with POST HTTP request
-    customerData = {
+    customer_data = {
         'utf8': '✓',
         '_method': 'patch',
         'authenticity_token': authenticity_token,
@@ -165,9 +169,12 @@ def send_customer_info():
 
     # Try to send this customer information in a POST request
     try:
-        resp = session.post(shopifyCheckoutLink, data=customerData, proxies=proxyDict, allow_redirects=True, timeout=4)
+        resp = session.post(shopify_checkout_link, data=customer_data, proxies=proxyDict, allow_redirects=True, timeout=4)
     except Exception as e:
         log(e)
+    except requests.exceptions.ProxyError:
+        log("Proxy error while posting customer information. Aborting...")
+        raise ValueError("Proxy error occurred in customer information POST.")
 
     # If the response code is 200, successfully submitted customer info
     if resp.status_code == 200:
@@ -176,8 +183,14 @@ def send_customer_info():
         log(str(resp.status_code))
 
     # Now try to access the checkout link asking for the payment method
-    resp = session.get(shopifyCheckoutLink + "?previous_step=shipping_method&step=payment_method", proxies=proxyDict,
-                       allow_redirects=True, timeout=4)
+    try:
+        resp = session.get(shopify_checkout_link + "?previous_step=shipping_method&step=payment_method", proxies=proxyDict,
+                           allow_redirects=True, timeout=4)
+    except Exception as e:
+        log(e)
+    except requests.exceptions.ProxyError:
+        log("Proxy error while checking success of customer info POST. Aborting...")
+        raise ValueError("Proxy error occurred in customer information POST success check.")
 
     # Check if successfully got to payment page
     if b'Complete order' or b'Complete order'.upper in resp.content:
@@ -187,7 +200,7 @@ def send_customer_info():
 # Function to go through with the payment method
 def submitpayment():
     # Define payment headers
-    submitPaymentHeaders = {
+    submit_payment_headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
         'Content-Type': 'application/json'
     }
@@ -206,11 +219,12 @@ def submitpayment():
     # Now try sending the post request to the Shopify Servers
     try:
         resp = session.post('https://elb.deposit.shopifycs.com/sessions', data=json.dumps(ccInfo), proxies=proxyDict,
-                            headers=submitPaymentHeaders, allow_redirects=True, timeout=4)
+                            headers=submit_payment_headers, allow_redirects=True, timeout=4)
     except Exception as e:
         log(e)
-    except requests.exceptions.ProxyError as pe:
+    except requests.exceptions.ProxyError:
         log("Proxy error while submitting credit card.")
+        raise ValueError("Proxy error occurred in customer credit card POST.")
 
     # Check if the post request was successful
     if resp.status_code == 200:
