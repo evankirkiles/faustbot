@@ -224,6 +224,8 @@ void TaskWidget::run() {
 
 // Checks the time against the taskwidget's start time. If there is a match (or if early by a second), then run the task.
 void TaskWidget::checkTime(QDateTime time) {
+    // Make sure the task still exists first
+    if (deleted) { return; }
     // Check the difference between times, making sure it is within a second of accuracy
     if (time.secsTo(task->startat) < 1 && time.secsTo(task->startat) > -1) {
         run();
@@ -264,6 +266,9 @@ void TaskWidget::exit() {
     } else {
         // Delete the log file when this task is deleted
         remove(std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str());
+        // Remove all connections
+        deleted = true;
+        this->disconnect();
         this->close();
     }
 }
@@ -349,7 +354,7 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
         identifier(new QLabel(p_identifier.c_str(), this)),
         website(new QLabel(p_website.baseURL, this)),
         variantId(new QLabel(p_variantID.c_str(), this)),
-        variantName(new QLabel(prodTitle.c_str(), this)),
+        variantName(new QTextEdit(prodTitle.c_str(), this)),
         variantSize(new QLabel(prodSize.c_str(), this)),
         startAt(new QDateTimeEdit(this)),
         editWindowOpen(p_editWindowOpen),
@@ -360,6 +365,12 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
 
     // Set the style sheet of the frame
     setObjectName("task");
+
+    // Builds the textedit box
+    variantName->setReadOnly(true);
+    variantName->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    variantName->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    variantName->setFixedWidth(204);
 
     // Stylesheet settings for the different labels
     identifier->setObjectName("task_identifier");
@@ -373,7 +384,6 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     website->setMaximumWidth(150);
     variantId->setObjectName("task_mediocre_text");
     variantId->setMaximumWidth(150);
-    variantName->setObjectName("task_important_var");
     variantSize->setObjectName("task_important_var");
     startAt->setObjectName("task_important_var");
 
@@ -390,8 +400,9 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     // Main horizontal layouts
     auto row = new QHBoxLayout();
     // Sub horizontal layouts
-    auto variantTitleLabel = new QLabel("Title: ", this);
+    auto variantTitleLabel = new QLabel("Product Title: ", this);
     variantTitleLabel->setObjectName("task_mediocre_title_v2");
+    variantTitleLabel->setFixedWidth(75);
     auto startAtTitle = new QLabel("START AT: ", this);
     startAtTitle->setObjectName("task_tiny_text");
     startAt->setObjectName("task_dateedit");
@@ -530,6 +541,8 @@ void VIDTaskWidget::run() {
 
 // Checks the time against the vidtaskwidget's start time. If there is a match (or if early by a second), then run the task.
 void VIDTaskWidget::checkTime(QDateTime time) {
+    // Make sure that the task actually still exists so no error crops up
+    if (deleted) { return; }
     // Check the difference between times, making sure it is within a second of accuracy
     if (time.secsTo(task->startat) < 1 && time.secsTo(task->startat) > -1) {
         run();
@@ -570,6 +583,9 @@ void VIDTaskWidget::exit() {
     } else {
         // Delete the log file when this task is deleted
         remove(std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str());
+        // Remove all connections
+        deleted = true;
+        this->disconnect();
         this->close();
     }
 }
@@ -597,8 +613,8 @@ void VIDTaskWidget::showEdit() {
     if (*editWindowOpen) { if (etd) { etd->raise(); } return; }
 
     // Otherwise create a new edit window and show it
-    etd = new VIDTaskEditDisplay(title->text(), website->text(), variantId->text(), variantName->text(), variantSize->text(),
-            startAt->dateTime(), task->profile.c_str(), task->proxy.c_str());
+    etd = new VIDTaskEditDisplay(title->text(), website->text(), variantId->text(), variantName->toPlainText(),
+            variantSize->text(), startAt->dateTime(), task->profile.c_str(), task->proxy.c_str());
     etd->show();
     etd->setFocus();
     // Connect the closeLogs function of lfd to the delete button of the task

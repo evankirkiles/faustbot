@@ -93,7 +93,7 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     // Set window properties
     setFixedSize(500, 270);
     setObjectName("newtaskwindow");
-    setWindowTitle("New Task");
+    setWindowTitle("New Keyword Task");
     setWindowFlags(Qt::FramelessWindowHint);
     setFocusPolicy(Qt::ClickFocus);
     setAttribute(Qt::WA_QuitOnClose, false);
@@ -386,7 +386,7 @@ AddVIDTaskDisplay::AddVIDTaskDisplay(QWidget *parent) : QWidget(parent) {
 
     // Create the widgets
     // WEBSITE & VARIANT ID ROW
-    websitesLabel = new QLabel("Websites: ", this);
+    websitesLabel = new QLabel("Website: ", this);
     websitesLabel->setObjectName("addtask_mediocre_text");
     websites = new QComboBox(this);
     websites->addItems(supported_sites::ssStringList);
@@ -394,12 +394,13 @@ AddVIDTaskDisplay::AddVIDTaskDisplay(QWidget *parent) : QWidget(parent) {
     variantIDLabel->setObjectName("addtask_mediocre_text");
     variantID = new QLineEdit(this);
     variantID->setObjectName("addtask_editbox");
-    variantID->setFixedWidth(150);
+    variantID->setFixedWidth(135);
     checkForNameButton = new QPushButton("FILL", this);
     checkForNameButton->setObjectName("checkfornamebutton");
 
     // Add the row to the layout
     websiteVariantLayout->addWidget(websitesLabel);
+    websiteVariantLayout->addSpacing(10);
     websiteVariantLayout->addWidget(websites);
     websiteVariantLayout->addSpacing(10);
     websiteVariantLayout->addWidget(variantIDLabel);

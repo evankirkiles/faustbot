@@ -215,6 +215,8 @@ private slots:
     void editClosed();
 
 private:
+    bool deleted = false;
+
     // Frequency of the task
     unsigned int taskfreq;
 
@@ -297,6 +299,8 @@ private slots:
     void editClosed();
 
 private:
+    bool deleted = false;
+
     // Frequency of the while loop
     unsigned int taskfreq;
 
@@ -318,7 +322,7 @@ private:
     QLabel* website;
     QLabel* variantId;
     QFrame* separator1;
-    QLabel* variantName;
+    QTextEdit* variantName;
     QLabel* variantSize;
     QDateTimeEdit* startAt;
     QFrame* separator2;
