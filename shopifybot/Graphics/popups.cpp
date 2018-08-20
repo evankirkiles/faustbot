@@ -49,7 +49,7 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
         logDisplay = new QTextBrowser();
         logDisplay->setText(logStream->readAll());
         QScrollBar* vsb = logDisplay->verticalScrollBar();
-        vsb->setValue(vsb->minimum());
+        vsb->setValue(vsb->maximum());
     } else {
         logDisplay = new QTextBrowser();
         logDisplay->setText(QString("Log file not yet generated."));
@@ -75,6 +75,8 @@ void LogFileDisplay::refresh() {
     if (logFile->exists()) {
         logStream = new QTextStream(logFile);
         logDisplay->setText(logStream->readAll());
+        QScrollBar* vsb = logDisplay->verticalScrollBar();
+        vsb->setValue(vsb->maximum());
     } else {
         logDisplay->setText(QString("Log file not yet generated."));
     }
@@ -616,7 +618,9 @@ void AddVIDTaskDisplay::fillFromVariant() {
 
     // Finally set the current texts for each lineedit to their respective data
     variantTitle->setText(std::get<0>(dataPack).c_str());
+    variantTitle->setCursorPosition(0);
     variantSize->setText(std::get<1>(dataPack).c_str());
+    variantSize->setCursorPosition(0);
 }
 
 // MORE INFO DISPLAY ClASS

@@ -52,8 +52,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     identifier->setAlignment(Qt::AlignCenter);
     identifier->setFixedWidth(20);
     title->setObjectName("task_important_text");
-    title->setMaximumWidth(250);
-    title->setMinimumWidth(150);
+    title->setFixedWidth(240);
     website->setObjectName("task_mediocre_text");
     website->setMaximumWidth(150);
     collection->setObjectName("task_mediocre_text");
@@ -335,9 +334,6 @@ void TaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QString
     task = new Task(p_title.toStdString(), p_website, task->swh.taskID, p_collection.toStdString(),
             vectorFromString(p_keywords.toStdString()), vectorFromString(p_colorKeywords.toStdString()),
                     p_size.toStdString(), p_start, p_profile.toStdString(), p_proxy.toStdString(), frequency);\
-
-    // If a log window was open, then close it
-    if (logWindowOpen) { lfd->close(); }
 }
 
 // Called when the edit task window is closed
@@ -379,18 +375,32 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     variantName->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     variantName->setFixedWidth(204);
 
+    // Horizontal layout for variant ID
+    auto varIDRow = new QHBoxLayout();
+    varIDRow->setSpacing(0);
+    auto varIDLabel = new QLabel("/cart/", this);
+    varIDLabel->setObjectName("task_mediocre_text");
+    varIDLabel->setFixedWidth(28);
+    auto varIDLabel2 = new QLabel(":1", this);
+    varIDLabel2->setObjectName("task_mediocre_text");
+    varIDLabel2->setFixedWidth(10);
+    varIDRow->addWidget(varIDLabel);
+    varIDRow->addWidget(variantId);
+    varIDRow->addWidget(varIDLabel2);
+    varIDRow->addStretch();
+
     // Stylesheet settings for the different labels
     identifier->setObjectName("task_identifier");
     identifier->setContentsMargins(0, 0, 0, 0);
     identifier->setAlignment(Qt::AlignCenter);
     identifier->setFixedWidth(20);
     title->setObjectName("task_important_text");
-    title->setMaximumWidth(350);
-    title->setMinimumWidth(150);
+    title->setFixedWidth(240);
     website->setObjectName("task_mediocre_text");
     website->setMaximumWidth(150);
     variantId->setObjectName("task_mediocre_text");
     variantId->setMaximumWidth(150);
+    variantId->setStyleSheet("color: #cbe589");
     variantSize->setObjectName("task_important_var");
     startAt->setObjectName("task_important_var");
 
@@ -472,7 +482,7 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     row->addLayout(zerocol);
     firstcol->addWidget(title);
     firstcol->addWidget(website);
-    firstcol->addWidget(variantId);
+    firstcol->addLayout(varIDRow);
     row->addLayout(firstcol);
     row->addStretch();
     row->addWidget(separator1);
@@ -657,9 +667,6 @@ void VIDTaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QStr
     // Then, delete the current task and rebuild it with the edited task
     task = new VariantIDTask(p_title.toStdString(), p_website, task->swh.taskID, p_variantID.toStdString(), p_start,
             p_profile.toStdString(), p_proxy.toStdString(), frequency);
-
-    // If a log window is open currently, then close it as well because log file has changed location
-    if (logWindowOpen) { lfd->close(); }
 }
 
 // Called when the edit task window is closed
@@ -1139,7 +1146,9 @@ void VIDTaskEditDisplay::fillFromVariant() {
 
     // Finally set the current texts for each lineedit to their respective data
     variantTitle->setText(std::get<0>(dataPack).c_str());
+    variantTitle->setCursorPosition(0);
     variantSize->setText(std::get<1>(dataPack).c_str());
+    variantSize->setCursorPosition(0);
 
     // Remove the temporary task html body
     remove(std::string(std::string(file_paths::HTML_BODY) + supported_sites::WEBSITES.at(websites->currentText().toStdString()).title + "temp.txt").c_str());

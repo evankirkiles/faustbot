@@ -25,7 +25,7 @@
 
 <meta name="shopify-checkout-api-token" content="08430b96c47dd2ac8e17e305db3b71e8">
 
-  <meta name="shopify-checkout-authorization-token" content="c228a9fa3dcec0827378868e89603b6d" />
+  <meta name="shopify-checkout-authorization-token" content="b2f0aa8a52b6d2d9b99a22e2dc8ab058" />
 
 <meta id="google-autocomplete-sandbox-url" name="google-autocomplete-sandbox-url" content="https://checkout.shopify.com/942252/sandbox/google_autocomplete?locale=en" />
 
@@ -34,11 +34,11 @@
     <link href="//cdn.shopify.com/s/files/1/0094/2252/t/82/assets/checkout_2.css?9885839021806687087" rel="stylesheet" type="text/css" media="all"> 
       
 <!--[if lt IE 9]>
-<link rel="stylesheet" media="all" href="//cdn.shopify.com/app/services/942252/assets/450002951/checkout_stylesheet/v2-ltr-2018-06-18-d2ab5c6eed8d0b8bf2bea0536601640b-13194699491882176130/oldie" />
+<link rel="stylesheet" media="all" href="//cdn.shopify.com/app/services/942252/assets/450002951/checkout_stylesheet/v2-ltr-2018-06-18-d2ab5c6eed8d0b8bf2bea0536601640b-17034451570685622822/oldie" />
 <![endif]-->
 
 <!--[if gte IE 9]><!-->
-  <link rel="stylesheet" media="all" href="//cdn.shopify.com/app/services/942252/assets/450002951/checkout_stylesheet/v2-ltr-2018-06-18-d2ab5c6eed8d0b8bf2bea0536601640b-13194699491882176130" />
+  <link rel="stylesheet" media="all" href="//cdn.shopify.com/app/services/942252/assets/450002951/checkout_stylesheet/v2-ltr-2018-06-18-d2ab5c6eed8d0b8bf2bea0536601640b-17034451570685622822" />
 
 <!--<![endif]-->
 
@@ -65,7 +65,7 @@
 
 
 
-  <script src="//cdn.shopify.com/app/services/942252/javascripts/countries/450002951/en/countries-3a695cbf31af186e91fc17d98f183179c8106fda-1530806268.js"></script>
+  <script src="//cdn.shopify.com/app/services/942252/javascripts/countries/450002951/en/countries-5e878baaa15da71b3f1f16f875c1ff087393c232-1530806268.js"></script>
 
 <script type="text/javascript">
   if (window.opener) {
@@ -76,7 +76,7 @@
   Shopify.Checkout = {};
   Shopify.Checkout.geolocatedAddress = {"lat":41.612300000000005,"lng":-73.4121};
   Shopify.Checkout.locale = "en";
-  Shopify.Checkout.token = "9a20ca5de44fd7d6165a860903a4a774";
+  Shopify.Checkout.token = "6bc78047bf86eeb462cd3eec752bbe5b";
   Shopify.Checkout.requiresShipping = true;
   Shopify.Checkout.page = "stock_problems";
   Shopify.Checkout.step = "stock_problems";
@@ -84,7 +84,7 @@
 
   if (typeof ShopifyPay == 'undefined') { ShopifyPay = {}; }
   ShopifyPay.apiHost = "pay.shopify.com";
-  ShopifyPay.apiToken = "UlBHUGE4cDBJbFVCRDE0UTJEQ2hvSDNrd0pZQ2E2aStyVVExSnNGazVORT0tLTI0MDFWYW9EWEd0TGE1b1IxaFUwVVE9PQ==--2bd3435fac1b557ee957874f8771cd275924d234";
+  ShopifyPay.apiToken = "a3I4QTZkVms0ek1pT3VPMDh2dzRtV3pwRUtORmRmWXdYM0NQZHlINFY5VT0tLTU5K3FKNzhHZEN2ZUNkSnNTRHEwRWc9PQ==--7883c50b36948ab5238f0da1c202f11a0e665ad4";
 
   Shopify.Checkout.AddressFormat = {"N_p_c_sc_a_a":[["company"],["last_name","first_name"],["zip"],["country"],["province","city"],["address1"],["address2"],["phone"]],"N_p_c_c_a_a":[["company"],["last_name","first_name"],["zip"],["country"],["city"],["address1"],["address2"],["phone"]],"n_a_a_c_csp":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country","province","zip"],["phone"]],"n_a_a_c_cs":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country","province"],["phone"]],"n_a_a_c_cp":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country","zip"],["phone"]],"n_a_a_c_c":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country"],["phone"]]};
 
@@ -104,14 +104,14 @@
 <script type="text/javascript">
   Shopify.clientAttributesCollectionEventName =
     "client_attributes_checkout";
-  var DF_CHECKOUT_TOKEN = "9a20ca5de44fd7d6165a860903a4a774";
+  var DF_CHECKOUT_TOKEN = "6bc78047bf86eeb462cd3eec752bbe5b";
 </script>
 
 
 
 
 
-<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"11859032-3b79-48d2-a80d-03931c74985a","pageurl":"kith.com\/942252\/checkouts\/9a20ca5de44fd7d6165a860903a4a774\/stock_problems","u":"8bd60e8de085","t":"checkout","offsite":1};</script>
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"fb0d112c-4bf6-492a-b4dd-b422cb1b4378","pageurl":"kith.com\/942252\/checkouts\/6bc78047bf86eeb462cd3eec752bbe5b\/stock_problems","u":"d67fed7cee51","t":"checkout","offsite":1};</script>
 
 
 
@@ -123,7 +123,7 @@
 
     
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.alphanum.js?13194699491882176130" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.alphanum.js?17034451570685622822" type="text/javascript"></script>
 
 <script>
   (function($){
@@ -218,7 +218,7 @@
         }
       };
     </script>
-    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/shopify_checkout_autocomplete.js?13194699491882176130" defer="defer"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/shopify_checkout_autocomplete.js?17034451570685622822" defer="defer"></script>
 
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt4zJctaBH5z7WzYrewqQ69PTr8fwMCXo&libraries=places&language=en&callback=setupShopifyCheckoutAutocomplete" defer="defer"></script>
@@ -271,7 +271,7 @@
       <div class="wrap">
           
 <a class="logo logo--left" href="https://kith.com">
-    <img alt="Kith" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?13194699491882176130" />
+    <img alt="Kith" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?17034451570685622822" />
 </a>
 <h1 class="visually-hidden">
   Inventory issues
@@ -314,7 +314,7 @@
           <div class="main__header">
               
 <a class="logo logo--left" href="https://kith.com">
-    <img alt="Kith" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?13194699491882176130" />
+    <img alt="Kith" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?17034451570685622822" />
 </a>
 <h1 class="visually-hidden">
   Inventory issues
@@ -339,7 +339,7 @@
       </li>
 
       <li class="breadcrumb__item breadcrumb__item--blank">
-        <a class="breadcrumb__link" data-trekkie-id="breadcrumb_contact_information_link" href="/942252/checkouts/9a20ca5de44fd7d6165a860903a4a774?step=contact_information">Customer information</a>
+        <a class="breadcrumb__link" data-trekkie-id="breadcrumb_contact_information_link" href="/942252/checkouts/6bc78047bf86eeb462cd3eec752bbe5b?step=contact_information">Customer information</a>
           <svg class="icon-svg icon-svg--size-10 breadcrumb__chevron-icon" aria-hidden="true" focusable="false"> <use xlink:href="#chevron-right" /> </svg>
       </li>
       <li class="breadcrumb__item breadcrumb__item--blank">
@@ -409,7 +409,7 @@
             <td class="product__image">
               <div class="product-thumbnail">
   <div class="product-thumbnail__wrapper">
-    <img alt="Nike Air Jordan Legacy 312 - White / Hot Lava / Black / Zen Grey - 7" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0094/2252/products/Hot_Lava_AQ4160_108_7376_small.jpg?13194699491882176130" />
+    <img alt="Nike Air Jordan Legacy 312 - White / Hot Lava / Black / Zen Grey - 9" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0094/2252/products/Hot_Lava_AQ4160_108_7376_small.jpg?17034451570685622822" />
   </div>
     <span class="product-thumbnail__quantity" aria-hidden="true">1</span>
 </div>
@@ -417,7 +417,7 @@
             </td>
             <td class="product__description">
               <span class="product__description__name page-main__emphasis">Nike Air Jordan Legacy 312 - White / Hot Lava / Black / Zen Grey</span>
-              <span class="product__description__variant page-main__small-text">7</span>
+              <span class="product__description__variant page-main__small-text">9</span>
 
             </td>
               <td class="product__status product__status--sold-out">
@@ -429,9 +429,9 @@
   </div>
 </div>
 
-  <form class="edit_checkout" action="/942252/checkouts/9a20ca5de44fd7d6165a860903a4a774" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="U1vth/7/Pmu4U5vjLVpZx6cquyogKY1NmdT4HIbw/OhwPEnDg/4A3zYs09LtvgKPTIHM3F4Jaa1NoxolZgbFeg==" />
+  <form class="edit_checkout" action="/942252/checkouts/6bc78047bf86eeb462cd3eec752bbe5b" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="GnA3FrCdMO/Anuw8MHXrNeQTAGPFOK6PorybPeowqj85F5NSzZwOW07hpA3wkbB9D7h3lbsYSm92y3kECsaTrQ==" />
     <div class="step__footer">
-        <input type="hidden" name="checkout[line_items][0][id]" id="checkout_line_items_0_id" value="3e25843738c2d1ee321617259197dfba" />
+        <input type="hidden" name="checkout[line_items][0][id]" id="checkout_line_items_0_id" value="c6b16f3c057fbb02657cea8d1330ef3a" />
         <input type="hidden" name="checkout[line_items][0][quantity]" id="checkout_line_items_0_quantity" value="0" />
 
       <input type="submit" name="commit" value="Continue" id="continue-shopping" class="step__footer__continue-btn btn" />
@@ -486,7 +486,7 @@
           <div class="sidebar__header">
               
 <a class="logo logo--left" href="https://kith.com">
-    <img alt="Kith" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?13194699491882176130" />
+    <img alt="Kith" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?17034451570685622822" />
 </a>
 <h1 class="visually-hidden">
   Inventory issues
@@ -513,11 +513,11 @@
         </tr>
       </thead>
       <tbody data-order-summary-section="line-items">
-        <tr class="product " data-product-id="1402409943109" data-variant-id="12572466577477" data-product-type="Sneakers" data-customer-ready-visible>
+        <tr class="product " data-product-id="1402409943109" data-variant-id="12572466708549" data-product-type="Sneakers" data-customer-ready-visible>
           <td class="product__image">
             <div class="product-thumbnail">
   <div class="product-thumbnail__wrapper">
-    <img alt="Nike Air Jordan Legacy 312 - White / Hot Lava / Black / Zen Grey - 7" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0094/2252/products/Hot_Lava_AQ4160_108_7376_small.jpg?13194699491882176130" />
+    <img alt="Nike Air Jordan Legacy 312 - White / Hot Lava / Black / Zen Grey - 9" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0094/2252/products/Hot_Lava_AQ4160_108_7376_small.jpg?17034451570685622822" />
   </div>
     <span class="product-thumbnail__quantity" aria-hidden="true">1</span>
 </div>
@@ -525,7 +525,7 @@
           </td>
           <td class="product__description">
             <span class="product__description__name order-summary__emphasis">Nike Air Jordan Legacy 312 - White / Hot Lava / Black / Zen Grey</span>
-            <span class="product__description__variant order-summary__small-text">7</span>
+            <span class="product__description__variant order-summary__small-text">9</span>
 
           </td>
           <td class="product__quantity visually-hidden">
@@ -629,7 +629,7 @@
       window.ShopifyAnalytics = window.ShopifyAnalytics || {};
       window.ShopifyAnalytics.meta = window.ShopifyAnalytics.meta || {};
       window.ShopifyAnalytics.meta.currency = 'USD';
-      var meta = {"page":{"path":"\/checkout\/stock_problems","search":"","url":"https:\/\/kith.com\/942252\/checkouts\/9a20ca5de44fd7d6165a860903a4a774\/stock_problems"}};
+      var meta = {"page":{"path":"\/checkout\/stock_problems","search":"","url":"https:\/\/kith.com\/942252\/checkouts\/6bc78047bf86eeb462cd3eec752bbe5b\/stock_problems"}};
       for (var attr in meta) {
         window.ShopifyAnalytics.meta[attr] = meta[attr];
       }
@@ -693,7 +693,7 @@
     first.parentNode.insertBefore(script, first);
   };
   trekkie.load(
-    {"Trekkie":{"appName":"checkout","development":false,"defaultAttributes":{"shopId":942252,"isMerchantRequest":null,"themeId":450002951,"themeCityHash":8773515178736734145,"checkoutToken":"9a20ca5de44fd7d6165a860903a4a774"}},"Performance":{"navigationTimingApiMeasurementsEnabled":true,"navigationTimingApiMeasurementsSampleRate":1.0},"Google Analytics":{"trackingId":"UA-62344036-1","domain":"auto","siteSpeedSampleRate":"10","enhancedEcommerce":true,"doubleClick":true,"includeSearch":true},"Facebook Pixel":{"pixelIds":["1059291937516902"],"agent":"plshopify1.2"},"Clickstream":{},"Session Attribution":{}}
+    {"Trekkie":{"appName":"checkout","development":false,"defaultAttributes":{"shopId":942252,"isMerchantRequest":null,"themeId":450002951,"themeCityHash":11797692115576248595,"checkoutToken":"6bc78047bf86eeb462cd3eec752bbe5b"}},"Performance":{"navigationTimingApiMeasurementsEnabled":true,"navigationTimingApiMeasurementsSampleRate":1.0},"Google Analytics":{"trackingId":"UA-62344036-1","domain":"auto","siteSpeedSampleRate":"10","enhancedEcommerce":true,"doubleClick":true,"includeSearch":true},"Facebook Pixel":{"pixelIds":["1059291937516902"],"agent":"plshopify1.2"},"Clickstream":{},"Session Attribution":{}}
   );
 
   var loaded = false;
@@ -746,7 +746,7 @@
     
         window.ShopifyAnalytics.lib.page(
           "Checkout - Stock problems",
-          {"path":"\/checkout\/stock_problems","search":"","url":"https:\/\/kith.com\/942252\/checkouts\/9a20ca5de44fd7d6165a860903a4a774\/stock_problems"}
+          {"path":"\/checkout\/stock_problems","search":"","url":"https:\/\/kith.com\/942252\/checkouts\/6bc78047bf86eeb462cd3eec752bbe5b\/stock_problems"}
         );
       
     
