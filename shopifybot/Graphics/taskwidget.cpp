@@ -385,7 +385,7 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     identifier->setAlignment(Qt::AlignCenter);
     identifier->setFixedWidth(20);
     title->setObjectName("task_important_text");
-    title->setMaximumWidth(250);
+    title->setMaximumWidth(350);
     title->setMinimumWidth(150);
     website->setObjectName("task_mediocre_text");
     website->setMaximumWidth(150);
@@ -900,9 +900,9 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
                                        QWidget *parent) : QWidget(parent) {
 
     // Set window properties
-    setFixedSize(500, 270);
+    setFixedSize(500, 230);
     setObjectName("newtaskwindow");
-    setWindowTitle(std::string("Edit ").append(p_title.toStdString()).c_str());
+    setWindowTitle(std::string(std::string("Edit \"") + p_title.toStdString() + "\"").c_str());
     setWindowFlags(Qt::FramelessWindowHint);
     setFocusPolicy(Qt::ClickFocus);
     setAttribute(Qt::WA_QuitOnClose, false);
@@ -930,6 +930,7 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
     externLayout->addWidget(bg);
     auto mainLayout = new QVBoxLayout;
     mainLayout->setContentsMargins(11, 3, 11, 11);
+    mainLayout->setSpacing(0);
     // Individual horizontal row layouts
     auto websiteVariantLayout = new QHBoxLayout;
     auto titleSizeLayout = new QHBoxLayout;
@@ -939,7 +940,7 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
 
     // Create the widgets
     // WEBSITE & VARIANT ID ROW
-    websitesLabel = new QLabel("Websites: ", this);
+    websitesLabel = new QLabel("Website: ", this);
     websitesLabel->setObjectName("addtask_mediocre_text");
     websites = new QComboBox(this);
     websites->addItems(supported_sites::ssStringList);
@@ -947,18 +948,23 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
     variantIDLabel->setObjectName("addtask_mediocre_text");
     variantID = new QLineEdit(this);
     variantID->setObjectName("addtask_editbox");
+    variantID->setFixedWidth(135);
     checkForNameButton = new QPushButton("FILL", this);
     checkForNameButton->setObjectName("checkfornamebutton");
 
     // Add the row to the layout
     websiteVariantLayout->addWidget(websitesLabel);
+    websiteVariantLayout->addSpacing(10);
     websiteVariantLayout->addWidget(websites);
+    websiteVariantLayout->addSpacing(10);
     websiteVariantLayout->addWidget(variantIDLabel);
     websiteVariantLayout->addWidget(variantID);
+    websiteVariantLayout->addSpacing(20);
     websiteVariantLayout->addWidget(checkForNameButton);
     mainLayout->addLayout(websiteVariantLayout);
+    mainLayout->addSpacing(5);
 
-    // TITLE ROW
+    // TITLE ROW WITH COPIES
     variantTitleLabel = new QLabel("Product Title: ", this);
     variantTitleLabel->setObjectName("addtask_mediocre_text");
     variantTitle = new QLineEdit(this);
@@ -967,25 +973,38 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
     titleSizeLayout->addWidget(variantTitleLabel);
     titleSizeLayout->addWidget(variantTitle);
     mainLayout->addLayout(titleSizeLayout);
+    mainLayout->addSpacing(10);
 
     // SIZE & STARTAT ROW
     variantSizeLabel = new QLabel("Size: ", this);
     variantSizeLabel->setObjectName("addtask_mediocre_text");
+    variantSizeLabel->setMaximumWidth(35);
     variantSize = new QLineEdit(this);
     variantSize->setObjectName("addtask_editbox");
+    variantSize->setMaximumWidth(35);
     startAtLabel = new QLabel("Start at: ", this);
     startAtLabel->setObjectName("addtask_mediocre_text");
     startAtLabel->setMaximumWidth(60);
     startAt = new QDateTimeEdit(this);
     startAt->setObjectName("addtask_datetime");
-    startAt->setDisplayFormat("[MMMM d, yyyy] hh:mm::ss");
-    startAt->setDateTime(QDateTime::currentDateTime());
+    startAt->setDisplayFormat("[MMMM d, yyyy] hh:mm:ss");
+    // Format the time to minute 00
+    QDateTime thecurrent = QDateTime::currentDateTime();
+    QTime thetime = thecurrent.time();
+    if (thetime.second() != 0) { thetime.setHMS(thetime.hour(), thetime.minute(), 0); }
+    thecurrent.setTime(thetime);
+    startAt->setDateTime(thecurrent);
     // Add the row to the layout
+    startAtLayout->addStretch();
     startAtLayout->addWidget(variantSizeLabel);
     startAtLayout->addWidget(variantSize);
+    startAtLayout->addSpacing(10);
     startAtLayout->addWidget(startAtLabel);
     startAtLayout->addWidget(startAt);
+    startAtLayout->addSpacing(10);
+    startAtLayout->addStretch();
     mainLayout->addLayout(startAtLayout);
+    mainLayout->addSpacing(10);
 
     // PROFILE & PROXY ROW
     profileLabel = new QLabel("Profile: ", this);
@@ -1001,11 +1020,15 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
     proxy->setFixedWidth(75);
     buildProxies();
     // Add row to the layout
+    profileProxyLayout->addStretch();
     profileProxyLayout->addWidget(profileLabel);
     profileProxyLayout->addWidget(profile);
+    profileProxyLayout->addSpacing(10);
     profileProxyLayout->addWidget(proxyLabel);
     profileProxyLayout->addWidget(proxy);
+    profileProxyLayout->addStretch();
     mainLayout->addLayout(profileProxyLayout);
+    mainLayout->addSpacing(10);
 
     // TITLE ROW
     titleLabel = new QLabel("Title: ", this);
@@ -1018,11 +1041,10 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
     // Add row to the layout
     titleLayout->addWidget(titleLabel);
     titleLayout->addWidget(title);
-    titleLayout->addSpacing(10);
+    titleLayout->addSpacing(20);
     titleLayout->addWidget(submit);
     mainLayout->addLayout(titleLayout);
 
-    // TODO: Fix log window not showing correct log when website is changed
     // Set the contents of each edit box
     websites->setCurrentText(p_website);
     variantID->setText(p_variantID);
@@ -1038,11 +1060,13 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
     setLayout(externLayout);
 
     // Connect the submit button to the attemptToSend slot
-    connect(submit, SIGNAL(clicked()), this, SLOT(attempToSend()));
+    connect(submit, SIGNAL(clicked()), this, SLOT(attemptToSend()));
+    // Connect the fill button to the fillfromVariant slot
+    connect(checkForNameButton, SIGNAL(clicked()), this, SLOT(fillFromVariant()));
 }
 
 // Tries to send the data in the input fields to the main window to edit the task
-void VIDTaskEditDisplay::attempToSend() {
+void VIDTaskEditDisplay::attemptToSend() {
 
     // Non-required fields: collection, color keywords
     // Check each required input field to make sure a valid task can be built
@@ -1100,4 +1124,23 @@ void VIDTaskEditDisplay::buildProxies() {
 
     // Close the filein
     filein.close();
+}
+
+// Fills the add task edits based on the given ID
+void VIDTaskEditDisplay::fillFromVariant() {
+    // Make sure there is a variant ID
+    if (variantID->text().isEmpty()) { variantID->setFocus(); return; }
+
+    // Build a temporary shopify website handler for the given URL and a temporary task ID
+    ShopifyWebsiteHandler shopwh(supported_sites::WEBSITES.at(websites->currentText().toStdString()), "temp");
+
+    // Get the tuple of the necessary information
+    std::tuple<std::string, std::string, std::string> dataPack = shopwh.getNameSizeImage(variantID->text().toStdString());
+
+    // Finally set the current texts for each lineedit to their respective data
+    variantTitle->setText(std::get<0>(dataPack).c_str());
+    variantSize->setText(std::get<1>(dataPack).c_str());
+
+    // Remove the temporary task html body
+    remove(std::string(std::string(file_paths::HTML_BODY) + supported_sites::WEBSITES.at(websites->currentText().toStdString()).title + "temp.txt").c_str());
 }

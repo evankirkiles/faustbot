@@ -28,7 +28,8 @@ with open('shopifybot/Infrastructure/profiles.txt') as input_file:
     if profileName == 'Random':
         profileLine = 0
         for i, line in enumerate(input_file):
-            profileLine += 1
+            if line != "":
+                profileLine += 1
         profileLine = random.randint(1, profileLine + 1)
     input_file.close()
 
@@ -36,7 +37,6 @@ with open('shopifybot/Infrastructure/profiles.txt') as input_file:
     currentLine = 0
     for i, line in enumerate(input_file):
         currentLine += 1
-        log(str(currentLine) + " : " + str(profileLine))
         if line.split(' :-: ', 1)[0] == profileName or currentLine == profileLine:
             j = json.loads(line.split(' :-: ', 1)[1])
             break
@@ -53,7 +53,8 @@ with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
     if j['ccard'] == 'Random':
         ccardLine = 0
         for i, line in enumerate(ccinput_file):
-            ccardLine += 1
+            if line != "":
+                ccardLine += 1
         ccardLine = random.randint(1, ccardLine + 1)
     ccinput_file.close()
 
@@ -77,7 +78,8 @@ with open('shopifybot/Infrastructure/proxies.txt') as proxyinputfile:
     if proxyName == 'Random':
         proxyLine = 0
         for i, line in enumerate(proxyinputfile):
-            proxyLine += 1
+            if line != "":
+                proxyLine += 1
         proxyLine = random.randint(1, proxyLine + 1)
     proxyinputfile.close()
 

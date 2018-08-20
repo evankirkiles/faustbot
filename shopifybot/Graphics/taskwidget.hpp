@@ -130,7 +130,9 @@ signals:
 private slots:
     // Tries to send the information in the form to the task widget to edit the task.
     // If not all required fields are filled, then does not send the form.
-    void attempToSend();
+    void attemptToSend();
+    // Retrieves the variant ID's name, size, and image from the given website
+    void fillFromVariant();
 
 private:
     // Dark title bar widget

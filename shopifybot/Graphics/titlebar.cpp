@@ -9,7 +9,12 @@ DarkTitleBar::DarkTitleBar(QWidget *parent, bool moreInfo, bool refresh) : paren
 
     // Build the title bar's necessary components
     title = new QLabel(parent->windowTitle(), this);
-    title->setStyleSheet("margin-right: 56px;");
+    if (refresh && !moreInfo) {
+        title->setStyleSheet("margin-right: 56px;");
+    } else if (refresh) {
+        title->setStyleSheet("margin-right: 23px;");
+    }
+
 
     // Clickable buttons in top left
     closeWindow = new ClickableImage(24, 24, 2, file_paths::EXIT2_IMG, file_paths::EXIT_IMG, this);

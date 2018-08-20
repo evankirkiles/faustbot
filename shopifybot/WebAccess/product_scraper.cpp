@@ -670,29 +670,6 @@ std::tuple<std::string, std::string, std::string> ShopifyWebsiteHandler::getName
     const int available = productAvailable(variantID);
     // If no product exists or there is an unknown error, simply return nothing
     if (available == 2) { return std::make_tuple<std::string, std::string, std::string>("", "", ""); }
-//    if (available == 1) {
-//        // In this case, a cURL will first need to be performed on the URL given in the redirect
-//        std::ifstream filein(
-//                std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
-//        std::string redirURL;
-//        while (getline(filein, str)) {
-//            // If the product is not available, the html body is an HTML redirect page to inventory issues page
-//            // <meta http-equiv="refresh" content="0; url=
-//            const unsigned long redirPos = str.find("http-equiv=\"refresh\"");
-//            if (redirPos != std::string::npos) {
-//                str.erase(0, redirPos + 37);
-//                redirURL = str.substr(0, str.find('?'));
-//                filein.close();
-//                break;
-//            }
-//        }
-//
-//        // Make sure the redirect URL exists
-//        if (redirURL.empty()) { filein.close(); throw std::runtime_error("Redirect URL not found."); }
-//        // Perform a cURL on the new URL
-//        std::cout << "Performing curl." << std::endl;
-//        performCURL(redirURL);
-//    }
 
     // Both available and unavailable products should follow the same format now after following through
     // with the HTML redirect (if necessary).
