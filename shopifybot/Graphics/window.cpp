@@ -148,6 +148,9 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Open the proxies window when the proxies button is clicked
     connect(proxies, SIGNAL(clicked()), this, SLOT(openProxies()));
 
+    // PLACEHOLDER CONNECT
+    connect(logs, SIGNAL(clicked()), this, SLOT(clearDirs()));
+
     // Build the timer updated on second intervals
     timeChecker = new QTimer(this);
     connect(timeChecker, &QTimer::timeout, [this] () { emit timeUpdated(QDateTime::currentDateTime()); } );
@@ -316,4 +319,17 @@ void BotWindow::openProxies() {
 
     // Make necessary connections
     connect(proxiesDisp, &ProxyDisplay::closed, [this] () { proxiesOpen = false; });
+}
+
+// Clears all the temporary file directories
+void BotWindow::clearDirs() {
+
+    // Remove the contents directory and recreate it and its subdirectory cookiejar
+    boost::filesystem::remove_all(file_paths::CONTENTS_DIR);
+    boost::filesystem::create_directory(file_paths::CONTENTS_DIR);
+    boost::filesystem::create_directory(std::string(file_paths::CONTENTS_DIR).append("/CookieJar"));
+
+    // Removes the logs directory and recreates it
+    boost::filesystem::remove_all(file_paths::LOGS_DIR);
+    boost::filesystem::create_directory(file_paths::LOGS_DIR);
 }

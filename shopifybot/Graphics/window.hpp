@@ -26,6 +26,9 @@
 // Include the task class
 #include "../Infrastructure/tasks.hpp"
 
+// Include boost filesystem
+#include <boost/filesystem.hpp>
+
 // Include the widgets
 #include "taskwidget.hpp"
 // Include the sidebar popups
@@ -114,6 +117,8 @@ private:
     QTimer* timeChecker;
 
 private slots:
+    // Clears all the task, contents, and cookie directories
+    void clearDirs();
     // Opens the add task window
     void openNewTask();
     // Opens an add VID task window

@@ -183,10 +183,10 @@ void VariantIDTask::run() {
                 return;
             } else if (availabilityCode == 1) {
                 // If product is unavailable, then exit the while loop
-                throw std::runtime_error("Inventory issues with product (not in stock).");
+                throw std::runtime_error("Product out of stock.");
             } else if (availabilityCode == 2) {
                 // Some other error occurred with the variant ID
-                throw std::runtime_error("Unknown error occurred with product availability check.");
+                throw std::runtime_error("Could not locate product.");
             }
         } catch (std::runtime_error& e) {
             log("Failed because: \"" + std::string(e.what()) + "\", checking again in " + std::to_string(frequency) + " seconds.");

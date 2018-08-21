@@ -36,6 +36,11 @@ IF (Qt5Concurrent_FOUND)
     include_directories(${Qt5Concurrent_INCLUDE_DIRS})
     target_link_libraries(runshopifytests ${Qt5Concurrent_LIBRARIES})
 endif()
+find_package(Boost COMPONENTS system filesystem REQUIRED)
+IF (Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    target_link_libraries(runshopifytests ${Boost_LIBRARIES})
+endif()
 
 target_link_libraries(runshopifytests shopifybot gtest gtest_main)
 

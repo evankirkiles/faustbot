@@ -72,6 +72,9 @@ namespace file_paths {
     const char* TEMPPROXIES_TXT = "./shopifybot/Infrastructure/tempproxies.txt";
     const char* COOKIES_TXT = "./shopifybot/WebAccess/Contents/CookieJar/cookies.txt";
 
+    const char* CONTENTS_DIR = "./shopifybot/WebAccess/Contents";
+    const char* LOGS_DIR = "./shopifybot/Infrastructure/Logs";
+
     // Images
     const char* LOGO_FILE = "./shopifybot/Graphics/Assets/logo.png";
     const char* PLAY_IMG = "./shopifybot/Graphics/Assets/play.png";
