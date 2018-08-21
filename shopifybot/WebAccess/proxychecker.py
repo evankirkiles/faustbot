@@ -26,7 +26,7 @@ else:
 
 # Then use the proxy to grab a Google webpage and make sure contains the requested data
 try:
-    req = requests.get('https://reddit.com', proxies=proxyDict)
+    req = requests.get('https://reddit.com', proxies=proxyDict, timeout=4)
     with open(fileToWriteTo, 'w+') as logfile:
         logfile.write('1')
         logfile.close()
@@ -39,4 +39,9 @@ except urllib3.exceptions.LocationParseError as e:
     # In this case, there was a redirect error or some issue with the port and ip
     with open(fileToWriteTo, 'w+') as logfile:
         logfile.write('2')
+        logfile.close()
+except urllib3.exceptions.TimeoutError as e:
+    # In this case, the proxy took too long to connect (4 second timeout)
+    with open(fileToWriteTo, 'w+') as logfile:
+        logfile.write('3')
         logfile.close()
