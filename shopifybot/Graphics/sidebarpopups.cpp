@@ -1413,7 +1413,7 @@ void ProductParserDisplay::parseProds() {
     // Pull the models from the given page for the specified method
     if (collection->isChecked()) {
         // Pull all the models from the collection page
-        swh.getAllModels(extension->text().toStdString(), std::string("?limit=").append(limit->text().toStdString()));
+        swh.getAllModels(extension->text().toStdString(), false, std::string("?limit=").append(limit->text().toStdString()));
 
         // Then load the file into the product parsed view
         QFile* productsLog = new QFile(std::string(file_paths::PRODUCTS_LOG).append(supported_sites::WEBSITES.at(websites->currentText().toStdString()).title).append("temp.txt").c_str());

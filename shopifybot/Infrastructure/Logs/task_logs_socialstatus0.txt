@@ -1,0 +1,11 @@
+[2018-08-21 17:55:17.831] Beginning "BAPE TEE".
+[2018-08-21 17:55:19.465] Failed because: "Product out of stock.", checking again in 5 seconds.
+[2018-08-21 17:55:26.017] Failed because: "Product out of stock.", checking again in 5 seconds.
+[2018-08-21 17:55:32.367] Failed because: "Product out of stock.", checking again in 5 seconds.
+[2018-08-21 17:55:39.322] Failed because: "Product out of stock.", checking again in 5 seconds.
+[2018-08-21 17:55:45.686] Failed because: "Product out of stock.", checking again in 5 seconds.
+[2018-08-21 17:55:52.433] Failed because: "Product out of stock.", checking again in 5 seconds.
+[2018-08-21 17:55:59.191] Failed because: "Product out of stock.", checking again in 5 seconds.
+[2018-08-21 17:56:06.360] Failed because: "Product out of stock.", checking again in 5 seconds.
+[2018-08-21 17:56:12.917] Failed because: "Product out of stock.", checking again in 5 seconds.
+[2018-08-21 17:56:19.262] Failed because: "Product out of stock.", checking again in 5 seconds.

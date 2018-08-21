@@ -74,7 +74,8 @@ public:
     explicit ShopifyWebsiteHandler(const URLAndMethod& url, const std::string& taskID);
 
     // Function that at the moment prints out the different models it scrapes from the website at given collection
-    void getAllModels(const std::string& collection, const std::string& bonusparams="?limit=25");
+    void getAllModels(const std::string& collection, bool availabilityFiltering = true,
+            const std::string& bonusparams="?limit=25");
 
     // Function that returns the product id from the product's page (the one that has a BUY NOW button)
     // To specify color, they are indexed from the top: highest is 0, then 1, then 2, etc.

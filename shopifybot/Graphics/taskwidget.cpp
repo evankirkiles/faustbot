@@ -407,6 +407,7 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     website->setObjectName("task_mediocre_text");
     website->setMaximumWidth(150);
     thumbnailImg->setFixedSize(64, 64);
+    thumbnailImg->setAlignment(Qt::AlignCenter);
     variantId->setObjectName("task_mediocre_text");
     variantId->setMaximumWidth(150);
     variantId->setStyleSheet("color: #cbe589");

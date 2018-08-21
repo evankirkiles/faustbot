@@ -9,7 +9,8 @@ ShopifyWebsiteHandler::ShopifyWebsiteHandler(const URLAndMethod& url, const std:
         sourceURL(url), taskID(p_taskID) { }
 
 // Function that pulls the HTML source and then searches it for " title: ", printing the lines it finds
-void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const std::string& bonusparams) {
+void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool availabilityFiltering,
+                                         const std::string& bonusparams) {
 
     // Begin clock to check how much time each process takes
     std::clock_t start;
@@ -90,7 +91,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
                 if (str.find("\"variants\":") > str.find("\"available\":")) {
                     str.erase(0, str.find("\"available\":") + 12);
                     std::string availability = str.substr(0, str.find(','));
-                    if (availability == "false") { continue; }
+                    if (availability == "false" && availabilityFiltering) { continue; }
                     // Color comes after a space in the size title
                     if (sourceURL.method == 102) {
                         if (sscolor.empty()) {
@@ -449,7 +450,7 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
     Product prdct;
 
     // First, perform a full model scrape on the collection page specified, saved into Contents/products_log.txt
-    getAllModels(collection, "?limit=" + numresults);
+    getAllModels(collection, true, "?limit=" + numresults);
 
     // Open time logging file
     std::ofstream timeLogs;
