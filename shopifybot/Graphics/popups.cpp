@@ -529,7 +529,7 @@ void AddVIDTaskDisplay::attemptToSend() {
     // Send the signal with all the data to the main window if all required fields have text in them
     emit sendTask(title->text(), supported_sites::WEBSITES.at(websites->currentText().toStdString()), variantID->text(),
                       variantTitle->text(), variantSize->text(), startAt->dateTime(), profile->currentText(),
-                  proxy->currentText(), copies->text().toInt());
+                  proxy->currentText(), imageURL, copies->text().toInt());
 
     // Now close the window because the new task has been made
     close();
@@ -621,6 +621,9 @@ void AddVIDTaskDisplay::fillFromVariant() {
     variantTitle->setCursorPosition(0);
     variantSize->setText(std::get<1>(dataPack).c_str());
     variantSize->setCursorPosition(0);
+
+    // Get the image URl from the tuple too
+    imageURL = std::get<2>(dataPack).c_str();
 }
 
 // MORE INFO DISPLAY ClASS

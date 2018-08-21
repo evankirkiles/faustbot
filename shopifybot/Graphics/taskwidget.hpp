@@ -35,6 +35,11 @@
 #ifndef QThread
 #include <QThread>
 #endif
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QUrl>
+#include <QtNetwork/QNetworkRequest>
+#include <QBitmap>
 
 #ifndef ClickableCheckableImage
 #include "customwidgets.hpp"
@@ -125,7 +130,7 @@ signals:
     void closed();
     // Sends the edited task information back to the task to restructure
     void sendTaskEdit(QString title, URLAndMethod website, QString variantId, QString variantName, QString variantSize,
-                      QDateTime startAt, QString profile, QString proxy, unsigned int frequency = constants::BASE_FREQ);
+                      QDateTime startAt, QString profile, QString proxy, QString imageURL, unsigned int frequency = constants::BASE_FREQ);
 
 private slots:
     // Tries to send the information in the form to the task widget to edit the task.
@@ -135,6 +140,8 @@ private slots:
     void fillFromVariant();
 
 private:
+    QString imageURL;
+
     // Dark title bar widget
     DarkTitleBar* dtb;
 
@@ -268,7 +275,8 @@ public:
     explicit VIDTaskWidget(const std::string& title, const URLAndMethod& website, const std::string& variantID,
                            const std::string& identifier, const std::string& profile, const std::string& proxy,
                            const QDateTime& startAt, const std::string &prodTitle, const std::string& prodSize,
-                           bool* p_logWindowOpen, bool* p_editWindowOpen, unsigned int frequency, QWidget* parent = 0);
+                           const QString& imageURL, bool* p_logWindowOpen, bool* p_editWindowOpen,
+                           unsigned int frequency, QWidget* parent = 0);
 
     // Title label, public so edit task can access it
     QLabel* title;
@@ -296,12 +304,20 @@ private slots:
     void showEdit();
     // Receives the task edit from the window
     void acceptTaskEdit(QString title, URLAndMethod website, QString variantID, QString variantName, QString variantSize,
-                        QDateTime start, QString profile, QString proxy, unsigned int frequency = constants::BASE_FREQ);
+                        QDateTime start, QString profile, QString proxy, QString imageURL, unsigned int frequency = constants::BASE_FREQ);
     // Called when the edit window is closed
     void editClosed();
 
+    // Retrieves a network reply containig the image data
+    void downloadFinished(QNetworkReply* reply);
+
 private:
     bool deleted = false;
+
+    // Store information about the thumbnail image
+    QString imageURL;
+    QPixmap thumbnail;
+    QPixmap defaultThumbnail;
 
     // Frequency of the while loop
     unsigned int taskfreq;
@@ -324,6 +340,7 @@ private:
     QLabel* website;
     QLabel* variantId;
     QFrame* separator1;
+    QLabel* thumbnailImg;
     QTextEdit* variantName;
     QLabel* variantSize;
     QDateTimeEdit* startAt;
@@ -341,6 +358,9 @@ private:
 
     // Delete button
     ClickableImage* deleteButton;
+
+    // Loads in an image from the imageURL and stores in the thumbnail, which is then put on the QLabel
+    void loadImage();
 };
 
 #endif //SHOPIFY_BOT_TASKWIDGET_HPP

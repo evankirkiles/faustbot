@@ -177,14 +177,15 @@ void BotWindow::buildTask(QString title, URLAndMethod website, QString collectio
 
 // Slot which takes information from the new VID task window and builds necessary VID tasks
 void BotWindow::buildVIDTask(QString title, URLAndMethod website, QString variantID, QString variantName,
-                             QString variantSize, QDateTime start, QString profile, QString proxy, int copies) {
+                             QString variantSize, QDateTime start, QString profile, QString proxy,
+                             QString p_imageURL, int copies) {
 
     // Gets an identifier by checking how many task widgets there are on the tasklist
     // Builds a task based on the number of copies sent
     for (int i = 0; i < copies; i++) {
         addVIDTaskFunc(title.toStdString(), website, std::to_string(numTasksCreated), variantID.toStdString(),
                        variantName.toStdString(), variantSize.toStdString(), start, profile.toStdString(),
-                       proxy.toStdString());
+                       proxy.toStdString(), p_imageURL);
         // Increment the task identifier
         numTasksCreated++;
     }
@@ -219,11 +220,11 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
 void BotWindow::addVIDTaskFunc(const std::string &title, const URLAndMethod &website, const std::string &identifier,
                                const std::string &variantID, const std::string &variantName,
                                const std::string &variantSize, const QDateTime &startAt, const std::string &profile,
-                               const std::string &proxy, unsigned int frequency) {
+                               const std::string &proxy, QString p_imageURL, unsigned int frequency) {
 
     // Create a new task
     auto newtask = new VIDTaskWidget(title, website, identifier, variantID, profile, proxy, startAt, variantName,
-            variantSize, &logWindowOpen, &editWindowOpen, frequency, tasklistwidget);
+            variantSize, p_imageURL, &logWindowOpen, &editWindowOpen, frequency, tasklistwidget);
 
     // Connect the signals of the window to this new task's start and stop
     connect(startAllTasks, SIGNAL(clicked()), newtask, SLOT(run()));
@@ -283,8 +284,8 @@ void BotWindow::openNewVIDTask() {
     // Make necessary connections
     connect(avidtd, &AddVIDTaskDisplay::closed, [this] () { addVIDTaskOpen = false; });
     // Connect the buildtask symbol to the addtask slot of the mainwindow
-    connect(avidtd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, int)),
-            this, SLOT(buildVIDTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, int)));
+    connect(avidtd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, int)),
+            this, SLOT(buildVIDTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, int)));
 }
 
 // Opens the profiles window

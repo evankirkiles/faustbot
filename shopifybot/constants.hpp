@@ -142,6 +142,7 @@ namespace file_paths {
     extern const char* PROXYNEUTRAL_IMG;
     extern const char* REFRESHICON_IMG;
     extern const char* REFRESHICON2_IMG;
+    extern const char* DEFAULTTHUMB_IMG;
 }
 
 namespace constants {

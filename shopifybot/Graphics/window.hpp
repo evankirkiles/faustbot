@@ -62,7 +62,7 @@ public:
     // Adds a VID task to the list
     void addVIDTaskFunc(const std::string& title, const URLAndMethod& website, const std::string& identifier,
                         const std::string& variantID, const std::string& variantName, const std::string& variantSize,
-                        const QDateTime& startAt, const std::string& profile, const std::string& proxy,
+                        const QDateTime& startAt, const std::string& profile, const std::string& proxy, QString imageURL,
                         unsigned int frequency = constants::BASE_FREQ);
 signals:
     // Emitted every time the qtimer timesout
@@ -133,7 +133,7 @@ private slots:
                    QDateTime start, QString profile, QString proxy, int copies);
     // Connects to the submit slot in the new VID task window, and adds a VID task with the given information
     void buildVIDTask(QString title, URLAndMethod website, QString variantID, QString variantName, QString variantSize,
-                      QDateTime start, QString profile, QString proxy, int copies);
+                      QDateTime start, QString profile, QString proxy, QString p_imageURL, int copies);
 };
 
 

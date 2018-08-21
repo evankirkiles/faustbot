@@ -351,7 +351,8 @@ void TaskWidget::logsClosed() {
 VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_website, const std::string& p_identifier,
                              const std::string &p_variantID, const std::string &p_profile, const std::string &p_proxy,
                              const QDateTime &p_startAt, const std::string &prodTitle, const std::string& prodSize,
-                             bool* p_logWindowOpen, bool* p_editWindowOpen, unsigned int frequency, QWidget *parent) :
+                             const QString& p_imageURL, bool* p_logWindowOpen, bool* p_editWindowOpen, unsigned int frequency,
+                             QWidget *parent) :
         title(new QLabel(p_title.c_str(), this)),
         task(new VariantIDTask(p_title, p_website, p_identifier, p_variantID, p_startAt, p_profile, p_proxy, frequency)),
         identifier(new QLabel(p_identifier.c_str(), this)),
@@ -360,6 +361,8 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
         variantName(new QTextEdit(prodTitle.c_str(), this)),
         variantSize(new QLabel(prodSize.c_str(), this)),
         startAt(new QDateTimeEdit(this)),
+        thumbnailImg(new QLabel(this)),
+        imageURL(p_imageURL),
         editWindowOpen(p_editWindowOpen),
         logWindowOpen(p_logWindowOpen) {
 
@@ -368,6 +371,11 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
 
     // Set the style sheet of the frame
     setObjectName("task");
+
+    // Initialize the default pixmap thumbnail image
+    QImage img(file_paths::DEFAULTTHUMB_IMG);
+    defaultThumbnail = QPixmap::fromImage(img).scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    defaultThumbnail.setDevicePixelRatio(2.0);
 
     // Builds the textedit box
     variantName->setReadOnly(true);
@@ -395,9 +403,10 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     identifier->setAlignment(Qt::AlignCenter);
     identifier->setFixedWidth(20);
     title->setObjectName("task_important_text");
-    title->setFixedWidth(240);
+    title->setFixedWidth(170);
     website->setObjectName("task_mediocre_text");
     website->setMaximumWidth(150);
+    thumbnailImg->setFixedSize(64, 64);
     variantId->setObjectName("task_mediocre_text");
     variantId->setMaximumWidth(150);
     variantId->setStyleSheet("color: #cbe589");
@@ -486,6 +495,7 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     row->addLayout(firstcol);
     row->addStretch();
     row->addWidget(separator1);
+    row->addWidget(thumbnailImg);
     secondcol->addWidget(variantTitleLabel);
     secondcol->addWidget(variantName);
     row->addLayout(secondcol);
@@ -515,6 +525,9 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     connect(logsButton, SIGNAL(clicked()), this, SLOT(showLogs()));
     // Connect the edit button to showing the edit window
     connect(edit, SIGNAL(clicked()), this, SLOT(showEdit()));
+
+    // Load the image
+    loadImage();
 }
 
 // Tells the event loop to run the task
@@ -639,8 +652,8 @@ void VIDTaskWidget::showEdit() {
     connect(etd, SIGNAL(closed()), this, SLOT(editClosed()));
 
     // Finally connect the task edited signal of the display to the receiving end of the taskwidget
-    connect(etd, SIGNAL(sendTaskEdit(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, unsigned int)),
-            this, SLOT(acceptTaskEdit(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, unsigned int)));
+    connect(etd, SIGNAL(sendTaskEdit(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString unsigned int)),
+            this, SLOT(acceptTaskEdit(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, unsigned int)));
 
     // Notify the main window that a log window is open
     *editWindowOpen = true;
@@ -648,7 +661,7 @@ void VIDTaskWidget::showEdit() {
 
 // Receives a packet of information and rebuilds the task and the task widget with edited info
 void VIDTaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QString p_variantID, QString p_variantName,
-                                   QString p_variantSize, QDateTime p_start, QString p_profile, QString p_proxy,
+                                   QString p_variantSize, QDateTime p_start, QString p_profile, QString p_proxy, QString p_imageURL,
                                    unsigned int frequency) {
 
     // Rename the old logs file to the new one
@@ -658,11 +671,20 @@ void VIDTaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QStr
     // First, change the visuals fo the task widget to match the new task
     title->setText(p_title);
     website->setText(p_website.baseURL);
-    variantId->setText(p_variantID);
+
     variantName->setText(p_variantName);
     variantSize->setText(p_variantSize);
     startAt->setDateTime(p_start);
     taskfreq = frequency;
+    imageURL = p_imageURL;
+
+    // If the variant ID has changed and if the imageURL exists, then load the image
+    if (variantId->text() != p_variantID) {
+        loadImage();
+    }
+
+    // Set variantID after the download check
+    variantId->setText(p_variantID);
 
     // Then, delete the current task and rebuild it with the edited task
     task = new VariantIDTask(p_title.toStdString(), p_website, task->swh.taskID, p_variantID.toStdString(), p_start,
@@ -677,6 +699,38 @@ void VIDTaskWidget::editClosed() {
 // Called when the logFile window is closed
 void VIDTaskWidget::logsClosed() {
     *logWindowOpen = false;
+}
+
+// Loads in an image from the instance imageURL and puts it in the QPixmap
+void VIDTaskWidget::loadImage() {
+    // If imageURL is empty, then set the image to be the default image
+    if (imageURL.isEmpty()) {
+        thumbnailImg->setPixmap(defaultThumbnail);
+        return;
+    }
+
+    // Build a Network Access Manager which retrieves the image data from the URL
+    auto *nam = new QNetworkAccessManager(this);
+    connect(nam, &QNetworkAccessManager::finished, this, &VIDTaskWidget::downloadFinished);
+    QNetworkRequest request(imageURL);
+    nam->get(request);
+}
+
+// Slot which accepts the image data and then updates the QPixmap of the thumbnail
+void VIDTaskWidget::downloadFinished(QNetworkReply *reply) {
+    thumbnail.loadFromData(reply->readAll());
+    thumbnail = thumbnail.scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    thumbnail.setDevicePixelRatio(2.0);
+
+    // Build a mask to get rounded corners
+    QBitmap imgmask(thumbnail.size().width(), thumbnail.size().height());
+    imgmask.fill(Qt::color0);
+    QPainter painter(&imgmask);
+    painter.setBrush(Qt::color1);
+    painter.drawRoundRect(0, 0, thumbnail.size().width(), thumbnail.size().height(), 32, 32);
+
+    thumbnail.setMask(imgmask);
+    thumbnailImg->setPixmap(thumbnail);
 }
 
 // EDIT TASK DISPLAY CLASS
@@ -1084,7 +1138,8 @@ void VIDTaskEditDisplay::attemptToSend() {
 
     // Send the signal with all the data to the main window if all required fields have text in them
     emit sendTaskEdit(title->text(), supported_sites::WEBSITES.at(websites->currentText().toStdString()), variantID->text(),
-                      variantTitle->text(), variantSize->text(), startAt->dateTime(), profile->currentText(), proxy->currentText());
+                      variantTitle->text(), variantSize->text(), startAt->dateTime(), profile->currentText(),
+                      imageURL, proxy->currentText());
 
     // Now close the window because the task edit package has been sent
     close();
@@ -1149,6 +1204,9 @@ void VIDTaskEditDisplay::fillFromVariant() {
     variantTitle->setCursorPosition(0);
     variantSize->setText(std::get<1>(dataPack).c_str());
     variantSize->setCursorPosition(0);
+
+    // Set the image
+    imageURL = std::get<2>(dataPack).c_str();
 
     // Remove the temporary task html body
     remove(std::string(std::string(file_paths::HTML_BODY) + supported_sites::WEBSITES.at(websites->currentText().toStdString()).title + "temp.txt").c_str());

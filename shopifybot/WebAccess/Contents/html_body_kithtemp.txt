@@ -1,0 +1,861 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" dir="ltr" class="no-js mac chrome desktop page--no-banner page--logo-main page--stock-problems card-fields">
+  <head>
+    
+  
+
+    
+    
+    
+
+    
+  
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+
+    
+
+      <meta data-browser="chrome" data-browser-major="67" />
+<meta data-body-font-family="Lato" data-body-font-type="google" />
+
+    <meta id="shopify-digital-wallet" name="shopify-digital-wallet" content="/942252/digital_wallets/dialog">
+
+<meta name="shopify-checkout-api-token" content="08430b96c47dd2ac8e17e305db3b71e8">
+
+  <meta name="shopify-checkout-authorization-token" content="14265058eed8da74dd91691e7da87657" />
+
+<meta id="google-autocomplete-sandbox-url" name="google-autocomplete-sandbox-url" content="https://checkout.shopify.com/942252/sandbox/google_autocomplete?locale=en" />
+
+
+
+    <link href="//cdn.shopify.com/s/files/1/0094/2252/t/82/assets/checkout_2.css?9885839021806687087" rel="stylesheet" type="text/css" media="all"> 
+      
+<!--[if lt IE 9]>
+<link rel="stylesheet" media="all" href="//cdn.shopify.com/app/services/942252/assets/450002951/checkout_stylesheet/v2-ltr-2018-06-18-d2ab5c6eed8d0b8bf2bea0536601640b-17034451570685622822/oldie" />
+<![endif]-->
+
+<!--[if gte IE 9]><!-->
+  <link rel="stylesheet" media="all" href="//cdn.shopify.com/app/services/942252/assets/450002951/checkout_stylesheet/v2-ltr-2018-06-18-d2ab5c6eed8d0b8bf2bea0536601640b-17034451570685622822" />
+
+<!--<![endif]-->
+
+    <link href='//fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+    <link href='//fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' />
+
+
+
+
+
+
+        <script type="text/javascript">
+  (function() {
+    window.ShopifyExperiments = {};
+    window.ShopifyExperiments.rememberMe = true;
+    window.ShopifyExperiments.googleAutocomplete = true;
+  })();
+</script>
+
+<script src="//cdn.shopify.com/s/assets/checkout_2018-06-18-948c5b0f10b07414ede97d0a40de42f071048f2735ee7dd2448c66227f15d763.js"></script>
+
+
+<script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
+
+
+
+  <script src="//cdn.shopify.com/app/services/942252/javascripts/countries/450002951/en/countries-8dc4f2f5279d1f29d55edaa3649d0c57cb430e2c-1530806268.js"></script>
+
+<script type="text/javascript">
+  if (window.opener) {
+    window.opener.postMessage(JSON.stringify({"current_checkout_page": "\/checkout\/stock_problems"}), "*");
+  }
+
+  if (typeof Shopify == 'undefined') { Shopify = {}; }
+  Shopify.Checkout = {};
+  Shopify.Checkout.geolocatedAddress = {"lat":41.612300000000005,"lng":-73.4121};
+  Shopify.Checkout.locale = "en";
+  Shopify.Checkout.token = "fb067d885fa1ba24f424377deb2729b2";
+  Shopify.Checkout.requiresShipping = true;
+  Shopify.Checkout.page = "stock_problems";
+  Shopify.Checkout.step = "stock_problems";
+  Shopify.Checkout.apiHost = "kithnyc.myshopify.com";
+
+  if (typeof ShopifyPay == 'undefined') { ShopifyPay = {}; }
+  ShopifyPay.apiHost = "pay.shopify.com";
+  ShopifyPay.apiToken = "akEzVUtsTVY3d3ZCY1B0aXUvL29aT2RkL3hJVVRHbERTdUhMYUNsUUJpOD0tLVZHZ0VTU3p2a0g1U2NxMlZTS1BTT0E9PQ==--b7af17fa4ce5e4d0a383e70198634326b27be7f3";
+
+  Shopify.Checkout.AddressFormat = {"N_p_c_sc_a_a":[["company"],["last_name","first_name"],["zip"],["country"],["province","city"],["address1"],["address2"],["phone"]],"N_p_c_c_a_a":[["company"],["last_name","first_name"],["zip"],["country"],["city"],["address1"],["address2"],["phone"]],"n_a_a_c_csp":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country","province","zip"],["phone"]],"n_a_a_c_cs":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country","province"],["phone"]],"n_a_a_c_cp":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country","zip"],["phone"]],"n_a_a_c_c":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country"],["phone"]]};
+
+  var thankYouStep = false;
+  var rememberMeCookie = false;
+  var rememberMeEnabled = true;
+
+  if(thankYouStep) {
+    Shopify.Checkout.OrderStatus = OrderStatusPageApi.prototype;
+  }
+
+  if(rememberMeCookie && rememberMeEnabled) {
+    Shopify.Checkout.rememberMeCookieIsHere = true;
+  }
+</script>
+
+<script type="text/javascript">
+  Shopify.clientAttributesCollectionEventName =
+    "client_attributes_checkout";
+  var DF_CHECKOUT_TOKEN = "fb067d885fa1ba24f424377deb2729b2";
+</script>
+
+
+
+
+
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"35079189-944a-4280-8eea-a9d1692cb9a6","pageurl":"kith.com\/942252\/checkouts\/fb067d885fa1ba24f424377deb2729b2\/stock_problems","u":"13b4c1ccc496","t":"checkout","offsite":1};</script>
+
+
+
+
+
+
+  
+
+
+    
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/jquery.alphanum.js?17034451570685622822" type="text/javascript"></script>
+
+<script>
+  (function($){
+    
+    'use strict';
+    
+    var addressType;
+    var addRestrictions;
+    var $addresses;
+    
+    $(document).on('page:load page:change', function() {
+      
+      addRestrictions = false;
+      
+      if (Shopify.Checkout.step === 'contact_information') {
+        addressType = "shipping_address";
+        addRestrictions = true;
+      }
+      
+      if (Shopify.Checkout.step === 'payment_method') {
+        addressType = "billing_address";
+        addRestrictions = true;
+      }
+      
+      if (addRestrictions) {
+        
+        $addresses = $(
+          '[name="checkout[' + addressType + '][address1]"],'
+          + '[name="checkout[' + addressType + '][address2]"],'
+          + '[name="checkout[' + addressType + '][city]"],'
+          + '[name="checkout[' + addressType + '][zip]"],'
+          + '[name="checkout[' + addressType + '][phone]"],'
+          + '[name="checkout[' + addressType + '][company]"],'
+          + '[name="checkout[' + addressType + '][last_name]"],'
+          + '[name="checkout[' + addressType + '][first_name]"]'
+        );
+        
+        $addresses.alphanum({
+          onlyUTF8: true
+        });
+        
+        
+        
+        $addresses.trigger('change');
+        
+        $(document).on('change', '[name="checkout[' + addressType + '][id]"]', function() {
+          $addresses.trigger('change');
+        });
+        
+      }
+      
+    });
+    
+  })(jQuery);
+</script>
+
+    
+    
+    
+    
+    
+    
+
+    
+      
+
+      
+
+
+
+  
+
+    
+
+  
+
+    <!-- Snippet plus_google_autocomplete -->
+
+  
+
+  
+    <script>
+      var pageChangeChecker = function(name, section, callback) {
+        // checking for a specific class-attribute, else it's been erased by page:change
+        if (!$(section).hasClass(name)) {
+          if (typeof(callback) === 'function') {
+            $(section).addClass(name);
+            callback();
+          } else {
+            console.warn('pageChangeChecker requires a function for the callback parameter');
+          }
+        }
+      };
+    </script>
+    <script src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/shopify_checkout_autocomplete.js?17034451570685622822" defer="defer"></script>
+
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt4zJctaBH5z7WzYrewqQ69PTr8fwMCXo&libraries=places&language=en&callback=setupShopifyCheckoutAutocomplete" defer="defer"></script>
+  
+
+  <script>
+    var setupShopifyCheckoutAutocomplete = (function ($) {
+      function setupShopifyCheckoutAutocomplete() {
+
+        // Initialize Google Maps on for Shipping Address form and Billing Address form.
+        if (Shopify.Checkout.step === 'contact_information' || Shopify.Checkout.step === 'payment_method') {
+          var addressInput = $('form input[name="checkout[shipping_address][address1]"]').length ? 'shipping_address' : 'billing_address';
+
+          function checkoutAutocompleteInit() {
+
+            var placesAutocomplete = new ShopifyCheckoutAutocomplete();
+
+            placesAutocomplete.init({
+              addressInput: addressInput,
+              geolocate: true,
+              countryError: "translation missing: en.plus.checkout.field_errors.country_invalid",
+              address1ErrorPlaceholder: "Address"
+            });
+          }
+
+          $(document).on('page:load page:change', function() {
+            pageChangeChecker('autocomplete-active', '[name="checkout['+addressInput+'][address1]"]', checkoutAutocompleteInit);
+          });
+        }
+
+      }
+
+      return setupShopifyCheckoutAutocomplete;
+
+    })(jQuery);
+  </script>
+
+
+
+  </head>
+  <body>
+        <a href="#main-header" class="skip-to-content">
+  Skip to content
+</a>
+
+
+
+    
+    <div class="banner" data-header>
+      <div class="wrap">
+          
+<a class="logo logo--left" href="https://kith.com">
+    <img alt="Kith" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?17034451570685622822" />
+</a>
+<h1 class="visually-hidden">
+  Inventory issues
+</h1>
+
+
+      </div>
+    </div>
+
+        <button class="order-summary-toggle order-summary-toggle--show shown-if-js" data-trekkie-id="order_summary_toggle" aria-expanded="false" aria-controls="order-summary" data-drawer-toggle="[data-order-summary]">
+  <span class="wrap">
+    <span class="order-summary-toggle__inner">
+      <span class="order-summary-toggle__icon-wrapper">
+        <svg width="20" height="19" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__icon">
+          <path d="M17.178 13.088H5.453c-.454 0-.91-.364-.91-.818L3.727 1.818H0V0h4.544c.455 0 .91.364.91.818l.09 1.272h13.45c.274 0 .547.09.73.364.18.182.27.454.18.727l-1.817 9.18c-.09.455-.455.728-.91.728zM6.27 11.27h10.09l1.454-7.362H5.634l.637 7.362zm.092 7.715c1.004 0 1.818-.813 1.818-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817zm9.18 0c1.004 0 1.817-.813 1.817-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817z" />
+        </svg>
+      </span>
+      <span class="order-summary-toggle__text order-summary-toggle__text--show">
+        <span>Show order summary</span>
+        <svg width="11" height="6" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="#000"><path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z" /></svg>
+      </span>
+      <span class="order-summary-toggle__text order-summary-toggle__text--hide">
+        <span>Hide order summary</span>
+        <svg width="11" height="7" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="#000"><path d="M6.138.876L5.642.438l-.496.438L.504 4.972l.992 1.124L6.138 2l-.496.436 3.862 3.408.992-1.122L6.138.876z" /></svg>
+      </span>
+      <span class="order-summary-toggle__total-recap total-recap" data-order-summary-section="toggle-total-recap">
+        <span class="total-recap__final-price" data-checkout-payment-due-target="14000">$140.00</span>
+      </span>
+    </span>
+  </span>
+</button>
+
+
+
+
+    <div class="content" data-content>
+      <div class="wrap">
+
+        <div class="main" role="main">
+          <div class="main__header">
+              
+<a class="logo logo--left" href="https://kith.com">
+    <img alt="Kith" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?17034451570685622822" />
+</a>
+<h1 class="visually-hidden">
+  Inventory issues
+</h1>
+
+
+            
+            <script>
+              $(document).ready(function () {
+                if(window.location.href.indexOf("orders") > -1) {
+                  $(".main__header").append('<div class="snb"><a href="https://kith.com/" class="step__footer__continue-btn btn snb"><span class="btn__content snb">Continue shopping</span><i class="btn__spinner icon icon--button-spinner"></i></a></div>');
+                } 
+              });
+            </script>
+
+            
+            
+                    <ul class="breadcrumb ">
+      <li class="breadcrumb__item breadcrumb__item--completed">
+        <a class="breadcrumb__link" data-trekkie-id="breadcrumb_cart_link" href="https://kith.com/cart">Cart</a>
+        <svg class="icon-svg icon-svg--size-10 breadcrumb__chevron-icon" aria-hidden="true" focusable="false"> <use xlink:href="#chevron-right" /> </svg>
+      </li>
+
+      <li class="breadcrumb__item breadcrumb__item--blank">
+        <a class="breadcrumb__link" data-trekkie-id="breadcrumb_contact_information_link" href="/942252/checkouts/fb067d885fa1ba24f424377deb2729b2?step=contact_information">Customer information</a>
+          <svg class="icon-svg icon-svg--size-10 breadcrumb__chevron-icon" aria-hidden="true" focusable="false"> <use xlink:href="#chevron-right" /> </svg>
+      </li>
+      <li class="breadcrumb__item breadcrumb__item--blank">
+        <span class="breadcrumb__text">Shipping method</span>
+          <svg class="icon-svg icon-svg--size-10 breadcrumb__chevron-icon" aria-hidden="true" focusable="false"> <use xlink:href="#chevron-right" /> </svg>
+      </li>
+      <li class="breadcrumb__item breadcrumb__item--blank">
+        <span class="breadcrumb__text">Payment method</span>
+      </li>
+  </ul>
+
+
+
+                  <div data-alternative-payments>
+</div>
+
+
+
+            
+          </div>
+          <div class="main__content">
+             
+
+            
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<div class="section section--page-title">
+  <svg focusable="false" aria-hidden="true" class="icon-svg icon-svg--size-48 exclamation-mark section__hanging-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" stroke-width="2"><circle class="exclamation-mark__circle" cx="25" cy="25" r="24" fill="none"/><path class="exclamation-mark__line" d="M25 12v18"/><circle class="exclamation-mark__dot" cx="25" cy="37" r="1"/></svg>
+  <h2 class="section__title" id="main-header" tabindex="-1">Inventory issues</h2>
+  <p class="section__text">
+      Some products became unavailable and your cart has been updated. We&#39;re sorry for the inconvenience.
+  </p>
+</div>
+
+<div class="section">
+  <div class="section__content">
+    <table class="stock-problems-table">
+      <thead class="stock-problem-table__header">
+        <tr>
+          <th scope="col" colspan="2">Description</th>
+          <th scope="col">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td class="product__image">
+              <div class="product-thumbnail">
+  <div class="product-thumbnail__wrapper">
+    <img alt="Nike Air Max 1 Premium - Black / Oil Grey / University Red - 6.5" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0094/2252/products/DSC_7697_c36be2b1-6147-40c9-a5d5-ae3f6b687c95_small.JPG?17034451570685622822" />
+  </div>
+    <span class="product-thumbnail__quantity" aria-hidden="true">1</span>
+</div>
+
+            </td>
+            <td class="product__description">
+              <span class="product__description__name page-main__emphasis">Nike Air Max 1 Premium - Black / Oil Grey / University Red</span>
+              <span class="product__description__variant page-main__small-text">6.5</span>
+
+            </td>
+              <td class="product__status product__status--sold-out">
+                <svg class="icon-svg icon-svg--size-14 icon-svg--inline-before product__status__icon" aria-hidden="true" focusable="false"> <use xlink:href="#status-sold-out" /> </svg>Sold out
+              </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  <form class="edit_checkout" action="/942252/checkouts/fb067d885fa1ba24f424377deb2729b2" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="Y8k2Qn4R4eVZKcEk/2MU1wzFSpY3rrLqIwbSOfxvHCwMT4zYNvvfJRVTdmMmdcF2J70fIcPrc4tpic2Rg7ezrw==" />
+    <div class="step__footer">
+        <input type="hidden" name="checkout[line_items][0][id]" id="checkout_line_items_0_id" value="542a2c0d863acb3992ca12b510986eb6" />
+        <input type="hidden" name="checkout[line_items][0][quantity]" id="checkout_line_items_0_quantity" value="0" />
+
+      <input type="submit" name="commit" value="Continue" id="continue-shopping" class="step__footer__continue-btn btn" />
+
+      <a class="step__footer__previous-link" data-trekkie-id="previous_step_link" href="https://kith.com/cart"><svg focusable="false" aria-hidden="true" class="icon-svg icon-svg--color-accent icon-svg--size-10 previous-link__icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M8 1L7 0 3 4 2 5l1 1 4 4 1-1-4-4"/></svg><span class="step__footer__previous-link-content">Return to cart</span></a>
+    </div>
+</form>
+
+  <span class="visually-hidden" id="forwarding-external-new-window-message">
+  Opens external website in a new window.
+</span>
+
+<span class="visually-hidden" id="forwarding-new-window-message">
+  Opens in a new window.
+</span>
+
+<span class="visually-hidden" id="forwarding-external-message">
+  Opens external website.
+</span>
+
+<span class="visually-hidden" id="checkout-context-step-one">
+  Customer information - Kith - Checkout
+</span>
+
+
+
+
+            
+
+
+
+    
+          </div>
+          <div class="main__footer">
+              <div role="contentinfo" aria-label="Footer">
+    <ul class="policy-list">
+        <li class="policy-list__item">
+          <a aria-haspopup="dialog" data-modal="policy-402712" data-close-text="Close" href="/942252/policies/402712.html">Refund policy</a>
+        </li>
+        <li class="policy-list__item">
+          <a aria-haspopup="dialog" data-modal="policy-402732" data-close-text="Close" href="/942252/policies/402732.html">Terms of service</a>
+        </li>
+    </ul>
+    
+    
+</div>
+
+
+          </div>
+        </div>
+                <div class="sidebar" role="complementary">
+          <div class="sidebar__header">
+              
+<a class="logo logo--left" href="https://kith.com">
+    <img alt="Kith" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/0094/2252/t/118/assets/logo.png?17034451570685622822" />
+</a>
+<h1 class="visually-hidden">
+  Inventory issues
+</h1>
+
+
+          </div>
+          <div class="sidebar__content">
+                <div id="order-summary" class="order-summary order-summary--is-collapsed" data-order-summary>
+  <h2 class="visually-hidden-if-js">Order summary</h2>
+
+  <div class="order-summary__sections">
+    
+<div class="order-summary__section order-summary__section--product-list">
+  <div class="order-summary__section__content">
+    <table class="product-table">
+      <caption class="visually-hidden">Shopping cart</caption>
+      <thead>
+        <tr>
+          <th scope="col"><span class="visually-hidden">Product image</span></th>
+          <th scope="col"><span class="visually-hidden">Description</span></th>
+          <th scope="col"><span class="visually-hidden">Quantity</span></th>
+          <th scope="col"><span class="visually-hidden">Price</span></th>
+        </tr>
+      </thead>
+      <tbody data-order-summary-section="line-items">
+        <tr class="product " data-product-id="220491415559" data-variant-id="2189076070407" data-product-type="Sneakers" data-customer-ready-visible>
+          <td class="product__image">
+            <div class="product-thumbnail">
+  <div class="product-thumbnail__wrapper">
+    <img alt="Nike Air Max 1 Premium - Black / Oil Grey / University Red - 6.5" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0094/2252/products/DSC_7697_c36be2b1-6147-40c9-a5d5-ae3f6b687c95_small.JPG?17034451570685622822" />
+  </div>
+    <span class="product-thumbnail__quantity" aria-hidden="true">1</span>
+</div>
+
+          </td>
+          <td class="product__description">
+            <span class="product__description__name order-summary__emphasis">Nike Air Max 1 Premium - Black / Oil Grey / University Red</span>
+            <span class="product__description__variant order-summary__small-text">6.5</span>
+
+          </td>
+          <td class="product__quantity visually-hidden">
+            1
+          </td>
+          <td class="product__price">
+            <span class="order-summary__emphasis">$140.00</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="order-summary__scroll-indicator" aria-hidden="true" tabindex="-1">
+      Scroll for more items
+      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" viewBox="0 0 10 12"><path d="M9.817 7.624l-4.375 4.2c-.245.235-.64.235-.884 0l-4.375-4.2c-.244-.234-.244-.614 0-.848.245-.235.64-.235.884 0L4.375 9.95V.6c0-.332.28-.6.625-.6s.625.268.625.6v9.35l3.308-3.174c.122-.117.282-.176.442-.176.16 0 .32.06.442.176.244.234.244.614 0 .848"/></svg>
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="order-summary__section order-summary__section--total-lines" data-order-summary-section="payment-lines">
+        <table class="total-line-table">
+  <caption class="visually-hidden">Cost summary</caption>
+  <thead>
+    <tr>
+      <th scope="col"><span class="visually-hidden">Description</span></th>
+      <th scope="col"><span class="visually-hidden">Price</span></th>
+    </tr>
+  </thead>
+    <tbody class="total-line-table__tbody">
+      <tr class="total-line total-line--subtotal">
+        <th class="total-line__name" scope="row">Subtotal</th>
+        <td class="total-line__price">
+          <span class="order-summary__emphasis" data-checkout-subtotal-price-target="14000">
+            $140.00
+          </span>
+        </td>
+      </tr>
+
+
+        <tr class="total-line total-line--shipping">
+          <th class="total-line__name" scope="row">Shipping</th>
+          <td class="total-line__price">
+            <span class="order-summary__emphasis" data-checkout-total-shipping-target="0">
+              <span aria-hidden="true">—</span><span class="visually-hidden">Not yet available</span>
+            </span>
+          </td>
+        </tr>
+
+        <tr class="total-line total-line--taxes hidden" data-checkout-taxes>
+          <th class="total-line__name" scope="row">Taxes</th>
+          <td class="total-line__price">
+            <span class="order-summary__emphasis" data-checkout-total-taxes-target="0">—</span>
+          </td>
+        </tr>
+
+
+
+    </tbody>
+  <tfoot class="total-line-table__footer">
+    <tr class="total-line">
+      <th class="total-line__name payment-due-label" scope="row">
+        <span class="payment-due-label__total">Total</span>
+      </th>
+      <td class="total-line__price payment-due">
+          <span class="payment-due__currency">USD</span>
+        <span class="payment-due__price" data-checkout-payment-due-target="14000">
+          $140.00
+        </span>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<div class="visually-hidden" aria-live="polite" aria-atomic="true" role="status">
+  Updated total price:
+  <span data-checkout-payment-due-target="14000">
+    $140.00
+  </span>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+  <div id="partial-icon-symbols" data-tg-refresh="partial-icon-symbols" data-tg-refresh-always="true" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg"><symbol id="status-sold-out"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g stroke="currentColor" stroke-width="2" stroke-linecap="square" fill="none"><circle cx="7" cy="7" r="6"/><path d="M11.066 2.934l-7.628 7.628"/></g></svg></symbol>
+<symbol id="chevron-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M2 1l1-1 4 4 1 1-1 1-4 4-1-1 4-4"/></svg></symbol>
+<symbol id="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M15.1 2.3L13.7.9 8 6.6 2.3.9.9 2.3 6.6 8 .9 13.7l1.4 1.4L8 9.4l5.7 5.7 1.4-1.4L9.4 8"/></svg></symbol>
+<symbol id="spinner-small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M32 16c0 8.837-7.163 16-16 16S0 24.837 0 16 7.163 0 16 0v2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14h2z"/></svg></symbol></svg></div>
+
+
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.ShopifyAnalytics = window.ShopifyAnalytics || {};
+      window.ShopifyAnalytics.meta = window.ShopifyAnalytics.meta || {};
+      window.ShopifyAnalytics.meta.currency = 'USD';
+      var meta = {"page":{"path":"\/checkout\/stock_problems","search":"","url":"https:\/\/kith.com\/942252\/checkouts\/fb067d885fa1ba24f424377deb2729b2\/stock_problems"}};
+      for (var attr in meta) {
+        window.ShopifyAnalytics.meta[attr] = meta[attr];
+      }
+    </script>
+<script>window.ShopifyAnalytics.merchantGoogleAnalytics = function() {
+  
+};
+</script>
+<script class="analytics">(window.gaDevIds=window.gaDevIds||[]).push('BwiEti');
+
+
+(function () {
+  var customDocumentWrite = function(content) {
+    var jquery = null;
+
+    if (window.jQuery) {
+      jquery = window.jQuery;
+    } else if (window.Checkout && window.Checkout.$) {
+      jquery = window.Checkout.$;
+    }
+
+    if (jquery) {
+      jquery('body').append(content);
+    }
+  };
+
+  var trekkie = window.ShopifyAnalytics.lib = window.trekkie = window.trekkie || [];
+  if (trekkie.integrations) {
+    return;
+  }
+  trekkie.methods = [
+    'identify',
+    'page',
+    'ready',
+    'track',
+    'trackForm',
+    'trackLink'
+  ];
+  trekkie.factory = function(method) {
+    return function() {
+      var args = Array.prototype.slice.call(arguments);
+      args.unshift(method);
+      trekkie.push(args);
+      return trekkie;
+    };
+  };
+  for (var i = 0; i < trekkie.methods.length; i++) {
+    var key = trekkie.methods[i];
+    trekkie[key] = trekkie.factory(key);
+  }
+  trekkie.load = function(config) {
+    trekkie.config = config;
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.onerror = function(e) {
+      (new Image()).src = '//v.shopify.com/internal_errors/track?error=trekkie_load';
+    };
+    script.async = true;
+    script.src = 'https://cdn.shopify.com/s/javascripts/tricorder/trekkie.storefront.min.js?v=2017.09.05.1';
+    var first = document.getElementsByTagName('script')[0];
+    first.parentNode.insertBefore(script, first);
+  };
+  trekkie.load(
+    {"Trekkie":{"appName":"checkout","development":false,"defaultAttributes":{"shopId":942252,"isMerchantRequest":null,"themeId":450002951,"themeCityHash":11797692115576248595,"checkoutToken":"fb067d885fa1ba24f424377deb2729b2"}},"Performance":{"navigationTimingApiMeasurementsEnabled":true,"navigationTimingApiMeasurementsSampleRate":1.0},"Google Analytics":{"trackingId":"UA-62344036-1","domain":"auto","siteSpeedSampleRate":"10","enhancedEcommerce":true,"doubleClick":true,"includeSearch":true},"Facebook Pixel":{"pixelIds":["1059291937516902"],"agent":"plshopify1.2"},"Clickstream":{},"Session Attribution":{}}
+  );
+
+  var loaded = false;
+  trekkie.ready(function() {
+    if (loaded) return;
+    loaded = true;
+
+    window.ShopifyAnalytics.lib = window.trekkie;
+    
+      ga('require', 'linker');
+      function addListener(element, type, callback) {
+        if (element.addEventListener) {
+          element.addEventListener(type, callback);
+        }
+        else if (element.attachEvent) {
+          element.attachEvent('on' + type, callback);
+        }
+      }
+      function decorate(event) {
+        event = event || window.event;
+        var target = event.target || event.srcElement;
+        if (target && (target.getAttribute('action') || target.getAttribute('href'))) {
+          ga(function (tracker) {
+            var linkerParam = tracker.get('linkerParam');
+            document.cookie = '_shopify_ga=' + linkerParam + '; ' + 'path=/';
+          });
+        }
+      }
+      addListener(window, 'load', function(){
+        for (var i=0; i < document.forms.length; i++) {
+          var action = document.forms[i].getAttribute('action');
+          if(action && action.indexOf('/cart') >= 0) {
+            addListener(document.forms[i], 'submit', decorate);
+          }
+        }
+        for (var i=0; i < document.links.length; i++) {
+          var href = document.links[i].getAttribute('href');
+          if(href && href.indexOf('/checkout') >= 0) {
+            addListener(document.links[i], 'click', decorate);
+          }
+        }
+      });
+    
+
+    var originalDocumentWrite = document.write;
+    document.write = customDocumentWrite;
+    try { window.ShopifyAnalytics.merchantGoogleAnalytics.call(this); } catch(error) {};
+    document.write = originalDocumentWrite;
+
+    
+        window.ShopifyAnalytics.lib.page(
+          "Checkout - Stock problems",
+          {"path":"\/checkout\/stock_problems","search":"","url":"https:\/\/kith.com\/942252\/checkouts\/fb067d885fa1ba24f424377deb2729b2\/stock_problems"}
+        );
+      
+    
+  });
+
+  
+      var eventsListenerScript = document.createElement('script');
+      eventsListenerScript.async = true;
+      eventsListenerScript.src = "//cdn.shopify.com/s/assets/shop_events_listener-f2c5800305098f0ebebdfa7d980c9abf56514c46d5305e97a7c476f7c9116163.js";
+      document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);
+    
+})();
+</script>
+
+    <script>
+      
+
+    </script>
+
+
+  <style>
+    
+      .section--billing-address {display:none !important;}
+      .section--shipping-address-recap a{display:none;}
+    
+    .snize-sticky-searchbox {
+      display: none !important;
+    }
+    </style>
+
+     <script>
+      $('<br/><p>By Clicking "Complete Order" you are accepting Kith&#39;s <a target="_blank" href="https://kith.com/pages/terms-and-conditions/">Terms and Conditions</a>.</p>').insertAfter( ".section--payment-method" );
+    </script>
+
+    <script>
+      $(document).bind("contextmenu",function(e) {
+    e.preventDefault();
+    });
+
+      $(document).keydown(function(e){
+       if(e.which === 123){
+          return false;
+      }
+  });
+    </script>
+
+    <div id="test"></div>
+    <script>
+      var search = window.location.search.substring(1).split('&')
+      var qs = search.reduce(function (a, c) {
+        var s = c.split('=')
+        a[s[0]] = s[1]
+        return a
+      }, {})
+      if (qs.applepay) {
+        // var test = document.getElementById('test')
+
+        // if (test) {
+        //   test.textContent = localStorage.getItem('cart_items') + ' // ' + localStorage.getItem('cart_cleared')
+        //   if (window.ApplePaySession) {
+        //     test.textContent = 'Apple pay available // ' + window.navigator.userAgent + ' // ' + window.location.href
+        //   } else {
+        //     test.textContent = 'Apple pay unavailable // ' + window.navigator.userAgent + ' // ' + window.location.href
+        //   }
+        // }
+
+        $(".main__content, .alternative-payment-separator, .main__footer").hide();
+        $("#paypal-express-checkout-btn").hide();
+        $(".alt-payment-list-container").before("<h3 style='width: 100%; text-align: center;font-size: 17px;margin-bottom:20px;'>Tap the Apple Pay button to submit your payment</h3>");
+     }
+
+     if (Shopify.Checkout.step === 'thank_you') {
+      localStorage.removeItem('cart_cleared');
+      localStorage.removeItem('cart_items');
+     }
+    </script>
+    
+    
+    
+        
+    
+    
+    
+    
+    
+    <style>
+      .finalInner {
+        color: #AEAEAE;
+        font-size: 1em;
+        text-align: center; 
+      }
+      @media only screen and (max-width: 768px) {
+        .finalInner {
+          text-align: left;
+        }
+      }
+    </style>
+
+    
+    <style>
+      .product__description__property{
+        font-size: 0;
+        display: none;
+      }
+    </style>
+    <script>
+      $(window).on('load', function(){
+        $('.product__description__property').remove();
+      })
+    </script>
+  </body>
+</html>
