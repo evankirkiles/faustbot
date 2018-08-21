@@ -17,6 +17,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QCheckBox>
 #ifndef QtConcurrent
 #include <QtConcurrent>
 #endif
@@ -308,6 +309,45 @@ private:
 
     // List view of all the proxies
     QListWidget* proxiesListView;
+};
+
+// Header for the URL Variant Parser window which gets all the products on a collection page or a product's page.
+class ProductParserDisplay : public QWidget {
+    Q_OBJECT
+public:
+    // Constructor that builds the parser window
+    explicit ProductParserDisplay(QWidget *parent = 0);
+    // Override the window closed
+    void closeEvent(QCloseEvent* event) override;
+
+signals:
+    // Emitted whenever the proxy display is closed
+    void closed();
+private slots:
+    // Parses the given fields and gets the products
+    void parseProds();
+
+private:
+    // Dark title bar widget
+    DarkTitleBar *dtb;
+
+    // Left column widgets
+    QLabel* parsedProductsLabel;
+    QTextBrowser* parsedProducts;
+
+    // Right column widgets
+    QLabel* websiteLabel;
+    QComboBox* websites;
+    QLabel* typeLabel;
+    QLabel* collectionLabel;
+    QCheckBox* collection;
+    QLabel* productLabel;
+    QCheckBox* product;
+    QLabel* extensionLabel;
+    QLineEdit* extension;
+    QLabel* limitLabel;
+    QLineEdit* limit;
+    QPushButton* goButton;
 };
 
 #endif //SHOPIFY_BOT_SIDEBARPOPUPS_HPP

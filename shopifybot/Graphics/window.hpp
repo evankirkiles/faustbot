@@ -76,6 +76,7 @@ private:
     // Bool telling whether windows are open
     bool addTaskOpen = false;
     bool addVIDTaskOpen = false;
+    bool parserOpen = false;
     bool profilesOpen = false;
     bool proxiesOpen = false;
     // Number of tasks created, incremented every time a task is added
@@ -96,12 +97,14 @@ private:
     AddVIDTaskDisplay* avidtd;
 
     // Other sidebar buttons
+    QPushButton* variantParser;
     QPushButton *billing;
     QPushButton *proxies;
-    QPushButton *logs;
+    QPushButton *settings;
     QLabel *copyrightLabel;
 
     // Sidebar windows
+    ProductParserDisplay* parserDisp;
     ProfilesDisplay* profilesDisp;
     ProxyDisplay* proxiesDisp;
 
@@ -123,6 +126,8 @@ private slots:
     void openNewTask();
     // Opens an add VID task window
     void openNewVIDTask();
+    // Opens the parser window
+    void openParser();
     // Opens the profiles window
     void openProfiles();
     // Opens the proxies window

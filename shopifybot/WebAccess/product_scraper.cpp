@@ -185,13 +185,15 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, const st
 
                 // The title of the product is the next line
                 getline(searchFile, str);
-                //str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+                str.erase(std::unique(str.begin(), str.end(),
+                                      [](char a, char b) { return a == ' ' && b == ' '; }), str.end());
                 boost::to_upper(str);
                 logFile << "TITLE: " << str;
 
                 // The colorway is four lines down
                 for (int i = 0; i < 4; ++i) { getline(searchFile, str); }
-                //str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+                str.erase(std::unique(str.begin(), str.end(),
+                                      [](char a, char b) { return a == ' ' && b == ' '; }), str.end());
                 boost::to_upper(str);
                 logFile << ", COLOR: " << str << "\n";
 

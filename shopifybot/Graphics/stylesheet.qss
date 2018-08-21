@@ -256,6 +256,8 @@ QTextEdit {
     border-radius: 3px;
     border-color: #232323;
     border-style: solid;
+    selection-color: #fce694;
+    selection-background-color: #232323;
 }
 
 

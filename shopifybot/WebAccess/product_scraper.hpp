@@ -95,9 +95,6 @@ public:
     // Return format: title, size, imageURL
     std::tuple<std::string, std::string, std::string> getNameSizeImage(const std::string& variantID);
 
-    // Function that downloads an image from shopify to the images folder for a given variantID.
-    void downloadImage(const std::string& URL);
-
 private:
     // Perform a cURL download to get the body of a page
     void performCURL(const std::string& URL);

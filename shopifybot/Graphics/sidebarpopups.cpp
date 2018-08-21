@@ -2,6 +2,7 @@
 // Created by Evan Kirkiles on 8/1/18.
 //
 
+#include <shopifybot/WebAccess/product_scraper.hpp>
 #include "sidebarpopups.hpp"
 
 // PROFILES DISPLAY
@@ -1277,4 +1278,152 @@ void AddProxyDisplay::createNewProxy() {
     // Close the window and emit submit
     emit submitted();
     close();
+}
+
+// Constructor to build the product parser display
+ProductParserDisplay::ProductParserDisplay(QWidget *parent) :
+        parsedProductsLabel(new QLabel("Parsed Products: ", this)),
+        parsedProducts(new QTextBrowser(this)),
+        websiteLabel(new QLabel("Website: ", this)),
+        websites(new QComboBox(this)),
+        typeLabel(new QLabel("Type: ", this)),
+        collectionLabel(new QLabel("Collection ", this)),
+        collection(new QCheckBox(this)),
+        productLabel(new QLabel("Product ", this)),
+        product(new QCheckBox(this)),
+        extensionLabel(new QLabel("Extension: ", this)),
+        extension(new QLineEdit(this)),
+        limitLabel(new QLabel("Limit: ", this)),
+        limit(new QLineEdit(this)),
+        goButton(new QPushButton("GO", this)),
+        QWidget(parent) {
+
+    // Set window properties
+    setFixedSize(250, 500);
+    setWindowTitle("URL Variant Parser");
+    setWindowFlags(Qt::FramelessWindowHint);
+    setFocusPolicy(Qt::ClickFocus);
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Create the dark title bar
+    dtb = new DarkTitleBar(this, true);
+
+    // Set the stylesheet for the window
+    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    setStyleSheet(StyleSheet);
+
+    // Create external qframe and layouts for dtb
+    auto externLayout = new QVBoxLayout();
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    auto bgLayout = new QVBoxLayout();
+    bgLayout->setContentsMargins(0, 0, 0, 0);
+    bg->setObjectName("main_window");
+    bg->setLayout(bgLayout);
+    bgLayout->addWidget(dtb);
+    externLayout->addWidget(bg);
+
+    // Build the main layout and sub layouts
+    auto mainLayout = new QVBoxLayout;
+    mainLayout->setContentsMargins(11, 3, 11, 11);
+
+    // Widget horizontal layouts
+    auto websiteLayout = new QHBoxLayout;
+    auto typeLayout = new QHBoxLayout;
+    auto extensionLayout = new QHBoxLayout;
+    auto limitLayout = new QHBoxLayout;
+
+    // Set widget properties
+    parsedProducts->setReadOnly(true);
+    parsedProducts->setObjectName("logs_text");
+    parsedProducts->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    parsedProducts->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    parsedProducts->setText("No products parsed yet.");
+    websiteLabel->setObjectName("addtask_mediocre_text");
+    websites->addItems(supported_sites::ssStringList);
+    typeLabel->setObjectName("addtask_mediocre_text");
+    typeLabel->setFixedWidth(35);
+    collection->setChecked(true);
+    extensionLabel->setObjectName("addtask_mediocre_text");
+    extension->setObjectName("addtask_editbox");
+    limitLabel->setObjectName("addtask_mediocre_text");
+    limitLabel->setFixedWidth(35);
+    limit->setObjectName("addtask_editbox");
+    limit->setValidator(new QIntValidator(1, 250));
+    limit->setText("20");
+    limit->setFixedWidth(35);
+    goButton->setObjectName("addtaskbutton");
+    goButton->setFixedSize(100, 30);
+
+    // Add the widgets to their layouts
+    websiteLayout->addWidget(websiteLabel);
+    websiteLayout->addWidget(websites);
+    mainLayout->addLayout(websiteLayout);
+    typeLayout->addStretch();
+    typeLayout->addWidget(typeLabel);
+    typeLayout->addWidget(collection);
+    typeLayout->addWidget(collectionLabel);
+    typeLayout->addWidget(product);
+    typeLayout->addWidget(productLabel);
+    typeLayout->addStretch();
+    mainLayout->addLayout(typeLayout);
+    extensionLayout->addWidget(extensionLabel);
+    extensionLayout->addWidget(extension);
+    mainLayout->addLayout(extensionLayout);
+    limitLayout->addStretch();
+    limitLayout->addWidget(limitLabel);
+    limitLayout->addWidget(limit);
+    limitLayout->addSpacing(10);
+    limitLayout->addWidget(goButton);
+    limitLayout->addStretch();
+    mainLayout->addLayout(limitLayout);
+    mainLayout->addWidget(parsedProductsLabel);
+    mainLayout->addWidget(parsedProducts);
+
+    // Finalize layout decisions
+    bgLayout->addLayout(mainLayout);
+    setLayout(externLayout);
+
+    // Make sure that collection and product are not both checked or neither checked
+    connect(collection, &QCheckBox::stateChanged, [this] () { product->setChecked(collection->checkState() == 0); } );
+    connect(product, &QCheckBox::stateChanged, [this] () { collection->setChecked(product->checkState() == 0); } );
+
+    // Connect the go button to the parse product slot
+    connect(goButton, SIGNAL(clicked()), this, SLOT(parseProds()));
+}
+
+// Override the window close event to emit the closed signal
+void ProductParserDisplay::closeEvent(QCloseEvent *event) {
+    emit closed();
+    QWidget::closeEvent(event);
+}
+
+// Uses the information in the lineedits and combobox to get all the models into a products log
+void ProductParserDisplay::parseProds() {
+
+    // Make sure all the necessary fields are filled
+    if (product->isChecked() && extension->text().isEmpty()) { extension->setFocus(); return; }
+
+    // Create a temporary shopify website handler
+    ShopifyWebsiteHandler swh(supported_sites::WEBSITES.at(websites->currentText().toStdString()), "temp");
+
+    // Pull the models from the given page for the specified method
+    if (collection->isChecked()) {
+        // Pull all the models from the collection page
+        swh.getAllModels(extension->text().toStdString(), std::string("?limit=").append(limit->text().toStdString()));
+
+        // Then load the file into the product parsed view
+        QFile* productsLog = new QFile(std::string(file_paths::PRODUCTS_LOG).append(supported_sites::WEBSITES.at(websites->currentText().toStdString()).title).append("temp.txt").c_str());
+        productsLog->open(QIODevice::ReadOnly);
+        if (productsLog->exists()) {
+            // If the products log is found, then parse their products
+            auto logStream = new QTextStream(productsLog);
+            parsedProducts->setText(logStream->readAll());
+        } else {
+            parsedProducts->setText("Error loading product log file.");
+        }
+    }
 }

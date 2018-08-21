@@ -7,7 +7,7 @@
 // Constructor for the Bot's main window
 BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Set the size of the window
-    setFixedSize(1100, 610);
+    setFixedSize(1100, 650);
     // Also set the stylesheet for the window
     QFile File("./shopifybot/Graphics/stylesheet.qss");
     File.open(QFile::ReadOnly);
@@ -87,12 +87,14 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     addVIDtask = new QPushButton("NEW VARIANT ID TASK", this);
     addVIDtask->setObjectName("addtaskbuttonv2");
     addVIDtask->setFixedHeight(50);
+    variantParser = new QPushButton("Parser", this);
+    variantParser->setObjectName("sidebuttons");
     billing = new QPushButton("Profiles", this);
     billing->setObjectName("sidebuttons");
     proxies = new QPushButton("Proxies", this);
     proxies->setObjectName("sidebuttons");
-    logs = new QPushButton("Logs", this);
-    logs->setObjectName("sidebuttons");
+    settings = new QPushButton("Settings", this);
+    settings->setObjectName("sidebuttons");
     copyrightLabel = new QLabel("© 2018 Evan Kirkiles - All Rights Reserved", this);
     copyrightLabel->setObjectName("copyrightlabel");
     // Add widgets to the left column
@@ -101,9 +103,10 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     leftColumn->addLayout(alltaskButtonsLayout);
     leftColumn->addWidget(addtask);
     leftColumn->addWidget(addVIDtask);
+    leftColumn->addWidget(variantParser);
     leftColumn->addWidget(billing);
     leftColumn->addWidget(proxies);
-    leftColumn->addWidget(logs);
+    leftColumn->addWidget(settings);
     leftColumn->addWidget(copyrightLabel);
     leftColumn->setAlignment(Qt::AlignTop);
 
@@ -143,13 +146,15 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     connect(addtask, SIGNAL(clicked()), this, SLOT(openNewTask()));
     // Open the add VID task window when the add VID task buton is clicked
     connect(addVIDtask, SIGNAL(clicked()), this, SLOT(openNewVIDTask()));
+    // Open the parser window when the parser button is clicked
+    connect(variantParser, SIGNAL(clicked()), this, SLOT(openParser()));
     // Open the profiles window when the profiles button is clicked
     connect(billing, SIGNAL(clicked()), this, SLOT(openProfiles()));
     // Open the proxies window when the proxies button is clicked
     connect(proxies, SIGNAL(clicked()), this, SLOT(openProxies()));
 
     // PLACEHOLDER CONNECT
-    connect(logs, SIGNAL(clicked()), this, SLOT(clearDirs()));
+    connect(settings, SIGNAL(clicked()), this, SLOT(clearDirs()));
 
     // Build the timer updated on second intervals
     timeChecker = new QTimer(this);
@@ -286,6 +291,24 @@ void BotWindow::openNewVIDTask() {
     // Connect the buildtask symbol to the addtask slot of the mainwindow
     connect(avidtd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, int)),
             this, SLOT(buildVIDTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, int)));
+}
+
+// Opens the parser window
+void BotWindow::openParser() {
+    if (parserOpen) {
+        // Show the currently open parser window
+        parserDisp->raise();
+        parserDisp->setFocus();
+        return;
+    }
+
+    // Build the window if it does not exist
+    parserDisp = new ProductParserDisplay();
+    parserDisp->show();
+    parserOpen = true;
+
+    // Make necessary connections
+    connect(parserDisp, &ProductParserDisplay::closed, [this] () { parserOpen = false; });
 }
 
 // Opens the profiles window
