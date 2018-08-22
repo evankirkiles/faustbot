@@ -66,7 +66,8 @@ namespace file_paths {
 
     const char* STYLESHEET = "./shopifybot/Graphics/Stylesheets/stylesheet.qss";
     const char* COLORSTYLESHEET = "./shopifybot/Graphics/Stylesheets/colorstylesheet.qss";
-    const char* TEMPCOLORSTYLESHEET = "./shopifybot/Graphics/Stylesheets/tempcolorstylesheet.qss";
+    const char* COLORSTYLESHEET_WITHVARS = "./shopifybot/Graphics/Stylesheets/colorstylesheet_withvars.qss";
+    const char* COLORSTYLESHEET_DEFAULT = "./shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss";
 
     const char* PROFILES_TXT = "./shopifybot/Infrastructure/profiles.txt";
     const char* TEMPPROFILES_TXT = "./shopifybot/Infrastructure/tempprofiles.txt";

@@ -21,7 +21,8 @@ add_executable(shopify_bot
         shopifybot/Graphics/popups.cpp
         shopifybot/Graphics/titlebar.cpp
         shopifybot/Graphics/sidebarpopups.cpp
-        shopifybot/Graphics/customwidgets.cpp)
+        shopifybot/Graphics/customwidgets.cpp
+        shopifybot/Graphics/Stylesheets/colorcustomizer.cpp)
 
 include_directories(shopifybot)
 include_directories(shopifybot_tests/lib/googletest/include shopifybot_tests/lib/googletest)

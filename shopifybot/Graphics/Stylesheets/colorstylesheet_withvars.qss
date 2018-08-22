@@ -1,19 +1,19 @@
 /* DEFAULT VARS
-    @MAINBG                 :-: #181818
-    @SECONDARYBG            :-: #151515
-    @FONT                   :-: "Futura"
-    @BORDER                 :-: #232323
-    @MAINTEXT               :-: #d2a15a
-    @SECONDARYTEXT          :-: #c4c0b2
-    @TASKID                 :-: #404040
-    @MAINACCENT             :-: #2b2e33
-    @SECONDARYMAINACCENT    :-: #323232
-    @MAINBUTTON             :-: #d2a15a
-    @MAINBUTTONPRESSED      :-: #dbab67
-    @SIDEBUTTON             :-: #1f1f1f
-    @SIDEBUTTONPRESSED      :-: #2b2e33
-    @SECONDARYBUTTON        :-: #a87f45
-    @SECONDARYBUTTONPRESSED :-: #dbab67
+    -MAINBG                 :-: @MAINBG;
+    -SECONDARYBG            :-: @SECONDARYBG;
+    -FONT                   :-: @FONT;
+    -BORDER                 :-: @BORDER;
+    -MAINTEXT               :-: @MAINTEXT;
+    -SECONDARYTEXT          :-: @SECONDARYTEXT;
+    -TASKID                 :-: @TASKID;
+    -MAINACCENT             :-: @MAINACCENT;
+    -SECONDARYMAINACCENT    :-: @SECONDARYMAINACCENT;
+    -MAINBUTTON             :-: @MAINBUTTON;
+    -MAINBUTTONPRESSED      :-: @MAINBUTTONPRESSED;
+    -SIDEBUTTON             :-: @SIDEBUTTON;
+    -SIDEBUTTONPRESSED      :-: @SIDEBUTTONPRESSED;
+    -SECONDARYBUTTON        :-: @SECONDARYBUTTON;
+    -SECONDARYBUTTONPRESSED :-: @SECONDARYBUTTONPRESSED;
 */
 
 #main_window {
@@ -229,7 +229,7 @@ QComboBox QAbstractItemView {
     font-family: @FONT;
     color: @MAINTEXT;
     selection-color: @SECONDARYTEXT;
-    selection-background-color: @BORDER
+    selection-background-color: @BORDER;
 }
 
 #proxiesstatustext {

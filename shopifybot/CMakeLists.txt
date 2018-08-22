@@ -9,7 +9,8 @@ set(HEADER_FILES
         Graphics/popups.hpp
         Graphics/titlebar.hpp
         Graphics/sidebarpopups.hpp
-        Graphics/customwidgets.hpp)
+        Graphics/customwidgets.hpp
+        Graphics/Stylesheets/colorcustomizer.hpp)
 
 set(SOURCE_FILES
         constants.cpp
@@ -20,6 +21,7 @@ set(SOURCE_FILES
         Graphics/popups.cpp
         Graphics/titlebar.cpp
         Graphics/sidebarpopups.cpp
-        Graphics/customwidgets.cpp)
+        Graphics/customwidgets.cpp
+        Graphics/Stylesheets/colorcustomizer.cpp)
 
 add_library(shopifybot STATIC ${SOURCE_FILES} ${HEADER_FILES})
