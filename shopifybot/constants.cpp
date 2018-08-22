@@ -64,10 +64,14 @@ namespace file_paths {
     const char* TIME_LOG = "./shopifybot/logs.txt";
     const char* TASK_LOG = "./shopifybot/Infrastructure/Logs/";
 
+    const char* STYLESHEET = "./shopifybot/Graphics/Stylesheets/stylesheet.qss";
+    const char* COLORSTYLESHEET = "./shopifybot/Graphics/Stylesheets/colorstylesheet.qss";
+    const char* TEMPCOLORSTYLESHEET = "./shopifybot/Graphics/Stylesheets/tempcolorstylesheet.qss";
+
     const char* PROFILES_TXT = "./shopifybot/Infrastructure/profiles.txt";
     const char* TEMPPROFILES_TXT = "./shopifybot/Infrastructure/tempprofiles.txt";
-    const char* CCARD_TXT = "./shopifybot/Infrastructure/readme.txt";
-    const char* TEMPCCARD_TXT = "./shopifybot/Infrastructure/tempreadme.txt";
+    const char* CCARD_TXT = "./shopifybot/Infrastructure/ccards.txt";
+    const char* TEMPCCARD_TXT = "./shopifybot/Infrastructure/tempccards.txt";
     const char* PROXIES_TXT = "./shopifybot/Infrastructure/proxies.txt";
     const char* TEMPPROXIES_TXT = "./shopifybot/Infrastructure/tempproxies.txt";
     const char* COOKIES_TXT = "./shopifybot/WebAccess/Contents/CookieJar/cookies.txt";

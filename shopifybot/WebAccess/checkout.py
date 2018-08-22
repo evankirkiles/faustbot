@@ -48,7 +48,7 @@ if j is None:
 # Go into the credit card file and find the correct credit card json data
 c = None
 ccardLine = -1
-with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
+with open('shopifybot/Infrastructure/ccards.txt') as ccinput_file:
 
     if j['ccard'] == 'Random':
         ccardLine = 0
@@ -58,7 +58,7 @@ with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
         ccardLine = random.randint(1, ccardLine + 1)
     ccinput_file.close()
 
-with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
+with open('shopifybot/Infrastructure/ccards.txt') as ccinput_file:
     currentLine = 0
     for i, line in enumerate(ccinput_file):
         currentLine += 1
@@ -68,7 +68,7 @@ with open('shopifybot/Infrastructure/readme.txt') as ccinput_file:
     ccinput_file.close()
 if c is None:
     # If it gets here (c is undefined), then the credit card has not been found
-    raise ValueError("Could not locate credit card in readme.txt")
+    raise ValueError("Could not locate credit card in ccards.txt")
 
 # Go into the proxy file and find the correct proxy json data
 p = None

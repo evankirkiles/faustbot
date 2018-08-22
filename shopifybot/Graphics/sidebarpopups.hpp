@@ -350,4 +350,12 @@ private:
     QPushButton* goButton;
 };
 
+// Header for the settings window which allows the user to edit various features of the bot
+class SettingsDisplay : public QWidget {
+    Q_OBJECT
+public:
+    // Constructor that builds the settings display
+
+};
+
 #endif //SHOPIFY_BOT_SIDEBARPOPUPS_HPP

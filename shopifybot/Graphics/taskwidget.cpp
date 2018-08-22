@@ -753,10 +753,13 @@ EditTaskDisplay::EditTaskDisplay(const QString& p_title, const QString& p_websit
     dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Create layouts
     auto externLayout = new QVBoxLayout();
@@ -974,10 +977,13 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
     dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Create layouts
     auto externLayout = new QVBoxLayout();

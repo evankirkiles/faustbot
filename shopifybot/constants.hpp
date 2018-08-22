@@ -97,6 +97,11 @@ namespace file_paths {
     extern const char* TIME_LOG;
     extern const char* TASK_LOG;
 
+    extern const char* STYLESHEET;
+
+    extern const char* COLORSTYLESHEET;
+    extern const char* TEMPCOLORSTYLESHEET;
+
     extern const char* PROFILES_TXT;
     extern const char* TEMPPROFILES_TXT;
     extern const char* CCARD_TXT;

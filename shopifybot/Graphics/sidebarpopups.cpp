@@ -62,10 +62,13 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Create external qframe and layouts for dtb
     auto externLayout = new QVBoxLayout();
@@ -654,10 +657,13 @@ AddCreditCardDisplay::AddCreditCardDisplay(const QString profiletitle, QWidget *
     dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Create external qframe and layouts for dtb
     auto externLayout = new QVBoxLayout();
@@ -989,10 +995,13 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
     dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Create external qframe and layouts for dtb
     auto externLayout = new QVBoxLayout();
@@ -1186,10 +1195,13 @@ AddProxyDisplay::AddProxyDisplay(int newIndex, ClickableCheckableImage* refreshe
     dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Create external qframe and layouts for dtb
     auto externLayout = new QVBoxLayout();
@@ -1310,10 +1322,13 @@ ProductParserDisplay::ProductParserDisplay(QWidget *parent) :
     dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Create external qframe and layouts for dtb
     auto externLayout = new QVBoxLayout();

@@ -1,0 +1,238 @@
+/* DEFAULT VARS
+    @MAINBG                 :-: #181818
+    @SECONDARYBG            :-: #151515
+    @FONT                   :-: "Futura"
+    @BORDER                 :-: #232323
+    @MAINTEXT               :-: #d2a15a
+    @SECONDARYTEXT          :-: #c4c0b2
+    @TASKID                 :-: #404040
+    @MAINACCENT             :-: #2b2e33
+    @SECONDARYMAINACCENT    :-: #323232
+    @MAINBUTTON             :-: #d2a15a
+    @MAINBUTTONPRESSED      :-: #dbab67
+    @SIDEBUTTON             :-: #1f1f1f
+    @SIDEBUTTONPRESSED      :-: #2b2e33
+    @SECONDARYBUTTON        :-: #a87f45
+    @SECONDARYBUTTONPRESSED :-: #dbab67
+*/
+
+#main_window {
+	background: @MAINBG;
+}
+#moreinfo_window {
+	background: @MAINBG;
+}
+QLabel {
+	color: @MAINTEXT;
+    font-family: @FONT;
+}
+#bot_title {
+    color: @MAINTEXT;
+    font-family: @FONT;
+}
+#status_title {
+    color: @SECONDARYTEXT;
+    font-family: @FONT;
+}
+#status_text {
+    background-color: @SECONDARYBG;
+    color: #FFFFFF;
+    font-family: @FONT;
+    border-color: @BORDER;
+}
+#task_title {
+    color: @MAINTEXT;
+    font-family: @FONT;
+}
+#task_important_text {
+    color: @MAINTEXT;
+    font-family: @FONT;
+}
+#task_identifier {
+    color: @TASKID;
+    font-family: @FONT;
+}
+#task_important_var {
+    color: @MAINTEXT;
+    font-family: @FONT;
+}
+#task_mediocre_text {
+    color: @SECONDARYTEXT;
+    font-family: @FONT;
+}
+#task_tiny_text {
+    color: @SECONDARYTEXT;
+    font-family: @FONT;
+}
+#task_dateedit {
+    color: @MAINTEXT;
+    font-family: @FONT;
+    background-color: @SECONDARYBG;
+    selection-color: @SECONDARYTEXT;
+    selection-background-color: @BORDER;
+}
+#task_mediocre_title {
+    color: @SECONDARYTEXT;
+    font-family: @FONT;
+}
+#task_mediocre_title_v2 {
+    color: @SECONDARYTEXT;
+    font-family: @FONT;
+}
+#horizontal_line {
+    background-color: @MAINACCENT;
+}
+#vertical_line {
+    background-color: @MAINACCENT;
+}
+QPushButton#sidebuttons:disabled {
+    background-color: @MAINACCENT;
+    color: #6b6b6b;
+}
+QPushButton#sidebuttons:pressed {
+    background-color: @SIDEBUTTONPRESSED;
+}
+QPushButton#sidebuttons {
+    background-color: @SIDEBUTTON;
+    border-color: @SIDEBUTTON;
+	color: @MAINTEXT;
+	font-family: @FONT;
+}
+QPushButton#checkfornamebutton:pressed {
+    background-color: @MAINBUTTONPRESSED;
+}
+QPushButton#checkfornamebutton {
+    background-color: @MAINBUTTON;
+    border-color: @MAINACCENT;
+    color: @MAINACCENT;
+    font-family: @FONT;
+}
+QPushButton#startallbutton:pressed {
+    background-color: #4f755b;
+}
+QPushButton#startallbutton {
+    background-color: #6ea37f;
+	color: @MAINACCENT;
+	font-family: @FONT;
+}
+QPushButton#stopallbutton:pressed {
+    background-color: #a35341;
+}
+QPushButton#stopallbutton {
+    background-color: #c96650;
+	color: @MAINACCENT;
+	font-family: @FONT;
+}
+QPushButton#addtaskbutton:pressed {
+    background-color: @MAINBUTTONPRESSED;
+}
+QPushButton#addtaskbutton {
+    background-color: @MAINBUTTON;
+    border-color: @MAINACCENT;
+	color: @MAINACCENT;
+	font-family: @FONT;
+}
+QPushButton#addtaskbuttonv2:pressed {
+    background-color: @SECONDARYBUTTONPRESSED;
+}
+QPushButton#addtaskbuttonv2 {
+    background-color: @SECONDARYBUTTON;
+    border-color: @MAINACCENT;
+	color: @MAINACCENT;
+	font-family: @FONT;
+}
+#copyrightlabel {
+    color: @SECONDARYMAINACCENT;
+    font-family: @FONT;
+}
+QScrollArea {
+    background-color: @SECONDARYBG;
+    color: @MAINTEXT;
+    font-family: @FONT;
+}
+#scrollarea {
+    background-color: @SECONDARYBG;
+}
+#task {
+    background-color: #1e2023;
+    color: @MAINTEXT;
+    font-family: @FONT;
+}
+QTextEdit {
+    background-color: @SECONDARYBG;
+    color: @MAINTEXT;
+    font-family: @FONT;
+    border-color: @BORDER;
+    selection-color: @SECONDARYTEXT;
+    selection-background-color: @BORDER;
+}
+
+#logs_text {
+    color: @SECONDARYTEXT;
+}
+#logs_window {
+    background: @MAINBG;
+}
+#newtaskwindow {
+ 	background: @MAINBG;
+}
+QTextEdit#task_title_textedit {
+    background-color: @SECONDARYBG;
+    color: @MAINTEXT;
+    font-family: @FONT;
+    border-color: @BORDER;
+}
+QComboBox {
+    background-color: @SECONDARYBG;
+    border-color: @MAINACCENT;
+    color: @MAINTEXT;
+    font-family: @FONT;
+}
+QComboBox QAbstractItemView {
+    selection-background-color: @MAINTEXT;
+    background-color: @SECONDARYBG;
+}
+#addtask_mediocre_text {
+    color: @SECONDARYTEXT;
+    font-family: @FONT;
+}
+#addtask_editbox {
+    background-color: @SECONDARYBG;
+    color: @MAINTEXT;
+    font-family: @FONT;
+    border-color: @BORDER;
+    selection-color: @SECONDARYTEXT;
+    selection-background-color: @BORDER;
+}
+#task_title_lineedit {
+    background-color: @SECONDARYBG;
+    color: @MAINTEXT;
+    font-family: @FONT;
+    border-color: @BORDER;
+    selection-color: @SECONDARYTEXT;
+    selection-background-color: @BORDER;
+}
+#addtask_datetime {
+    color: @MAINTEXT;
+    font-family: @FONT;
+    background-color: @SECONDARYBG;
+    selection-color: @SECONDARYTEXT;
+    selection-background-color: @BORDER;
+}
+
+#titlebar {
+    background-color: @TITLEBARBG;
+}
+
+#profileslistview {
+    background-color: @SECONDARYBG;
+    font-family: @FONT;
+    color: @MAINTEXT;
+    selection-color: @SECONDARYTEXT;
+    selection-background-color: @BORDER
+}
+
+#proxiesstatustext {
+    color: @SECONDARYMAINACCENT;
+    font-family: @FONT;
+}

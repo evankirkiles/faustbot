@@ -1,0 +1,220 @@
+#main_window {
+	background: #181818;
+}
+#moreinfo_window {
+	background: #181818;
+}
+QLabel {
+	color: #D2A15A;
+    font-family: "Futura";
+}
+#bot_title {
+    color: #D2A15A;
+    font-family: "Futura";
+}
+#status_title {
+    color: #c4c0b2;
+    font-family: "Futura";
+}
+#status_text {
+    background-color: #151515;
+    color: #FFFFFF;
+    font-family: "Futura";
+    border-color: #232323;
+}
+#task_title {
+    color: #D2A15A;
+    font-family: "Futura";
+}
+#task_important_text {
+    color: #D2A15A;
+    font-family: "Futura";
+}
+#task_identifier {
+    color: #404040;
+    font-family: "Futura";
+}
+#task_important_var {
+    color: #D2A15A;
+    font-family: "Futura";
+}
+#task_mediocre_text {
+    color: #c4c0b2;
+    font-family: "Futura";
+}
+#task_tiny_text {
+    color: #c4c0b2;
+    font-family: "Futura";
+}
+#task_dateedit {
+    color: #D2A15A;
+    font-family: "Futura";
+    background-color: #151515;
+    selection-color: #fce694;
+    selection-background-color: #171717;
+}
+#task_mediocre_title {
+    color: #c4c0b2;
+    font-family: "Futura";
+}
+#task_mediocre_title_v2 {
+    color: #c4c0b2;
+    font-family: "Futura";
+}
+#horizontal_line {
+    background-color: #2b2e33;
+}
+#vertical_line {
+    background-color: #2b2e33;
+}
+QPushButton#sidebuttons:disabled {
+    background-color: #2b2e33;
+    color: #6b6b6b;
+}
+QPushButton#sidebuttons:pressed {
+    background-color: #2b2e33;
+}
+QPushButton#sidebuttons {
+    background-color: #1f1f1f;
+    border-color: #1f1f1f;
+	color: #D2A15A;
+	font-family: "Futura";
+}
+QPushButton#checkfornamebutton:pressed {
+    background-color: #dbc987;
+}
+QPushButton#checkfornamebutton {
+    background-color: #D2A15A;
+    border-color: #2b2e33;
+    color: #2b2e33;
+    font-family: "Futura";
+}
+QPushButton#startallbutton:pressed {
+    background-color: #4f755b;
+}
+QPushButton#startallbutton {
+    background-color: #6ea37f;
+	color: #2b2e33;
+	font-family: "Futura";
+}
+QPushButton#stopallbutton:pressed {
+    background-color: #a35341;
+}
+QPushButton#stopallbutton {
+    background-color: #c96650;
+	color: #2b2e33;
+	font-family: "Futura";
+}
+QPushButton#addtaskbutton:pressed {
+    background-color: #dbab67;
+}
+QPushButton#addtaskbutton {
+    background-color: #D2A15A;
+    border-color: #2b2e33;
+	color: #2b2e33;
+	font-family: "Futura";
+}
+QPushButton#addtaskbuttonv2:pressed {
+    background-color: #dbab67;
+}
+QPushButton#addtaskbuttonv2 {
+    background-color: #a87f45;
+    border-color: #a87f45;
+	color: #2b2e33;
+	font-family: "Futura";
+}
+#copyrightlabel {
+    color: #282828;
+    font-family: "Futura";
+}
+QScrollArea {
+    background-color: #151515;
+    color: #D2A15A;
+    font-family: "Futura";
+}
+#scrollarea {
+    background-color: #151515;
+}
+#task {
+    background-color: #1e2023;
+    color: #D2A15A;
+    font-family: "Futura";
+}
+QTextEdit {
+    background-color: #151515;
+    color: #D2A15A;
+    font-family: "Futura";
+    border-color: #232323;
+    selection-color: #fce694;
+    selection-background-color: #232323;
+}
+
+#logs_text {
+    color: #c4c0b2;
+}
+#logs_window {
+    background: #181818;
+}
+#newtaskwindow {
+ 	background: #181818;
+}
+QTextEdit#task_title_textedit {
+    background-color: #151515;
+    color: #D2A15A;
+    font-family: "Futura";
+    border-color: #232323;
+}
+QComboBox {
+    background-color: #151515;
+    border-color: #2b2e33;
+    color: #D2A15A;
+    font-family: "Futura";
+}
+QComboBox QAbstractItemView {
+    selection-background-color: #D2A15A;
+    background-color: #151515;
+}
+#addtask_mediocre_text {
+    color: #c4c0b2;
+    font-family: "Futura";
+}
+#addtask_editbox {
+    background-color: #151515;
+    color: #D2A15A;
+    font-family: "Futura";
+    border-color: #232323;
+    selection-color: #fce694;
+    selection-background-color: #232323;
+}
+#task_title_lineedit {
+    background-color: #151515;
+    color: #D2A15A;
+    font-family: "Futura";
+    border-color: #232323;
+    selection-color: #fce694;
+    selection-background-color: #232323;
+}
+#addtask_datetime {
+    color: #D2A15A;
+    font-family: "Futura";
+    background-color: #151515;
+    selection-color: #fce694;
+    selection-background-color: #232323;
+}
+
+#titlebar {
+    background-color: #111111;
+}
+
+#profileslistview {
+    background-color: #151515;
+    font-family: "Futura";
+    color: #D2A15A;
+    selection-color: #fce694;
+    selection-background-color: #505050
+}
+
+#proxiesstatustext {
+    color: #323232;
+    font-family: "Futura";
+}

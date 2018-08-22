@@ -8,11 +8,14 @@
 BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Set the size of the window
     setFixedSize(1100, 650);
-    // Also set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    // Set the stylesheet for the window
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
     // Finally, set some various window attributes
     setAttribute(Qt::WA_QuitOnClose);
     setWindowFlags(Qt::FramelessWindowHint);

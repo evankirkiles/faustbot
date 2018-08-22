@@ -3,169 +3,112 @@
 
  */
 #main_window {
-	background: #181818;
 	border-radius: 8px;
 }
 #moreinfo_window {
-	background: #181818;
 	border-radius: 8px;
 }
-QLabel {
-	color: #D2A15A;
-    font-family: "Futura";
-}
 #bot_title {
-    color: #D2A15A;
     font-size: 20px;
     margin-top: 8px;
     margin-bottom: 0px;
     max-height: 20px;
-    font-family: "Futura";
 }
 #status_title {
-    color: #c4c0b2;
     text-align: center;
     font-size: 15px;
     min-height: 18px;
     max-width: 60px;
-    font-family: "Futura";
 }
 #status_text {
-    background-color: #151515;
-    color: #FFFFFF;
-    font-family: "Futura";
     font-size: 12px;
     padding: 3px 3px 3px 3px;
     border-radius: 3px;
-    border-color: #232323;
     border-style: solid;
     min-width: 100px;
     max-width: 100px;
     max-height: 25px;
 }
 #task_title {
-    color: #D2A15A;
     font-size: 15px;
     margin-top: 0px;
     margin-bottom: 3px;
     max-height: 20px;
     max-width: 50px;
-    font-family: "Futura";
 }
 #task_important_text {
-    color: #D2A15A;
     font-size: 18px;
     min-height: 24px;
     max-height: 30px;
-    font-family: "Futura";
 }
 #task_identifier {
-    color: #404040;
     font-size: 13px;
     max-width: 17px;
     margin-right: 3px;
     margin-left: 3px;
-    font-family: "Futura";
 }
 #task_important_var {
-    color: #D2A15A;
     font-size: 15px;
     max-width: 20px;
-    font-family: "Futura";
 }
 #task_mediocre_text {
-    color: #c4c0b2;
     font-size: 10px;
     min-height: 12px;
-    font-family: "Futura";
 }
 #task_tiny_text {
-    color: #c4c0b2;
     font-size: 10px;
     max-height: 10px;
-    font-family: "Futura";
 }
 #task_dateedit {
-    color: #D2A15A;
-    font-family: "Futura";
-    background-color: #151515;
     font-size: 13px;
     border: 1px solid #151515;
     max-width: 85px;
     margin-top: 2px;
-    selection-color: #fce694;
-    selection-background-color: #171717;
 }
 #task_mediocre_title {
-    color: #c4c0b2;
     font-size: 12px;
     max-width: 100px;
-    font-family: "Futura";
 }
 #task_mediocre_title_v2 {
-    color: #c4c0b2;
     font-size: 12px;
     max-width: 60px;
-    font-family: "Futura";
-}
-#horizontal_line {
-    background-color: #2b2e33;
-}
-#vertical_line {
-    background-color: #2b2e33;
 }
 QPushButton#sidebuttons:disabled {
-    background-color: #2b2e33;
-    color: #6b6b6b;
     border: 1px solid gray;
 }
 QPushButton#sidebuttons:pressed {
-    background-color: #2b2e33;
     border-style: inset;
     border: 1px solid gray;
 }
 QPushButton#sidebuttons {
-    background-color: #1f1f1f;
     border-width: 1px;
     border-style: solid;
-    border-color: #1f1f1f;
 	border-radius: 15px;
-	color: #D2A15A;
-	font-family: "Futura";
 	min-height: 30px;
 	max-height: 30px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
 QPushButton#checkfornamebutton:pressed {
-    background-color: #dbc987;
     border-style: inset;
     border: 1px solid gray;
 }
 QPushButton#checkfornamebutton {
-    background-color: #D2A15A;
     border-width: 1px;
     border-style: solid;
-    border-color: #2b2e33;
     border-radius: 5px;
-    color: #2b2e33;
-    font-family: "Futura";
     width: 40px;
     height: 23px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 QPushButton#startallbutton:pressed {
-    background-color: #4f755b;
     border-style: inset;
     border: 1px solid gray;
 }
 QPushButton#startallbutton {
-    background-color: #6ea37f;
     border: none;
 	border-radius: 8px;
-	color: #2b2e33;
-	font-family: "Futura";
 	min-height: 25px;
 	max-height: 25px;
 	margin-top: 0px;
@@ -173,16 +116,12 @@ QPushButton#startallbutton {
 	margin-bottom: 0px;
 }
 QPushButton#stopallbutton:pressed {
-    background-color: #a35341;
     border-style: inset;
     border: 1px solid gray;
 }
 QPushButton#stopallbutton {
-    background-color: #c96650;
     border: none;
 	border-radius: 8px;
-	color: #2b2e33;
-	font-family: "Futura";
 	min-height: 25px;
 	max-height: 25px;
 	margin-top: 0px;
@@ -190,58 +129,39 @@ QPushButton#stopallbutton {
 	margin-bottom: 0px;
 }
 QPushButton#addtaskbutton:pressed {
-    background-color: #dbab67;
     border-style: inset;
     border: 1px solid gray;
 }
 QPushButton#addtaskbutton {
-    background-color: #D2A15A;
     border-width: 1px;
     border-style: solid;
-    border-color: #2b2e33;
 	border-radius: 10px;
-	color: #2b2e33;
-	font-family: "Futura";
 	margin-top: 2px;
 	margin-bottom: 5px;
 }
 QPushButton#addtaskbuttonv2:pressed {
-    background-color: #dbab67;
     border-style: inset;
     border: 1px solid gray;
 }
 QPushButton#addtaskbuttonv2 {
-    background-color: #a87f45;
     border-width: 1px;
     border-style: solid;
-    border-color: #a87f45;
 	border-radius: 10px;
-	color: #2b2e33;
-	font-family: "Futura";
 	margin-top: 3px;
 	margin-bottom: 5px;
 }
 #copyrightlabel {
-    color: #282828;
     text-align: center;
     font-size: 10px;
     max-height: 14px;
-    font-family: "Futura";
 }
 QScrollArea {
-    background-color: #141414;
-    color: #D2A15A;
     border-radius: 10px;
-    font-family: "Futura";
 }
 #scrollarea {
-    background-color: #141414;
     border-radius: 10px;
 }
 #task {
-    background-color: #1e2023;
-    color: #D2A15A;
-    font-family: "Futura";
     border: 1px;
     border-radius: 10px;
     margin-top: 2px;
@@ -252,45 +172,20 @@ QScrollArea {
     min-height: 90px;
 }
 QTextEdit {
-    background-color: #151515;
-    color: #D2A15A;
-    font-family: "Futura";
     font-size: 12px;
     padding: 3px 18px 3px 4px;
     border-radius: 3px;
-    border-color: #232323;
     border-style: solid;
-    selection-color: #fce694;
-    selection-background-color: #232323;
 }
 
-
-#logs_text {
-    color: #c4c0b2;
-}
-#logs_window {
-    background: #181818;
-}
-
-#newtaskwindow {
- 	background: #181818;
-}
 QTextEdit#task_title_textedit {
-    background-color: #151515;
-    color: #D2A15A;
-    font-family: "Futura";
     font-size: 15px;
     padding: 3px 3px 3px 3px;
     border-radius: 4px;
-    border-color: #232323;
     border-style: solid;
     max-height: 30px;
 }
 QComboBox {
-    background-color: #151515;
-    border-color: #2b2e33;
-    color: #D2A15A;
-    font-family: "Futura";
     outline: 1px solid #151515;
     font-size: 12px;
     padding: 0px 3px 0px 3px;
@@ -299,70 +194,41 @@ QComboBox QAbstractItemView {
     min-width: 160px;
     outline: 1px solid #151515;
     border: 1px solid #181818;
-    selection-background-color: #D2A15A;
-    background-color: #151515;
 }
 #addtask_mediocre_text {
-    color: #c4c0b2;
     font-size: 13px;
     min-height: 15px;
-    font-family: "Futura";
 }
 #addtask_editbox {
-    background-color: #151515;
-    color: #D2A15A;
-    font-family: "Futura";
     font-size: 13px;
     padding: 3px 3px 3px 3px;
     border-radius: 4px;
-    border-color: #232323;
     border-style: solid;
-    selection-color: #fce694;
-    selection-background-color: #232323;
     max-height: 20px;
 }
 #task_title_lineedit {
-    background-color: #151515;
-    color: #D2A15A;
-    font-family: "Futura";
     font-size: 15px;
     padding: 3px 3px 3px 3px;
     border-radius: 4px;
-    border-color: #232323;
     border-style: solid;
-    selection-color: #fce694;
-    selection-background-color: #232323;
     max-height: 20px;
 }
 #addtask_datetime {
-    color: #D2A15A;
-    font-family: "Futura";
-    background-color: #151515;
     font-size: 13px;
     border: 1px solid #151515;
     max-width: 200px;
-    selection-color: #fce694;
-    selection-background-color: #171717;
 }
 
 #titlebar {
-    background-color: #111111;
     border-radius: 8px;
 }
 
 #profileslistview {
-    background-color: #141414;
     border-radius: 8px;
-    font-family: "Futura";
-    color: #D2A15A;
     font-size: 12px;
-    selection-color: #fce694;
-    selection-background-color: #505050
 }
 
 #proxiesstatustext {
-    color: #323232;
     font-size: 10px;
-    font-family: "Futura";
     text-align: center;
 }

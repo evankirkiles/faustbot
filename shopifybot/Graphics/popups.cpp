@@ -19,10 +19,13 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
     setAttribute(Qt::WA_QuitOnClose, false);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Initialize dark title bar
     dtb = new DarkTitleBar(this, false, true);
@@ -106,10 +109,13 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Create layouts
     auto externLayout = new QVBoxLayout();
@@ -361,10 +367,13 @@ AddVIDTaskDisplay::AddVIDTaskDisplay(QWidget *parent) : QWidget(parent) {
     dtb = new DarkTitleBar(this, true);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Create layouts
     auto externLayout = new QVBoxLayout();
@@ -639,10 +648,13 @@ MoreInfoDisplay::MoreInfoDisplay(unsigned int width, unsigned int height, const 
     setAttribute(Qt::WA_TranslucentBackground);
 
     // Set the stylesheet for the window
-    QFile File("./shopifybot/Graphics/stylesheet.qss");
+    QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    setStyleSheet(StyleSheet);
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
 
     // Create the window layouts
     auto externLayout = new QVBoxLayout();
