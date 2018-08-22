@@ -77,6 +77,10 @@ public:
     void getAllModels(const std::string& collection, bool availabilityFiltering = true,
             const std::string& bonusparams="?limit=25");
 
+    // Function that scrapes all the variants for a product on a given product page. This revolves around the existence
+    // of the Shopify 'handle":"' string which contains all variant information for submitting to cart.
+    void getAllModelsProductPage(const std::string& extension);
+
     // Function that returns the product id from the product's page (the one that has a BUY NOW button)
     // To specify color, they are indexed from the top: highest is 0, then 1, then 2, etc.
     std::string getVariantIDFrom(const std::string& addToURL, const std::string& size, std::string color = "");

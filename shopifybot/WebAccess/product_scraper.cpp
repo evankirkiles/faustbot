@@ -306,6 +306,84 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
     logFile.close();
 }
 
+// Writes all the variants on a product page to a file
+void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension) {
+
+    // Open time logging file
+    std::ofstream timeLogs;
+    timeLogs.open(file_paths::TIME_LOG, std::ios::trunc);
+    // Begin clock to check how much time this function takes
+    std::clock_t begin;
+    begin = clock();
+
+    // First perform the cURL on the given product page
+    performCURL(std::string(sourceURL.baseURL).append(extension));
+
+    // Parse through the downloaded html file
+    std::ifstream searchFile(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt");
+    std::string str;
+
+    // Also open a new file to write to which will act as the system output
+    std::ofstream logFile(std::string(file_paths::PRODUCTS_LOG) + sourceURL.title + taskID + ".txt", std::ios::trunc);
+
+    // Locate the handle":" string on the product page
+    bool handleFound = false;
+    while (getline(searchFile, str)) {
+
+        // Search for the handle
+        const unsigned long handlePos = str.find("handle\":\"");
+        if (handlePos != std::string::npos) {
+            handleFound = true;
+            // Get the id, which is after the first occurrence of "id":" in the HTML body
+            const unsigned long titlePos = str.find("\"title\":\"");
+            str.erase(0, titlePos + 9);
+            std::string title = str.substr(0, str.find('"'));
+            // Remove any unnecessary whitespace from the product's title
+            title.erase(std::unique(title.begin(), title.end(),
+                                  [](char a, char b) { return a == ' ' && b == ' '; }), title.end());
+            logFile << "TITLE: " << title << "\n";
+
+            str.erase(0, handlePos + 9);
+
+            // Find the id, which comes before the size and color
+            unsigned long tokenpos = str.find(":[{\"id\":");
+            while (tokenpos != std::string::npos) {
+
+                // Retrieve the id for the variant
+                str.erase(0, tokenpos + 8);
+                unsigned long temptoken = str.find(',');
+                std::string id = str.substr(0, temptoken);
+                str.erase(0, temptoken + 10);
+
+                // Now get the title of each variant and write it to the products log
+                temptoken = str.find('"');
+                std::string name = str.substr(0, temptoken);
+                name.erase(std::unique(name.begin(), name.end(),
+                                        [](char a, char b) { return a == ' ' && b == ' '; }), name.end());
+                logFile << name << " :-: " << id << "\n";
+
+                // Now continue searching for ID's
+                tokenpos = str.find("},{\"id\":");
+            }
+
+            // Handle will only occur once on the product page
+            break;
+        }
+    }
+
+    // If handle was not found, then say so in the file
+    if (!handleFound) {
+        logFile << "Product page not valid, could not parse variants. \n";
+    }
+
+    // Close out file
+    logFile.close();
+
+    // Mark how much time has passed since function began
+    timeLogs << (std::clock() - begin) / (double) CLOCKS_PER_SEC << " seconds to get variants from product page. \n";
+    timeLogs.close();
+}
+
 // Gets the ID from a product's purchase page
 std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL, const std::string& size, std::string color) {
 

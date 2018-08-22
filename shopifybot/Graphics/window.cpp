@@ -348,10 +348,11 @@ void BotWindow::openProxies() {
 // Clears all the temporary file directories
 void BotWindow::clearDirs() {
 
-    // Remove the contents directory and recreate it and its subdirectory cookiejar
+    // Remove the contents directory and recreate it and its subdirectory cookiejar with cookies file
     boost::filesystem::remove_all(file_paths::CONTENTS_DIR);
     boost::filesystem::create_directory(file_paths::CONTENTS_DIR);
     boost::filesystem::create_directory(std::string(file_paths::CONTENTS_DIR).append("/CookieJar"));
+    boost::filesystem::ofstream(std::string(file_paths::COOKIES_TXT));
 
     // Removes the logs directory and recreates it
     boost::filesystem::remove_all(file_paths::LOGS_DIR);

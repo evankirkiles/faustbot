@@ -1414,16 +1414,19 @@ void ProductParserDisplay::parseProds() {
     if (collection->isChecked()) {
         // Pull all the models from the collection page
         swh.getAllModels(extension->text().toStdString(), false, std::string("?limit=").append(limit->text().toStdString()));
+    } else {
+        // Pull all the variants from the product page
+        swh.getAllModelsProductPage(extension->text().toStdString());
+    }
 
-        // Then load the file into the product parsed view
-        QFile* productsLog = new QFile(std::string(file_paths::PRODUCTS_LOG).append(supported_sites::WEBSITES.at(websites->currentText().toStdString()).title).append("temp.txt").c_str());
-        productsLog->open(QIODevice::ReadOnly);
-        if (productsLog->exists()) {
-            // If the products log is found, then parse their products
-            auto logStream = new QTextStream(productsLog);
-            parsedProducts->setText(logStream->readAll());
-        } else {
-            parsedProducts->setText("Error loading product log file.");
-        }
+    // Then load the file into the product parsed view
+    QFile* productsLog = new QFile(std::string(file_paths::PRODUCTS_LOG).append(supported_sites::WEBSITES.at(websites->currentText().toStdString()).title).append("temp.txt").c_str());
+    productsLog->open(QIODevice::ReadOnly);
+    if (productsLog->exists()) {
+        // If the products log is found, then parse their products
+        auto logStream = new QTextStream(productsLog);
+        parsedProducts->setText(logStream->readAll());
+    } else {
+        parsedProducts->setText("Error loading product log file.");
     }
 }
