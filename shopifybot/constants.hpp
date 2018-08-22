@@ -143,6 +143,7 @@ namespace file_paths {
     extern const char* REFRESHICON_IMG;
     extern const char* REFRESHICON2_IMG;
     extern const char* DEFAULTTHUMB_IMG;
+    extern const char* GEAR_IMG;
 }
 
 namespace constants {

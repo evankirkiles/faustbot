@@ -48,6 +48,9 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Vertical layouts for the top layout
     auto leftColumn = new QVBoxLayout;
     auto alltaskButtonsLayout = new QHBoxLayout;
+    auto bottomHorLayout = new QHBoxLayout;
+    bottomHorLayout->setContentsMargins(0, 0, 0, 0);
+    bottomHorLayout->setSizeConstraint(QLayout::SetMinimumSize);
     auto rightColumn = new QVBoxLayout;
     // Horizontal layout that goes above the listview
     auto tasktitleRow = new QHBoxLayout;
@@ -93,8 +96,16 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     billing->setObjectName("sidebuttons");
     proxies = new QPushButton("Proxies", this);
     proxies->setObjectName("sidebuttons");
-    settings = new QPushButton("Settings", this);
+    clear = new QPushButton("Clear", this);
+    clear->setObjectName("sidebuttons");
+    clear->setStyleSheet("margin-top: 0px; margin-bottom: 0px;");
+    settings = new QPushButton(this);
     settings->setObjectName("sidebuttons");
+    settings->setFixedSize(32, 30);
+    settings->setIcon(QIcon(file_paths::GEAR_IMG));
+    settings->setStyleSheet("margin-top: 0px; margin-bottom: 0px;");
+    bottomHorLayout->addWidget(clear);
+    bottomHorLayout->addWidget(settings);
     copyrightLabel = new QLabel("© 2018 Evan Kirkiles - All Rights Reserved", this);
     copyrightLabel->setObjectName("copyrightlabel");
     // Add widgets to the left column
@@ -106,7 +117,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     leftColumn->addWidget(variantParser);
     leftColumn->addWidget(billing);
     leftColumn->addWidget(proxies);
-    leftColumn->addWidget(settings);
+    leftColumn->addLayout(bottomHorLayout);
     leftColumn->addWidget(copyrightLabel);
     leftColumn->setAlignment(Qt::AlignTop);
 
@@ -154,7 +165,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     connect(proxies, SIGNAL(clicked()), this, SLOT(openProxies()));
 
     // PLACEHOLDER CONNECT
-    connect(settings, SIGNAL(clicked()), this, SLOT(clearDirs()));
+    connect(clear, SIGNAL(clicked()), this, SLOT(clearDirs()));
 
     // Build the timer updated on second intervals
     timeChecker = new QTimer(this);

@@ -100,6 +100,7 @@ private:
     QPushButton* variantParser;
     QPushButton *billing;
     QPushButton *proxies;
+    QPushButton *clear;
     QPushButton *settings;
     QLabel *copyrightLabel;
 
