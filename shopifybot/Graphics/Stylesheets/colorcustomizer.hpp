@@ -18,6 +18,8 @@
 #include <string>
 #endif
 
+#include <iostream>
+
 // Include the filepaths
 #include "constants.hpp"
 

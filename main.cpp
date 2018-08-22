@@ -4,20 +4,16 @@
 #include <QApplication>
 #endif
 
+#include "Graphics/Stylesheets/colorcustomizer.hpp"
+
 #include "Infrastructure/tasks.hpp"
 #include "Graphics/window.hpp"
 
 int main(int argc, char **argv) {
 
-    // Create two test tanks and run them
-    // Task task1("Kith Task", supported_sites::KITH, "1", "/collections/footwear", {"Asics"}, {"White"}, "9", 3, 3);
-    // Task task2("Bodega Task", supported_sites::BODEGA, "1", "/collections/footwear", {"Air Max"}, {"Cargo"}, "9", 1, 3);
-
-    // std::thread t1(&Task::run, task1);
-    // std::thread t2(&Task::run, task2);
-
-    // t1.join();
-    // t2.join();
+    // Test the color customizer
+    ColorCustomizer cc = ColorCustomizer();
+    cc.resetAllValues();
 
     // Builds the QApplication
     QApplication app(argc, argv);

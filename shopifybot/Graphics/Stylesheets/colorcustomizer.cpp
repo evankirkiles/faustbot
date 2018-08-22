@@ -19,7 +19,7 @@ ColorCustomizer::ColorCustomizer() {
             str.erase(0, dashPos);
 
             // Get an lvalue of the variable name
-            const std::string varName = str.substr(0, str.find(' '));
+            const std::string varName = str.substr(1, str.find(' ') - 1);
             // Finally, set the variable's value
             str.erase(0, str.find(" :-: ") + 5);
             str.pop_back();
@@ -45,7 +45,7 @@ ColorCustomizer::ColorCustomizer() {
             str.erase(0, dashPos);
 
             // Get an lvalue of the variable name
-            const std::string varName = str.substr(0, str.find(' '));
+            const std::string varName = str.substr(1, str.find(' ') - 1);
             // Finally, set the variable's value
             str.erase(0, str.find(" :-: ") + 5);
             str.pop_back();
@@ -82,7 +82,7 @@ void ColorCustomizer::changeValue(const std::string &name, const std::string &va
             // When the name identifier is found, then replace it with the variable
             tempstr = str.substr(0, atPos);
             str.erase(0, atPos);
-            std::string varName = str.substr(0, str.find(';'));
+            std::string varName = str.substr(1, str.find(';') - 1);
             tempstr.append(currentColors[varName]).append(";");
         } else {
             // Otherwise just write in the line
