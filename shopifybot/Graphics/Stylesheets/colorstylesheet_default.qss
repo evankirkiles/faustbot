@@ -16,6 +16,7 @@
     -SECONDARYBUTTONPRESSED :-: #dbab67;
     -TERTIARYBUTTON         :-: #131313;
     -TERTIARYBUTTONPRESSED  :-: #111111;
+    -TITLEBARBG             :-: #111111;
 */
 
 #main_window {

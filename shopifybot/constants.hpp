@@ -160,7 +160,7 @@ namespace constants {
     extern const unsigned int BASE_NUMRESULTS;
 
     // Array of variables settable through the Color Customizer
-    extern const std::vector<std::string> CUSTOMIZEVARS;
+    extern const std::map<std::string, std::string> CUSTOMIZEVARS;
 }
 
 

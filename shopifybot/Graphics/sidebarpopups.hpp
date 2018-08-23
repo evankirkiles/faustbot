@@ -369,6 +369,10 @@ private slots:
     void changeVar();
 
 private:
+    // Store the real variable name
+    std::string realVarName;
+    std::string initialVal;
+
     // Pointer to the color customizer object
     ColorCustomizer* cc;
 

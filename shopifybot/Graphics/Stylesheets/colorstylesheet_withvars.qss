@@ -16,6 +16,7 @@
     -SECONDARYBUTTONPRESSED :-: @SECONDARYBUTTONPRESSED;
     -TERTIARYBUTTON         :-: @TERTIARYBUTTON;
     -TERTIARYBUTTONPRESSED  :-: @TERTIARYBUTTONPRESSED;
+    -TITLEBARBG             :-: @TITLEBARBG;
 */
 
 #main_window {
@@ -153,7 +154,7 @@ QPushButton#addtaskbuttonv2 {
 	font-family: @FONT;
 }
 #copyrightlabel {
-    color: @SECONDARYMAINACCENT;
+    color: @SECONDARYACCENT;
     font-family: @FONT;
 }
 QScrollArea {

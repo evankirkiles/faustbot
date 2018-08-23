@@ -122,11 +122,14 @@ namespace constants {
     // TODO: Make a base numresults checker
     const unsigned int BASE_NUMRESULTS = 10;
 
-    const std::vector<std::string> CUSTOMIZEVARS = {
-            "MAINBG", "SECONDARYBG", "FONT", "BORDER", "MAINTEXT", "SECONDARYTEXT", "TASKID",
-            "MAINACCENT", "SECONDARYACCENT", "MAINBUTTON", "MAINBUTTONPRESSED", "SIDEBUTTON",
-            "SIDEBUTTONPRESSED", "SECONDARYBUTTON", "SECONDARYBUTTONPRESSED", "TERTIARYBUTTON",
-            "TERTIARYBUTTONPRESSED"
+    const std::map<std::string, std::string> CUSTOMIZEVARS = {
+            {"Background 1", "MAINBG"}, {"Background 2", "SECONDARYBG"}, {"Font", "FONT"}, {"Border", "BORDER"},
+            {"Text 1", "MAINTEXT"}, {"Text 2", "SECONDARYTEXT"}, {"Task ID", "TASKID"},
+            {"Accents 1", "MAINACCENT"}, {"Accents 2", "SECONDARYACCENT"}, {"Button 1", "MAINBUTTON"},
+            {"Button 1 -PRESSED-", "MAINBUTTONPRESSED"}, {"Button 2", "SIDEBUTTON"},
+            {"Button 2 -PRESSED-", "SIDEBUTTONPRESSED"}, {"Button 3", "SECONDARYBUTTON"},
+            {"Button 3 -PRESSED-", "SECONDARYBUTTONPRESSED"}, {"Button 4", "TERTIARYBUTTON"},
+            {"Button 4 -PRESSED", "TERTIARYBUTTONPRESSED"}, {"Title Bar", "TITLEBARBG"}
     };
 }
 

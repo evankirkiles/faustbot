@@ -1471,14 +1471,21 @@ SettingsListItem::SettingsListItem(const std::string& name, ColorCustomizer* cco
 
     // Get the value of the object through the color customizer and put it into the qlineedit
     if (variableTitle->text() != "VARIABLE") {
+        realVarName = constants::CUSTOMIZEVARS.at(name);
+        initialVal = cc->currentColors[realVarName];
         value = new QLineEdit(this);
-        value->setText(cc->currentColors[name].c_str());
+        value->setText(cc->currentColors[realVarName].c_str());
         value->setFixedWidth(60);
         value->setObjectName("proxieslistedit");
+
+        // Connect the qlineedit's signals to its slots and lambdas
+        connect(value, &QLineEdit::editingFinished, [this] () { value->setText(initialVal.c_str()); });
+        connect(value, SIGNAL(returnPressed()), this, SLOT(changeVar()));
+
         mainLayout->addWidget(value);
         // Build the preview of the text as well
         previewValue = new QLabel(this);
-        if (variableTitle->text() != "FONT") {
+        if (variableTitle->text() != "Font") {
             previewValue->setStyleSheet(std::string("background-color: ").append(value->text().toStdString()).append("; border-radius: 2px;").c_str());
             previewValue->setFixedHeight(14);
         } else {
@@ -1500,19 +1507,37 @@ SettingsListItem::SettingsListItem(const std::string& name, ColorCustomizer* cco
     setLayout(mainLayout);
 }
 
-// Resets the variable
+// Resets the variable if its text box is currently selected
 void SettingsListItem::resetVar() {
+    // If the text edit is not selected, do nothing
+    if (!value->hasFocus()) { return; }
 
+    // Otherwise reset the variable and then set the value
+    cc->resetValue(realVarName);
+    value->setText(cc->currentColors[realVarName].c_str());
+
+    // Update the preview
+    updateVar();
 }
 
 // Updates the list item with its new value
 void SettingsListItem::updateVar() {
-
+    // Update the variable with its new information
+    if (variableTitle->text() != "Font") {
+        previewValue->setStyleSheet(std::string("background-color: ").append(value->text().toStdString()).append("; border-radius: 2px;").c_str());
+    } else {
+        previewValue->setStyleSheet(std::string("font-family: ").append(value->text().toStdString()).append(";").c_str());
+    }
 }
 
 // Changes the list item in the cc to its new value
 void SettingsListItem::changeVar() {
-
+    // Get the text from the qlineedit and change the value
+    cc->changeValue(realVarName, value->text().toStdString());
+    // Now update the preview
+    updateVar();
+    // Also change the stored value
+    initialVal = value->text().toStdString();
 }
 
 // MARK: Settings Display
@@ -1591,12 +1616,18 @@ SettingsDisplay::SettingsDisplay(QWidget *parent) :
 
     // Add all variable names to the list
     for (const auto &i : constants::CUSTOMIZEVARS) {
-        auto tempItem = new SettingsListItem(i, &cc, this);
+        auto tempItem = new SettingsListItem(i.first, &cc, this);
         auto tempLWidgItem = new QListWidgetItem();
         tempLWidgItem->setSizeHint(tempItem->sizeHint());
         variablesList->addItem(tempLWidgItem);
         variablesList->setItemWidget(tempLWidgItem, tempItem);
+
+        // Make connections for each widg
+        connect(resetSingleButton, SIGNAL(clicked()), tempItem, SLOT(resetVar()));
     }
+
+    // Make necessary connections
+    connect(resetAllButton, SIGNAL(clicked()), this, SLOT(resetAll()));
 }
 
 // Override the close event to emit a closed signal
@@ -1608,4 +1639,18 @@ void SettingsDisplay::closeEvent(QCloseEvent *event) {
 // Resets all the variables to their default states
 void SettingsDisplay::resetAll() {
 
+    // Clear the variables list and reload the variables in, having copied over the defaults
+    variablesList->clear();
+    cc.resetAllValues();
+    // Add all variable names to the list
+    for (const auto &i : constants::CUSTOMIZEVARS) {
+        auto tempItem = new SettingsListItem(i.first, &cc, this);
+        auto tempLWidgItem = new QListWidgetItem();
+        tempLWidgItem->setSizeHint(tempItem->sizeHint());
+        variablesList->addItem(tempLWidgItem);
+        variablesList->setItemWidget(tempLWidgItem, tempItem);
+
+        // Make connections for each widg
+        connect(resetSingleButton, SIGNAL(clicked()), tempItem, SLOT(resetVar()));
+    }
 }
