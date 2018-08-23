@@ -139,6 +139,16 @@ QPushButton#addtaskbutton {
 	margin-top: 2px;
 	margin-bottom: 5px;
 }
+QPushButton#subbutton:pressed {
+    border-style: inset;
+    border: 1px solid gray;
+}
+QPushButton#subbutton {
+    border-width: 1px;
+    border-style: solid;
+	border-radius: 5px;
+	min-height: 20px;
+}
 QPushButton#addtaskbuttonv2:pressed {
     border-style: inset;
     border: 1px solid gray;
@@ -231,4 +241,16 @@ QComboBox QAbstractItemView {
 #proxiesstatustext {
     font-size: 10px;
     text-align: center;
+}
+#proxieslistitem {
+    font-size: 12px;
+}
+#proxiesindexitem {
+    font-size: 10px;
+}
+#proxieslistedit {
+    font-size: 11px;
+    border-radius: 2px;
+    border-style: solid;
+    height: 20px;
 }

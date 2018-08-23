@@ -888,16 +888,19 @@ ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString us
         QWidget(parent) {
 
     // Set the object name and height
-    setObjectName("proxylistitem");
-    setStyleSheet(settings);
     setContentsMargins(2, 2, 2, 2);
 
     // Give each QLabel a fixed size
     indexDisp->setFixedWidth(20);
+    indexDisp->setObjectName(settings);
     ipLabel->setFixedWidth(110);
+    ipLabel->setObjectName(settings);
     portLabel->setFixedWidth(40);
+    portLabel->setObjectName(settings);
     usernameLabel->setFixedWidth(80);
+    usernameLabel->setObjectName(settings);
     passwordLabel->setFixedWidth(70);
+    passwordLabel->setObjectName(settings);
 
     // Build the status code light on the proxylistitem
     proxyOn.setDevicePixelRatio(2.0);
@@ -921,6 +924,7 @@ ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString us
     } else {
         statusIMG = new QLabel("?", this);
         statusIMG->setFixedWidth(16);
+        statusIMG->setObjectName(settings);
         mainLayout->addWidget(statusIMG);
     }
     setLayout(mainLayout);
@@ -980,7 +984,7 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
                                                    file_paths::REFRESH2_IMG, file_paths::REFRESH_IMG,
                                                    file_paths::DISABLEDREFRESH_IMG, this)),
         proxiesListView(new QListWidget(this)),
-        columnProxies(new ProxyListItem("#", "IP", "PORT", "USERNAME", "PASSWORD", "color:#c4c0b2;font-size:10px;", this)),
+        columnProxies(new ProxyListItem("#", "IP", "PORT", "USERNAME", "PASSWORD", "proxiesindexitem", this)),
         QWidget(parent) {
 
     // Set window properties
@@ -1444,4 +1448,164 @@ void ProductParserDisplay::parseProds() {
     } else {
         parsedProducts->setText("Error loading product log file.");
     }
+}
+
+// MARK: Settings List Item
+// Put this in the settings window list to be able to edit the colors of the client.
+SettingsListItem::SettingsListItem(const std::string& name, ColorCustomizer* ccobj, QWidget *parent, QString settingsName) :
+        variableTitle(new QLabel(name.c_str(), this)),
+        cc(ccobj),
+        QWidget(parent) {
+
+    // Main layout
+    auto mainLayout = new QHBoxLayout;
+    mainLayout->setContentsMargins(1, 1, 1, 1);
+    mainLayout->addWidget(variableTitle);
+
+    // Set some properties
+    setFixedSize(300, 24);
+    setContentsMargins(3, 1, 3, 1);
+    setObjectName(settingsName);
+    variableTitle->setFixedWidth(150);
+    variableTitle->setObjectName(settingsName);
+
+    // Get the value of the object through the color customizer and put it into the qlineedit
+    if (variableTitle->text() != "VARIABLE") {
+        value = new QLineEdit(this);
+        value->setText(cc->currentColors[name].c_str());
+        value->setFixedWidth(60);
+        value->setObjectName("proxieslistedit");
+        mainLayout->addWidget(value);
+        // Build the preview of the text as well
+        previewValue = new QLabel(this);
+        if (variableTitle->text() != "FONT") {
+            previewValue->setStyleSheet(std::string("background-color: ").append(value->text().toStdString()).append("; border-radius: 2px;").c_str());
+            previewValue->setFixedHeight(14);
+        } else {
+            previewValue->setStyleSheet(std::string("font-family: ").append(value->text().toStdString()).append(";").c_str());
+            previewValue->setText("Sample");
+            previewValue->setFixedHeight(20);
+        }
+        mainLayout->addWidget(previewValue);
+    } else {
+        valueLabel = new QLabel("VALUE", this);
+        valueLabel->setObjectName(settingsName);
+        valueLabel->setFixedWidth(80);
+        mainLayout->addWidget(valueLabel);
+        previewLabel = new QLabel("PREVIEW", this);
+        previewLabel->setObjectName(settingsName);
+        mainLayout->addWidget(previewLabel);
+    }
+
+    setLayout(mainLayout);
+}
+
+// Resets the variable
+void SettingsListItem::resetVar() {
+
+}
+
+// Updates the list item with its new value
+void SettingsListItem::updateVar() {
+
+}
+
+// Changes the list item in the cc to its new value
+void SettingsListItem::changeVar() {
+
+}
+
+// MARK: Settings Display
+// The window in which you can change client colors and other variables.
+SettingsDisplay::SettingsDisplay(QWidget *parent) :
+        variableColName(new QLabel("Main Settings: ", this)),
+        listColumns(new SettingsListItem("VARIABLE", &cc, this, "proxiesindexitem")),
+        variablesList(new QListWidget(this)),
+        resetSingleButton(new QPushButton("Reset", this)),
+        resetAllButton(new QPushButton("Reset All to Defaults", this)),
+        QWidget(parent) {
+
+    // Set window properties
+    setFixedSize(330, 300);
+    setWindowTitle("Settings");
+    setWindowFlags(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Create the dark title bar
+    dtb = new DarkTitleBar(this);
+
+    // Set the stylesheet for the window
+    QFile File(file_paths::STYLESHEET);
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    QFile File2(file_paths::COLORSTYLESHEET);
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
+
+    // Create external qframe and layouts for dtb
+    auto externLayout = new QVBoxLayout();
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    auto bgLayout = new QVBoxLayout();
+    bgLayout->setContentsMargins(0, 0, 0, 0);
+    bg->setObjectName("main_window");
+    bg->setLayout(bgLayout);
+    bgLayout->addWidget(dtb);
+    externLayout->addWidget(bg);
+
+    // Set properties of qlabels and other widgets
+    variableColName->setObjectName("addtask_mediocre_text");
+    variablesList->setObjectName("profileslistview");
+    variablesList->setSelectionMode(QAbstractItemView::SingleSelection);
+    variablesList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    variablesList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    variablesList->setFixedWidth(306);
+    variablesList->setContentsMargins(1, 4, 1, 4);
+    variablesList->setSelectionMode(QAbstractItemView::NoSelection);
+    variablesList->setFocusPolicy(Qt::NoFocus);
+    resetSingleButton->setObjectName("subbutton");
+    resetAllButton->setObjectName("subbutton");
+
+    // Build the main layout
+    auto mainLayout = new QHBoxLayout;
+    mainLayout->setContentsMargins(11, 3, 11, 11);
+    auto leftcol = new QVBoxLayout;
+    // leftcol->addWidget(variableColName);
+    auto rightcol = new QVBoxLayout;
+    rightcol->addWidget(listColumns);
+    rightcol->addWidget(variablesList);
+    auto bottomButtonLayout = new QHBoxLayout;
+    bottomButtonLayout->addWidget(resetSingleButton);
+    bottomButtonLayout->addSpacing(10);
+    bottomButtonLayout->addWidget(resetAllButton);
+    rightcol->addStretch();
+    rightcol->addLayout(bottomButtonLayout);
+    mainLayout->addLayout(leftcol);
+    mainLayout->addLayout(rightcol);
+
+    // Set the window's layout
+    bgLayout->addLayout(mainLayout);
+    setLayout(externLayout);
+
+    // Add all variable names to the list
+    for (const auto &i : constants::CUSTOMIZEVARS) {
+        auto tempItem = new SettingsListItem(i, &cc, this);
+        auto tempLWidgItem = new QListWidgetItem();
+        tempLWidgItem->setSizeHint(tempItem->sizeHint());
+        variablesList->addItem(tempLWidgItem);
+        variablesList->setItemWidget(tempLWidgItem, tempItem);
+    }
+}
+
+// Override the close event to emit a closed signal
+void SettingsDisplay::closeEvent(QCloseEvent *event) {
+    emit closed();
+    QWidget::closeEvent(event);
+}
+
+// Resets all the variables to their default states
+void SettingsDisplay::resetAll() {
+
 }

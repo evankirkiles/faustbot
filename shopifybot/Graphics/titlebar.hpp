@@ -72,7 +72,9 @@ private:
     QPoint cursorPoint;
 
     // Makes sure not clicking on an exit button when moving
+    bool refresh = false;
     bool clickedOnButton = false;
+    bool moreInfo = false;
     bool showMoreInfo = false;
 
     // The actual title of the window as well as a pushbutton to close it

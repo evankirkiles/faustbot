@@ -158,6 +158,9 @@ namespace constants {
     extern const unsigned int BASE_FREQ;
     // Standard base number of results to check from the website, by most recent.
     extern const unsigned int BASE_NUMRESULTS;
+
+    // Array of variables settable through the Color Customizer
+    extern const std::vector<std::string> CUSTOMIZEVARS;
 }
 
 

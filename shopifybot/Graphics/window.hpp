@@ -79,6 +79,7 @@ private:
     bool parserOpen = false;
     bool profilesOpen = false;
     bool proxiesOpen = false;
+    bool settingsOpen = false;
     // Number of tasks created, incremented every time a task is added
     int numTasksCreated = 0;
 
@@ -102,6 +103,7 @@ private:
     QPushButton *proxies;
     QPushButton *clear;
     QPushButton *settings;
+    SettingsDisplay *settingsDisp;
     QLabel *copyrightLabel;
 
     // Sidebar windows
@@ -133,6 +135,8 @@ private slots:
     void openProfiles();
     // Opens the proxies window
     void openProxies();
+    // Opens the settings window
+    void openSettings();
     // Connects to the submit slot in the new task window, and adds a task with the given information
     void buildTask(QString title, URLAndMethod website, QString collection,
                    QString keywords, QString colorKeywords, QString size,

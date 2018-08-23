@@ -35,6 +35,8 @@
 #include "customwidgets.hpp"
 #endif
 
+#include "Graphics/Stylesheets/colorcustomizer.hpp"
+
 // trim from end (in place)
 static inline void rtrim(std::string &s) {
     s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
@@ -195,7 +197,7 @@ public:
 
     // Constructor that builds the custom ProxyListItem widget
     explicit ProxyListItem(QString index, QString ip, QString port, QString username, QString password,
-                           QString settings = "", QWidget *parent = 0);
+                           QString settingsName = "proxieslistitem", QWidget *parent = 0);
 signals:
     // Emitted when the proxy check starts
     void proxyCheckStart();
@@ -350,12 +352,73 @@ private:
     QPushButton* goButton;
 };
 
+// A variable in the settings display
+class SettingsListItem : public QWidget {
+    Q_OBJECT
+public:
+    // Constructor that builds the settings list item for a given variable name
+    explicit SettingsListItem(const std::string& name, ColorCustomizer* ccObj, QWidget* parent = 0, QString settingsName = "proxieslistitem");
+
+public slots:
+    // Resets the variable in the list item
+    void resetVar();
+    // Updates the list item's properties
+    void updateVar();
+private slots:
+    // Changes the variable in the stylesheet
+    void changeVar();
+
+private:
+    // Pointer to the color customizer object
+    ColorCustomizer* cc;
+
+    // Widgets on the list
+    QLabel* variableTitle;
+    QLineEdit* value;
+    QLabel* previewValue;
+
+    // Widgets on the index list
+    QLabel* valueLabel;
+    QLabel* previewLabel;
+};
+
 // Header for the settings window which allows the user to edit various features of the bot
 class SettingsDisplay : public QWidget {
     Q_OBJECT
 public:
     // Constructor that builds the settings display
+    explicit SettingsDisplay(QWidget *parent = 0);
+    // Override the close event
+    void closeEvent(QCloseEvent* event) override;
 
+signals:
+    // Emitted whenever the settings display is closed
+    void closed();
+private slots:
+    // Resets the selected variable in the list to its initial value
+    void resetAll();
+
+private:
+    // Dark title bar widget
+    DarkTitleBar *dtb;
+
+    // Color customizer
+    ColorCustomizer cc;
+
+    // Titles of each column
+    QLabel* variableColName;
+
+    // Left column widgets
+    QLabel* baseFreqLabel;
+    QLineEdit* baseFreq;
+    QLabel* numResultsLabel;
+    QLineEdit* numResults;
+
+    // Right column widgets
+    SettingsListItem* listColumns;
+    QListWidget* variablesList;
+    QPushButton* resetSingleButton;
+    QPushButton* resetAllButton;
 };
 
 #endif //SHOPIFY_BOT_SIDEBARPOPUPS_HPP

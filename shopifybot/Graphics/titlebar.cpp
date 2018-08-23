@@ -5,7 +5,8 @@
 #include "titlebar.hpp"
 
 // Builds the dark title bar
-DarkTitleBar::DarkTitleBar(QWidget *parent, bool moreInfo, bool refresh) : parentWidg(parent){
+DarkTitleBar::DarkTitleBar(QWidget *parent, bool p_moreInfo, bool p_refresh) :
+        moreInfo(p_moreInfo), refresh(p_refresh), parentWidg(parent){
 
     // Build the title bar's necessary components
     title = new QLabel(parent->windowTitle(), this);
@@ -55,10 +56,15 @@ void DarkTitleBar::mousePressEvent(QMouseEvent *event) {
     // When the user clicks with the left button, save the position of the click relative to window
     if (event->buttons() & Qt::LeftButton) {
         cursorPoint = event->globalPos() - parentWidg->geometry().topLeft();
-        clickedOnButton = childAt(event->pos()) == closeWindow || childAt(event->pos()) == moreInfoButton;
-        if (childAt(event->pos()) == moreInfoButton) {
-            showMoreInfo = true;
-            emit showMIW();
+        clickedOnButton = childAt(event->pos()) == closeWindow ||
+                (moreInfo && childAt(event->pos()) == moreInfoButton) ||
+                (refresh && childAt(event->pos()) == refreshButton);
+
+        if (moreInfo) {
+            if (childAt(event->pos()) == moreInfoButton) {
+                showMoreInfo = true;
+                emit showMIW();
+            }
         }
         event->accept();
     }

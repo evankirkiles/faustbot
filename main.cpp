@@ -11,10 +11,6 @@
 
 int main(int argc, char **argv) {
 
-    // Test the color customizer
-    ColorCustomizer cc = ColorCustomizer();
-    cc.resetAllValues();
-
     // Builds the QApplication
     QApplication app(argc, argv);
     app.setAttribute(Qt::AA_UseHighDpiPixmaps);

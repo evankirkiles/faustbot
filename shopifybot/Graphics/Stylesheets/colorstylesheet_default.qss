@@ -7,13 +7,15 @@
     -SECONDARYTEXT          :-: #c4c0b2;
     -TASKID                 :-: #404040;
     -MAINACCENT             :-: #2b2e33;
-    -SECONDARYMAINACCENT    :-: #323232;
+    -SECONDARYACCENT        :-: #323232;
     -MAINBUTTON             :-: #d2a15a;
     -MAINBUTTONPRESSED      :-: #dbab67;
     -SIDEBUTTON             :-: #1f1f1f;
     -SIDEBUTTONPRESSED      :-: #2b2e33;
     -SECONDARYBUTTON        :-: #a87f45;
     -SECONDARYBUTTONPRESSED :-: #dbab67;
+    -TERTIARYBUTTON         :-: #131313;
+    -TERTIARYBUTTONPRESSED  :-: #111111;
 */
 
 #main_window {
@@ -132,6 +134,15 @@ QPushButton#addtaskbutton {
 	color: #2b2e33;
 	font-family: "Futura";
 }
+QPushButton#subbutton:pressed {
+    background-color: #111111;
+}
+QPushButton#subbutton {
+    background-color: #131313;
+    border-color: #c4c0b2;
+	color: #c4c0b2;
+	font-family: "Futura";
+}
 QPushButton#addtaskbuttonv2:pressed {
     background-color: #dbab67;
 }
@@ -234,5 +245,16 @@ QComboBox QAbstractItemView {
 
 #proxiesstatustext {
     color: #323232;
+    font-family: "Futura";
+}
+#proxieslistitem {
+    color: #D2A15A;
+}
+#proxiesindexitem {
+    color: #c4c0b2;
+}
+#proxieslistedit {
+    background-color: #111111;
+    color: #D2A15A;
     font-family: "Futura";
 }

@@ -121,6 +121,13 @@ namespace constants {
     const unsigned int BASE_FREQ = 5;
     // TODO: Make a base numresults checker
     const unsigned int BASE_NUMRESULTS = 10;
+
+    const std::vector<std::string> CUSTOMIZEVARS = {
+            "MAINBG", "SECONDARYBG", "FONT", "BORDER", "MAINTEXT", "SECONDARYTEXT", "TASKID",
+            "MAINACCENT", "SECONDARYACCENT", "MAINBUTTON", "MAINBUTTONPRESSED", "SIDEBUTTON",
+            "SIDEBUTTONPRESSED", "SECONDARYBUTTON", "SECONDARYBUTTONPRESSED", "TERTIARYBUTTON",
+            "TERTIARYBUTTONPRESSED"
+    };
 }
 
 

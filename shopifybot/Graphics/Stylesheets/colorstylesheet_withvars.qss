@@ -7,13 +7,15 @@
     -SECONDARYTEXT          :-: @SECONDARYTEXT;
     -TASKID                 :-: @TASKID;
     -MAINACCENT             :-: @MAINACCENT;
-    -SECONDARYMAINACCENT    :-: @SECONDARYMAINACCENT;
+    -SECONDARYACCENT        :-: @SECONDARYACCENT;
     -MAINBUTTON             :-: @MAINBUTTON;
     -MAINBUTTONPRESSED      :-: @MAINBUTTONPRESSED;
     -SIDEBUTTON             :-: @SIDEBUTTON;
     -SIDEBUTTONPRESSED      :-: @SIDEBUTTONPRESSED;
     -SECONDARYBUTTON        :-: @SECONDARYBUTTON;
     -SECONDARYBUTTONPRESSED :-: @SECONDARYBUTTONPRESSED;
+    -TERTIARYBUTTON         :-: @TERTIARYBUTTON;
+    -TERTIARYBUTTONPRESSED  :-: @TERTIARYBUTTONPRESSED;
 */
 
 #main_window {
@@ -132,6 +134,15 @@ QPushButton#addtaskbutton {
 	color: @MAINACCENT;
 	font-family: @FONT;
 }
+QPushButton#subbutton:pressed {
+    background-color: @TERTIARYBUTTONPRESSED;
+}
+QPushButton#subbutton {
+    background-color: @TERTIARYBUTTON;
+    border-color: @SECONDARYTEXT;
+	color: @SECONDARYTEXT;
+	font-family: @FONT;
+}
 QPushButton#addtaskbuttonv2:pressed {
     background-color: @SECONDARYBUTTONPRESSED;
 }
@@ -233,6 +244,17 @@ QComboBox QAbstractItemView {
 }
 
 #proxiesstatustext {
-    color: @SECONDARYMAINACCENT;
+    color: @SECONDARYACCENT;
+    font-family: @FONT;
+}
+#proxieslistitem {
+    color: @MAINTEXT;
+}
+#proxiesindexitem {
+    color: @SECONDARYTEXT;
+}
+#proxieslistedit {
+    background-color: @TITLEBARBG;
+    color: @MAINTEXT;
     font-family: @FONT;
 }

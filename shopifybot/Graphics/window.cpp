@@ -166,6 +166,8 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     connect(billing, SIGNAL(clicked()), this, SLOT(openProfiles()));
     // Open the proxies window when the proxies button is clicked
     connect(proxies, SIGNAL(clicked()), this, SLOT(openProxies()));
+    // Open the settings window when the settings button is clicked
+    connect(settings, SIGNAL(clicked()), this, SLOT(openSettings()));
 
     // PLACEHOLDER CONNECT
     connect(clear, SIGNAL(clicked()), this, SLOT(clearDirs()));
@@ -357,6 +359,23 @@ void BotWindow::openProxies() {
 
     // Make necessary connections
     connect(proxiesDisp, &ProxyDisplay::closed, [this] () { proxiesOpen = false; });
+}
+
+// Opens the settings window
+void BotWindow::openSettings() {
+    if (settingsOpen) {
+        // Show the currently open proxies window
+        settingsDisp->raise();
+        settingsDisp->setFocus();
+        return;
+    }
+    // Build the window if it does not exist
+    settingsDisp = new SettingsDisplay();
+    settingsDisp->show();
+    settingsOpen = true;
+
+    // Make necessary connections
+    connect(settingsDisp, &SettingsDisplay::closed, [this] () { settingsOpen = false; });
 }
 
 // Clears all the temporary file directories
