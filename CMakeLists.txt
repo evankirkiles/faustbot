@@ -25,10 +25,8 @@ add_executable(shopify_bot
         shopifybot/Graphics/Stylesheets/colorcustomizer.cpp)
 
 include_directories(shopifybot)
-include_directories(shopifybot_tests/lib/googletest/include shopifybot_tests/lib/googletest)
 
 add_subdirectory(shopifybot)
-add_subdirectory(shopifybot_tests)
 
 find_package(CURL REQUIRED)
 IF (CURL_FOUND)
