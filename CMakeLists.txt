@@ -10,7 +10,15 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-# Make sure to link the resources.qrc
+# Set the resource files
+set(RESOURCE_FILES
+        shopifybot/Graphics/Stylesheets/colorstylesheet.qss
+        shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss
+        shopifybot/Graphics/Stylesheets/colorstylesheet_withvars.qss
+        shopifybot/Graphics/Stylesheets/stylesheet.qss
+        )
+
+# Make sure to link the resources.qrc for all icons to be binary-encoded
 add_executable(shopify_bot
         main.cpp
         shopifybot/Graphics/resources.qrc

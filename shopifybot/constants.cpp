@@ -61,7 +61,7 @@ namespace file_paths {
     const char* HTML_BODY = "./shopifybot/WebAccess/Contents/html_body_";
     const char* PRODUCTS_LOG = "./shopifybot/WebAccess/Contents/products_log_";
 
-    const char* TIME_LOG = "./shopifybot/logs.txt";
+    const char* TIME_LOG = "./shopifybot/logs.log";
     const char* TASK_LOG = "./shopifybot/Infrastructure/Logs/";
 
     const char* STYLESHEET = "./shopifybot/Graphics/Stylesheets/stylesheet.qss";
@@ -81,40 +81,40 @@ namespace file_paths {
     const char* LOGS_DIR = "./shopifybot/Infrastructure/Logs";
 
     // Images
-    const char* LOGO_FILE = "./shopifybot/Graphics/Assets/logo.png";
-    const char* PLAY_IMG = "./shopifybot/Graphics/Assets/play.png";
-    const char* PLAY2_IMG = "./shopifybot/Graphics/Assets/play2.png";
-    const char* STOP_IMG = "./shopifybot/Graphics/Assets/stop.png";
-    const char* STOP2_IMG = "./shopifybot/Graphics/Assets/stop2.png";
-    const char* EDIT_IMG = "./shopifybot/Graphics/Assets/edit.png";
-    const char* EDIT2_IMG = "./shopifybot/Graphics/Assets/edit2.png";
-    const char* PLAY_DISBL_IMG = "./shopifybot/Graphics/Assets/play-disabled.png";
-    const char* REPLAY_IMG = "./shopifybot/Graphics/Assets/replay.png";
-    const char* REPLAY2_IMG = "./shopifybot/Graphics/Assets/replay2.png";
-    const char* DELETE_IMG = "./shopifybot/Graphics/Assets/delete.png";
-    const char* DELETE2_IMG = "./shopifybot/Graphics/Assets/delete2.png";
-    const char* LOGS_IMG = "./shopifybot/Graphics/Assets/logs.png";
-    const char* LOGS2_IMG = "./shopifybot/Graphics/Assets/logs2.png";
-    const char* EXIT_IMG = "./shopifybot/Graphics/Assets/exit.png";
-    const char* EXIT2_IMG = "./shopifybot/Graphics/Assets/exit2.png";
-    const char* MOREINFO_IMG = "./shopifybot/Graphics/Assets/moreinfo.png";
-    const char* MOREINFO2_IMG = "./shopifybot/Graphics/Assets/moreinfo2.png";
-    const char* ADD_IMG = "./shopifybot/Graphics/Assets/add.png";
-    const char* ADD2_IMG = "./shopifybot/Graphics/Assets/add2.png";
-    const char* MINUS_IMG = "./shopifybot/Graphics/Assets/minus.png";
-    const char* MINUS2_IMG = "./shopifybot/Graphics/Assets/minus2.png";
-    const char* DUPLICATE_IMG = "./shopifybot/Graphics/Assets/duplicate.png";
-    const char* DUPLICATE2_IMG = "./shopifybot/Graphics/Assets/duplicate2.png";
-    const char* REFRESH_IMG = "./shopifybot/Graphics/Assets/refresh.png";
-    const char* REFRESH2_IMG = "./shopifybot/Graphics/Assets/refresh2.png";
-    const char* DISABLEDREFRESH_IMG = "./shopifybot/Graphics/Assets/disabledrefresh.png";
-    const char* PROXYON_IMG = "./shopifybot/Graphics/Assets/proxyon.png";
-    const char* PROXYOFF_IMG = "./shopifybot/Graphics/Assets/proxyoff.png";
-    const char* PROXYNEUTRAL_IMG = "./shopifybot/Graphics/Assets/proxyneutral.png";
-    const char* REFRESHICON_IMG = "./shopifybot/Graphics/Assets/refreshicon.png";
-    const char* REFRESHICON2_IMG = "./shopifybot/Graphics/Assets/refreshicon2.png";
-    const char* DEFAULTTHUMB_IMG = "./shopifybot/Graphics/Assets/defaultthumb.png";
-    const char* GEAR_IMG = "./shopifybot/Graphics/Assets/gear.png";
+    const char* LOGO_FILE = ":Assets/logo.png";
+    const char* PLAY_IMG = ":Assets/play.png";
+    const char* PLAY2_IMG = ":Assets/play2.png";
+    const char* STOP_IMG = ":Assets/stop.png";
+    const char* STOP2_IMG = ":Assets/stop2.png";
+    const char* EDIT_IMG = ":Assets/edit.png";
+    const char* EDIT2_IMG = ":Assets/edit2.png";
+    const char* PLAY_DISBL_IMG = ":Assets/play-disabled.png";
+    const char* REPLAY_IMG = ":Assets/replay.png";
+    const char* REPLAY2_IMG = ":Assets/replay2.png";
+    const char* DELETE_IMG = ":Assets/delete.png";
+    const char* DELETE2_IMG = ":Assets/delete2.png";
+    const char* LOGS_IMG = ":Assets/logs.png";
+    const char* LOGS2_IMG = ":Assets/logs2.png";
+    const char* EXIT_IMG = ":Assets/exit.png";
+    const char* EXIT2_IMG = ":Assets/exit2.png";
+    const char* MOREINFO_IMG = ":Assets/moreinfo.png";
+    const char* MOREINFO2_IMG = ":Assets/moreinfo2.png";
+    const char* ADD_IMG = ":Assets/add.png";
+    const char* ADD2_IMG = ":Assets/add2.png";
+    const char* MINUS_IMG = ":Assets/minus.png";
+    const char* MINUS2_IMG = ":Assets/minus2.png";
+    const char* DUPLICATE_IMG = ":Assets/duplicate.png";
+    const char* DUPLICATE2_IMG = ":Assets/duplicate2.png";
+    const char* REFRESH_IMG = ":Assets/refresh.png";
+    const char* REFRESH2_IMG = ":Assets/refresh2.png";
+    const char* DISABLEDREFRESH_IMG = ":Assets/disabledrefresh.png";
+    const char* PROXYON_IMG = ":Assets/proxyon.png";
+    const char* PROXYOFF_IMG = ":Assets/proxyoff.png";
+    const char* PROXYNEUTRAL_IMG = ":Assets/proxyneutral.png";
+    const char* REFRESHICON_IMG = ":Assets/refreshicon.png";
+    const char* REFRESHICON2_IMG = ":Assets/refreshicon2.png";
+    const char* DEFAULTTHUMB_IMG = ":Assets/defaultthumb.png";
+    const char* GEAR_IMG = ":Assets/gear.png";
 }
 
 namespace constants {
