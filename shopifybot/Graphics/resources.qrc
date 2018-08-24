@@ -34,5 +34,6 @@
         <file>Assets/refreshicon2.png</file>
         <file>Assets/defaultthumb.png</file>
         <file>Assets/gear.png</file>
+        <file>Stylesheets/stylesheet.qss</file>
     </qresource>
 </RCC>

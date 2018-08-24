@@ -64,7 +64,7 @@ namespace file_paths {
     const char* TIME_LOG = "./shopifybot/logs.log";
     const char* TASK_LOG = "./shopifybot/Infrastructure/Logs/";
 
-    const char* STYLESHEET = "./shopifybot/Graphics/Stylesheets/stylesheet.qss";
+    const char* STYLESHEET = ":Stylesheets/stylesheet.qss";
     const char* COLORSTYLESHEET = "./shopifybot/Graphics/Stylesheets/colorstylesheet.qss";
     const char* COLORSTYLESHEET_WITHVARS = "./shopifybot/Graphics/Stylesheets/colorstylesheet_withvars.qss";
     const char* COLORSTYLESHEET_DEFAULT = "./shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss";
