@@ -91,7 +91,8 @@ void Task::log(const std::string &message) {
 
     // Open the log file for logging
     std::ofstream fp;
-    fp.open(std::string(file_paths::TASK_LOG).append("task_logs_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str(), std::ios::app);
+    fp.open(std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
+            append("task_logs_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str(), std::ios::app);
 
     // Gets the current time
     auto t = std::time(nullptr);
@@ -221,7 +222,8 @@ void VariantIDTask::order(const std::string &url) {
 void VariantIDTask::log(const std::string &message) {
     // Open the log file for logging
     std::ofstream fp;
-    fp.open(std::string(file_paths::TASK_LOG).append("task_logs_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str(), std::ios::app);
+    fp.open(std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
+            append("task_logs_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str(), std::ios::app);
 
     // Gets the current time
     auto t = std::time(nullptr);

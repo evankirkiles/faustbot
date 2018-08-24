@@ -14,6 +14,9 @@
 #ifndef QStringList
 #include <QStringList>
 #endif
+#ifndef QApplication
+#include <QApplication>
+#endif
 
 // Constants header as well as base URLs.
 

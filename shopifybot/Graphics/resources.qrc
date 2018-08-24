@@ -35,5 +35,6 @@
         <file>Assets/defaultthumb.png</file>
         <file>Assets/gear.png</file>
         <file>Stylesheets/stylesheet.qss</file>
+        <file>Stylesheets/colorstylesheet_withvars.qss</file>
     </qresource>
 </RCC>

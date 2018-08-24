@@ -22,7 +22,7 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);
@@ -112,7 +112,7 @@ AddTaskDisplay::AddTaskDisplay(QWidget *parent) : QWidget(parent) {
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);
@@ -320,7 +320,7 @@ void AddTaskDisplay::buildProfilesBox() {
     profile->addItem("Random");
 
     // Open the profiles.txt
-    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
     std::string tempStr;
 
     // Cycle through each line and get the profiles' titles
@@ -338,7 +338,7 @@ void AddTaskDisplay::buildProxiesBox() {
     proxy->addItem("Random");
 
     // Open the proxies.txt
-    std::ifstream filein(file_paths::PROXIES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROXIES_TXT).toStdString().c_str());
     std::string tempStr;
 
     // Cycle through each line and get the proxies' ips
@@ -370,7 +370,7 @@ AddVIDTaskDisplay::AddVIDTaskDisplay(QWidget *parent) : QWidget(parent) {
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);
@@ -584,7 +584,7 @@ void AddVIDTaskDisplay::buildProfilesBox() {
     profile->addItem("Random");
 
     // Open the profiles.txt
-    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
     std::string tempStr;
 
     // Cycle through each line and get the profiles' titles
@@ -602,7 +602,7 @@ void AddVIDTaskDisplay::buildProxiesBox() {
     proxy->addItem("Random");
 
     // Open the proxies.txt
-    std::ifstream filein(file_paths::PROXIES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROXIES_TXT).toStdString().c_str());
     std::string tempStr;
 
     // Cycle through each line and get the proxies' ips
@@ -651,7 +651,7 @@ MoreInfoDisplay::MoreInfoDisplay(unsigned int width, unsigned int height, const 
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);

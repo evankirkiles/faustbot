@@ -65,7 +65,7 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);
@@ -254,7 +254,7 @@ void ProfilesDisplay::closeEvent(QCloseEvent* event) {
 // Refreshes the list of profiles, should be called after updates
 void ProfilesDisplay::refresh(int selected) {
     // Rereads the profiles file and builds the qlist of profile titles for the listview
-    std::ifstream fin(file_paths::PROFILES_TXT);
+    std::ifstream fin(QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
     std::string str;
 
     // Reset the list view
@@ -278,7 +278,7 @@ void ProfilesDisplay::refresh(int selected) {
 // Refreshes the list of credit cards, should be called after updates
 void ProfilesDisplay::refreshCC(int selected) {
     // Rereads the credit cards file and builds the qlist of credit card titles for the listview
-    std::ifstream fin(file_paths::CCARD_TXT);
+    std::ifstream fin(QApplication::applicationDirPath().append(file_paths::CCARD_TXT).toStdString().c_str());
     std::string str;
 
     // Reset the list view
@@ -305,7 +305,7 @@ void ProfilesDisplay::refreshCC(int selected) {
 // Changes the text fields to the selected profile's information
 void ProfilesDisplay::select(QString which) {
     // Reads the profiles file and finds the JSON data for the given profile title
-    std::ifstream fin(file_paths::PROFILES_TXT);
+    std::ifstream fin(QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
     std::string str;
 
     // Cycle through the lines and get the title of each profile
@@ -355,8 +355,8 @@ void ProfilesDisplay::submit() {
     }
 
     // Initialize input/output streams
-    std::ifstream filein(file_paths::PROFILES_TXT);
-    std::ofstream fileout(file_paths::TEMPPROFILES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
+    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::TEMPPROFILES_TXT).toStdString().c_str());
     if (!filein || !fileout) { throw std::runtime_error("Error opening profiles file."); }
 
     // Cycle through the input file until the correct line is found
@@ -389,7 +389,8 @@ void ProfilesDisplay::submit() {
     fileout.close();
 
     // Rename the output file to the input file so it overwrites it and is picked up by the listview
-    std::rename(file_paths::TEMPPROFILES_TXT, file_paths::PROFILES_TXT);
+    std::rename(QApplication::applicationDirPath().append(file_paths::TEMPPROFILES_TXT).toStdString().c_str(),
+                QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
 
     // Finally update the qlistview display
     refresh(profilesListView->currentRow());
@@ -399,7 +400,8 @@ void ProfilesDisplay::submit() {
 void ProfilesDisplay::createNew() {
 
     // Opens the profiles file and adds a new profile to the end
-    std::ofstream profilesFile(file_paths::PROFILES_TXT, std::ios_base::app | std::ios_base::out);
+    std::ofstream profilesFile(QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str(),
+                               std::ios_base::app | std::ios_base::out);
     profilesFile << getSafeName(true) + R"( :-: {"email":","firstname":"","lastname":"","address1":"","address2":"","city":"","country":"","province":"","zipcode":"","phone":"","ccard":"Random"})" + "\n";
     profilesFile.close();
 
@@ -445,8 +447,8 @@ std::string ProfilesDisplay::getSafeName(bool addingnew, const int currentIndex,
 // Duplicates the currently selected profile
 void ProfilesDisplay::duplicateProfile() {
     // Initialize input/output streams
-    std::ifstream filein(file_paths::PROFILES_TXT);
-    std::ofstream fileout(file_paths::TEMPPROFILES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
+    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::TEMPPROFILES_TXT).toStdString().c_str());
     if (!filein || !fileout) { throw std::runtime_error("Error opening profiles file."); }
 
     // Find the line with the selected profile, then duplicate it in the temp file
@@ -468,7 +470,8 @@ void ProfilesDisplay::duplicateProfile() {
     fileout.close();
 
     // Rename the output file to the input file so it overwrites it and is picked up by the listview
-    std::rename(file_paths::TEMPPROFILES_TXT, file_paths::PROFILES_TXT);
+    std::rename(QApplication::applicationDirPath().append(file_paths::TEMPPROFILES_TXT).toStdString().c_str(),
+                QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
 
     // Finally update the qlistview display
     refresh(profilesListView->currentRow() + 1);
@@ -477,8 +480,8 @@ void ProfilesDisplay::duplicateProfile() {
 // Deletes the currently selected profile
 void ProfilesDisplay::deleteProfile() {
     // Initialize input/output streams
-    std::ifstream filein(file_paths::PROFILES_TXT);
-    std::ofstream fileout(file_paths::TEMPPROFILES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
+    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::TEMPPROFILES_TXT).toStdString().c_str());
     if (!filein || !fileout) { throw std::runtime_error("Error opening profiles file."); }
 
     // Find the line with the given profile; then delete it in the temp file
@@ -495,7 +498,8 @@ void ProfilesDisplay::deleteProfile() {
     fileout.close();
 
     // Rename the output file to the input file so it overwrites it and is picked up by the listview
-    std::rename(file_paths::TEMPPROFILES_TXT, file_paths::PROFILES_TXT);
+    std::rename(QApplication::applicationDirPath().append(file_paths::TEMPPROFILES_TXT).toStdString().c_str(),
+                QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
 
     // Finally update the qlistview display
     refresh(std::max(profilesListView->currentRow() - 1, 0));
@@ -574,8 +578,8 @@ void ProfilesDisplay::deleteCC() {
     if (accdOpen) { accd->close(); }
 
     // Cycle through the ccard text file
-    std::ifstream filein(file_paths::CCARD_TXT);
-    std::ofstream fileout(file_paths::TEMPCCARD_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::CCARD_TXT).toStdString().c_str());
+    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::TEMPCCARD_TXT).toStdString().c_str());
     std::string str;
     while(getline(filein, str)) {
 
@@ -590,7 +594,8 @@ void ProfilesDisplay::deleteCC() {
     fileout.close();
 
     // Rename the temporary credit card list to the real one
-    rename(file_paths::TEMPCCARD_TXT, file_paths::CCARD_TXT);
+    rename(QApplication::applicationDirPath().append(file_paths::TEMPCCARD_TXT).toStdString().c_str(),
+           QApplication::applicationDirPath().append(file_paths::CCARD_TXT).toStdString().c_str());
 
     // Refresh the credit cards list
     refreshCC(std::max(0, creditcardsListView->currentRow() - 1));
@@ -607,7 +612,7 @@ void ProfilesDisplay::resetCreditCardQCB() {
     ccard->addItem("Random");
 
     // Open the filein
-    std::ifstream filein(file_paths::CCARD_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::CCARD_TXT).toStdString().c_str());
     std::string str;
 
     // Cycle through the lines and get the titles of each credit card profile
@@ -660,7 +665,7 @@ AddCreditCardDisplay::AddCreditCardDisplay(const QString profiletitle, QWidget *
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);
@@ -734,7 +739,7 @@ AddCreditCardDisplay::AddCreditCardDisplay(const QString profiletitle, QWidget *
 void AddCreditCardDisplay::fillCCInfo() {
 
     // Searches the credit card text file for the given title being edited
-    std::ifstream filein(file_paths::CCARD_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::CCARD_TXT).toStdString().c_str());
     std::string strTemp;
 
     // Cycle through the Credit Card profiles until a match is found
@@ -765,7 +770,7 @@ void AddCreditCardDisplay::submitEditOrNew() {
     if (windowTitle().toStdString().substr(0, 3) == "Add") {
 
         // Takes the information from the new credit card form and puts it in the credit card text file
-        std::ofstream fileout(file_paths::CCARD_TXT, std::ios_base::app | std::ios_base::out);
+        std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::CCARD_TXT).toStdString().c_str(), std::ios_base::app | std::ios_base::out);
 
         // First, make sure that all the required fields are filled
         if (title->text().isEmpty()) { title->setFocus(); return; }
@@ -789,8 +794,8 @@ void AddCreditCardDisplay::submitEditOrNew() {
         // Second case is when the task is being edited
     } else {
         // Takes the information from the edited credit card and puts it in the credit card text file
-        std::ifstream filein(file_paths::CCARD_TXT);
-        std::ofstream fileout(file_paths::TEMPCCARD_TXT);
+        std::ifstream filein(QApplication::applicationDirPath().append(file_paths::CCARD_TXT).toStdString().c_str());
+        std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::TEMPPROFILES_TXT).toStdString().c_str());
         std::string str;
 
         // First, make sure that all the required fields are filled
@@ -817,7 +822,8 @@ void AddCreditCardDisplay::submitEditOrNew() {
         fileout.close();
 
         // Rename the temporary credit card file to the real one
-        rename(file_paths::TEMPCCARD_TXT, file_paths::CCARD_TXT);
+        rename(QApplication::applicationDirPath().append(file_paths::TEMPCCARD_TXT).toStdString().c_str(),
+               QApplication::applicationDirPath().append(file_paths::CCARD_TXT).toStdString().c_str());
 
         // Emit the correct signals
         emit submitted();
@@ -835,7 +841,7 @@ std::string AddCreditCardDisplay::getSafeName(std::string currentTitle, std::str
     if (title == currentTitle) { return title; }
 
     // Cycle through the credit card names in the credit card text file
-    std::ifstream filein(file_paths::CCARD_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::CCARD_TXT).toStdString().c_str());
     // Make sure that the credit cards file actually has contents
     if (filein.peek() == std::ifstream::traits_type::eof()) { return title; }
     std::string str;
@@ -1002,7 +1008,7 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);
@@ -1096,7 +1102,7 @@ void ProxyDisplay::refresh(int selected) {
     proxiesListView->clear();
 
     // Read in the Proxy Display file and interpret the JSON
-    std::ifstream filein(file_paths::PROXIES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROXIES_TXT).toStdString().c_str());
     std::string str;
 
     // Cycle through each line and read in the JSON object for each IP
@@ -1145,8 +1151,8 @@ void ProxyDisplay::deleteProxy() {
     if (!refreshProxies->enabled) { return; }
 
     // Open both proxy text files
-    std::ifstream filein(file_paths::PROXIES_TXT);
-    std::ofstream fileout(file_paths::TEMPPROXIES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROXIES_TXT).toStdString().c_str());
+    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::TEMPPROXIES_TXT).toStdString().c_str());
     std::string str;
     int indices = 0;
 
@@ -1165,7 +1171,8 @@ void ProxyDisplay::deleteProxy() {
     fileout.close();
 
     // Rename the temporary proxies file to the real one
-    rename(file_paths::TEMPPROXIES_TXT, file_paths::PROXIES_TXT);
+    rename(QApplication::applicationDirPath().append(file_paths::TEMPPROXIES_TXT).toStdString().c_str(),
+           QApplication::applicationDirPath().append(file_paths::PROXIES_TXT).toStdString().c_str());
 
     // Then refresh with the previous one now selected
     refresh(proxiesListView->currentRow() - 1);
@@ -1202,7 +1209,7 @@ AddProxyDisplay::AddProxyDisplay(int newIndex, ClickableCheckableImage* refreshe
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);
@@ -1279,7 +1286,8 @@ void AddProxyDisplay::createNewProxy() {
     if (proxyPort->text().isEmpty()) { proxyPort->setFocus(); return; }
 
     // Open the proxy text file
-    std::ofstream fileout(file_paths::PROXIES_TXT, std::ios_base::app | std::ios_base::out);
+    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::PROXIES_TXT).toStdString().c_str(),
+                          std::ios_base::app | std::ios_base::out);
     std::string str;
 
     // Append a new proxy to the file in the given format
@@ -1329,7 +1337,7 @@ ProductParserDisplay::ProductParserDisplay(QWidget *parent) :
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);
@@ -1439,7 +1447,9 @@ void ProductParserDisplay::parseProds() {
     }
 
     // Then load the file into the product parsed view
-    QFile* productsLog = new QFile(std::string(file_paths::PRODUCTS_LOG).append(supported_sites::WEBSITES.at(websites->currentText().toStdString()).title).append("temp.txt").c_str());
+    QFile* productsLog = new QFile(std::string(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).
+            toStdString().c_str()).append(supported_sites::WEBSITES.at(websites->currentText().toStdString()).title).
+            append("temp.txt").c_str());
     productsLog->open(QIODevice::ReadOnly);
     if (productsLog->exists()) {
         // If the products log is found, then parse their products
@@ -1564,7 +1574,7 @@ SettingsDisplay::SettingsDisplay(QWidget *parent) :
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);

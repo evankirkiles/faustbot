@@ -8,7 +8,7 @@
 ColorCustomizer::ColorCustomizer() {
 
     // Initialize the currentColors array from the colorstylesheet file
-    std::ifstream filein(file_paths::COLORSTYLESHEET);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     std::string str;
 
     // Cycle through the vars comment and set the values for each index in the currentColors map
@@ -35,7 +35,7 @@ ColorCustomizer::ColorCustomizer() {
     filein.close();
 
     // Also build the default colors array from the default colorstylesheet
-    filein.open(file_paths::COLORSTYLESHEET_DEFAULT);
+    filein.open(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET_DEFAULT).toStdString().c_str());
 
     // Cycle through the vars comment and set the values for each index in the defaultColors map
     while (getline(filein, str)) {
@@ -68,34 +68,37 @@ void ColorCustomizer::changeValue(const std::string &name, const std::string &va
     currentColors[name] = value;
 
     // Now change the value in the current color stylesheet
-    std::ifstream filein(file_paths::COLORSTYLESHEET_WITHVARS);
-    std::ofstream fileout(file_paths::COLORSTYLESHEET, std::ios::trunc);
-    std::string str;
+    QFile filein(file_paths::COLORSTYLESHEET_WITHVARS);
 
     // Iterate through the lines of the colorstylesheet with variables
-    while(getline(filein, str)) {
-        std::string tempstr;
+    if (filein.open(QIODevice::ReadOnly)) {
+        QTextStream in(&filein);
+        std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str(), std::ios::trunc);
+        while (!in.atEnd()) {
+            std::string str = in.readLine().toStdString();
+            std::string tempstr;
 
-        // Check for the variable name signifier
-        const unsigned long atPos = str.find('@');
-        if (atPos != std::string::npos) {
-            // When the name identifier is found, then replace it with the variable
-            tempstr = str.substr(0, atPos);
-            str.erase(0, atPos);
-            std::string varName = str.substr(1, str.find(';') - 1);
-            tempstr.append(currentColors[varName]).append(";");
-        } else {
-            // Otherwise just write in the line
-            tempstr = str;
+            // Check for the variable name signifier
+            const unsigned long atPos = str.find('@');
+            if (atPos != std::string::npos) {
+                // When the name identifier is found, then replace it with the variable
+                tempstr = str.substr(0, atPos);
+                str.erase(0, atPos);
+                std::string varName = str.substr(1, str.find(';') - 1);
+                tempstr.append(currentColors[varName]).append(";");
+            } else {
+                // Otherwise just write in the line
+                tempstr = str;
+            }
+
+            // Write the edited line into the color stylesheet file
+            fileout << tempstr << "\n";
         }
 
-        // Write the edited line into the color stylesheet file
-        fileout << tempstr << "\n";
+        // Close both files
+        filein.close();
+        fileout.close();
     }
-
-    // Close both files
-    filein.close();
-    fileout.close();
 }
 
 // Reset a value to its default
@@ -111,8 +114,8 @@ void ColorCustomizer::resetAllValues() {
     currentColors = defaultColors;
 
     // Copy over the contents of the default stylesheet to that of the new one
-    std::ifstream filein(file_paths::COLORSTYLESHEET_DEFAULT);
-    std::ofstream fileout(file_paths::COLORSTYLESHEET, std::ios::trunc);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET_DEFAULT).toStdString().c_str());
+    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str(), std::ios::trunc);
     std::string str;
     while (getline(filein, str)) {
         fileout << str << "\n";

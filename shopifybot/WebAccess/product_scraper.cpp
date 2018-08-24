@@ -19,7 +19,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
 
     // Also open a new file to write to which logs times of each process
     std::ofstream timeFile;
-    timeFile.open(file_paths::TIME_LOG, std::ios::trunc);
+    timeFile.open(QApplication::applicationDirPath().append(file_paths::TIME_LOG).toStdString().c_str(), std::ios::trunc);
 
     // Run cURL on the website to download the body to a file
     if (sourceURL.method > 100 && sourceURL.method < 200) {
@@ -33,12 +33,14 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
     timeFile << duration << " seconds to connect to website. \n";
 
     // Now parse through the downloaded html file to get the names of all the current items
-    std::ifstream searchFile(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt");
+    std::ifstream searchFile(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).
+            toStdString().c_str()) + sourceURL.title + taskID + ".txt");
     std::string str;
 
     // Also open a new file to write to which will act as the system output
     std::ofstream logFile;
-    logFile.open(std::string(file_paths::PRODUCTS_LOG) + sourceURL.title + taskID + ".txt", std::ios::trunc);
+    logFile.open(std::string(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).
+            toStdString().c_str()) + sourceURL.title + taskID + ".txt", std::ios::trunc);
 
     // There are different parse requirements for each different method, hence the if statements
     if (sourceURL.method > 100 && sourceURL.method < 200) {
@@ -311,7 +313,7 @@ void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension
 
     // Open time logging file
     std::ofstream timeLogs;
-    timeLogs.open(file_paths::TIME_LOG, std::ios::trunc);
+    timeLogs.open(QApplication::applicationDirPath().append(file_paths::TIME_LOG).toStdString().c_str(), std::ios::trunc);
     // Begin clock to check how much time this function takes
     std::clock_t begin;
     begin = clock();
@@ -320,11 +322,13 @@ void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension
     performCURL(std::string(sourceURL.baseURL).append(extension));
 
     // Parse through the downloaded html file
-    std::ifstream searchFile(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt");
+    std::ifstream searchFile(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).
+            toStdString().c_str()) + sourceURL.title + taskID + ".txt");
     std::string str;
 
     // Also open a new file to write to which will act as the system output
-    std::ofstream logFile(std::string(file_paths::PRODUCTS_LOG) + sourceURL.title + taskID + ".txt", std::ios::trunc);
+    std::ofstream logFile(std::string(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).
+            toStdString().c_str()) + sourceURL.title + taskID + ".txt", std::ios::trunc);
 
     // Locate the handle":" string on the product page
     bool handleFound = false;
@@ -389,7 +393,7 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
 
     // Open time logging file
     std::ofstream timeLogs;
-    timeLogs.open(file_paths::TIME_LOG, std::ios::trunc);
+    timeLogs.open(QApplication::applicationDirPath().append(file_paths::TIME_LOG).toStdString().c_str(), std::ios::trunc);
 
     if (color.empty()) { color = "ul"; }
 
@@ -401,7 +405,7 @@ std::string ShopifyWebsiteHandler::getVariantIDFrom(const std::string &addToURL,
     performCURL(std::string(sourceURL.baseURL).append(addToURL));
 
     // Parse through the downloaded html file
-    std::ifstream searchFile(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt");
+    std::ifstream searchFile(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().c_str()) + sourceURL.title + taskID + ".txt");
     std::string str;
     std::string id;
 
@@ -480,11 +484,11 @@ void ShopifyWebsiteHandler::performCURL(const std::string& URL) {
     snprintf(nline, sizeof(nline), "%s\t%s\t%s\t%s\t%lu\t%s\t%s", ".example.com", "TRUE", "/", "FALSE",
              (unsigned long)time(nullptr) + 31337UL, "PREF", "hello example");
     // Set cookie file
-    curl_easy_setopt(curl, CURLOPT_COOKIEFILE, file_paths::COOKIES_TXT);
+    curl_easy_setopt(curl, CURLOPT_COOKIEFILE, QApplication::applicationDirPath().append(file_paths::COOKIES_TXT).toStdString().c_str());
     curl_easy_setopt(curl, CURLOPT_COOKIELIST, "ALL");
     // Set the cookie file as the cookie jar
     curl_easy_setopt(curl, CURLOPT_COOKIESESSION, true);
-    curl_easy_setopt(curl, CURLOPT_COOKIEJAR, file_paths::COOKIES_TXT);
+    curl_easy_setopt(curl, CURLOPT_COOKIEJAR, QApplication::applicationDirPath().append(file_paths::COOKIES_TXT).toStdString().c_str());
     // Format the cookie in Netscape format
     curl_easy_setopt(curl, CURLOPT_COOKIELIST, nline);
 
@@ -494,9 +498,9 @@ void ShopifyWebsiteHandler::performCURL(const std::string& URL) {
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     // First clear the file if it already exists
-    remove(std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
+    remove(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().c_str()) + sourceURL.title + taskID + ".txt").c_str());
     // Open the file to write to
-    FILE *fp = fopen(std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str(), "wb");
+    FILE *fp = fopen(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().c_str()) + sourceURL.title + taskID + ".txt").c_str(), "wb");
     if (fp) {
 
         // Write the page body to the file
@@ -532,11 +536,11 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
 
     // Open time logging file
     std::ofstream timeLogs;
-    timeLogs.open(file_paths::TIME_LOG, std::ios::app);
+    timeLogs.open(QApplication::applicationDirPath().append(file_paths::TIME_LOG).toStdString().c_str(), std::ios::app);
 
     // Now open products_log.txt and begin parsing through the lines, searching for the keywords in the title
     // Again, some websites have different color placements than others, so I have to account for that.
-    std::ifstream searchFile(std::string(file_paths::PRODUCTS_LOG) + sourceURL.title + taskID + ".txt");
+    std::ifstream searchFile(std::string(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).toStdString().c_str()) + sourceURL.title + taskID + ".txt");
     std::string str;
 
     // Uses a switch function to specify different color locators for different websites
@@ -717,7 +721,7 @@ int ShopifyWebsiteHandler::productAvailable(const std::string &variantID) {
     performCURL(std::string(sourceURL.baseURL) + "/cart/" + variantID + ":1");
 
     // Go through the scraped file and check if the product is available
-    std::ifstream filein(std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
+    std::ifstream filein(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().c_str()) + sourceURL.title + taskID + ".txt").c_str());
     std::string str;
     while (getline(filein, str)) {
         // If the product is available, say so
@@ -754,7 +758,7 @@ std::tuple<std::string, std::string, std::string> ShopifyWebsiteHandler::getName
 
     // Both available and unavailable products should follow the same format now after following through
     // with the HTML redirect (if necessary).
-    std::ifstream filein(std::string(std::string(file_paths::HTML_BODY) + sourceURL.title + taskID + ".txt").c_str());
+    std::ifstream filein(std::string(std::string(QApplication::applicationDirPath().append(file_paths::CONTENTS_DIR).toStdString().c_str()) + sourceURL.title + taskID + ".txt").c_str());
     while (getline(filein, str)) {
         // Only do each check if the keyword has not been found
         if (!imgFound) {

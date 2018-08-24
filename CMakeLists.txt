@@ -2,21 +2,15 @@ cmake_minimum_required(VERSION 3.10)
 project(shopify_bot)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_BUILD_TYPE release)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath,@loader_path/../,-rpath,@executable_path/../,-rpath,@executable_path/../Frameworks")
 set(APP_DOMAIN ./domain)
 set(APP_CALC ./calc)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-
-# Set the resource files
-set(RESOURCE_FILES
-        shopifybot/Graphics/Stylesheets/colorstylesheet.qss
-        shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss
-        shopifybot/Graphics/Stylesheets/colorstylesheet_withvars.qss
-        shopifybot/Graphics/Stylesheets/stylesheet.qss
-        )
 
 # Make sure to link the resources.qrc for all icons to be binary-encoded
 add_executable(shopify_bot
@@ -70,3 +64,11 @@ endif()
 
 include_directories(${APP_DOMAIN})
 include_directories(${APP_CALC})
+
+# Move the resources into the binary directory
+configure_file(shopifybot/Graphics/Stylesheets/colorstylesheet.qss ${CMAKE_CURRENT_BINARY_DIR}/Resources/Stylesheets/colorstylesheet.qss COPYONLY)
+configure_file(shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss ${CMAKE_CURRENT_BINARY_DIR}/Resources/Stylesheets/colorstylesheet_default.qss COPYONLY)
+configure_file(shopifybot/Infrastructure/profiles.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Cache/profiles.txt COPYONLY)
+configure_file(shopifybot/Infrastructure/proxies.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Cache/proxies.txt COPYONLY)
+configure_file(shopifybot/Infrastructure/ccards.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Cache/ccards.txt COPYONLY)
+configure_file(shopifybot/WebAccess/Contents/CookieJar/cookies.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Contents/CookieJar/cookies.txt COPYONLY)

@@ -264,7 +264,8 @@ void TaskWidget::exit() {
         return;
     } else {
         // Delete the log file when this task is deleted
-        remove(std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str());
+        remove(std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
+                append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str());
         // Remove all connections
         deleted = true;
         this->disconnect();
@@ -278,7 +279,8 @@ void TaskWidget::showLogs() {
     if (*logWindowOpen) { if (lfd) { lfd->raise(); } return; }
 
     // Otherwise create a new log window and show it
-    lfd = new LogFileDisplay(task->title, std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt"));
+    lfd = new LogFileDisplay(task->title, std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).
+            toStdString().c_str()).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt"));
     lfd->show();
     lfd->setFocus();
     // Connect the closeLogs function of lfd to the delete button of the task
@@ -317,8 +319,10 @@ void TaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QString
                                 QString p_proxy, unsigned int frequency) {
 
     // Rename the old logs file to the new one
-    std::rename(std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str(),
-                std::string(file_paths::TASK_LOG).append("task_logs_").append(p_website.title).append(task->swh.taskID).append(".txt").c_str());
+    std::rename(std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
+                        append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str(),
+                std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
+                        append("task_logs_").append(p_website.title).append(task->swh.taskID).append(".txt").c_str());
 
     // First, change the visuals of the task widget to match the new task
     title->setText(p_title);
@@ -613,7 +617,8 @@ void VIDTaskWidget::exit() {
         return;
     } else {
         // Delete the log file when this task is deleted
-        remove(std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str());
+        remove(std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
+                append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str());
         // Remove all connections
         deleted = true;
         this->disconnect();
@@ -627,7 +632,8 @@ void VIDTaskWidget::showLogs() {
     if (*logWindowOpen) { if (lfd) { lfd->raise(); } return; }
 
     // Otherwise create a new log window and show it
-    lfd = new LogFileDisplay(task->title, std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt"));
+    lfd = new LogFileDisplay(task->title, std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).
+            toStdString().c_str()).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt"));
     lfd->show();
     lfd->setFocus();
     // Connect the closeLogs function of lfd to the delete button of the task
@@ -666,8 +672,10 @@ void VIDTaskWidget::acceptTaskEdit(QString p_title, URLAndMethod p_website, QStr
                                    unsigned int frequency) {
 
     // Rename the old logs file to the new one
-    std::rename(std::string(file_paths::TASK_LOG).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str(),
-                std::string(file_paths::TASK_LOG).append("task_logs_").append(p_website.title).append(task->swh.taskID).append(".txt").c_str());
+    std::rename(std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
+                        append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str(),
+                std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
+                        append("task_logs_").append(p_website.title).append(task->swh.taskID).append(".txt").c_str());
 
     // First, change the visuals fo the task widget to match the new task
     title->setText(p_title);
@@ -756,7 +764,7 @@ EditTaskDisplay::EditTaskDisplay(const QString& p_title, const QString& p_websit
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);
@@ -927,7 +935,7 @@ void EditTaskDisplay::buildProfiles() {
     profile->addItem("Random");
 
     // Open the profiles.txt
-    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
     std::string tempStr;
 
     // Cycle through each line and get the profiles' titles
@@ -945,7 +953,7 @@ void EditTaskDisplay::buildProxies() {
     proxy->addItem("Random");
 
     // Open the proxies.txt
-    std::ifstream filein(file_paths::PROXIES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROXIES_TXT).toStdString().c_str());
     std::string tempStr;
 
     // Cycle through each line and get the proxies' ips
@@ -980,7 +988,7 @@ VIDTaskEditDisplay::VIDTaskEditDisplay(const QString &p_title, const QString &p_
     QFile File(file_paths::STYLESHEET);
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
-    QFile File2(file_paths::COLORSTYLESHEET);
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
     File2.open(QFile::ReadOnly);
     QString CStyleSheet = QLatin1String(File2.readAll());
     setStyleSheet(StyleSheet + CStyleSheet);
@@ -1165,7 +1173,7 @@ void VIDTaskEditDisplay::buildProfiles() {
     profile->addItem("Random");
 
     // Open the profiles.txt
-    std::ifstream filein(file_paths::PROFILES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROFILES_TXT).toStdString().c_str());
     std::string tempStr;
 
     // Cycle through each line and get the profiles' titles
@@ -1183,7 +1191,7 @@ void VIDTaskEditDisplay::buildProxies() {
     proxy->addItem("Random");
 
     // Open the proxies.txt
-    std::ifstream filein(file_paths::PROXIES_TXT);
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROXIES_TXT).toStdString().c_str());
     std::string tempStr;
 
     // Cycle through each line and get the proxies' ips
@@ -1216,5 +1224,6 @@ void VIDTaskEditDisplay::fillFromVariant() {
     imageURL = std::get<2>(dataPack).c_str();
 
     // Remove the temporary task html body
-    remove(std::string(std::string(file_paths::HTML_BODY) + supported_sites::WEBSITES.at(websites->currentText().toStdString()).title + "temp.txt").c_str());
+    remove(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().
+            c_str()) + supported_sites::WEBSITES.at(websites->currentText().toStdString()).title + "temp.txt").c_str());
 }

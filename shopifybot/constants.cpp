@@ -58,27 +58,28 @@ namespace supported_sites {
 }
 
 namespace file_paths {
-    const char* HTML_BODY = "./shopifybot/WebAccess/Contents/html_body_";
-    const char* PRODUCTS_LOG = "./shopifybot/WebAccess/Contents/products_log_";
 
-    const char* TIME_LOG = "./shopifybot/logs.log";
-    const char* TASK_LOG = "./shopifybot/Infrastructure/Logs/";
+    const char* HTML_BODY = "/Resources/Contents/html_body_";
+    const char* PRODUCTS_LOG = "/Resources/Contents/products_log_";
+
+    const char* TIME_LOG = "/Logs/timelogs.log";
+    const char* TASK_LOG = "/Logs/";
 
     const char* STYLESHEET = ":Stylesheets/stylesheet.qss";
-    const char* COLORSTYLESHEET = "./shopifybot/Graphics/Stylesheets/colorstylesheet.qss";
-    const char* COLORSTYLESHEET_WITHVARS = "./shopifybot/Graphics/Stylesheets/colorstylesheet_withvars.qss";
-    const char* COLORSTYLESHEET_DEFAULT = "./shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss";
+    const char* COLORSTYLESHEET = "/Resources/Stylesheets/colorstylesheet.qss";
+    const char* COLORSTYLESHEET_WITHVARS = ":Stylesheets/colorstylesheet_withvars.qss";
+    const char* COLORSTYLESHEET_DEFAULT = "/Resources/Stylesheets/colorstylesheet_default.qss";
 
-    const char* PROFILES_TXT = "./shopifybot/Infrastructure/profiles.txt";
-    const char* TEMPPROFILES_TXT = "./shopifybot/Infrastructure/tempprofiles.txt";
-    const char* CCARD_TXT = "./shopifybot/Infrastructure/ccards.txt";
-    const char* TEMPCCARD_TXT = "./shopifybot/Infrastructure/tempccards.txt";
-    const char* PROXIES_TXT = "./shopifybot/Infrastructure/proxies.txt";
-    const char* TEMPPROXIES_TXT = "./shopifybot/Infrastructure/tempproxies.txt";
-    const char* COOKIES_TXT = "./shopifybot/WebAccess/Contents/CookieJar/cookies.txt";
+    const char* PROFILES_TXT = "/Resources/Cache/profiles.txt";
+    const char* TEMPPROFILES_TXT = "/Resources/Cache/tempprofiles.txt";
+    const char* CCARD_TXT = "/Resources/Cache/ccards.txt";
+    const char* TEMPCCARD_TXT = "/Resources/Cache/tempccards.txt";
+    const char* PROXIES_TXT = "/Resources/Cache/proxies.txt";
+    const char* TEMPPROXIES_TXT = "/Resources/Cache/tempproxies.txt";
+    const char* COOKIES_TXT = "/Resources/Contents/CookieJar/cookies.txt";
 
-    const char* CONTENTS_DIR = "./shopifybot/WebAccess/Contents";
-    const char* LOGS_DIR = "./shopifybot/Infrastructure/Logs";
+    const char* CONTENTS_DIR = "/Resources/Contents";
+    const char* LOGS_DIR = "/Logs";
 
     // Images
     const char* LOGO_FILE = ":Assets/logo.png";
