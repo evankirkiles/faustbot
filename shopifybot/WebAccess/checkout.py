@@ -195,7 +195,7 @@ def send_customer_info():
         raise ValueError("Proxy error occurred in customer information POST success check.")
 
     # Check if successfully got to payment page
-    if b'Complete order' or b'Complete order'.upper in resp.content:
+    if b' Complete order ' or b' Complete order '.upper in resp.content:
         log('Successfully bypassed reCAPTCHA and got to payment method page.')
 
 

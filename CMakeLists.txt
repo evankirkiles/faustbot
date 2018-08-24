@@ -4,15 +4,16 @@ project(shopify_bot)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_PREFIX_PATH /Users/evankirkiles/Qt/5.11.1/clang_64)
 set(APP_DOMAIN ./domain)
 set(APP_CALC ./calc)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+# Make sure to link the resources.qrc
 add_executable(shopify_bot
         main.cpp
+        shopifybot/Graphics/resources.qrc
         shopifybot/WebAccess/product_scraper.cpp
         shopifybot/constants.cpp
         shopifybot/Infrastructure/tasks.cpp
