@@ -758,7 +758,7 @@ std::tuple<std::string, std::string, std::string> ShopifyWebsiteHandler::getName
 
     // Both available and unavailable products should follow the same format now after following through
     // with the HTML redirect (if necessary).
-    std::ifstream filein(std::string(std::string(QApplication::applicationDirPath().append(file_paths::CONTENTS_DIR).toStdString().c_str()) + sourceURL.title + taskID + ".txt").c_str());
+    std::ifstream filein(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().c_str()) + sourceURL.title + taskID + ".txt").c_str());
     while (getline(filein, str)) {
         // Only do each check if the keyword has not been found
         if (!imgFound) {

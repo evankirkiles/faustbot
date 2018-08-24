@@ -44,9 +44,8 @@ void Task::run() {
             if (!shouldcontinue) {
 
                 // Delete the files used
-                remove(std::string("./shopifybot/WebAccess/Contents/html_body_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
-                remove(std::string("./shopifybot/WebAccess/Contents/products_log_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
-
+                remove(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+                remove(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
                 emit status("Interrupted.", "#e26c6c");
                 emit finished();
                 return;
@@ -60,8 +59,8 @@ void Task::run() {
             log("Task finished.");
 
             // Remove the files used
-            remove(std::string("./shopifybot/WebAccess/Contents/html_body_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
-            remove(std::string("./shopifybot/WebAccess/Contents/products_log_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+            remove(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+            remove(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
 
             // Successfully finished if it got here
             emit status("Finished!", "#8dd888");
@@ -80,9 +79,8 @@ void Task::run() {
     emit status("Interrupted.", "#e26c6c");
 
     // Delete the files used
-    remove(std::string("./shopifybot/WebAccess/Contents/html_body_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
-    remove(std::string("./shopifybot/WebAccess/Contents/products_log_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
-
+    remove(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+    remove(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
     emit finished();
 }
 
@@ -91,8 +89,8 @@ void Task::log(const std::string &message) {
 
     // Open the log file for logging
     std::ofstream fp;
-    fp.open(std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
-            append("task_logs_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str(), std::ios::app);
+    fp.open(std::string(QApplication::applicationDirPath().append(file_paths::TASKS_LOG).toStdString())
+                    .append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str(), std::ios::app);
 
     // Gets the current time
     auto t = std::time(nullptr);
@@ -108,9 +106,10 @@ void Task::log(const std::string &message) {
 void Task::order(const std::string &url) {
 
     // Essentially just runs the Python Selenium script for the given url
-    FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/checkout.py ") + swh.sourceURL.checkoutURL + " " +
-            url + std::string(" shopifybot/Infrastructure/Logs/task_logs_") + swh.sourceURL.title + swh.taskID + ".txt \"" + profile + "\" " +
-                                 proxy).c_str(), "r");
+    FILE *fp = popen(std::string(std::string("python3 ") + QApplication::applicationDirPath().append(file_paths::CHECKOUT).toStdString() +
+                                 " " + swh.sourceURL.checkoutURL + " " + url + " " + QApplication::applicationDirPath().append(file_paths::TASKS_LOG).toStdString() +
+                                 swh.sourceURL.title + swh.taskID + ".txt \"" + profile + "\" " + proxy + " " +
+                                        QApplication::applicationDirPath().toStdString()).c_str(), "r");
 
     // Wait for the Python script to finish
     pclose(fp);
@@ -169,14 +168,26 @@ void VariantIDTask::run() {
                 // If it is, then order it
                 emit status("Placing order...", "#8dd888");
                 log("Placing order...");
+
+                // Perform one last check to make sure not interrupted
+                if (!shouldcontinue) {
+
+                    // Delete the files used
+                    remove(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+                    remove(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+                    emit status("Interrupted.", "#e26c6c");
+                    emit finished();
+                    return;
+                }
+
                 order(std::string(swh.sourceURL.baseURL) + "/cart/" + variantID + ":1");
 
                 // When finished, order should be completed
                 log("Task finished.");
 
                 // Remove the files used
-                remove(std::string("./shopifybot/WebAccess/Contents/html_body_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
-                remove(std::string("./shopifybot/WebAccess/Contents/products_log_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+                remove(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+                remove(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
 
                 // Successfully finished if it got here
                 emit status("Finished!", "#8dd888");
@@ -201,8 +212,8 @@ void VariantIDTask::run() {
     emit status("Interrupted.", "#e26c6c");
 
     // Delete the files used
-    remove(std::string("./shopifybot/WebAccess/Contents/html_body_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
-    remove(std::string("./shopifybot/WebAccess/Contents/products_log_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+    remove(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
+    remove(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
 
     emit finished();
 }
@@ -210,9 +221,10 @@ void VariantIDTask::run() {
 // Order function which runs the checkout python file
 void VariantIDTask::order(const std::string &url) {
     // Essentially just runs the Python Selenium script for the given url
-    FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/checkout.py ") + swh.sourceURL.checkoutURL + " " +
-                                 url + std::string(" shopifybot/Infrastructure/Logs/task_logs_") + swh.sourceURL.title + swh.taskID + ".txt \"" + profile + "\" " +
-                                 proxy).c_str(), "r");
+    FILE *fp = popen(std::string(std::string("python3 ") + QApplication::applicationDirPath().append(file_paths::CHECKOUT).toStdString() +
+            " " + swh.sourceURL.checkoutURL + " " + url + " " + QApplication::applicationDirPath().append(file_paths::TASKS_LOG).toStdString() +
+                                 swh.sourceURL.title + swh.taskID + ".txt \"" + profile + "\" " + proxy + " " +
+                                         QApplication::applicationDirPath().toStdString()).c_str(), "r");
 
     // Wait for the Python script to finish
     pclose(fp);
@@ -222,8 +234,8 @@ void VariantIDTask::order(const std::string &url) {
 void VariantIDTask::log(const std::string &message) {
     // Open the log file for logging
     std::ofstream fp;
-    fp.open(std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
-            append("task_logs_").append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str(), std::ios::app);
+    fp.open(std::string(QApplication::applicationDirPath().append(file_paths::TASKS_LOG).toStdString())
+                    .append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str(), std::ios::app);
 
     // Gets the current time
     auto t = std::time(nullptr);
@@ -233,5 +245,4 @@ void VariantIDTask::log(const std::string &message) {
 
     // Close the logging file
     fp.close();
-
 }

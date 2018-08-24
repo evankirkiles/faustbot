@@ -72,3 +72,5 @@ configure_file(shopifybot/Infrastructure/profiles.txt ${CMAKE_CURRENT_BINARY_DIR
 configure_file(shopifybot/Infrastructure/proxies.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Cache/proxies.txt COPYONLY)
 configure_file(shopifybot/Infrastructure/ccards.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Cache/ccards.txt COPYONLY)
 configure_file(shopifybot/WebAccess/Contents/CookieJar/cookies.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Contents/CookieJar/cookies.txt COPYONLY)
+configure_file(shopifybot/WebAccess/checkout.py ${CMAKE_CURRENT_BINARY_DIR}/Resources/checkout.py COPYONLY)
+configure_file(shopifybot/WebAccess/proxychecker.py ${CMAKE_CURRENT_BINARY_DIR}/Resources/proxychecker.py COPYONLY)

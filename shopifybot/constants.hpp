@@ -95,10 +95,15 @@ namespace file_paths {
     // Declare file paths here so you can change the location of a file and not have to parse through every
     // usage throughout the program to ensure consistency.
     extern const char* HTML_BODY;
-
     extern const char* PRODUCTS_LOG;
+    extern const char* PROXYCHECK;
+
     extern const char* TIME_LOG;
+    extern const char* TASKS_LOG;
     extern const char* TASK_LOG;
+
+    extern const char* CHECKOUT;
+    extern const char* PROXYCHECKER;
 
     extern const char* STYLESHEET;
     extern const char* COLORSTYLESHEET;

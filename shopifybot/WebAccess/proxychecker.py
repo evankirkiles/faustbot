@@ -4,10 +4,11 @@ import requests, sys, json, urllib3
 # First argument is the index of the proxy to check, and the second is the filename to write to
 proxyIndex = sys.argv[1]
 fileToWriteTo = sys.argv[2]
+rootDir = sys.argv[3]
 
 # First task is to retrieve the proxy information from the proxy file
 j = None
-with open('shopifybot/Infrastructure/proxies.txt') as inputfile:
+with open(rootDir + '/Resources/Cache/proxies.txt') as inputfile:
     for i, line in enumerate(inputfile):
         if line.split(' :-: ', 1)[0] == proxyIndex:
             j = json.loads(line.split(' :-: ', 1)[1])

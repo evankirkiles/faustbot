@@ -61,8 +61,13 @@ namespace file_paths {
 
     const char* HTML_BODY = "/Resources/Contents/html_body_";
     const char* PRODUCTS_LOG = "/Resources/Contents/products_log_";
+    const char* PROXYCHECK = "/Resources/Contents/proxychecker";
+
+    const char* CHECKOUT = "/Resources/checkout.py";
+    const char* PROXYCHECKER = "/Resources/proxychecker.py";
 
     const char* TIME_LOG = "/Logs/timelogs.log";
+    const char* TASKS_LOG = "/Logs/task_logs_";
     const char* TASK_LOG = "/Logs/";
 
     const char* STYLESHEET = ":Stylesheets/stylesheet.qss";

@@ -957,9 +957,9 @@ void ProxyListItem::proxyEndEmit() { emit proxyCheckEnd(); }
 // Function to be run in the new QThread in the checkStatus function
 void ProxyListItem::runCheck() {
     // Open the python script to check the proxy status
-    FILE *fp = popen(std::string(std::string("python3 shopifybot/WebAccess/proxychecker.py ") +
-            indexDisp->text().toStdString() + " shopifybot/WebAccess/Contents/proxychecker" +
-                                 indexDisp->text().toStdString()).c_str(), "r");
+    FILE *fp = popen(std::string(std::string("python3 ") + QApplication::applicationDirPath().append(file_paths::PROXYCHECKER).toStdString() +
+            " " + indexDisp->text().toStdString() + " " + QApplication::applicationDirPath().append(file_paths::PROXYCHECK).toStdString() +
+                                 indexDisp->text().toStdString() + " " + QApplication::applicationDirPath().toStdString()).c_str(), "r");
 
     // Wait for the python script to finish
     pclose(fp);
@@ -968,7 +968,7 @@ void ProxyListItem::runCheck() {
 // Function to be
 void ProxyListItem::updateStatus() {
     // Now check the results file
-    std::ifstream filein("shopifybot/WebAccess/Contents/proxychecker" + indexDisp->text().toStdString());
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROXYCHECK).toStdString() + indexDisp->text().toStdString());
     int result;
     filein >> result;
     if (result == 1) {
@@ -977,7 +977,7 @@ void ProxyListItem::updateStatus() {
         statusIMG->setPixmap(proxyOff);
     }
     filein.close();
-    remove(std::string("shopifybot/WebAccess/Contents/proxychecker" + indexDisp->text().toStdString()).c_str());
+    remove(std::string(QApplication::applicationDirPath().append(file_paths::PROXYCHECK).toStdString() + indexDisp->text().toStdString()).c_str());
 }
 
 // Constructor that builds the proxy window

@@ -1224,6 +1224,6 @@ void VIDTaskEditDisplay::fillFromVariant() {
     imageURL = std::get<2>(dataPack).c_str();
 
     // Remove the temporary task html body
-    remove(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().
-            c_str()) + supported_sites::WEBSITES.at(websites->currentText().toStdString()).title + "temp.txt").c_str());
+    remove(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString()) +
+                       supported_sites::WEBSITES.at(websites->currentText().toStdString()).title + "temp.txt").c_str());
 }

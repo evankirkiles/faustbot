@@ -18,22 +18,23 @@ cartLink = sys.argv[2]
 logFileLocation = sys.argv[3]
 # Name of the profile is the fourth argument
 profileName = sys.argv[4]
-# Finally, the proxy identifier is the fifth argument
+# The proxy identifier is the fifth argument
 proxyName = sys.argv[5]
+# The resource directory is the final argument
+rootDir = sys.argv[6]
 
 # Go into the profile file and find the correct profile's json data
 j = None
 profileLine = -1
-with open('shopifybot/Infrastructure/profiles.txt') as input_file:
+with open(rootDir + '/Resources/Cache/profiles.txt') as input_file:
     if profileName == 'Random':
         profileLine = 0
         for i, line in enumerate(input_file):
-            if line != "":
-                profileLine += 1
-        profileLine = random.randint(1, profileLine + 1)
+            profileLine += 1
+        profileLine = random.randint(1, profileLine)
     input_file.close()
 
-with open('shopifybot/Infrastructure/profiles.txt') as input_file:
+with open(rootDir + '/Resources/Cache/profiles.txt') as input_file:
     currentLine = 0
     for i, line in enumerate(input_file):
         currentLine += 1
@@ -48,17 +49,16 @@ if j is None:
 # Go into the credit card file and find the correct credit card json data
 c = None
 ccardLine = -1
-with open('shopifybot/Infrastructure/ccards.txt') as ccinput_file:
+with open(rootDir + '/Resources/Cache/ccards.txt') as ccinput_file:
 
     if j['ccard'] == 'Random':
         ccardLine = 0
         for i, line in enumerate(ccinput_file):
-            if line != "":
-                ccardLine += 1
-        ccardLine = random.randint(1, ccardLine + 1)
+            ccardLine += 1
+        ccardLine = random.randint(1, ccardLine)
     ccinput_file.close()
 
-with open('shopifybot/Infrastructure/ccards.txt') as ccinput_file:
+with open(rootDir + '/Resources/Cache/ccards.txt') as ccinput_file:
     currentLine = 0
     for i, line in enumerate(ccinput_file):
         currentLine += 1
@@ -74,16 +74,15 @@ if c is None:
 p = None
 proxyDict = None
 proxyLine = -1
-with open('shopifybot/Infrastructure/proxies.txt') as proxyinputfile:
+with open(rootDir + '/Resources/Cache/proxies.txt') as proxyinputfile:
     if proxyName == 'Random':
         proxyLine = 0
         for i, line in enumerate(proxyinputfile):
-            if line != "":
-                proxyLine += 1
-        proxyLine = random.randint(1, proxyLine + 1)
+            proxyLine += 1
+        proxyLine = random.randint(1, proxyLine)
     proxyinputfile.close()
 
-with open('shopifybot/Infrastructure/proxies.txt') as proxyinputfile:
+with open(rootDir + '/Resources/Cache/proxies.txt') as proxyinputfile:
     currentLine = 0
     for i, line in enumerate(proxyinputfile):
         currentLine += 1
