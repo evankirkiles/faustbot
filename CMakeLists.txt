@@ -22,7 +22,6 @@ set(INSTALL_CMAKE_DIR "${prefix}/Resources")
 # Find the packages necessary
 find_package(Qt5 COMPONENTS Core Widgets Concurrent Network REQUIRED)
 find_package(CURL REQUIRED)
-find_package(Boost COMPONENTS system filesystem REQUIRED)
 
 # List of sources
 set(SHOPBOT_SRCS
@@ -37,9 +36,20 @@ set(SHOPBOT_SRCS
         shopifybot/Graphics/sidebarpopups.cpp
         shopifybot/Graphics/customwidgets.cpp
         shopifybot/Graphics/Stylesheets/colorcustomizer.cpp)
-# List of resources
+# List of Qt Resources file
 set(SHOPBOT_RCS
         shopifybot/Graphics/resources.qrc)
+# List of actual resources
+set(SHOPBOT_RSCS
+        shopifybot/Graphics/Stylesheets/colorstylesheet.qss
+        shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss
+        shopifybot/Infrastructure/profiles.txt
+        shopifybot/Infrastructure/proxies.txt
+        shopifybot/Infrastructure/ccards.txt
+        shopifybot/WebAccess/Contents/CookieJar/cookies.txt
+        shopifybot/WebAccess/checkout.py
+        shopifybot/WebAccess/proxychecker.py)
+set_property(SOURCE SHOPBOT_RSCS PROPERTY MACOSX_PACKAGE_LOCATION "Resource")
 
 # Build the executable
 add_executable(shopify_bot MACOSX_BUNDLE
@@ -71,10 +81,6 @@ target_link_libraries(shopify_bot
         ${Qt5Core_LIBRARIES}
         ${Qt5Concurrent_LIBRARIES}
         ${Qt5Network_LIBRARIES})
-
-# Boost include and linker
-include_directories(${Boost_INCLUDE_DIRS})
-target_link_libraries(shopify_bot ${Boost_LIBRARIES})
 
 # ---------------------------------------------------------------------------- #
 

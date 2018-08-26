@@ -6,7 +6,7 @@
 #define SHOPIFY_BOT_SUPPORTED_SITES_HPP
 
 #ifndef Q_DECLARE_METATYPE
-#include <QtCore>
+#include <QtCore/QtCore>
 #endif
 #ifndef unordered_map
 #include <unordered_map>

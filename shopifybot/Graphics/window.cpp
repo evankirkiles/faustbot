@@ -169,9 +169,6 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Open the settings window when the settings button is clicked
     connect(settings, SIGNAL(clicked()), this, SLOT(openSettings()));
 
-    // PLACEHOLDER CONNECT
-    connect(clear, SIGNAL(clicked()), this, SLOT(clearDirs()));
-
     // Build the timer updated on second intervals
     timeChecker = new QTimer(this);
     connect(timeChecker, &QTimer::timeout, [this] () { emit timeUpdated(QDateTime::currentDateTime()); } );
@@ -376,18 +373,4 @@ void BotWindow::openSettings() {
 
     // Make necessary connections
     connect(settingsDisp, &SettingsDisplay::closed, [this] () { settingsOpen = false; });
-}
-
-// Clears all the temporary file directories
-void BotWindow::clearDirs() {
-
-    // Remove the contents directory and recreate it and its subdirectory cookiejar with cookies file
-    boost::filesystem::remove_all(QApplication::applicationDirPath().append(file_paths::CONTENTS_DIR).toStdString().c_str());
-    boost::filesystem::create_directory(QApplication::applicationDirPath().append(file_paths::CONTENTS_DIR).toStdString().c_str());
-    boost::filesystem::create_directory(std::string(QApplication::applicationDirPath().append(file_paths::CONTENTS_DIR).toStdString().c_str()).append("/CookieJar"));
-    boost::filesystem::ofstream(std::string(QApplication::applicationDirPath().append(file_paths::COOKIES_TXT).toStdString().c_str()));
-
-    // Removes the logs directory and recreates it
-    boost::filesystem::remove_all(QApplication::applicationDirPath().append(file_paths::LOGS_DIR).toStdString().c_str());
-    boost::filesystem::create_directory(QApplication::applicationDirPath().append(file_paths::LOGS_DIR).toStdString().c_str());
 }
