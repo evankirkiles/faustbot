@@ -8,7 +8,7 @@ rootDir = sys.argv[3]
 
 # First task is to retrieve the proxy information from the proxy file
 j = None
-with open(rootDir + '/Resources/Cache/proxies.txt') as inputfile:
+with open(rootDir + '/../Resources/Vault/proxies.txt') as inputfile:
     for i, line in enumerate(inputfile):
         if line.split(' :-: ', 1)[0] == proxyIndex:
             j = json.loads(line.split(' :-: ', 1)[1])
@@ -43,6 +43,11 @@ except urllib3.exceptions.LocationParseError as e:
         logfile.close()
 except urllib3.exceptions.TimeoutError as e:
     # In this case, the proxy took too long to connect (4 second timeout)
+    with open(fileToWriteTo, 'w+') as logfile:
+        logfile.write('3')
+        logfile.close()
+except requests.exceptions.ConnectTimeout as e:
+    # Same case as above
     with open(fileToWriteTo, 'w+') as logfile:
         logfile.write('3')
         logfile.close()

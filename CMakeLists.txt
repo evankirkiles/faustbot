@@ -41,20 +41,30 @@ set(SHOPBOT_RCS
         shopifybot/Graphics/resources.qrc)
 # List of actual resources
 set(SHOPBOT_RSCS
-        shopifybot/Graphics/Stylesheets/colorstylesheet.qss
-        shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss
-        shopifybot/Infrastructure/profiles.txt
-        shopifybot/Infrastructure/proxies.txt
-        shopifybot/Infrastructure/ccards.txt
-        shopifybot/WebAccess/Contents/CookieJar/cookies.txt
         shopifybot/WebAccess/checkout.py
         shopifybot/WebAccess/proxychecker.py)
-set_property(SOURCE SHOPBOT_RSCS PROPERTY MACOSX_PACKAGE_LOCATION "Resource")
+set(SHOPBOT_UINFO
+        shopifybot/Infrastructure/profiles.txt
+        shopifybot/Infrastructure/proxies.txt
+        shopifybot/Infrastructure/ccards.txt)
+set(SHOPBOT_LOGS
+        shopifybot/WebAccess/pylogs.txt)
+set(SHOPBOT_COOKIE
+        shopifybot/WebAccess/Contents/CookieJar/cookies.txt)
+# Make sure the resources get put in the Contents/Resources folder
+set_source_files_properties(${SHOPBOT_RSCS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+set_source_files_properties(${SHOPBOT_LOGS} PROPERTIES MACOSX_PACKAGE_LOCATION "Logs")
+set_source_files_properties(${SHOPBOT_UINFO} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Vault")
+set_source_files_properties(${SHOPBOT_COOKIE} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Contents/CookieJar")
 
 # Build the executable
 add_executable(shopify_bot MACOSX_BUNDLE
         ${SHOPBOT_SRCS}
-        ${SHOPBOT_RCS})
+        ${SHOPBOT_RCS}
+        ${SHOPBOT_RSCS}
+        ${SHOPBOT_UINFO}
+        ${SHOPBOT_LOGS}
+        ${SHOPBOT_COOKIE})
 
 # Add Docs references
 add_custom_target(Docs SOURCES README.md .gitignore LICENSE)

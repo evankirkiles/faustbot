@@ -59,32 +59,29 @@ namespace supported_sites {
 
 namespace file_paths {
 
-    const char* HTML_BODY = "/Resources/Contents/html_body_";
-    const char* PRODUCTS_LOG = "/Resources/Contents/products_log_";
-    const char* PROXYCHECK = "/Resources/Contents/proxychecker";
+    const char* HTML_BODY = "/../Resources/Contents/html_body_";
+    const char* PRODUCTS_LOG = "/../Resources/Contents/products_log_";
+    const char* PROXYCHECK = "/../Resources/Contents/proxychecker";
 
-    const char* CHECKOUT = "/Resources/checkout.py";
-    const char* PROXYCHECKER = "/Resources/proxychecker.py";
+    const char* CHECKOUT = "/../Resources/checkout.py";
+    const char* PROXYCHECKER = "/../Resources/proxychecker.py";
 
-    const char* TIME_LOG = "/Logs/timelogs.log";
-    const char* TASKS_LOG = "/Logs/task_logs_";
-    const char* TASK_LOG = "/Logs/";
+    const char* TIME_LOG = "/../Logs/timelogs.log";
+    const char* TASKS_LOG = "/../Logs/task_logs_";
+    const char* TASK_LOG = "/../Logs/";
 
     const char* STYLESHEET = ":Stylesheets/stylesheet.qss";
-    const char* COLORSTYLESHEET = "/Resources/Stylesheets/colorstylesheet.qss";
+    const char* COLORSTYLESHEET = "/../Resources/Stylesheets/colorstylesheet.qss";
     const char* COLORSTYLESHEET_WITHVARS = ":Stylesheets/colorstylesheet_withvars.qss";
-    const char* COLORSTYLESHEET_DEFAULT = "/Resources/Stylesheets/colorstylesheet_default.qss";
+    const char* COLORSTYLESHEET_DEFAULT = "/../Resources/Stylesheets/colorstylesheet_default.qss";
 
-    const char* PROFILES_TXT = "/Resources/Cache/profiles.txt";
-    const char* TEMPPROFILES_TXT = "/Resources/Cache/tempprofiles.txt";
-    const char* CCARD_TXT = "/Resources/Cache/ccards.txt";
-    const char* TEMPCCARD_TXT = "/Resources/Cache/tempccards.txt";
-    const char* PROXIES_TXT = "/Resources/Cache/proxies.txt";
-    const char* TEMPPROXIES_TXT = "/Resources/Cache/tempproxies.txt";
-    const char* COOKIES_TXT = "/Resources/Contents/CookieJar/cookies.txt";
-
-    const char* CONTENTS_DIR = "/Resources/Contents";
-    const char* LOGS_DIR = "/Logs";
+    const char* PROFILES_TXT = "/../Resources/Vault/profiles.txt";
+    const char* TEMPPROFILES_TXT = "/../Resources/Vault/tempprofiles.txt";
+    const char* CCARD_TXT = "/../Resources/Vault/ccards.txt";
+    const char* TEMPCCARD_TXT = "/../Resources/Vault/tempccards.txt";
+    const char* PROXIES_TXT = "/../Resources/Vault/proxies.txt";
+    const char* TEMPPROXIES_TXT = "/../Resources/Vault/tempproxies.txt";
+    const char* COOKIES_TXT = "/../Resources/Contents/CookieJar/cookies.txt";
 
     // Images
     const char* LOGO_FILE = ":Assets/logo.png";

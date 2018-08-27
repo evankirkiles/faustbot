@@ -26,7 +26,7 @@ rootDir = sys.argv[6]
 # Go into the profile file and find the correct profile's json data
 j = None
 profileLine = -1
-with open(rootDir + '/Resources/Cache/profiles.txt') as input_file:
+with open(rootDir + '/../Resources/Vault/profiles.txt') as input_file:
     if profileName == 'Random':
         profileLine = 0
         for i, line in enumerate(input_file):
@@ -34,7 +34,7 @@ with open(rootDir + '/Resources/Cache/profiles.txt') as input_file:
         profileLine = random.randint(1, profileLine)
     input_file.close()
 
-with open(rootDir + '/Resources/Cache/profiles.txt') as input_file:
+with open(rootDir + '/../Resources/Vault/profiles.txt') as input_file:
     currentLine = 0
     for i, line in enumerate(input_file):
         currentLine += 1
@@ -49,7 +49,7 @@ if j is None:
 # Go into the credit card file and find the correct credit card json data
 c = None
 ccardLine = -1
-with open(rootDir + '/Resources/Cache/ccards.txt') as ccinput_file:
+with open(rootDir + '/../Resources/Vault/ccards.txt') as ccinput_file:
 
     if j['ccard'] == 'Random':
         ccardLine = 0
@@ -58,7 +58,7 @@ with open(rootDir + '/Resources/Cache/ccards.txt') as ccinput_file:
         ccardLine = random.randint(1, ccardLine)
     ccinput_file.close()
 
-with open(rootDir + '/Resources/Cache/ccards.txt') as ccinput_file:
+with open(rootDir + '/../Resources/Vault/ccards.txt') as ccinput_file:
     currentLine = 0
     for i, line in enumerate(ccinput_file):
         currentLine += 1
@@ -74,7 +74,7 @@ if c is None:
 p = None
 proxyDict = None
 proxyLine = -1
-with open(rootDir + '/Resources/Cache/proxies.txt') as proxyinputfile:
+with open(rootDir + '/../Resources/Vault/proxies.txt') as proxyinputfile:
     if proxyName == 'Random':
         proxyLine = 0
         for i, line in enumerate(proxyinputfile):
@@ -82,7 +82,7 @@ with open(rootDir + '/Resources/Cache/proxies.txt') as proxyinputfile:
         proxyLine = random.randint(1, proxyLine)
     proxyinputfile.close()
 
-with open(rootDir + '/Resources/Cache/proxies.txt') as proxyinputfile:
+with open(rootDir + '/../Resources/Vault/proxies.txt') as proxyinputfile:
     currentLine = 0
     for i, line in enumerate(proxyinputfile):
         currentLine += 1

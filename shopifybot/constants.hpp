@@ -118,9 +118,6 @@ namespace file_paths {
     extern const char* TEMPPROXIES_TXT;
     extern const char* COOKIES_TXT;
 
-    extern const char* CONTENTS_DIR;
-    extern const char* LOGS_DIR;
-
     // Image locations
     extern const char* LOGO_FILE;
     extern const char* PLAY_IMG;
