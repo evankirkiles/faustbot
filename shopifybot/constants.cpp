@@ -66,6 +66,9 @@ namespace file_paths {
     const char* CHECKOUT = "/../Resources/checkout.py";
     const char* PROXYCHECKER = "/../Resources/proxychecker.py";
 
+    const char* CHECKOUTCOOKIES_TXT = "/../Resources/Contents/Checkout/cookies_";
+    const char* CHECKOUTBODY_TXT = "/../Resources/Contents/Checkout/html_body_";
+
     const char* TIME_LOG = "/../Logs/timelogs.log";
     const char* TASKS_LOG = "/../Logs/task_logs_";
     const char* TASK_LOG = "/../Logs/";

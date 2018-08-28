@@ -498,9 +498,9 @@ void ShopifyWebsiteHandler::performCURL(const std::string& URL) {
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     // First clear the file if it already exists
-    remove(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().c_str()) + sourceURL.title + taskID + ".txt").c_str());
+    remove(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString()) + sourceURL.title + taskID + ".txt").c_str());
     // Open the file to write to
-    FILE *fp = fopen(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString().c_str()) + sourceURL.title + taskID + ".txt").c_str(), "wb");
+    FILE *fp = fopen(std::string(std::string(QApplication::applicationDirPath().append(file_paths::HTML_BODY).toStdString()) + sourceURL.title + taskID + ".txt").c_str(), "wb");
     if (fp) {
 
         // Write the page body to the file

@@ -4,6 +4,8 @@
 #include <QApplication>
 #endif
 
+#include "WebAccess/checkout.hpp"
+
 #include "Graphics/Stylesheets/colorcustomizer.hpp"
 
 #include "Infrastructure/tasks.hpp"
@@ -21,8 +23,12 @@ int main(int argc, char **argv) {
     window.show();
     window.raise();
 
+    Checkout checker("https://kith.com/cart/2600793800711:1", "kith.com", "/../Logs/checking.txt", "Random", "Random", "1");
+    checker.run();
+
     // Run the application
     app.exec();
+
 
     return 0;
 }

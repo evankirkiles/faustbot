@@ -104,6 +104,8 @@ namespace file_paths {
 
     extern const char* CHECKOUT;
     extern const char* PROXYCHECKER;
+    extern const char* CHECKOUTCOOKIES_TXT;
+    extern const char* CHECKOUTBODY_TXT;
 
     extern const char* STYLESHEET;
     extern const char* COLORSTYLESHEET;
