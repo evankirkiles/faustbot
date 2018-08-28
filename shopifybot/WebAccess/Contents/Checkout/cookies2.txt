@@ -25,7 +25,7 @@
 
 <meta name="shopify-checkout-api-token" content="08430b96c47dd2ac8e17e305db3b71e8">
 
-  <meta name="shopify-checkout-authorization-token" content="23dddfa7e0a2147d3f748d3a8bbed394" />
+  <meta name="shopify-checkout-authorization-token" content="bb8a9b2b2621cff94eaf335a76e4d5d1" />
 
 <meta id="google-autocomplete-sandbox-url" name="google-autocomplete-sandbox-url" content="https://checkout.shopify.com/942252/sandbox/google_autocomplete?locale=en" />
 
@@ -76,7 +76,7 @@
   Shopify.Checkout = {};
   Shopify.Checkout.geolocatedAddress = {"lat":41.612300000000005,"lng":-73.4121};
   Shopify.Checkout.locale = "en";
-  Shopify.Checkout.token = "7df5ebd6b29a58afc2b91087425e0156";
+  Shopify.Checkout.token = "bf694ce3afa6bbc0ff8062857d38f936";
   Shopify.Checkout.requiresShipping = true;
   Shopify.Checkout.page = "show";
   Shopify.Checkout.step = "contact_information";
@@ -84,7 +84,7 @@
 
   if (typeof ShopifyPay == 'undefined') { ShopifyPay = {}; }
   ShopifyPay.apiHost = "pay.shopify.com";
-  ShopifyPay.apiToken = "QkoxU1dwSUxhb2hwdFFDZ2ZaWldsWFM3TmZMMWNTMGEyUDduU3V6SnZwaz0tLXlMY3ZNR1BkbzZMZTdqaEhncktRSnc9PQ==--6b8119e18891dbb3e8107de7ea11241da3e2886f";
+  ShopifyPay.apiToken = "aGZ1WVc5WnNrZ1czTi9JcENxTWZlZGtyWHBYTjlGVUFXNWRGWVVSbUhSYz0tLVFvM1FTOE5tbWVmRDJKdUdBWnRzaHc9PQ==--4b732acc13c5e5c59a9d29f22f9e0fef1b4bd9a6";
 
   Shopify.Checkout.AddressFormat = {"N_p_c_sc_a_a":[["company"],["last_name","first_name"],["zip"],["country"],["province","city"],["address1"],["address2"],["phone"]],"N_p_c_c_a_a":[["company"],["last_name","first_name"],["zip"],["country"],["city"],["address1"],["address2"],["phone"]],"n_a_a_c_csp":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country","province","zip"],["phone"]],"n_a_a_c_cs":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country","province"],["phone"]],"n_a_a_c_cp":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country","zip"],["phone"]],"n_a_a_c_c":[["first_name","last_name"],["company"],["address1"],["address2"],["city"],["country"],["phone"]]};
 
@@ -104,14 +104,14 @@
 <script type="text/javascript">
   Shopify.clientAttributesCollectionEventName =
     "client_attributes_checkout";
-  var DF_CHECKOUT_TOKEN = "7df5ebd6b29a58afc2b91087425e0156";
+  var DF_CHECKOUT_TOKEN = "bf694ce3afa6bbc0ff8062857d38f936";
 </script>
 
 
 
 
 
-<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"ea43f05f-4ea4-438c-8bab-40f5401e8193","pageurl":"kith.com\/942252\/checkouts\/7df5ebd6b29a58afc2b91087425e0156","u":"e8c92a7aa7c8","t":"checkout","offsite":1};</script>
+<script id="__st">var __st={"a":942252,"offset":-14400,"reqid":"260184bb-07d8-42a3-9867-d82a6b24dfaf","pageurl":"kith.com\/942252\/checkouts\/bf694ce3afa6bbc0ff8062857d38f936","u":"d7cef2ee9e34","t":"checkout","offsite":1};</script>
 
 
 
@@ -362,7 +362,7 @@
 
             <noscript id="noscript-paypal-replacement">
               <li class="alt-payment-list__item alt-payment-list__item--paypal">
-                <a class="alt-payment-list__item__link" id="paypal-express-checkout-btn" aria-label="Checkout with: PayPal" aria-describedby="forwarding-external-message" href="/942252/checkouts/7df5ebd6b29a58afc2b91087425e0156/express/redirect"><img alt="" class="alt-payment-list__item__logo" src="//cdn.shopify.com/s/assets/checkout/easy-checkout-btn-paypal-9835af2c2b0e2a543b2905789a7f08b678d62de2c77c1b0d16fd7689aff463f3.png" /></a>
+                <a class="alt-payment-list__item__link" id="paypal-express-checkout-btn" aria-label="Checkout with: PayPal" aria-describedby="forwarding-external-message" href="/942252/checkouts/bf694ce3afa6bbc0ff8062857d38f936/express/redirect"><img alt="" class="alt-payment-list__item__logo" src="//cdn.shopify.com/s/assets/checkout/easy-checkout-btn-paypal-9835af2c2b0e2a543b2905789a7f08b678d62de2c77c1b0d16fd7689aff463f3.png" /></a>
               </li>
             </noscript>
             <li class="alt-payment-list__item alt-payment-list__item--paypalv4">
@@ -414,7 +414,7 @@
 
 
 <div class="step" data-step="contact_information">
-  <form class="edit_checkout" novalidate="novalidate" data-customer-information-form="true" data-email-or-phone="false" action="/942252/checkouts/7df5ebd6b29a58afc2b91087425e0156" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="Mu215149dn62R/6L/Un5HsWlGM+BxRYw3HMV4EHWyyu8yTvnOOgGKgJBlR5IRKxT7+sjgD3QIeQdcRNrC306bg==" />
+  <form class="edit_checkout" novalidate="novalidate" data-customer-information-form="true" data-email-or-phone="false" action="/942252/checkouts/bf694ce3afa6bbc0ff8062857d38f936" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="83VLDK2K4YQAQG5lqxwr0UGE3amCoWiXAoCj5wTuKa5+caye9TpwrZxuWp4YOimzP70aIyKWayXnJ6+RgauYoQ==" />
 
   <input type="hidden" name="previous_step" id="previous_step" value="contact_information" />
   <input type="hidden" name="step" value="shipping_method" />
@@ -430,7 +430,7 @@
 
         <p class="layout-flex__item">
           <span aria-hidden="true">Already have an account?</span>
-          <a data-trekkie-id="have_an_account_login_link" href="/account/login?checkout_url=https%3A%2F%2Fkith.com%2F942252%2Fcheckouts%2F7df5ebd6b29a58afc2b91087425e0156%3Fstep%3Dcontact_information">
+          <a data-trekkie-id="have_an_account_login_link" href="/account/login?checkout_url=https%3A%2F%2Fkith.com%2F942252%2Fcheckouts%2Fbf694ce3afa6bbc0ff8062857d38f936%3Fstep%3Dcontact_information">
             <span class="visually-hidden">Already have an account?</span>
             Log in
 </a>        </p>
@@ -687,7 +687,7 @@
             </div>
           </section>
 
-          <form autocomplete="off" action="https://pay.shopify.com/customers/validate" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="l0yzIb7AJ6OFZ8+ZWpQ2s9ZwjvUGoq7kZYrKW4QuIg4ZaD0h2BVX9zFhpAzvmWP+/D61urq3mTCkiMzQzoXTSw==" />
+          <form autocomplete="off" action="https://pay.shopify.com/customers/validate" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="jd6SYr5pKoOj7JWm0pWvXe2fvak8CdQOa1Ph8WYmO0EA2nXw5tm7qj/CoV1hs60/k6Z6I5w+17yO9O2H42OKTg==" />
             <div class="fieldset sp-popover__fieldset">
               <div class="sp-popover__field">
                 <label class="visually-hidden" for="validation-code">Verification code</label>
@@ -875,12 +875,12 @@
       <div class="order-summary__section order-summary__section--discount" data-reduction-form="update">
         <h3 class="visually-hidden">Gift card or discount code</h3>
 
-          <form class="edit_checkout" action="/942252/checkouts/7df5ebd6b29a58afc2b91087425e0156" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="RDqF0Gv9qlxRSNOf/5ICjNddNyfH5wrOqVVqvz6jVYzKHgvQDSjaCOVOuApKn1fB/RMMaHvyPRpoV2w0dAikyQ==" />
+          <form class="edit_checkout" action="/942252/checkouts/bf694ce3afa6bbc0ff8062857d38f936" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="Yg0vyAlM0XMzK8+pwdQACsXcs+QCIjbPW9reOtO9vXvvCchaUfxAWq8F+1Jy8gJou+V0bqIVNX2+fdJMVvgMdA==" />
   <input type="hidden" name="step" value="contact_information" />
 </form>
 
 
-<form class="edit_checkout" action="/942252/checkouts/7df5ebd6b29a58afc2b91087425e0156" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="rQq7cXLAAdnx3KNid3LJZ+MZJ4yfLrtRYnvRm8Zf4fIjLjVxFBVxjUXayPfCf5wqyVccwyM7jIWjedcQjPQQtw==" />
+<form class="edit_checkout" action="/942252/checkouts/bf694ce3afa6bbc0ff8062857d38f936" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="RjCtzXmN2jR1Nik5XWg1F40Ak9CeP82osXE6msYiqvXLNEpfIT1LHekYHcLuTjd18zlUWj4IzhpU1jbsQ2cb+g==" />
   <input type="hidden" name="step" value="contact_information" />
   <div class="fieldset">
     <div class="field ">
@@ -994,7 +994,7 @@
       window.ShopifyAnalytics = window.ShopifyAnalytics || {};
       window.ShopifyAnalytics.meta = window.ShopifyAnalytics.meta || {};
       window.ShopifyAnalytics.meta.currency = 'USD';
-      var meta = {"page":{"path":"\/checkout\/contact_information","search":"","url":"https:\/\/kith.com\/942252\/checkouts\/7df5ebd6b29a58afc2b91087425e0156"}};
+      var meta = {"page":{"path":"\/checkout\/contact_information","search":"","url":"https:\/\/kith.com\/942252\/checkouts\/bf694ce3afa6bbc0ff8062857d38f936"}};
       for (var attr in meta) {
         window.ShopifyAnalytics.meta[attr] = meta[attr];
       }
@@ -1058,7 +1058,7 @@
     first.parentNode.insertBefore(script, first);
   };
   trekkie.load(
-    {"Trekkie":{"appName":"checkout","development":false,"defaultAttributes":{"shopId":942252,"isMerchantRequest":null,"themeId":450002951,"themeCityHash":14748513187721895899,"checkoutToken":"7df5ebd6b29a58afc2b91087425e0156"}},"Performance":{"navigationTimingApiMeasurementsEnabled":true,"navigationTimingApiMeasurementsSampleRate":1.0},"Google Analytics":{"trackingId":"UA-62344036-1","domain":"auto","siteSpeedSampleRate":"10","enhancedEcommerce":true,"doubleClick":true,"includeSearch":true},"Facebook Pixel":{"pixelIds":["1059291937516902"],"agent":"plshopify1.2"},"Clickstream":{},"Session Attribution":{}}
+    {"Trekkie":{"appName":"checkout","development":false,"defaultAttributes":{"shopId":942252,"isMerchantRequest":null,"themeId":450002951,"themeCityHash":14748513187721895899,"checkoutToken":"bf694ce3afa6bbc0ff8062857d38f936"}},"Performance":{"navigationTimingApiMeasurementsEnabled":true,"navigationTimingApiMeasurementsSampleRate":1.0},"Google Analytics":{"trackingId":"UA-62344036-1","domain":"auto","siteSpeedSampleRate":"10","enhancedEcommerce":true,"doubleClick":true,"includeSearch":true},"Facebook Pixel":{"pixelIds":["1059291937516902"],"agent":"plshopify1.2"},"Clickstream":{},"Session Attribution":{}}
   );
 
   var loaded = false;
@@ -1111,7 +1111,7 @@
     
         window.ShopifyAnalytics.lib.page(
           "Checkout - Contact information",
-          {"path":"\/checkout\/contact_information","search":"","url":"https:\/\/kith.com\/942252\/checkouts\/7df5ebd6b29a58afc2b91087425e0156"}
+          {"path":"\/checkout\/contact_information","search":"","url":"https:\/\/kith.com\/942252\/checkouts\/bf694ce3afa6bbc0ff8062857d38f936"}
         );
       
     

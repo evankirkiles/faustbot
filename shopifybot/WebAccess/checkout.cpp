@@ -182,13 +182,6 @@ void Checkout::run() {
     std::string shopifyCheckoutURL;
     CURLcode res;
     if (curl) {
-        // Build a headers item to submit
-        struct curl_slist *headers = nullptr;
-        headers = curl_slist_append(headers, "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
-
-        // set the custom set of headers
-        res = curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-
         // First clear the cookie file
         remove(QApplication::applicationDirPath().toStdString().append(file_paths::CHECKOUTCOOKIES_TXT).append(identifier).append(".txt").c_str());
 
@@ -199,6 +192,7 @@ void Checkout::run() {
         // Set other cURL operation settings
         // URL to perform GET request on
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
         // Download the body of the linked URL
         curl_easy_setopt(curl, CURLOPT_NOBODY, 0L);
         // Cookie file to write to and write all cookies to it
@@ -209,15 +203,14 @@ void Checkout::run() {
         // Allow for redirects
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         // Set the cURL proxy
-        curl_easy_setopt(curl, CURLOPT_PROXY, proxy);
-        if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp); }
+//        curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
+//        if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
         // Set the timeout
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 4);
 
         // Now open the file for pulling the body through cURL
         FILE *fp = fopen(QApplication::applicationDirPath().toStdString()
                                  .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str(), "wb");
-//      FILE *fp = fopen("/Users/samkirkiles/Desktop/shopifybot/shopifybot/WebAccess/Contents/Checkout/cookies2.txt", "wb");
         if (fp) {
             // Write the page body to the file
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
@@ -233,17 +226,17 @@ void Checkout::run() {
             emit setStatus("Failed", "#ed4f47");
 
             // Free the headers and clean up curl
-            curl_slist_free_all(headers);
             curl_easy_cleanup(curl);
             curl_global_cleanup();
             return;
         } else {
             // Get the effective url
-            curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &shopifyCheckoutURL);
+            char* scu;
+            curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &scu);
+            shopifyCheckoutURL = scu;
         }
 
         // Free the headers and clean up curl
-        curl_slist_free_all(headers);
         curl_easy_cleanup(curl);
 
         // Get the authenticity token from the page data
@@ -273,8 +266,10 @@ void Checkout::run() {
         curl = curl_easy_init();
 
         // Set other cURL operation settings
-        // URL to perform GET request on
-        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        // URL to perf  orm GET request on
+        std::cout << shopifyCheckoutURL << std::endl;
+        curl_easy_setopt(curl, CURLOPT_URL, shopifyCheckoutURL.c_str());
+        curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
         // Download the body of the linked URL
         curl_easy_setopt(curl, CURLOPT_NOBODY, 0L);
         // Cookie file to retrieve cookies from
@@ -285,50 +280,74 @@ void Checkout::run() {
         // Allow for redirects
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         // Set the cURL proxy
-        curl_easy_setopt(curl, CURLOPT_PROXY, proxy);
-        if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp); }
+//        curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
+//        if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
         // Set the timeout
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 4);
 
-        // Build the data packet to send
-        const std::string postfields = std::string("{'utf8':'✓',") +
-                                        "'_method':'patch'," +
-                                        "'authenticity_token':'" + authenticitytoken + "'," +
-                                        "'previous_step':'contact_information',"
-                                        "'step':'shipping_method',"
-                                        "'checkout[email]':'" + profile["email"].toString().toStdString() + "'," +
-                                        "'checkout[buyer_accepts_marketing]':'0',"
-                                        "'checkout[shipping_address][first_name]':'" + profile["firstname"].toString().toStdString() + "'," +
-                                        "'checkout[shipping_address][last_name]':'" + profile["lastname"].toString().toStdString() + "'," +
-                                        "'checkout[shipping_address][address1]':'" + profile["address1"].toString().toStdString() + "'," +
-                                        "'checkout[shipping_address][address2]':'" + profile["address2"].toString().toStdString() + "'," +
-                                        "'checkout[shipping_address][city]':'" + profile["city"].toString().toStdString() + "'," +
-                                        "'checkout[shipping_address][country]':'" + profile["country"].toString().toStdString() + "'," +
-                                        "'checkout[shipping_address][province]':'" + profile["province"].toString().toStdString() + "'," +
-                                        "'checkout[shipping_address][zip]':'" + profile["zipcode"].toString().toStdString() + "'," +
-                                        "'checkout[shipping_address][phone]':'" + profile["phone"].toString().toStdString() + "'," +
-                                        "'button':'',"
-                                        "'checkout[client_details][browser_width]':'520',"
-                                        "'checkout[client_details][browser_height]':'704',"
-                                        "'checkout[client_details][javascript_enabled]':'1'}";
+        std::string postfields =
+                std::string("utf8=%E2%9C%93") +
+                "&_method=patch" +
+                "&authenticity_token=" + curl_easy_escape(curl, authenticitytoken.c_str(), static_cast<int>(authenticitytoken.length())) +
+                "&previous_step=contact_information" +
+                "&checkout[email]=" + curl_easy_escape(curl, profile["email"].toString().toStdString().c_str(), static_cast<int>(profile["email"].toString().toStdString().length())) +
+                "&checkout[buyer_accepts_marketing]=0" +
+                "&checkout[shipping_address][first_name]=" +
+                "&checkout[shipping_address][last_name]=" +
+                "&checkout[shipping_address][address1]=" +
+                "&checkout[shipping_address][address2]=" +
+                "&checkout[shipping_address][city]=" +
+                "&checkout[shipping_address][country]=" +
+                "&checkout[shipping_address][province]=" +
+                "&checkout[shipping_address][zip]=" +
+                "&checkout[shipping_address][phone]=" +
+                "&checkout[shipping_address][first_name]=" + curl_easy_escape(curl, profile["firstname"].toString().toStdString().c_str(), static_cast<int>(profile["firstname"].toString().toStdString().length())) +
+                "&checkout[shipping_address][last_name]=" + curl_easy_escape(curl, profile["lastname"].toString().toStdString().c_str(), static_cast<int>(profile["lastname"].toString().toStdString().length())) +
+                "&checkout[shipping_address][address1]=" + curl_easy_escape(curl, profile["address1"].toString().toStdString().c_str(), static_cast<int>(profile["address1"].toString().toStdString().length())) +
+                "&checkout[shipping_address][address2]=" + curl_easy_escape(curl, profile["address2"].toString().toStdString().c_str(), static_cast<int>(profile["address2"].toString().toStdString().length())) +
+                "&checkout[shipping_address][city]=" + curl_easy_escape(curl, profile["city"].toString().toStdString().c_str(), static_cast<int>(profile["city"].toString().toStdString().length())) +
+                "&checkout[shipping_address][country]=" + curl_easy_escape(curl, profile["country"].toString().toStdString().c_str(), static_cast<int>(profile["country"].toString().toStdString().length())) +
+                "&checkout[shipping_address][province]=" + curl_easy_escape(curl, profile["province"].toString().toStdString().c_str(), static_cast<int>(profile["province"].toString().toStdString().length())) +
+                "&checkout[shipping_address][zip]=" + curl_easy_escape(curl, profile["zipcode"].toString().toStdString().c_str(), static_cast<int>(profile["zipcode"].toString().toStdString().length())) +
+                "&checkout[shipping_address][phone]=" + curl_easy_escape(curl, profile["phone"].toString().toStdString().c_str(), static_cast<int>(profile["phone"].toString().toStdString().length())) +
+                "&step=shipping_method";
+
         // Attach it to the POST request
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postfields);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postfields.c_str());
 
-        // Perform the post request
-        res = curl_easy_perform(curl);
-        // Close the file
-        fclose(fp);
-
+        // Remove the page body data so can bring in new POST data
+        remove(QApplication::applicationDirPath().toStdString()
+                       .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str());
+        // Now open the file for pulling the body through cURL
+        fp = fopen(QApplication::applicationDirPath().toStdString()
+                                 .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str(), "wb");
+        if (fp) {
+            // Write the POST response to the file
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+            // Perform the file download
+            res = curl_easy_perform(curl);
+            // Close the file
+            fclose(fp);
+        }
         // Make sure the request succeeded
         if (res != CURLE_OK) {
+            long response_code;
+            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
+            std::cout << response_code << std::endl;
             log("Error posting checkout information! Aborting checkout...");
             emit setStatus("Failed", "#ed4f47");
 
             // Free the headers and clean up curl
-            curl_slist_free_all(headers);
             curl_easy_cleanup(curl);
             curl_global_cleanup();
             return;
+        } else {
+            log("Successfully submitted customer info data to Shopify servers");
+            emit setStatus("Sending CC...", "#ed4f47");
+            // Clean up curl instance
+            curl_easy_cleanup(curl);
         }
+
+
     }
 }

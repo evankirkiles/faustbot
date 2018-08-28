@@ -143,6 +143,7 @@ def send_customer_info():
     # Parse through the html contents and find authenticity tokens
     soup = BeautifulSoup(resp.content, 'html.parser')
     authenticity_token = soup.findAll('input', {'name': 'authenticity_token'})[2]['value']
+    log(authenticity_token)
 
     # Customer data packet to send with POST HTTP request
     customer_data = {
@@ -171,6 +172,7 @@ def send_customer_info():
     # Try to send this customer information in a POST request
     try:
         resp = session.post(shopify_checkout_link, data=customer_data, proxies=proxyDict, allow_redirects=True, timeout=4)
+        log(str(BeautifulSoup(resp.content, 'html.parser')))
     except Exception as e:
         log(e)
     except requests.exceptions.ProxyError:
