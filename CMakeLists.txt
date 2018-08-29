@@ -42,7 +42,6 @@ set(SHOPBOT_RCS
         shopifybot/Graphics/resources.qrc)
 # List of actual resources
 set(SHOPBOT_RSCS
-        shopifybot/WebAccess/checkout.py
         shopifybot/WebAccess/proxychecker.py)
 set(SHOPBOT_UINFO
         shopifybot/Infrastructure/profiles.txt
@@ -106,7 +105,7 @@ macro(install_qt5_plugin _qt_plugin_name _qt_plugins_var _prefix)
         install(FILES "${_qt_plugin_path}"
                 DESTINATION "${_qt_plugin_dest}")
         set(${_qt_plugins_var}
-                "${${_qt_plugins_var}};\$ENV{DEST_DIR}\${CMAKE_INSTALL_PREFIX}/${_qt_plugin_dest}/${_qt_plugin_file}")
+                "${${_qt_plugins_var}}\$ENV{DEST_DIR}\${CMAKE_INSTALL_PREFIX}/${_qt_plugin_dest}/${_qt_plugin_file}")
     else()
         message(FATAL_ERROR "Qt plugin ${_qt_plugin_name} not found")
     endif()
@@ -158,7 +157,6 @@ configure_file(shopifybot/Infrastructure/profiles.txt ${CMAKE_CURRENT_BINARY_DIR
 configure_file(shopifybot/Infrastructure/proxies.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Cache/proxies.txt COPYONLY)
 configure_file(shopifybot/Infrastructure/ccards.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Cache/ccards.txt COPYONLY)
 configure_file(shopifybot/WebAccess/Contents/CookieJar/cookies.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Contents/CookieJar/cookies.txt COPYONLY)
-configure_file(shopifybot/WebAccess/checkout.py ${CMAKE_CURRENT_BINARY_DIR}/Resources/checkout.py COPYONLY)
 configure_file(shopifybot/WebAccess/proxychecker.py ${CMAKE_CURRENT_BINARY_DIR}/Resources/proxychecker.py COPYONLY)
 
 # Pack everything up

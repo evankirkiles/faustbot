@@ -216,6 +216,7 @@ void TaskWidget::run() {
 
     // Also connect the status signal
     connect(temptask, SIGNAL(status(QString, QString)), this, SLOT(setStatus(QString, QString)));
+    connect(&temptask->checkout, SIGNAL(setStatus(QString, QString)), this, SLOT(setStatus(QString, QString)));
 
     // Begin the thread!
     taskthread->start();
@@ -569,6 +570,7 @@ void VIDTaskWidget::run() {
 
     // Also connect the status signal
     connect(temptask, SIGNAL(status(QString, QString)), this, SLOT(setStatus(QString, QString)));
+    connect(&temptask->checkout, SIGNAL(setStatus(QString, QString)), this, SLOT(setStatus(QString, QString)));
 
     // Begin the thread!
     taskthread->start();

@@ -20,7 +20,12 @@ Task::Task(const std::string &p_title, const URLAndMethod &p_url, const std::str
                                              profile(p_profile),
                                              proxy(p_proxy),
                                              resultsToCheck(p_resultsToCheck),
-                                             frequency(p_frequency) {}
+                                             frequency(p_frequency),
+                                             checkout(p_url.checkoutURL,
+                                                      QApplication::applicationDirPath().toStdString()
+                                                              .append(file_paths::TASKS_LOG).append(p_url.title)
+                                                              .append(p_identifier).append(".txt"),
+                                                      p_profile, p_proxy, p_identifier) {}
 
 // Run function which begins the while loop to be run in a separate thread for each task.
 void Task::run() {
@@ -105,14 +110,8 @@ void Task::log(const std::string &message) {
 // Orders the product with paypal from the given URL
 void Task::order(const std::string &url) {
 
-    // Essentially just runs the Python Selenium script for the given url
-    FILE *fp = popen(std::string(std::string("python3 ") + QApplication::applicationDirPath().append(file_paths::CHECKOUT).toStdString() +
-                                 " " + swh.sourceURL.checkoutURL + " " + url + " " + QApplication::applicationDirPath().append(file_paths::TASKS_LOG).toStdString() +
-                                 swh.sourceURL.title + swh.taskID + ".txt \"" + profile + "\" " + proxy + " " +
-                                        QApplication::applicationDirPath().toStdString()).c_str(), "r");
-
-    // Wait for the Python script to finish
-    pclose(fp);
+    // Run the checkout!
+    checkout.run(url);
 }
 
 
@@ -150,7 +149,12 @@ VariantIDTask::VariantIDTask(const std::string &p_title, const URLAndMethod &p_u
         startat(p_startat),
         profile(p_profile),
         proxy(p_proxy),
-        frequency(p_frequency) { }
+        frequency(p_frequency),
+        checkout(p_url.checkoutURL,
+                 QApplication::applicationDirPath().toStdString()
+                         .append(file_paths::TASKS_LOG).append(p_url.title)
+                         .append(p_identifier).append(".txt"),
+                 p_profile, p_proxy, p_identifier) { }
 
 // Run function which begins the while loop to be run in a separate thread for each task
 void VariantIDTask::run() {
@@ -190,7 +194,6 @@ void VariantIDTask::run() {
                 remove(QApplication::applicationDirPath().append(file_paths::PRODUCTS_LOG).toStdString().append(swh.sourceURL.title).append(swh.taskID).append(".txt").c_str());
 
                 // Successfully finished if it got here
-                emit status("Finished!", "#8dd888");
                 emit finished();
                 return;
             } else if (availabilityCode == 1) {
@@ -220,14 +223,9 @@ void VariantIDTask::run() {
 
 // Order function which runs the checkout python file
 void VariantIDTask::order(const std::string &url) {
-    // Essentially just runs the Python Selenium script for the given url
-    FILE *fp = popen(std::string(std::string("python3 ") + QApplication::applicationDirPath().append(file_paths::CHECKOUT).toStdString() +
-            " " + swh.sourceURL.checkoutURL + " " + url + " " + QApplication::applicationDirPath().append(file_paths::TASKS_LOG).toStdString() +
-                                 swh.sourceURL.title + swh.taskID + ".txt \"" + profile + "\" " + proxy + " " +
-                                         QApplication::applicationDirPath().toStdString()).c_str(), "r");
 
-    // Wait for the Python script to finish
-    pclose(fp);
+    // Run the checkout
+    checkout.run(url);
 }
 
 // Log function which logs a message to the logfile

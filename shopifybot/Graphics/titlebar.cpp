@@ -5,15 +5,17 @@
 #include "titlebar.hpp"
 
 // Builds the dark title bar
-DarkTitleBar::DarkTitleBar(QWidget *parent, bool p_moreInfo, bool p_refresh) :
-        moreInfo(p_moreInfo), refresh(p_refresh), parentWidg(parent){
+DarkTitleBar::DarkTitleBar(QWidget *parent, bool p_moreInfo, bool p_refresh, bool p_clear) :
+        moreInfo(p_moreInfo), refresh(p_refresh), clear(p_clear), parentWidg(parent){
 
     // Build the title bar's necessary components
     title = new QLabel(parent->windowTitle(), this);
-    if (refresh && !moreInfo) {
+    if (((refresh && !clear) || (!refresh && clear)) && !moreInfo) {
         title->setStyleSheet("margin-right: 56px;");
-    } else if (refresh) {
+    } else if (((refresh && !clear) || (!refresh && clear)) && moreInfo) {
         title->setStyleSheet("margin-right: 23px;");
+    } else if (refresh && clear && !moreInfo) {
+        title->setStyleSheet("margin-right: 89px;");
     }
 
 
@@ -29,11 +31,17 @@ DarkTitleBar::DarkTitleBar(QWidget *parent, bool p_moreInfo, bool p_refresh) :
     mainLayout->setContentsMargins(5, 1, 5, 1);
     mainLayout->addWidget(closeWindow);
 
-    // If the refresh option is enabled, add a refresh button to the top right
+    // If the refresh option is enabled, add a refresh button to the top left
     if (refresh) {
-        // Clickable buttons in top right
+        // Clickable buttons in top left
         refreshButton = new ClickableImage(26, 26, 2, file_paths::REFRESHICON2_IMG, file_paths::REFRESHICON_IMG, this);
         mainLayout->addWidget(refreshButton);
+    }
+    // If the clear button is enabled, add a clear button to the top left
+    if (clear) {
+        // Clickable button in the top left
+        clearButton = new ClickableImage(26, 26, 2, file_paths::CLEAR2_IMG, file_paths::CLEAR_IMG, this);
+        mainLayout->addWidget(clearButton);
     }
 
     mainLayout->addStretch();

@@ -28,7 +28,7 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
     setStyleSheet(StyleSheet + CStyleSheet);
 
     // Initialize dark title bar
-    dtb = new DarkTitleBar(this, false, true);
+    dtb = new DarkTitleBar(this, false, true, true);
     auto externLayout = new QVBoxLayout;
     externLayout->setContentsMargins(0, 0, 0, 0);
     auto inFrameLayout = new QVBoxLayout;
@@ -69,6 +69,8 @@ LogFileDisplay::LogFileDisplay(const std::string& p_title, const std::string& LF
 
     // Connect the refresh button
     connect(dtb->refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
+    // Connect the clear button
+    connect(dtb->clearButton, SIGNAL(clicked()), this, SLOT(clearLog()));
 }
 
 // Refresh slot which reloads the filestream into the textbrowser
@@ -83,6 +85,13 @@ void LogFileDisplay::refresh() {
     } else {
         logDisplay->setText(QString("Log file not yet generated."));
     }
+}
+
+// Clear the log file by removing it
+void LogFileDisplay::clearLog() {
+    logFile->remove();
+    logFile->open(QIODevice::ReadOnly);
+    refresh();
 }
 
 // Custom close event function that just emits a signal signifying it has closed

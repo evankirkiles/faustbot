@@ -115,6 +115,8 @@ signals:
 public slots:
     // Refresher slot that will be connected to a "FILE REFRESH" button, or can also be hooked up to a QTimer
     void refresh();
+    // Clears the logs file by removing it and then refreshing
+    void clearLog();
 private:
     // File location is saved in a member string to allow for continuous refreshal
     const std::string title;

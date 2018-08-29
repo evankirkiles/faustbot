@@ -41,11 +41,11 @@ class Checkout : public QObject {
     Q_OBJECT
 public:
     // Builds the checkout with the given URL for the given profile, proxy, etc.
-    explicit Checkout(const std::string& URL, const std::string& cartLink, const std::string& logFileLocation,
+    explicit Checkout(const std::string& cartLink, const std::string& logFileLocation,
                       const std::string& profile, const std::string& proxy, const std::string& identifier);
 
     // Runs the checkout
-    void run();
+    void run(const std::string& URL);
 
 signals:
     // Sets the status of the task widget
@@ -53,7 +53,7 @@ signals:
 
 private:
     // Instances of parameters passed in
-    const std::string url, cartLink, logFileLocation, identifier;
+    const std::string cartLink, logFileLocation, identifier;
     std::string proxy, proxyunp;
     QJsonObject profile, ccard;
 

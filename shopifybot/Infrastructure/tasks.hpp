@@ -27,6 +27,9 @@
 #include <QDateTime>
 #endif
 
+// Include the checkout module
+#include "WebAccess/checkout.hpp"
+
 // Class containing task-related functions
 // Main functionality is a while loop that continuously checks the website for the product
 // This is a QObject to allow for QThread functinoality
@@ -49,6 +52,9 @@ public:
     // Changed to public so I can copy all of them over into a new Task easily (no copy constructor bc QObject)
     // Title of the task
     const std::string title;
+
+    // Checkout object
+    Checkout checkout;
 
     // Shopify Website Handler
     ShopifyWebsiteHandler swh;
@@ -103,6 +109,9 @@ public:
 
     // Boolean which can be disabled to stop the running of the task
     bool shouldcontinue = false;
+
+    // Checkout object
+    Checkout checkout;
 
     // Title of the task
     const std::string title;

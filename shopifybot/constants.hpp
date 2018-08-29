@@ -137,6 +137,8 @@ namespace file_paths {
     extern const char* LOGS2_IMG;
     extern const char* EXIT_IMG;
     extern const char* EXIT2_IMG;
+    extern const char* CLEAR_IMG;
+    extern const char* CLEAR2_IMG;
     extern const char* MOREINFO_IMG;
     extern const char* MOREINFO2_IMG;
     extern const char* ADD_IMG;

@@ -103,6 +103,8 @@ namespace file_paths {
     const char* LOGS2_IMG = ":Assets/logs2.png";
     const char* EXIT_IMG = ":Assets/exit.png";
     const char* EXIT2_IMG = ":Assets/exit2.png";
+    const char* CLEAR_IMG = ":Assets/clear.png";
+    const char* CLEAR2_IMG = ":Assets/clear2.png";
     const char* MOREINFO_IMG = ":Assets/moreinfo.png";
     const char* MOREINFO2_IMG = ":Assets/moreinfo2.png";
     const char* ADD_IMG = ":Assets/add.png";

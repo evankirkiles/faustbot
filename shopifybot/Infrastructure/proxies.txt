@@ -1,3 +1,4 @@
 1 :-: {"proxyip":"185.93.3.70","proxyport":"8080","proxyusername":"","proxypassword":""}
 2 :-: {"proxyip":"138.68.245.7","proxyport":"8080","proxyusername":"","proxypassword":""}
 3 :-: {"proxyip":"193.178.246.248","proxyport":"8080","proxyusername":"","proxypassword":""}
+None :-: {"proxyip":"193.178.246.248","proxyport":"8080","proxyusername":"","proxypassword":""}

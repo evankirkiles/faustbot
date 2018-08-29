@@ -76,6 +76,7 @@ private:
     bool clickedOnButton = false;
     bool moreInfo = false;
     bool showMoreInfo = false;
+    bool clear = false;
 
     // The actual title of the window as well as a pushbutton to close it
     QLabel* title;
@@ -85,11 +86,13 @@ private:
 
 public:
     // Constructor that builds the title bar
-    DarkTitleBar(QWidget* parent, bool moreInfo = false, bool refresh = false);
+    DarkTitleBar(QWidget* parent, bool moreInfo = false, bool refresh = false, bool clear = false);
     // Optional moreinfo button
     ClickableImage* moreInfoButton;
     // Optional refresh button
     ClickableImage* refreshButton;
+    // Optional clear button
+    ClickableImage* clearButton;
 signals:
     // MoreInfo-related signals to specify when to show and not show the moreinfo window
     void showMIW();

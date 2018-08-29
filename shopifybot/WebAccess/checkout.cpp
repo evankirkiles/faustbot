@@ -16,16 +16,14 @@ void Checkout::log(const std::string &message) {
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()) % 1000;
     fp << std::put_time(&tm, "[%Y-%m-%d %T.") << std::setfill('0') << std::setw(3) << ms.count() << "] " << message << "\n";
 
-    std::cout << std::put_time(&tm, "[%Y-%m-%d %T.") << std::setfill('0') << std::setw(3) << ms.count() << "] " << message << std::endl;
-
     // Close the logging file
     fp.close();
 }
 
 // Builds the checkout object's instance variables
-Checkout::Checkout(const std::string &p_URL, const std::string &p_cartLink, const std::string &p_logFileLocation,
+Checkout::Checkout(const std::string &p_cartLink, const std::string &p_logFileLocation,
                    const std::string &p_profile, const std::string &p_proxy, const std::string &p_identifier) :
-        url(p_URL), cartLink(p_cartLink), logFileLocation(p_logFileLocation), identifier(p_identifier) {
+        cartLink(p_cartLink), logFileLocation(p_logFileLocation), identifier(p_identifier) {
 
     std::ifstream filein;
     std::string str;
@@ -135,37 +133,40 @@ Checkout::Checkout(const std::string &p_URL, const std::string &p_cartLink, cons
         filein.clear();
         filein.seekg(0, std::ios::beg);
     }
-    // Now continue on to searcing the proxies file
-    int proxiesLine = 0;
-    QJsonObject proxyObj;
-    while(getline(filein, str)) {
-        proxiesLine++;
-        // Check for proxy match
-        const unsigned long indexPos = str.find(" :-: ");
-        if (str.substr(0, indexPos) == p_proxy || proxiesLine == randomProxy) {
-            // On proxy match, init the json object of the proxy
-            str.erase(0, indexPos + 5);
-            QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(str.c_str()).toUtf8());
-            proxyObj = jsonDoc.object();
-            break;
-        }
-    }
-    // Close the file for the last time
-    filein.close();
 
-    // Make sure that a proxy was found as well
-    if (proxyObj.isEmpty()) {
-        log(std::string("Could not find proxy \"").append(p_proxy).append("\"!"));
-        allInitialized = false;
-        return;
-    } else {
-        // If proxy is found, set the proxy string to be used in the requests
-        proxy = std::string("") + proxyObj["proxyip"].toString().toStdString() + ":" + proxyObj["proxyport"].toString().toStdString();
-        log(proxy);
-        if (proxyObj["proxyusername"].toString() != "" && proxyObj["proxypassword"].toString() != "") {
-            proxyunp = proxyObj["proxyusername"].toString().toStdString() + ":" + proxyObj["proxypassword"].toString().toStdString();
+    // Now continue on to searcing the proxies file
+    if (p_proxy != "None") {
+        int proxiesLine = 0;
+        QJsonObject proxyObj;
+        while (getline(filein, str)) {
+            proxiesLine++;
+            // Check for proxy match
+            const unsigned long indexPos = str.find(" :-: ");
+            if (str.substr(0, indexPos) == p_proxy || proxiesLine == randomProxy) {
+                // On proxy match, init the json object of the proxy
+                str.erase(0, indexPos + 5);
+                QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(str.c_str()).toUtf8());
+                proxyObj = jsonDoc.object();
+                break;
+            }
         }
-        log(proxyunp);
+        // Close the file for the last time
+        filein.close();
+
+        // Make sure that a proxy was found as well
+        if (proxyObj.isEmpty()) {
+            log(std::string("Could not find proxy \"").append(p_proxy).append("\"!"));
+            allInitialized = false;
+            return;
+        } else {
+            // If proxy is found, set the proxy string to be used in the requests
+            proxy = std::string("") + proxyObj["proxyip"].toString().toStdString() + ":" +
+                    proxyObj["proxyport"].toString().toStdString();
+            if (proxyObj["proxyusername"].toString() != "" && proxyObj["proxypassword"].toString() != "") {
+                proxyunp = proxyObj["proxyusername"].toString().toStdString() + ":" +
+                           proxyObj["proxypassword"].toString().toStdString();
+            }
+        }
     }
 
     // If reaches here without a hitch, then everything has been initialized
@@ -173,7 +174,7 @@ Checkout::Checkout(const std::string &p_URL, const std::string &p_cartLink, cons
 }
 
 // Runs the checkout, but only if all variables are initialized
-void Checkout::run() {
+void Checkout::run(const std::string& URL) {
 
     // Check initialized
     if (!allInitialized) { log("Profile, proxy, or credit card uninitialized! Cannot run."); return; }
@@ -183,9 +184,9 @@ void Checkout::run() {
     std::string shopifyCheckoutURL;
     CURLcode res;
     if (curl) {
-        log("FIRST CURL BEGIN");
         // First clear the cookie file
         remove(QApplication::applicationDirPath().toStdString().append(file_paths::CHECKOUTCOOKIES_TXT).append(identifier).append(".txt").c_str());
+        emit setStatus("Getting link...", "#7cd4f4");
 
         // Netscape format for the cookie file
         char nline[256];
@@ -193,7 +194,7 @@ void Checkout::run() {
                  (unsigned long)time(nullptr) + 31337UL, "PREF", "hello example");
         // Set other cURL operation settings
         // URL to perform GET request on
-        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_URL, URL.c_str());
         curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
         // Download the body of the linked URL
         curl_easy_setopt(curl, CURLOPT_NOBODY, 0L);
@@ -205,7 +206,7 @@ void Checkout::run() {
         // Allow for redirects
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         // Set the cURL proxy
-        curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
+        if (!proxy.empty()) { curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str()); }
         if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
         // Set the timeout
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
@@ -218,7 +219,6 @@ void Checkout::run() {
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
             // Perform the file download
             res = curl_easy_perform(curl);
-            log("FIRST CURL END");
             // Close the file
             fclose(fp);
         }
@@ -237,6 +237,7 @@ void Checkout::run() {
             char* scu;
             curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &scu);
             shopifyCheckoutURL = scu;
+            log(std::string("Got checkout link: ") + shopifyCheckoutURL);
         }
 
         // Free the headers and clean up curl
@@ -246,7 +247,6 @@ void Checkout::run() {
         std::string authenticitytoken;
         std::ifstream filein(QApplication::applicationDirPath().toStdString()
                                      .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str());
-        log("FILE SEARCH BEGIN");
         int inputs = 0;
         while (getline(filein, authenticitytoken)) {
             if (authenticitytoken.find("input") != std::string::npos) {
@@ -263,13 +263,14 @@ void Checkout::run() {
                 }
             }
         }
-        log("FILE SEARCH END");
+        log(std::string("Got authenticity token: ").append(authenticitytoken));
         filein.close();
 
         // Reinit the curl session
         curl = curl_easy_init();
+        emit setStatus("Posting contact...", "#7cd4f4");
 
-        log("SECOND CURL BEGIN");
+        log("Posting contact information...");
         // Set other cURL operation settings
         // URL to perform POST request on
         curl_easy_setopt(curl, CURLOPT_URL, shopifyCheckoutURL.c_str());
@@ -286,8 +287,8 @@ void Checkout::run() {
         // Allow for redirects
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         // Set the cURL proxy
-//        curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
-//        if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
+        if (!proxy.empty()) { curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str()); }
+        if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
         // Set the timeout
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
 
@@ -332,7 +333,6 @@ void Checkout::run() {
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
             // Perform the file download
             res = curl_easy_perform(curl);
-            log("SECOND CURL END");
             // Close the file
             fclose(fp);
         }
@@ -349,15 +349,15 @@ void Checkout::run() {
             curl_global_cleanup();
             return;
         } else {
-            log("Successfully submitted customer info data to Shopify servers");
-            emit setStatus("Sending CC...", "#ed4f47");
+            log("Successfully submitted contact information to Shopify servers!");
             // Clean up curl instance
             curl_easy_cleanup(curl);
         }
 
         // Now post the credit card information
         curl = curl_easy_init();
-        log("THIRD CURL BEGIN");
+        log("Posting credit card information...");
+        emit setStatus("Posting credit card...", "#7cd4f4");
 
         struct curl_slist *list = NULL;
         list = curl_slist_append(list, "Content-Type: application/json");
@@ -379,11 +379,10 @@ void Checkout::run() {
         // Allow for redirects
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         // Set the cURL proxy
-        curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
+        if (!proxy.empty()) { curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str()); }
         if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
         // Set the timeout
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 
         std::string ccpostfields =
                 std::string("{\"credit_card\":") +
@@ -395,7 +394,6 @@ void Checkout::run() {
 
         // Now place the JSON ccpostfields into the post request
         curl_easy_setopt(curl, CURLOPT_POSTFIELDS, ccpostfields.c_str());
-        log(ccpostfields);
 
         // Remove the page body data so can bring in new POST data
         remove(QApplication::applicationDirPath().toStdString()
@@ -408,7 +406,6 @@ void Checkout::run() {
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
             // Perform the file download
             res = curl_easy_perform(curl);
-            log("THIRD CURL END");
             // Close the file
             fclose(fp);
         }
@@ -425,10 +422,28 @@ void Checkout::run() {
             curl_global_cleanup();
             return;
         } else {
-            log("Get unique Shopify checkout ID!");
-            emit setStatus("Sending CC Info...", "#ed4f47");
+            // Check if a unique Shopify checkout ID was received
+            filein.open(QApplication::applicationDirPath().toStdString()
+                                .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str());
+            std::string id;
+            getline(filein, id);
+            if (id.substr(0, 7) == R"({"id":")") {
+                log("Successfully posted credit card information!");
+                emit setStatus("Processing...", "#7cd4f4");
+            } else {
+                log("Could not get unique Shopify checkout ID. Connection error maybe? Aborting checkout...");
+                emit setStatus("Failed", "#ed4f47");
+                curl_easy_cleanup(curl);
+                curl_global_cleanup();
+                return;
+            }
+
             // Clean up curl instance
             curl_easy_cleanup(curl);
+            curl_global_cleanup();
         }
+
+        // Emit finished if it gets here
+        emit setStatus("Finished!", "#8dd888");
     }
 }
