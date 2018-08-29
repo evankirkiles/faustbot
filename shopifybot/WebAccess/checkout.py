@@ -232,6 +232,7 @@ def submitpayment():
     # Check if the post request was successful
     if resp.status_code == 200:
         log('Got unique session ID from Shopify.')
+        log(str(BeautifulSoup(resp.content, 'html.parser')))
     else:
         log(str(resp.status_code))
 

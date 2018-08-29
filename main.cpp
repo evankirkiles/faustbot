@@ -23,7 +23,8 @@ int main(int argc, char **argv) {
     window.show();
     window.raise();
 
-    Checkout checker("https://kith.com/cart/2600793800711:1", "kith.com", "/../Logs/checking.txt", "Random", "1", "1");
+    Checkout checker("https://kith.com/cart/2600793800711:1", "kith.com",
+                     QApplication::applicationDirPath().append("/../Logs/checking.txt").toStdString(), "Random", "1", "1");
     checker.run();
 
     // Run the application

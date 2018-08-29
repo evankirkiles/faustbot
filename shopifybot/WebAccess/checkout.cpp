@@ -16,7 +16,7 @@ void Checkout::log(const std::string &message) {
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()) % 1000;
     fp << std::put_time(&tm, "[%Y-%m-%d %T.") << std::setfill('0') << std::setw(3) << ms.count() << "] " << message << "\n";
 
-    std::cout << message << std::endl;
+    std::cout << std::put_time(&tm, "[%Y-%m-%d %T.") << std::setfill('0') << std::setw(3) << ms.count() << "] " << message << std::endl;
 
     // Close the logging file
     fp.close();
@@ -160,10 +160,12 @@ Checkout::Checkout(const std::string &p_URL, const std::string &p_cartLink, cons
         return;
     } else {
         // If proxy is found, set the proxy string to be used in the requests
-        proxy = std::string("https://") + proxyObj["proxyip"].toString().toStdString() + ":" + proxyObj["proxyport"].toString().toStdString();
+        proxy = std::string("") + proxyObj["proxyip"].toString().toStdString() + ":" + proxyObj["proxyport"].toString().toStdString();
+        log(proxy);
         if (proxyObj["proxyusername"].toString() != "" && proxyObj["proxypassword"].toString() != "") {
             proxyunp = proxyObj["proxyusername"].toString().toStdString() + ":" + proxyObj["proxypassword"].toString().toStdString();
         }
+        log(proxyunp);
     }
 
     // If reaches here without a hitch, then everything has been initialized
@@ -172,7 +174,6 @@ Checkout::Checkout(const std::string &p_URL, const std::string &p_cartLink, cons
 
 // Runs the checkout, but only if all variables are initialized
 void Checkout::run() {
-    std::cout << "Running" << std::endl;
 
     // Check initialized
     if (!allInitialized) { log("Profile, proxy, or credit card uninitialized! Cannot run."); return; }
@@ -182,6 +183,7 @@ void Checkout::run() {
     std::string shopifyCheckoutURL;
     CURLcode res;
     if (curl) {
+        log("FIRST CURL BEGIN");
         // First clear the cookie file
         remove(QApplication::applicationDirPath().toStdString().append(file_paths::CHECKOUTCOOKIES_TXT).append(identifier).append(".txt").c_str());
 
@@ -203,10 +205,10 @@ void Checkout::run() {
         // Allow for redirects
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         // Set the cURL proxy
-//        curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
-//        if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
+        curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
+        if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
         // Set the timeout
-        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 4);
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
 
         // Now open the file for pulling the body through cURL
         FILE *fp = fopen(QApplication::applicationDirPath().toStdString()
@@ -216,6 +218,7 @@ void Checkout::run() {
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
             // Perform the file download
             res = curl_easy_perform(curl);
+            log("FIRST CURL END");
             // Close the file
             fclose(fp);
         }
@@ -243,6 +246,7 @@ void Checkout::run() {
         std::string authenticitytoken;
         std::ifstream filein(QApplication::applicationDirPath().toStdString()
                                      .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str());
+        log("FILE SEARCH BEGIN");
         int inputs = 0;
         while (getline(filein, authenticitytoken)) {
             if (authenticitytoken.find("input") != std::string::npos) {
@@ -259,21 +263,23 @@ void Checkout::run() {
                 }
             }
         }
+        log("FILE SEARCH END");
         filein.close();
-        std::cout << authenticitytoken << std::endl;
 
         // Reinit the curl session
         curl = curl_easy_init();
 
+        log("SECOND CURL BEGIN");
         // Set other cURL operation settings
-        // URL to perf  orm GET request on
-        std::cout << shopifyCheckoutURL << std::endl;
+        // URL to perform POST request on
         curl_easy_setopt(curl, CURLOPT_URL, shopifyCheckoutURL.c_str());
         curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
         // Download the body of the linked URL
         curl_easy_setopt(curl, CURLOPT_NOBODY, 0L);
         // Cookie file to retrieve cookies from
         curl_easy_setopt(curl, CURLOPT_COOKIEFILE, QApplication::applicationDirPath().toStdString()
+                .append(file_paths::CHECKOUTCOOKIES_TXT).append(identifier).append(".txt").c_str());
+        curl_easy_setopt(curl, CURLOPT_COOKIEJAR, QApplication::applicationDirPath().toStdString()
                 .append(file_paths::CHECKOUTCOOKIES_TXT).append(identifier).append(".txt").c_str());
         curl_easy_setopt(curl, CURLOPT_COOKIELIST, nline);
         curl_easy_setopt(curl, CURLOPT_COOKIESESSION, true);
@@ -283,7 +289,7 @@ void Checkout::run() {
 //        curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
 //        if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
         // Set the timeout
-        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 4);
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
 
         std::string postfields =
                 std::string("utf8=%E2%9C%93") +
@@ -326,6 +332,7 @@ void Checkout::run() {
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
             // Perform the file download
             res = curl_easy_perform(curl);
+            log("SECOND CURL END");
             // Close the file
             fclose(fp);
         }
@@ -348,6 +355,80 @@ void Checkout::run() {
             curl_easy_cleanup(curl);
         }
 
+        // Now post the credit card information
+        curl = curl_easy_init();
+        log("THIRD CURL BEGIN");
 
+        struct curl_slist *list = NULL;
+        list = curl_slist_append(list, "Content-Type: application/json");
+
+        // Set other cURL operatoin settings
+        // URL to perform POST request on
+        curl_easy_setopt(curl, CURLOPT_URL, "https://elb.deposit.shopifycs.com/sessions");
+        curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
+         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, list);
+        // Download the body of the linked URL
+        curl_easy_setopt(curl, CURLOPT_NOBODY, 0L);
+        // Cookie file to retrieve cookies from
+        curl_easy_setopt(curl, CURLOPT_COOKIEFILE, QApplication::applicationDirPath().toStdString()
+                .append(file_paths::CHECKOUTCOOKIES_TXT).append(identifier).append(".txt").c_str());
+        curl_easy_setopt(curl, CURLOPT_COOKIEJAR, QApplication::applicationDirPath().toStdString()
+                .append(file_paths::CHECKOUTCOOKIES_TXT).append(identifier).append(".txt").c_str());
+        curl_easy_setopt(curl, CURLOPT_COOKIELIST, nline);
+        curl_easy_setopt(curl, CURLOPT_COOKIESESSION, true);
+        // Allow for redirects
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+        // Set the cURL proxy
+        curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
+        if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
+        // Set the timeout
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+
+        std::string ccpostfields =
+                std::string("{\"credit_card\":") +
+                R"({"number":")" + ccard["ccnum"].toString().toStdString() + "\"," +
+                R"("name":")" + ccard["ccname"].toString().toStdString() + "\"," +
+                R"("month":)" + ccard["ccmonth"].toString().toStdString() + "," +
+                R"("year":)" + ccard["ccyear"].toString().toStdString() + "," +
+                R"("verification_value":")" + ccard["ccccv"].toString().toStdString() + "\"}}";
+
+        // Now place the JSON ccpostfields into the post request
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, ccpostfields.c_str());
+        log(ccpostfields);
+
+        // Remove the page body data so can bring in new POST data
+        remove(QApplication::applicationDirPath().toStdString()
+                       .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str());
+        // Now open the file for pulling the body through cURL
+        fp = fopen(QApplication::applicationDirPath().toStdString()
+                           .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str(), "wb");
+        if (fp) {
+            // Write the POST response to the file
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+            // Perform the file download
+            res = curl_easy_perform(curl);
+            log("THIRD CURL END");
+            // Close the file
+            fclose(fp);
+        }
+        // Make sure the request succeeded
+        if (res != CURLE_OK) {
+            long response_code;
+            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
+            std::cout << response_code << std::endl;
+            log("Error posting credit card information! Aborting checkout...");
+            emit setStatus("Failed", "#ed4f47");
+
+            // Free the headers and clean up curl
+            curl_easy_cleanup(curl);
+            curl_global_cleanup();
+            return;
+        } else {
+            log("Get unique Shopify checkout ID!");
+            emit setStatus("Sending CC Info...", "#ed4f47");
+            // Clean up curl instance
+            curl_easy_cleanup(curl);
+        }
     }
 }

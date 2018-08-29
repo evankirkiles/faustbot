@@ -659,7 +659,7 @@ void VIDTaskWidget::showEdit() {
     connect(etd, SIGNAL(closed()), this, SLOT(editClosed()));
 
     // Finally connect the task edited signal of the display to the receiving end of the taskwidget
-    connect(etd, SIGNAL(sendTaskEdit(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString unsigned int)),
+    connect(etd, SIGNAL(sendTaskEdit(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, unsigned int)),
             this, SLOT(acceptTaskEdit(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, unsigned int)));
 
     // Notify the main window that a log window is open
