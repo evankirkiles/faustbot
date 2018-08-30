@@ -5,6 +5,7 @@
     -BORDER                 :-: #232323;
     -MAINTEXT               :-: #8bacdd;
     -SECONDARYTEXT          :-: #c4c0b2;
+    -TERTIARYTEXT           :-: #8595ad;
     -TASKID                 :-: #404040;
     -MAINACCENT             :-: #2b2e33;
     -SECONDARYACCENT        :-: #323232;
@@ -200,6 +201,9 @@ QComboBox {
     color: #8bacdd;
     font-family: "Futura";
 }
+#combobox_unchanged {
+    color: #8595ad;
+}
 QComboBox QAbstractItemView {
     selection-background-color: #8bacdd;
     background-color: #151515;
@@ -216,9 +220,25 @@ QComboBox QAbstractItemView {
     selection-color: #c4c0b2;
     selection-background-color: #232323;
 }
+#addtask_editbox_unchanged {
+    background-color: #151515;
+    color: #8595ad;
+    font-family: "Futura";
+    border-color: #232323;
+    selection-color: #c4c0b2;
+    selection-background-color: #232323;
+}
 #task_title_lineedit {
     background-color: #151515;
     color: #8bacdd;
+    font-family: "Futura";
+    border-color: #232323;
+    selection-color: #c4c0b2;
+    selection-background-color: #232323;
+}
+#task_title_lineedit_unchanged {
+    background-color: #151515;
+    color: #8595ad;
     font-family: "Futura";
     border-color: #232323;
     selection-color: #c4c0b2;

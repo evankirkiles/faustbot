@@ -952,6 +952,7 @@ void EditTaskDisplay::buildProfiles() {
 // Builds the proxies combobox
 void EditTaskDisplay::buildProxies() {
     // First add "Random" as an option
+    proxy->addItem("None");
     proxy->addItem("Random");
 
     // Open the proxies.txt
@@ -1190,6 +1191,7 @@ void VIDTaskEditDisplay::buildProfiles() {
 // Builds the proxies combobox
 void VIDTaskEditDisplay::buildProxies() {
     // First add "Random" as an option
+    proxy->addItem("None");
     proxy->addItem("Random");
 
     // Open the proxies.txt

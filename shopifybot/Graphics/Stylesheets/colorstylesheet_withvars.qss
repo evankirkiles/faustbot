@@ -5,6 +5,7 @@
     -BORDER                 :-: @BORDER;
     -MAINTEXT               :-: @MAINTEXT;
     -SECONDARYTEXT          :-: @SECONDARYTEXT;
+    -TERTIARYTEXT           :-: @TERTIARYTEXT;
     -TASKID                 :-: @TASKID;
     -MAINACCENT             :-: @MAINACCENT;
     -SECONDARYACCENT        :-: @SECONDARYACCENT;
@@ -200,6 +201,9 @@ QComboBox {
     color: @MAINTEXT;
     font-family: @FONT;
 }
+#combobox_unchanged {
+    color: @TERTIARYTEXT;
+}
 QComboBox QAbstractItemView {
     selection-background-color: @MAINTEXT;
     background-color: @SECONDARYBG;
@@ -216,9 +220,25 @@ QComboBox QAbstractItemView {
     selection-color: @SECONDARYTEXT;
     selection-background-color: @BORDER;
 }
+#addtask_editbox_unchanged {
+    background-color: @SECONDARYBG;
+    color: @TERTIARYTEXT;
+    font-family: @FONT;
+    border-color: @BORDER;
+    selection-color: @SECONDARYTEXT;
+    selection-background-color: @BORDER;
+}
 #task_title_lineedit {
     background-color: @SECONDARYBG;
     color: @MAINTEXT;
+    font-family: @FONT;
+    border-color: @BORDER;
+    selection-color: @SECONDARYTEXT;
+    selection-background-color: @BORDER;
+}
+#task_title_lineedit_unchanged {
+    background-color: @SECONDARYBG;
+    color: @TERTIARYTEXT;
     font-family: @FONT;
     border-color: @BORDER;
     selection-color: @SECONDARYTEXT;

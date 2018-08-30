@@ -20,7 +20,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_QuitOnClose);
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
-    setWindowTitle(tr("SHOPIFY BOT"));
+    setWindowTitle(tr("FAUST BOT"));
     setObjectName("main_window");
 
     // Create URLAndMethod metatype
@@ -72,12 +72,12 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Left column widgets
     QImage img(file_paths::LOGO_FILE);
     QPixmap logoimg;
-    logoimg = QPixmap::fromImage(img).scaled(420, 400, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    logoimg = QPixmap::fromImage(img).scaled(420, 400, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     logoimg.setDevicePixelRatio(2.0);
     logo = new QLabel();
     logo->setPixmap(logoimg);
     logo->setFixedSize(210, 200);
-    title = new QLabel("SHOPIFY BOT", this);
+    title = new QLabel("FAUST BOT", this);
     title->setAlignment(Qt::AlignCenter);
     title->setObjectName("bot_title");
     title->setFixedHeight(30);

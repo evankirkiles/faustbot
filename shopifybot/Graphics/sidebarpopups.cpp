@@ -137,62 +137,98 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     leftColumn->addWidget(creditcardsListView);
     titleLabel->setObjectName("task_important_text");
     editTitle->setObjectName("task_title_lineedit");
-    connect(editTitle, &QLineEdit::textEdited, [this] () { editTitle->setStyleSheet("color: #69c64f;"); } );
+    connect(editTitle, &QLineEdit::textEdited, [this] () {
+        editTitle->setObjectName("task_title_lineedit");
+        editTitle->setStyleSheet(editTitle->styleSheet());
+    } );
     titleRow->addWidget(titleLabel);
     titleRow->addWidget(editTitle);
     emailLabel->setObjectName("addtask_mediocre_text");
     email->setObjectName("addtask_editbox");
-    connect(email, &QLineEdit::textEdited, [this] () { email->setStyleSheet("color: #69c64f;"); } );
+    connect(email, &QLineEdit::textEdited, [this] () {
+        email->setObjectName("addtask_editbox");
+        email->setStyleSheet(email->styleSheet());
+    } );
     emailRow->addWidget(emailLabel);
     emailRow->addWidget(email);
     firstnameLabel->setObjectName("addtask_mediocre_text");
     firstname->setObjectName("addtask_editbox");
-    connect(firstname, &QLineEdit::textEdited, [this] () { firstname->setStyleSheet("color: #69c64f;"); } );
+    connect(firstname, &QLineEdit::textEdited, [this] () {
+        firstname->setObjectName("addtask_editbox");
+        firstname->setStyleSheet(firstname->styleSheet());
+    } );
     fNameRow->addWidget(firstnameLabel);
     fNameRow->addWidget(firstname);
     lastnameLabel->setObjectName("addtask_mediocre_text");
     lastname->setObjectName("addtask_editbox");
-    connect(lastname, &QLineEdit::textEdited, [this] () { lastname->setStyleSheet("color: #69c64f;"); } );
+    connect(lastname, &QLineEdit::textEdited, [this] () {
+        lastname->setObjectName("addtask_editbox");
+        lastname->setStyleSheet(lastname->styleSheet());
+    } );
     lNameRow->addWidget(lastnameLabel);
     lNameRow->addWidget(lastname);
     address1Label->setObjectName("addtask_mediocre_text");
     address1->setObjectName("addtask_editbox");
-    connect(address1, &QLineEdit::textEdited, [this] () { address1->setStyleSheet("color: #69c64f;"); } );
+    connect(address1, &QLineEdit::textEdited, [this] () {
+        address1->setObjectName("addtask_editbox");
+        address1->setStyleSheet(address1->styleSheet());
+    } );
     address1Row->addWidget(address1Label);
     address1Row->addWidget(address1);
     address2Label->setObjectName("addtask_mediocre_text");
     address2->setObjectName("addtask_editbox");
-    connect(address2, &QLineEdit::textEdited, [this] () { address2->setStyleSheet("color: #69c64f;"); } );
+    connect(address2, &QLineEdit::textEdited, [this] () {
+        address2->setObjectName("addtask_editbox");
+        address1->setStyleSheet(address2->styleSheet());
+    } );
     address2Row->addWidget(address2Label);
     address2Row->addWidget(address2);
     cityLabel->setObjectName("addtask_mediocre_text");
     city->setObjectName("addtask_editbox");
-    connect(city, &QLineEdit::textEdited, [this] () { city->setStyleSheet("color: #69c64f;"); } );
+    connect(city, &QLineEdit::textEdited, [this] () {
+        city->setObjectName("addtask_editbox");
+        city->setStyleSheet(city->styleSheet());
+    } );
     cityZipRow->addWidget(cityLabel);
     cityZipRow->addWidget(city);
     zipcodeLabel->setObjectName("addtask_mediocre_text");
     zipcode->setObjectName("addtask_editbox");
     zipcode->setMaximumWidth(60);
-    connect(zipcode, &QLineEdit::textEdited, [this] () { zipcode->setStyleSheet("color: #69c64f;"); } );
+    connect(zipcode, &QLineEdit::textEdited, [this] () {
+        zipcode->setObjectName("addtask_editbox");
+        zipcode->setStyleSheet(zipcode->styleSheet());
+    } );
     cityZipRow->addWidget(zipcodeLabel);
     cityZipRow->addWidget(zipcode);
     countryLabel->setObjectName("addtask_mediocre_text");
     country->setObjectName("addtask_editbox");
-    connect(country, &QLineEdit::textEdited, [this] () { country->setStyleSheet("color: #69c64f;"); } );
+    connect(country, &QLineEdit::textEdited, [this] () {
+        country->setObjectName("addtask_editbox");
+        country->setStyleSheet(country->styleSheet());
+    } );
     provinceLabel->setObjectName("addtask_mediocre_text");
     province->setObjectName("addtask_editbox");
-    connect(province, &QLineEdit::textEdited, [this] () { province->setStyleSheet("color: #69c64f;"); } );
+    connect(province, &QLineEdit::textEdited, [this] () {
+        province->setObjectName("addtask_editbox");
+        province->setStyleSheet(province->styleSheet());
+    } );
     countryRow->addWidget(countryLabel);
     countryRow->addWidget(country);
     countryRow->addWidget(provinceLabel);
     countryRow->addWidget(province);
     phoneLabel->setObjectName("addtask_mediocre_text");
     phone->setObjectName("addtask_editbox");
-    connect(phone, &QLineEdit::textEdited, [this] () { phone->setStyleSheet("color: #69c64f;"); } );
+    connect(phone, &QLineEdit::textEdited, [this] () {
+        phone->setObjectName("addtask_editbox");
+        phone->setStyleSheet(phone->styleSheet());
+    } );
     phoneRow->addWidget(phoneLabel);
     phoneRow->addWidget(phone);
     ccardLabel->setObjectName("addtask_mediocre_text");
-    connect(ccard, &QComboBox::currentTextChanged, [this] () { ccard->setStyleSheet("color: #69c64f;"); } );
+    connect(ccard, &QComboBox::currentTextChanged, [this] () {
+        ccard->setObjectName("");
+        ccard->setStyleSheet(ccard->styleSheet());
+    } );
     update->setObjectName("addtaskbutton");
     update->setFixedSize(100, 35);
     ccardRow->addWidget(ccardLabel);
@@ -244,7 +280,7 @@ ProfilesDisplay::ProfilesDisplay(QWidget *parent) : addProfileButton(new Clickab
     refreshCC();
 
     // Make sure credit card begins correct color
-    ccard->setStyleSheet("color: #baa86a;");
+    ccard->setObjectName("combobox_unchanged");
 }
 // Override the column for the profiles display
 void ProfilesDisplay::closeEvent(QCloseEvent* event) {
@@ -319,29 +355,41 @@ void ProfilesDisplay::select(QString which) {
 
             // Use the JSON object to fill in the data fields
             editTitle->setText(which);
-            editTitle->setStyleSheet("color: #baa86a;");
+            editTitle->setObjectName("task_title_lineedit_unchanged");
+            editTitle->setStyleSheet(editTitle->styleSheet());
             email->setText(jsonObject.value("email").toString());
-            email->setStyleSheet("color: #baa86a;");
+            email->setObjectName("addtask_editbox_unchanged");
+            email->setStyleSheet(email->styleSheet());
             firstname->setText(jsonObject.value("firstname").toString());
-            firstname->setStyleSheet("color: #baa86a;");
+            firstname->setObjectName("addtask_editbox_unchanged");
+            firstname->setStyleSheet(firstname->styleSheet());
             lastname->setText(jsonObject.value("lastname").toString());
-            lastname->setStyleSheet("color: #baa86a;");
+            lastname->setObjectName("addtask_editbox_unchanged");
+            lastname->setStyleSheet(lastname->styleSheet());
             address1->setText(jsonObject.value("address1").toString());
-            address1->setStyleSheet("color: #baa86a;");
+            address1->setObjectName("addtask_editbox_unchanged");
+            address1->setStyleSheet(address1->styleSheet());
             address2->setText(jsonObject.value("address2").toString());
-            address2->setStyleSheet("color: #baa86a;");
+            address2->setObjectName("addtask_editbox_unchanged");
+            address2->setStyleSheet(address2->styleSheet());
             city->setText(jsonObject.value("city").toString());
-            city->setStyleSheet("color: #baa86a;");
+            city->setObjectName("addtask_editbox_unchanged");
+            city->setStyleSheet(city->styleSheet());
             country->setText(jsonObject.value("country").toString());
-            country->setStyleSheet("color: #baa86a;");
+            country->setObjectName("addtask_editbox_unchanged");
+            country->setStyleSheet(country->styleSheet());
             province->setText(jsonObject.value("province").toString());
-            province->setStyleSheet("color: #baa86a;");
+            province->setObjectName("addtask_editbox_unchanged");
+            province->setStyleSheet(province->styleSheet());
             zipcode->setText(jsonObject.value("zipcode").toString());
-            zipcode->setStyleSheet("color: #baa86a;");
+            zipcode->setObjectName("addtask_editbox_unchanged");
+            zipcode->setStyleSheet(zipcode->styleSheet());
             phone->setText(jsonObject.value("phone").toString());
-            phone->setStyleSheet("color: #baa86a;");
+            phone->setObjectName("addtask_editbox_unchanged");
+            phone->setStyleSheet(phone->styleSheet());
             ccard->setCurrentText(jsonObject.value("ccard").toString());
-            ccard->setStyleSheet("color: #baa86a;");
+            ccard->setObjectName("combobox_unchanged");
+            ccard->setStyleSheet(ccard->styleSheet());
 
             break;
         }

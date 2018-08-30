@@ -51,11 +51,15 @@ set(SHOPBOT_LOGS
         shopifybot/WebAccess/pylogs.txt)
 set(SHOPBOT_COOKIE
         shopifybot/WebAccess/Contents/CookieJar/cookies.txt)
+set(SHOPBOT_STYLESHEETS
+        shopifybot/Graphics/Stylesheets/colorstylesheet.qss
+        shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss)
 # Make sure the resources get put in the Contents/Resources folder
 set_source_files_properties(${SHOPBOT_RSCS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 set_source_files_properties(${SHOPBOT_LOGS} PROPERTIES MACOSX_PACKAGE_LOCATION "Logs")
 set_source_files_properties(${SHOPBOT_UINFO} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Vault")
 set_source_files_properties(${SHOPBOT_COOKIE} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Contents/CookieJar")
+set_source_files_properties(${SHOPBOT_STYLESHEETS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Stylesheets")
 
 # Build the executable
 add_executable(shopify_bot MACOSX_BUNDLE
@@ -64,7 +68,8 @@ add_executable(shopify_bot MACOSX_BUNDLE
         ${SHOPBOT_RSCS}
         ${SHOPBOT_UINFO}
         ${SHOPBOT_LOGS}
-        ${SHOPBOT_COOKIE})
+        ${SHOPBOT_COOKIE}
+        ${SHOPBOT_STYLESHEETS})
 
 # Add Docs references
 add_custom_target(Docs SOURCES README.md .gitignore LICENSE)
@@ -151,12 +156,6 @@ install(CODE "include(BundleUtilities)
     fixup_bundle(\"${APPS}\" \"${QT_PLUGINS}\" \"${DIRS}\")")
 
 # Move the resources into the binary directory
-configure_file(shopifybot/Graphics/Stylesheets/colorstylesheet.qss ${CMAKE_CURRENT_BINARY_DIR}/Resources/Stylesheets/colorstylesheet.qss COPYONLY)
-configure_file(shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss ${CMAKE_CURRENT_BINARY_DIR}/Resources/Stylesheets/colorstylesheet_default.qss COPYONLY)
-configure_file(shopifybot/Infrastructure/profiles.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Cache/profiles.txt COPYONLY)
-configure_file(shopifybot/Infrastructure/proxies.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Cache/proxies.txt COPYONLY)
-configure_file(shopifybot/Infrastructure/ccards.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Cache/ccards.txt COPYONLY)
-configure_file(shopifybot/WebAccess/Contents/CookieJar/cookies.txt ${CMAKE_CURRENT_BINARY_DIR}/Resources/Contents/CookieJar/cookies.txt COPYONLY)
 configure_file(shopifybot/WebAccess/proxychecker.py ${CMAKE_CURRENT_BINARY_DIR}/Resources/proxychecker.py COPYONLY)
 
 # Pack everything up

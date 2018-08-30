@@ -132,7 +132,7 @@ namespace constants {
 
     const std::map<std::string, std::string> CUSTOMIZEVARS = {
             {"Background 1", "MAINBG"}, {"Background 2", "SECONDARYBG"}, {"Font", "FONT"}, {"Border", "BORDER"},
-            {"Text 1", "MAINTEXT"}, {"Text 2", "SECONDARYTEXT"}, {"Task ID", "TASKID"},
+            {"Text 1", "MAINTEXT"}, {"Text 2", "SECONDARYTEXT"}, {"Text 3", "TERTIARYTEXT"}, {"Task ID", "TASKID"},
             {"Accents 1", "MAINACCENT"}, {"Accents 2", "SECONDARYACCENT"}, {"Button 1", "MAINBUTTON"},
             {"Button 1 -PRESSED-", "MAINBUTTONPRESSED"}, {"Button 2", "SIDEBUTTON"},
             {"Button 2 -PRESSED-", "SIDEBUTTONPRESSED"}, {"Button 3", "SECONDARYBUTTON"},

@@ -344,6 +344,7 @@ void AddTaskDisplay::buildProfilesBox() {
 // Scans the proxies.txt file for the IPs of each proxies
 void AddTaskDisplay::buildProxiesBox() {
     // First add "Random" as an option
+    proxy->addItem("None");
     proxy->addItem("Random");
 
     // Open the proxies.txt
@@ -608,6 +609,7 @@ void AddVIDTaskDisplay::buildProfilesBox() {
 // Scans the proxies.txt file for the IPs of each proxies
 void AddVIDTaskDisplay::buildProxiesBox() {
     // First add "Random" as an option
+    proxy->addItem("None");
     proxy->addItem("Random");
 
     // Open the proxies.txt
