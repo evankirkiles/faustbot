@@ -99,25 +99,43 @@ target_link_libraries(shopify_bot
 
 # ---------------------------------------------------------------------------- #
 
-# Make macro to add in Qt5 plugins
-macro(install_qt5_plugin _qt_plugin_name _qt_plugins_var _prefix)
-    get_target_property(_qt_plugin_path "${_qt_plugin_name}" LOCATION)
-    if (EXISTS "${_qt_plugin_path}")
-        get_filename_component(_qt_plugin_file "${_qt_plugin_path}" NAME)
-        get_filename_component(_qt_plugin_type "${_qt_plugin_path}" PATH)
-        get_filename_component(_qt_plugin_type "${_qt_plugin_type}" NAME)
-        set(_qt_plugin_dest "${_prefix}/PlugIns/${_qt_plugin_type}")
-        install(FILES "${_qt_plugin_path}"
-                DESTINATION "${_qt_plugin_dest}")
-        set(${_qt_plugins_var}
-                "${${_qt_plugins_var}}\$ENV{DEST_DIR}\${CMAKE_INSTALL_PREFIX}/${_qt_plugin_dest}/${_qt_plugin_file}")
-    else()
-        message(FATAL_ERROR "Qt plugin ${_qt_plugin_name} not found")
-    endif()
-endmacro()
+## Make macro to add in Qt5 plugins
+#macro(install_qt5_plugin _qt_plugin_name _qt_plugins_var _prefix)
+#    get_target_property(_qt_plugin_path "${_qt_plugin_name}" LOCATION)
+#    if (EXISTS "${_qt_plugin_path}")
+#        get_filename_component(_qt_plugin_file "${_qt_plugin_path}" NAME)
+#        get_filename_component(_qt_plugin_type "${_qt_plugin_path}" PATH)
+#        get_filename_component(_qt_plugin_type "${_qt_plugin_type}" NAME)
+#        set(_qt_plugin_dest "${_prefix}/PlugIns/${_qt_plugin_type}")
+#        install(FILES "${_qt_plugin_path}"
+#                DESTINATION "${_qt_plugin_dest}")
+#        set(${_qt_plugins_var}
+#                "${${_qt_plugins_var}}\$ENV{DEST_DIR}\${CMAKE_INSTALL_PREFIX}/${_qt_plugin_dest}/${_qt_plugin_file}")
+#    else()
+#        message(FATAL_ERROR "Qt plugin ${_qt_plugin_name} not found")
+#    endif()
+#endmacro()
+#
+## Install Cocoa integration as it is a plugin required by QtGui which is required by QWidgets
+#install_qt5_plugin("Qt5::QCocoaIntegrationPlugin" QT_PLUGINS ${prefix})
 
-# Install Cocoa integration as it is a plugin required by QtGui which is required by QWidgets
-install_qt5_plugin("Qt5::QCocoaIntegrationPlugin" QT_PLUGINS ${prefix})
+# Install the plugins for each qt module
+set(REQ_QT_PLUGINS
+        ${Qt5Widgets_PLUGINS}
+        ${Qt5Network_PLUGINS}
+        ${Qt5Gui_PLUGINS})
+foreach(plugin ${REQ_QT_PLUGINS})
+    get_target_property(_qt_plugin_path ${plugin} LOCATION)
+    get_filename_component(_qt_plugin_file "${_qt_plugin_path}" NAME)
+    get_filename_component(_qt_plugin_type "${_qt_plugin_path}" PATH)
+    get_filename_component(_qt_plugin_type "${_qt_plugin_type}" NAME)
+    set(_qt_plugin_dest "${prefix}/PlugIns/${_qt_plugin_type}")
+    install(FILES "${_qt_plugin_path}"
+        DESTINATION "${_qt_plugin_dest}")
+    set(QT_PLUGINS
+            "${QT_PLUGINS};\$ENV{DEST_DIR}\${CMAKE_INSTALL_PREFIX}/${_qt_plugin_dest}/${_qt_plugin_file}")
+endforeach()
+
 file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/qt.conf"
         "[Paths]\nPlugins = ${_qt_plugin_dir}\n")
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/qt.conf"
@@ -152,7 +170,10 @@ message(STATUS "QT_PLUGINS: ${QT_PLUGINS}")
 message(STATUS "DIRS: ${DIRS}")
 
 # Finally perform bundling
-install(CODE "include(BundleUtilities)
+install(CODE "
+    file(GLOB_RECURSE QT_PLUGINS
+    \"\${CMAKE_INSTALL_PREFIX}/${plugin_dest_dir}/plugins/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
+    include(BundleUtilities)
     fixup_bundle(\"${APPS}\" \"${QT_PLUGINS}\" \"${DIRS}\")")
 
 # Move the resources into the binary directory
