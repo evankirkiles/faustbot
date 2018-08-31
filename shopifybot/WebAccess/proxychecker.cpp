@@ -49,9 +49,9 @@ void ProxyChecker::run(const std::string &URL) {
         // Allow for redirects
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         // Set the cURL proxy
-        curl_easy_setopt(curl, CURLOPT_PROXY, std::string(proxy["proxyip"].toString().toStdString() + ":" + proxy["proxyport"].toString().toStdString()));
+        curl_easy_setopt(curl, CURLOPT_PROXY, std::string(proxy["proxyip"].toString().toStdString() + ":" + proxy["proxyport"].toString().toStdString()).c_str());
         if (proxy["proxyusername"].toString() != "" && proxy["proxypassword"].toString() != "") {
-            curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, std::string(proxy["proxyusername"].toString().toStdString() + ":" + proxy["proxypassword"].toString().toStdString()));
+            curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, std::string(proxy["proxyusername"].toString().toStdString() + ":" + proxy["proxypassword"].toString().toStdString()).c_str());
         }
 
         // Now open the file for pulling the body through cURL
@@ -72,8 +72,8 @@ void ProxyChecker::run(const std::string &URL) {
         } else {
             // Make sure there are actually contents in the file
             std::ifstream filein(QApplication::applicationDirPath().toStdString().append(file_paths::PROXYCHECK)
-                                         .append(index).append(".txt").c_str(), std::ifstream::ate | std::ifstream::binary);
-            if (filein.tellg() != 0) {
+                                         .append(index).append(".txt").c_str());
+            if (filein.peek() != std::ifstream::traits_type::eof()) {
                 emit returnStatus(1);
             } else {
                 // Otherwise curl request went through but got nothing

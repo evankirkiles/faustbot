@@ -39,6 +39,7 @@
 #endif
 
 #include "Graphics/Stylesheets/colorcustomizer.hpp"
+#include "WebAccess/proxychecker.hpp"
 
 // trim from end (in place)
 static inline void rtrim(std::string &s) {
@@ -200,7 +201,10 @@ public:
 
     // Constructor that builds the custom ProxyListItem widget
     explicit ProxyListItem(QString index, QString ip, QString port, QString username, QString password,
-                           QString settingsName = "proxieslistitem", QWidget *parent = 0);
+                           QComboBox* urlToCheck, QString settingsName = "proxieslistitem", QWidget *parent = 0);
+
+    // The Proxy Checker item
+    ProxyChecker pc;
 signals:
     // Emitted when the proxy check starts
     void proxyCheckStart();
@@ -211,7 +215,7 @@ public slots:
     void checkStatus();
 private slots:
     // Uses the information in the proxy checker file to update the status
-    void updateStatus();
+    void updateStatus(int status);
     // Simply emits a signal from the class itself
     void proxyEndEmit();
 private:
@@ -227,8 +231,9 @@ private:
     QPixmap proxyOff;
     QPixmap proxyNeutral;
 
-    // Process called in the separate thread
-    void runCheck();
+    // Reference to the QComboBox containing the website to check against
+    QComboBox* urlCombo;
+
 };
 
 // The window which pops up when adding a proxy to the list
@@ -350,6 +355,7 @@ private:
     ClickableImage* pasteProxyButton;
     ClickableImage* deleteProxyButton;
     ClickableCheckableImage* refreshProxies;
+    QComboBox* websiteToCheck;
     ProxyListItem* columnProxies;
 
     // List view of all the proxies

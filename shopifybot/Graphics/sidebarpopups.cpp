@@ -930,7 +930,7 @@ void AddCreditCardDisplay::closeEvent(QCloseEvent *event) {
 // PROXY DISPLAY CLASS
 // Proxy list item which is used by the proxy listview
 ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString username, QString password,
-                             QString settings, QWidget *parent) :
+                             QComboBox* urlToCheck, QString settings, QWidget *parent) :
         indexDisp(new QLabel(index, this)),
         ipLabel(new QLabel(ip, this)),
         portLabel(new QLabel(port, this)),
@@ -939,6 +939,8 @@ ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString us
         proxyOn(QPixmap::fromImage(QImage(file_paths::PROXYON_IMG).scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
         proxyOff(QPixmap::fromImage(QImage(file_paths::PROXYOFF_IMG).scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
         proxyNeutral(QPixmap::fromImage(QImage(file_paths::PROXYNEUTRAL_IMG).scaled(16, 16, Qt::KeepAspectRatio, Qt::SmoothTransformation))),
+        pc(index.toStdString()),
+        urlCombo(urlToCheck),
         QWidget(parent) {
 
     // Set the object name and height
@@ -982,6 +984,9 @@ ProxyListItem::ProxyListItem(QString index, QString ip, QString port, QString us
         mainLayout->addWidget(statusIMG);
     }
     setLayout(mainLayout);
+
+    // Connect up the proxy list item's return function
+    connect(&pc, SIGNAL(returnStatus(int)), this, SLOT(updateStatus(int)));
 }
 
 // Function that checks the status of the proxy in the list item
@@ -990,41 +995,27 @@ void ProxyListItem::checkStatus() {
     // Do not run for the header row
     if (indexDisp->text().toStdString() == "#") { return; }
 
+    // Reset the proxy status
+    statusIMG->setPixmap(proxyNeutral);
+
     // Set up a concurrent run of the proxy function
-    QFuture<void> future = QtConcurrent::run(this, &ProxyListItem::runCheck);
+    QFuture<void> future = QtConcurrent::run(&pc, &ProxyChecker::run, supported_sites::WEBSITES.at(urlCombo->currentText().toStdString()).baseURL);
     auto *watcher = new QFutureWatcher<void>(this);
     connect(watcher, SIGNAL(finished()), this, SLOT(proxyEndEmit()));
-    connect(watcher, SIGNAL(finished()), this, SLOT(updateStatus()));
     connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
     watcher->setFuture(future);
 }
 
-// Simply emits the proxy check end signal
+// Proxy end emitter
 void ProxyListItem::proxyEndEmit() { emit proxyCheckEnd(); }
 
-// Function to be run in the new QThread in the checkStatus function
-void ProxyListItem::runCheck() {
-    // Open the python script to check the proxy status
-    FILE *fp = popen(std::string(std::string("python3 ") + QApplication::applicationDirPath().append(file_paths::PROXYCHECKER).toStdString() +
-            " " + indexDisp->text().toStdString() + " " + QApplication::applicationDirPath().append(file_paths::PROXYCHECK).toStdString() +
-                                 indexDisp->text().toStdString() + " " + QApplication::applicationDirPath().toStdString()).c_str(), "r");
-
-    // Wait for the python script to finish
-    pclose(fp);
-}
-
 // Function to be
-void ProxyListItem::updateStatus() {
-    // Now check the results file
-    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::PROXYCHECK).toStdString() + indexDisp->text().toStdString());
-    int result;
-    filein >> result;
-    if (result == 1) {
+void ProxyListItem::updateStatus(int status) {
+    if (status == 1) {
         statusIMG->setPixmap(proxyOn);
     } else {
         statusIMG->setPixmap(proxyOff);
     }
-    filein.close();
     remove(std::string(QApplication::applicationDirPath().append(file_paths::PROXYCHECK).toStdString() + indexDisp->text().toStdString()).c_str());
 }
 
@@ -1039,7 +1030,8 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
                                                    file_paths::REFRESH2_IMG, file_paths::REFRESH_IMG,
                                                    file_paths::DISABLEDREFRESH_IMG, this)),
         proxiesListView(new QListWidget(this)),
-        columnProxies(new ProxyListItem("#", "IP", "PORT", "USERNAME", "PASSWORD", "proxiesindexitem", this)),
+        websiteToCheck(new QComboBox(this)),
+        columnProxies(new ProxyListItem("#", "IP", "PORT", "USERNAME", "PASSWORD", websiteToCheck, "proxiesindexitem", this)),
         QWidget(parent) {
 
     // Set window properties
@@ -1052,6 +1044,9 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
 
     // Create the dark title bar
     dtb = new DarkTitleBar(this, true);
+
+    // Build the website combobox
+    websiteToCheck->addItems(supported_sites::ssStringList);
 
     // Set the stylesheet for the window
     QFile File(file_paths::STYLESHEET);
@@ -1087,10 +1082,10 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
     proxiesViewTitle->setFixedWidth(45);
     proxyStatusCheck->setObjectName("proxiesstatustext");
     proxyStatusCheck->setAlignment(Qt::AlignCenter);
-    proxyStatusCheck->setStyleSheet("margin-left: 26px;");
     smallButtonRow->addWidget(proxiesViewTitle);
     smallButtonRow->addWidget(proxyStatusCheck);
     smallButtonRow->addWidget(refreshProxies);
+    smallButtonRow->addWidget(websiteToCheck);
     smallButtonRow->addWidget(addProxyButton);
     smallButtonRow->addWidget(pasteProxyButton);
     smallButtonRow->addWidget(deleteProxyButton);
@@ -1201,7 +1196,9 @@ void ProxyDisplay::refresh(int selected) {
                 jsonObject.value("proxyip").toString(),
                 jsonObject.value("proxyport").toString(),
                 jsonObject.value("proxyusername").toString(),
-                jsonObject.value("proxypassword").toString(), "", proxiesListView);
+                jsonObject.value("proxypassword").toString(),
+                                             websiteToCheck,
+                                             "", proxiesListView);
         lwidgitem->setSizeHint(newWidgItem->sizeHint());
         proxiesListView->addItem(lwidgitem);
         proxiesListView->setItemWidget(lwidgitem, newWidgItem);

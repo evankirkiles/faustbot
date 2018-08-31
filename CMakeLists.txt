@@ -28,6 +28,7 @@ set(SHOPBOT_SRCS
         main.cpp
         shopifybot/WebAccess/product_scraper.cpp
         shopifybot/WebAccess/checkout.cpp
+        shopifybot/WebAccess/proxychecker.cpp
         shopifybot/constants.cpp
         shopifybot/Infrastructure/tasks.cpp
         shopifybot/Graphics/window.cpp

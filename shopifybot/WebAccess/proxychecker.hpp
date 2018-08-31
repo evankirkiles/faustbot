@@ -26,6 +26,10 @@
 #include <curl/curl.h>
 #endif
 
+#ifndef cout
+#include <iostream>
+#endif
+
 // Include the global constants
 #include <shopifybot/constants.hpp>
 
