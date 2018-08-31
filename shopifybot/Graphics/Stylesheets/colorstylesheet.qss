@@ -3,18 +3,18 @@
     -SECONDARYBG            :-: #151515;
     -FONT                   :-: "Futura";
     -BORDER                 :-: #232323;
-    -MAINTEXT               :-: #8bacdd;
+    -MAINTEXT               :-: #c43e43;
     -SECONDARYTEXT          :-: #c4c0b2;
-    -TERTIARYTEXT           :-: #8595ad;
+    -TERTIARYTEXT           :-: #5b3636;
     -TASKID                 :-: #404040;
     -MAINACCENT             :-: #2b2e33;
     -SECONDARYACCENT        :-: #323232;
-    -MAINBUTTON             :-: #7b9fd8;
-    -MAINBUTTONPRESSED      :-: #a0bbe5;
+    -MAINBUTTON             :-: #e23f3f;
+    -MAINBUTTONPRESSED      :-: #d84949;
     -SIDEBUTTON             :-: #1f1f1f;
     -SIDEBUTTONPRESSED      :-: #2b2e33;
-    -SECONDARYBUTTON        :-: #4682dd;
-    -SECONDARYBUTTONPRESSED :-: #649bef;
+    -SECONDARYBUTTON        :-: #bc4043;
+    -SECONDARYBUTTONPRESSED :-: #c65154;
     -TERTIARYBUTTON         :-: #131313;
     -TERTIARYBUTTONPRESSED  :-: #111111;
     -TITLEBARBG             :-: #111111;
@@ -27,11 +27,11 @@
 	background: #181818;
 }
 QLabel {
-	color: #8bacdd;
+	color: #c43e43;
     font-family: "Futura";
 }
 #bot_title {
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
 }
 #status_title {
@@ -45,11 +45,11 @@ QLabel {
     border-color: #232323;
 }
 #task_title {
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
 }
 #task_important_text {
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
 }
 #task_identifier {
@@ -57,7 +57,7 @@ QLabel {
     font-family: "Futura";
 }
 #task_important_var {
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
 }
 #task_mediocre_text {
@@ -69,7 +69,7 @@ QLabel {
     font-family: "Futura";
 }
 #task_dateedit {
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
     background-color: #151515;
     selection-color: #c4c0b2;
@@ -99,14 +99,14 @@ QPushButton#sidebuttons:pressed {
 QPushButton#sidebuttons {
     background-color: #1f1f1f;
     border-color: #1f1f1f;
-	color: #8bacdd;
+	color: #c43e43;
 	font-family: "Futura";
 }
 QPushButton#checkfornamebutton:pressed {
-    background-color: #a0bbe5;
+    background-color: #d84949;
 }
 QPushButton#checkfornamebutton {
-    background-color: #7b9fd8;
+    background-color: #e23f3f;
     border-color: #2b2e33;
     color: #2b2e33;
     font-family: "Futura";
@@ -128,10 +128,10 @@ QPushButton#stopallbutton {
 	font-family: "Futura";
 }
 QPushButton#addtaskbutton:pressed {
-    background-color: #a0bbe5;
+    background-color: #d84949;
 }
 QPushButton#addtaskbutton {
-    background-color: #7b9fd8;
+    background-color: #e23f3f;
     border-color: #2b2e33;
 	color: #2b2e33;
 	font-family: "Futura";
@@ -146,10 +146,10 @@ QPushButton#subbutton {
 	font-family: "Futura";
 }
 QPushButton#addtaskbuttonv2:pressed {
-    background-color: #649bef;
+    background-color: #c65154;
 }
 QPushButton#addtaskbuttonv2 {
-    background-color: #4682dd;
+    background-color: #bc4043;
     border-color: #2b2e33;
 	color: #2b2e33;
 	font-family: "Futura";
@@ -160,7 +160,7 @@ QPushButton#addtaskbuttonv2 {
 }
 QScrollArea {
     background-color: #151515;
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
 }
 #scrollarea {
@@ -168,12 +168,12 @@ QScrollArea {
 }
 #task {
     background-color: #1e2023;
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
 }
 QTextEdit {
     background-color: #151515;
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
     border-color: #232323;
     selection-color: #c4c0b2;
@@ -191,22 +191,23 @@ QTextEdit {
 }
 QTextEdit#task_title_textedit {
     background-color: #151515;
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
     border-color: #232323;
 }
 QComboBox {
     background-color: #151515;
     border-color: #2b2e33;
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
 }
 #combobox_unchanged {
-    color: #8595ad;
+    color: #5b3636;
 }
 QComboBox QAbstractItemView {
-    selection-background-color: #8bacdd;
+    selection-background-color: #c43e43;
     background-color: #151515;
+    alternate-background-color: #151515;
 }
 #addtask_mediocre_text {
     color: #c4c0b2;
@@ -214,7 +215,7 @@ QComboBox QAbstractItemView {
 }
 #addtask_editbox {
     background-color: #151515;
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
     border-color: #232323;
     selection-color: #c4c0b2;
@@ -222,7 +223,7 @@ QComboBox QAbstractItemView {
 }
 #addtask_editbox_unchanged {
     background-color: #151515;
-    color: #8595ad;
+    color: #5b3636;
     font-family: "Futura";
     border-color: #232323;
     selection-color: #c4c0b2;
@@ -230,7 +231,7 @@ QComboBox QAbstractItemView {
 }
 #task_title_lineedit {
     background-color: #151515;
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
     border-color: #232323;
     selection-color: #c4c0b2;
@@ -238,14 +239,14 @@ QComboBox QAbstractItemView {
 }
 #task_title_lineedit_unchanged {
     background-color: #151515;
-    color: #8595ad;
+    color: #5b3636;
     font-family: "Futura";
     border-color: #232323;
     selection-color: #c4c0b2;
     selection-background-color: #232323;
 }
 #addtask_datetime {
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
     background-color: #151515;
     selection-color: #c4c0b2;
@@ -259,7 +260,7 @@ QComboBox QAbstractItemView {
 #profileslistview {
     background-color: #151515;
     font-family: "Futura";
-    color: #8bacdd;
+    color: #c43e43;
     selection-color: #c4c0b2;
     selection-background-color: #232323;
 }
@@ -269,13 +270,13 @@ QComboBox QAbstractItemView {
     font-family: "Futura";
 }
 #proxieslistitem {
-    color: #8bacdd;
+    color: #c43e43;
 }
 #proxiesindexitem {
     color: #c4c0b2;
 }
 #proxieslistedit {
     background-color: #111111;
-    color: #8bacdd;
+    color: #c43e43;
     font-family: "Futura";
 }

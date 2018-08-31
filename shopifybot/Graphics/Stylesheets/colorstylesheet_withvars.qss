@@ -207,6 +207,7 @@ QComboBox {
 QComboBox QAbstractItemView {
     selection-background-color: @MAINTEXT;
     background-color: @SECONDARYBG;
+    alternate-background-color: @SECONDARYBG;
 }
 #addtask_mediocre_text {
     color: @SECONDARYTEXT;
