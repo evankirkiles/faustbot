@@ -60,11 +60,6 @@ private:
     // Must be true for run
     bool allInitialized = false;
 
-//    // Sends the customer info, returning true if it was a success
-//    bool sendCustomerInfo();
-//    // Sends the payment info, returning true if it was a success
-//    bool sendPaymentInfo();
-
     // Logs a line to the given log file
     void log(const std::string& message);
 };

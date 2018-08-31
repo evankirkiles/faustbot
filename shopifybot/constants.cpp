@@ -61,7 +61,7 @@ namespace file_paths {
 
     const char* HTML_BODY = "/../Resources/Contents/html_body_";
     const char* PRODUCTS_LOG = "/../Resources/Contents/products_log_";
-    const char* PROXYCHECK = "/../Resources/Contents/proxychecker";
+    const char* PROXYCHECK = "/../Resources/Contents/proxychecker_";
 
     const char* CHECKOUT = "/../Resources/checkout.py";
     const char* PROXYCHECKER = "/../Resources/proxychecker.py";
