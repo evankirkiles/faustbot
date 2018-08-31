@@ -109,7 +109,7 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     settings->setStyleSheet("margin-top: 0px; margin-bottom: 0px;");
     bottomHorLayout->addWidget(clear);
     bottomHorLayout->addWidget(settings);
-    copyrightLabel = new QLabel("© 2018 Evan Kirkiles - All Rights Reserved", this);
+    copyrightLabel = new QLabel("© 2018 Faust BOT - All Rights Reserved", this);
     copyrightLabel->setObjectName("copyrightlabel");
     // Add widgets to the left column
     leftColumn->addWidget(logo);

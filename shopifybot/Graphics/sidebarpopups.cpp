@@ -1033,6 +1033,7 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
         proxiesViewTitle(new QLabel("Proxies", this)),
         proxyStatusCheck(new QLabel("Idle.", this)),
         addProxyButton(new ClickableImage(26, 26, 2, file_paths::ADD2_IMG, file_paths::ADD_IMG, this)),
+        pasteProxyButton(new ClickableImage(26, 26, 2, file_paths::LOGS2_IMG, file_paths::LOGS_IMG, this)),
         deleteProxyButton(new ClickableImage(26, 26, 2, file_paths::MINUS2_IMG, file_paths::MINUS_IMG, this)),
         refreshProxies(new ClickableCheckableImage(26, 26, 2, file_paths::REFRESH2_IMG, file_paths::REFRESH_IMG,
                                                    file_paths::REFRESH2_IMG, file_paths::REFRESH_IMG,
@@ -1086,10 +1087,12 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
     proxiesViewTitle->setFixedWidth(45);
     proxyStatusCheck->setObjectName("proxiesstatustext");
     proxyStatusCheck->setAlignment(Qt::AlignCenter);
+    proxyStatusCheck->setStyleSheet("margin-left: 26px;");
     smallButtonRow->addWidget(proxiesViewTitle);
     smallButtonRow->addWidget(proxyStatusCheck);
     smallButtonRow->addWidget(refreshProxies);
     smallButtonRow->addWidget(addProxyButton);
+    smallButtonRow->addWidget(pasteProxyButton);
     smallButtonRow->addWidget(deleteProxyButton);
     mainLayout->addWidget(topRow);
     mainLayout->addWidget(columnProxies);
@@ -1110,6 +1113,7 @@ ProxyDisplay::ProxyDisplay(QWidget *parent) :
     // Make the connections
     connect(addProxyButton, SIGNAL(clicked()), this, SLOT(openAddProxy()));
     connect(deleteProxyButton, SIGNAL(clicked()), this, SLOT(deleteProxy()));
+    connect(pasteProxyButton, SIGNAL(clicked()), this, SLOT(openPasteProxy()));
 }
 
 // Override the proxy display's close event function to emit closed
@@ -1131,6 +1135,11 @@ void ProxyDisplay::openAddProxy() {
         apd->setFocus();
         return;
     }
+    if (pasteWindOpen) {
+        ppw->close();
+        pasteWindOpen = false;
+    }
+
     // If not, then build a new add proxy window and change bool value
     apd = new AddProxyDisplay(proxiesListView->count() + 1, refreshProxies);
     apd->show();
@@ -1140,6 +1149,32 @@ void ProxyDisplay::openAddProxy() {
     connect(apd, &AddProxyDisplay::closed, [this] () { addWindOpen = false; });
     connect(apd, &AddProxyDisplay::submitted, [this] () {
         // Refresh with the new proxy selected
+        refresh(proxiesListView->count());
+    });
+}
+
+// Opens the paste proxy window
+void ProxyDisplay::openPasteProxy() {
+    // Make sure a paste proxy window is not already open
+    if (pasteWindOpen) {
+        ppw->raise();
+        ppw->setFocus();
+        return;
+    }
+    if (addWindOpen) {
+        apd->close();
+        addWindOpen = false;
+    }
+
+    // If not, then build a new paste proxy window and change the bool value
+    ppw = new ProxyPaster(proxiesListView->count() + 1, refreshProxies);
+    ppw->show();
+    pasteWindOpen = true;
+
+    // Make necessary connections
+    connect(ppw, &ProxyPaster::closed, [this] () { pasteWindOpen = false; });
+    connect(ppw, &ProxyPaster::submitted, [this] () {
+        // Refresh with the end of the new proxies selected
         refresh(proxiesListView->count());
     });
 }
@@ -1155,6 +1190,7 @@ void ProxyDisplay::refresh(int selected) {
 
     // Cycle through each line and read in the JSON object for each IP
     while (getline(filein, str)) {
+        if (str.empty()) { continue; }
         const unsigned long indexPos = str.find(" :-: ");
         QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(str.substr(indexPos + 5).c_str()).toUtf8());
         QJsonObject jsonObject = jsonDoc.object();
@@ -1206,6 +1242,7 @@ void ProxyDisplay::deleteProxy() {
 
     // Cycle through the in file and check for the index to be deleted
     while (getline(filein, str)) {
+        if (str.empty()) { continue; }
         // Check if the index of the proxy matches that of the selected one
         const unsigned long indexPos = str.find(" :-: ");
         if (str.substr(0, indexPos) != std::to_string(proxiesListView->currentRow() + 1)) {
@@ -1336,7 +1373,6 @@ void AddProxyDisplay::createNewProxy() {
     // Open the proxy text file
     std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::PROXIES_TXT).toStdString().c_str(),
                           std::ios_base::app | std::ios_base::out);
-    std::string str;
 
     // Append a new proxy to the file in the given format
     fileout << std::to_string(index) << R"( :-: {"proxyip":")" << proxyIP->text().toStdString() <<
@@ -1345,6 +1381,146 @@ void AddProxyDisplay::createNewProxy() {
             R"("})" << "\n";
 
     // Close the outfile
+    fileout.close();
+
+    // Close the window and emit submit
+    emit submitted();
+    close();
+}
+
+// PROXY PASTER DISPLAY CLASS
+// Window which displays a text edit to paste in proxies.
+ProxyPaster::ProxyPaster(int newIndex, ClickableCheckableImage* refresher, QWidget* parent) :
+        refreshButton(refresher),
+        index(newIndex),
+        proxies(new QTextEdit(this)),
+        pasteFormat(new QLabel("ip:port", this)),
+        pasteFormat2(new QLabel(":username:password", this)),
+        submit(new QPushButton("SUBMIT", this)),
+        QWidget(parent) {
+
+    // Set window properties
+    setFixedSize(275, 275);
+    setWindowTitle("Paste In Proxies");
+    setWindowFlags(Qt::FramelessWindowHint);
+    setFocusPolicy(Qt::ClickFocus);
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // Create the dark title bar
+    dtb = new DarkTitleBar(this);
+
+    // Set the stylesheet for the window
+    QFile File(file_paths::STYLESHEET);
+    File.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(File.readAll());
+    QFile File2(QApplication::applicationDirPath().append(file_paths::COLORSTYLESHEET).toStdString().c_str());
+    File2.open(QFile::ReadOnly);
+    QString CStyleSheet = QLatin1String(File2.readAll());
+    setStyleSheet(StyleSheet + CStyleSheet);
+
+    // Create external qframe and layouts for dtb
+    auto externLayout = new QVBoxLayout();
+    externLayout->setContentsMargins(0, 0, 0, 0);
+    auto bg = new QFrame(this);
+    auto bgLayout = new QVBoxLayout();
+    bgLayout->setContentsMargins(0, 0, 0, 0);
+    bg->setObjectName("main_window");
+    bg->setLayout(bgLayout);
+    bgLayout->addWidget(dtb);
+    externLayout->addWidget(bg);
+
+    // Create the main layout
+    auto mainLayout = new QVBoxLayout();
+    mainLayout->setContentsMargins(11, 3, 11, 11);
+    auto submitRow = new QHBoxLayout;
+    submitRow->setSpacing(0);
+
+    // Set widget properties
+    proxies->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    proxies->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    pasteFormat2->setObjectName("addtask_mediocre_text");
+    submit->setObjectName("addtaskbutton");
+    submit->setFixedSize(70, 30);
+
+    // Add widgets to rows
+    submitRow->addSpacing(5);
+    submitRow->addWidget(pasteFormat);
+    submitRow->addWidget(pasteFormat2);
+    submitRow->addStretch();
+    submitRow->addWidget(submit);
+    mainLayout->addWidget(proxies);
+    mainLayout->addLayout(submitRow);
+
+    // Set the layout
+    bgLayout->addLayout(mainLayout);
+    setLayout(externLayout);
+
+    // Connect submit button
+    connect(submit, SIGNAL(clicked()), this, SLOT(createNewProxies()));
+}
+
+// Override the paste proxy close event
+void ProxyPaster::closeEvent(QCloseEvent* event) {
+    emit closed();
+    QWidget::closeEvent(event);
+}
+
+// Submits the proxy information and writes it to the proxy file
+void ProxyPaster::createNewProxies() {
+    // First make sure that there is not a proxy check going on
+    if (!refreshButton->enabled) { return; }
+    // First ensure that there is data in the proxies window
+    if (proxies->toPlainText().isEmpty()) { close(); return; }
+
+    // Open the proxy text file
+    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::PROXIES_TXT).toStdString().c_str(),
+                          std::ios_base::app | std::ios_base::out);
+
+    // Now iterate through the lines in the proxies
+    QTextDocument *doc = proxies->document();
+    QTextBlock block = doc->begin();
+    while(block.isValid()) {
+        // Need to make sure this is a valid proxy
+        std::string toWrite;
+        std::string currentline = block.text().toStdString();
+        unsigned long substrPos = currentline.find(':');
+        // There should be either 2 or 4 substrings between semicolons
+        if (substrPos == std::string::npos) {
+            // Move on to next block
+            block = block.next();
+            continue; }
+        toWrite.append(std::to_string(index) + R"( :-: {"proxyip":")" + currentline.substr(0, substrPos));
+        currentline.erase(0, substrPos + 1);
+        substrPos = currentline.find(':');
+        // In this case, it is just an IP and PORT, no username and password
+        if (substrPos == std::string::npos) {
+            toWrite.append(std::string(R"(","proxyport":")") + currentline + R"(","proxyusername":"","proxypassword":""})");
+            fileout << toWrite << "\n";
+            // Move on to next block
+            block = block.next();
+            continue;
+        }
+        toWrite.append(std::string(R"(","proxyport":")") + currentline.substr(0, substrPos));
+        currentline.erase(0, substrPos + 1);
+        substrPos = currentline.find(':');
+        if (substrPos == std::string::npos) {
+            // Move on to next block
+            block = block.next();
+            continue; }
+        toWrite.append(std::string(R"(","proxyusername":")") + currentline.substr(0, substrPos));
+        currentline.erase(0, substrPos + 1);
+        toWrite.append(std::string(R"(","proxypassword":")") + currentline + R"("})");
+
+        std::cout << "3" << std::endl;
+
+        // Now write the line to the file
+        fileout << toWrite << "\n";
+
+        // Move on to next block
+        block = block.next();
+    }
+    // Finally close the out file
     fileout.close();
 
     // Close the window and emit submit

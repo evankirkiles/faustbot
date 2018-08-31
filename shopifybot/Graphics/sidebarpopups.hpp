@@ -27,6 +27,9 @@
 #ifndef QFutureWatcher
 #include <QFutureWatcher>
 #endif
+#ifndef QTextBlock
+#include <QTextBlock>
+#endif
 
 #ifndef NewTaskDisplay
 #include "popups.hpp"
@@ -269,6 +272,40 @@ private:
     QPushButton* submit;
 };
 
+// Window which pops up when pasting in proxies
+class ProxyPaster : public QWidget {
+    Q_OBJECT
+public:
+    // Constructor that builds the proxy paste window
+    explicit ProxyPaster(int newIndex, ClickableCheckableImage* refresher,  QWidget* parent = 0);
+    // Override the window closed
+    void closeEvent(QCloseEvent* event) override;
+
+signals:
+    // Emitted whenever the proxy paster is closed
+    void closed();
+    // Emitted when a proxy has been added
+    void submitted();
+private slots:
+    // Submits the information to multiple new proxies in the file
+    void createNewProxies();
+private:
+    // The index at which to start putting new proxies
+    const int index;
+
+    // Dark title bar widget
+    DarkTitleBar* dtb;
+
+    // The text edit into which you paste the proxies
+    QTextEdit* proxies;
+    QLabel* pasteFormat;
+    QLabel* pasteFormat2;
+    QPushButton* submit;
+
+    // A clickable checkable image which can be used to deny updates
+    ClickableCheckableImage* refreshButton;
+};
+
 // Header for the Proxy Display window which will include a listview of the proxies and functions to add
 // and delete them.
 class ProxyDisplay : public QWidget {
@@ -287,11 +324,14 @@ private slots:
     void refresh(int selected);
     // Opens the add proxy display
     void openAddProxy();
+    // Opens the paste proxy display
+    void openPasteProxy();
     // Deletes the selected proxy
     void deleteProxy();
 private:
     // Tells whether an add new proxy window is open
     bool addWindOpen = false;
+    bool pasteWindOpen = false;
     // Tells whether a thread is alive with a proxy check running
     int threadsOpen = 0;
 
@@ -300,11 +340,14 @@ private:
 
     // Add new proxy window
     AddProxyDisplay* apd;
+    // Paste in proxy window
+    ProxyPaster* ppw;
 
     // Icons for adding and deleting proxies
     QLabel* proxiesViewTitle;
     QLabel* proxyStatusCheck;
     ClickableImage* addProxyButton;
+    ClickableImage* pasteProxyButton;
     ClickableImage* deleteProxyButton;
     ClickableCheckableImage* refreshProxies;
     ProxyListItem* columnProxies;
