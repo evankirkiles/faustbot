@@ -1,7 +1,7 @@
 # Use recommended cmake version
 cmake_minimum_required(VERSION 3.10)
 # Set deployment target for OS X
-project(shopify_bot LANGUAGES CXX)
+project(Faust LANGUAGES CXX)
 
 # Set various CMake variables
 set(CMAKE_CXX_STANDARD 17)
@@ -43,7 +43,7 @@ set(SHOPBOT_RCS
         shopifybot/Graphics/resources.qrc)
 # List of actual resources
 set(SHOPBOT_RSCS
-        shopifybot/WebAccess/proxychecker.py)
+        shopifybot/logo.icns)
 set(SHOPBOT_UINFO
         shopifybot/Infrastructure/profiles.txt
         shopifybot/Infrastructure/proxies.txt
@@ -62,8 +62,11 @@ set_source_files_properties(${SHOPBOT_UINFO} PROPERTIES MACOSX_PACKAGE_LOCATION 
 set_source_files_properties(${SHOPBOT_COOKIE} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Contents/CookieJar")
 set_source_files_properties(${SHOPBOT_STYLESHEETS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Stylesheets")
 
+# Set the Mac icon
+set(MACOSX_BUNDLE_ICON_FILE logo.icns)
+
 # Build the executable
-add_executable(shopify_bot MACOSX_BUNDLE
+add_executable(Faust MACOSX_BUNDLE
         ${SHOPBOT_SRCS}
         ${SHOPBOT_RCS}
         ${SHOPBOT_RSCS}
@@ -75,6 +78,9 @@ add_executable(shopify_bot MACOSX_BUNDLE
 # Add Docs references
 add_custom_target(Docs SOURCES README.md .gitignore LICENSE)
 
+# Set some source properties
+set_source_files_properties(Faust PROPERTIES OUTPUT_NAME "Faust")
+
 # --------------------------------- INCLUDES --------------------------------- #
 
 # Include the shopifybot libraries and app domain/calc
@@ -84,7 +90,7 @@ include_directories(${APP_CALC})
 
 # Include cURL and link its libraries
 include_directories(%{CURL_INCLUDE_DIRS})
-target_link_libraries(shopify_bot ${CURL_LIBRARIES})
+target_link_libraries(Faust ${CURL_LIBRARIES})
 
 # Qt Related includes and linkers
 include_directories(
@@ -92,7 +98,7 @@ include_directories(
         ${Qt5Core_INCLUDE_DIRS}
         ${Qt5Concurrent_INCLUDE_DIRS}
         ${Qt5Network_INCLUDE_DIRS})
-target_link_libraries(shopify_bot
+target_link_libraries(Faust
         ${Qt5Widgets_LIBRARIES}
         ${Qt5Core_LIBRARIES}
         ${Qt5Concurrent_LIBRARIES}
@@ -100,31 +106,13 @@ target_link_libraries(shopify_bot
 
 # ---------------------------------------------------------------------------- #
 
-## Make macro to add in Qt5 plugins
-#macro(install_qt5_plugin _qt_plugin_name _qt_plugins_var _prefix)
-#    get_target_property(_qt_plugin_path "${_qt_plugin_name}" LOCATION)
-#    if (EXISTS "${_qt_plugin_path}")
-#        get_filename_component(_qt_plugin_file "${_qt_plugin_path}" NAME)
-#        get_filename_component(_qt_plugin_type "${_qt_plugin_path}" PATH)
-#        get_filename_component(_qt_plugin_type "${_qt_plugin_type}" NAME)
-#        set(_qt_plugin_dest "${_prefix}/PlugIns/${_qt_plugin_type}")
-#        install(FILES "${_qt_plugin_path}"
-#                DESTINATION "${_qt_plugin_dest}")
-#        set(${_qt_plugins_var}
-#                "${${_qt_plugins_var}}\$ENV{DEST_DIR}\${CMAKE_INSTALL_PREFIX}/${_qt_plugin_dest}/${_qt_plugin_file}")
-#    else()
-#        message(FATAL_ERROR "Qt plugin ${_qt_plugin_name} not found")
-#    endif()
-#endmacro()
-#
-## Install Cocoa integration as it is a plugin required by QtGui which is required by QWidgets
-#install_qt5_plugin("Qt5::QCocoaIntegrationPlugin" QT_PLUGINS ${prefix})
-
 # Install the plugins for each qt module
 set(REQ_QT_PLUGINS
+        ${Qt5Core_PLUGINS}
         ${Qt5Widgets_PLUGINS}
         ${Qt5Network_PLUGINS}
-        ${Qt5Gui_PLUGINS})
+        ${Qt5Gui_PLUGINS}
+        ${Qt5Concurrent_PLUGINS})
 foreach(plugin ${REQ_QT_PLUGINS})
     get_target_property(_qt_plugin_path ${plugin} LOCATION)
     get_filename_component(_qt_plugin_file "${_qt_plugin_path}" NAME)
