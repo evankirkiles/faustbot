@@ -10,6 +10,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(APP_DOMAIN ./domain)
 set(APP_CALC ./calc)
+# For statically linking libcURL
+set(CURL_STATICLIB true)
+set(BUILD_CURL_EXE false)
 # Turn on Qt-related auto compiler options
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -52,6 +55,8 @@ set(SHOPBOT_LOGS
         shopifybot/WebAccess/pylogs.txt)
 set(SHOPBOT_COOKIE
         shopifybot/WebAccess/Contents/CookieJar/cookies.txt)
+set(SHOPBOT_CHECKOUT
+        shopifybot/WebAccess/Contents/Checkout/cookies.txt)
 set(SHOPBOT_STYLESHEETS
         shopifybot/Graphics/Stylesheets/colorstylesheet.qss
         shopifybot/Graphics/Stylesheets/colorstylesheet_default.qss)
@@ -60,6 +65,7 @@ set_source_files_properties(${SHOPBOT_RSCS} PROPERTIES MACOSX_PACKAGE_LOCATION "
 set_source_files_properties(${SHOPBOT_LOGS} PROPERTIES MACOSX_PACKAGE_LOCATION "Logs")
 set_source_files_properties(${SHOPBOT_UINFO} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Vault")
 set_source_files_properties(${SHOPBOT_COOKIE} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Contents/CookieJar")
+set_source_files_properties(${SHOPBOT_CHECKOUT} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Contents/Checkout")
 set_source_files_properties(${SHOPBOT_STYLESHEETS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/Stylesheets")
 
 # Set the Mac icon
@@ -73,6 +79,7 @@ add_executable(Faust MACOSX_BUNDLE
         ${SHOPBOT_UINFO}
         ${SHOPBOT_LOGS}
         ${SHOPBOT_COOKIE}
+        ${SHOPBOT_CHECKOUT}
         ${SHOPBOT_STYLESHEETS})
 
 # Add Docs references
@@ -157,6 +164,9 @@ include(InstallRequiredSystemLibraries)
 message(STATUS "APPS: ${APPS}")
 message(STATUS "QT_PLUGINS: ${QT_PLUGINS}")
 message(STATUS "DIRS: ${DIRS}")
+
+# Statically link libcURL
+add_definitions(-DCURL_STATICLIB)
 
 # Finally perform bundling
 install(CODE "
