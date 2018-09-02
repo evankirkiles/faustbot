@@ -78,7 +78,7 @@ private slots:
     // Checks if there exists a machine has for the given authentication ID in the database
     void checkAuthAvailability();
     // Checks if the computer matches the one in the database for the given authentication ID
-    void authenticate();
+    void authenticate(const std::string& token);
 private:
     // Stacked Widget for differnet pages of authentication popup
     QStackedWidget* stack;

@@ -79,12 +79,6 @@ AuthenticationPopup::AuthenticationPopup(QWidget *parent) :
     secondpage->setLayout(authstatusLayout);
     stack->addWidget(secondpage);
 
-    // Sets the current stack index
-//    stack->setCurrentIndex(1);
-//    returnButton->disable();
-
-    // Check if there is an auth token available
-
     // Connect to mySQL server
     db.setHostName("den1.mysql3.gear.host");
     db.setDatabaseName("faustbot");
@@ -105,6 +99,28 @@ AuthenticationPopup::AuthenticationPopup(QWidget *parent) :
     connect(returnButton, &ClickableCheckableImage::runTask, [this] () {
         changeStackIndex(0);
     });
+
+    // Perform the user authentication
+    // Check if there is an auth token available
+    std::ifstream authTokenFile(QApplication::applicationDirPath().append(file_paths::AUTHENTICATION).toStdString().c_str());
+    // If file does not exist or could not be opened, then reask for auth token
+    if (authTokenFile.fail()) {
+        stack->setCurrentIndex(0);
+    // Otherwise check validity of authentication token
+    } else {
+        std::string token;
+        getline(authTokenFile, token);
+        // If token exists, then use it to try to authenticate with server
+        if (!token.empty()) {
+            stack->setCurrentIndex(1);
+            returnButton->disable();
+            authenticate(token);
+        } else {
+            stack->setCurrentIndex(0);
+        }
+    }
+    // Close the file
+    authTokenFile.close();
 }
 
 // Changes the stack index with a nice fade effect
@@ -210,12 +226,15 @@ void AuthenticationPopup::checkAuthAvailability() {
                 db.close();
 
                 // Finally, close the authentication because it succesfully added a row
+                authStatus->setText("Authenticated!");
                 emit closed();
                 close();
                 return;
+            } else {
+                authStatus->setText("Authentication token already in use.");
             }
         } else {
-            authStatus->setText("Invalid auth token!");
+            authStatus->setText("Invalid authentication token!");
         }
     }
 
@@ -224,17 +243,10 @@ void AuthenticationPopup::checkAuthAvailability() {
 }
 
 // Tries to authenticate the computer
-void AuthenticationPopup::authenticate() {
+void AuthenticationPopup::authenticate(const std::string& authTokenString) {
 
-//    // First, get the authentication ID from the authentication text file
-//    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::AUTHENTICATION).toStdString().c_str());
-//    std::string authToken;
-//    getline(filein, authToken);
-//    filein.close();
-//    // Make sure authenticate ID retrieved
-//    if (authToken.empty()) { std::cout << "Auth token not found" << std::endl; return; }
-    std::string authTokenString = "a";
-    std::string machine_hash;
+    // Local instance of machine hash string (will be empty)
+    std::string hashcode = "asdsadgysahuidjhuaskijaukhsugsjfdhdhiqfw8digu";
 
     // Ensure connection to auth server
     bool ok = db.open();
@@ -248,7 +260,24 @@ void AuthenticationPopup::authenticate() {
         query.exec(std::string("SELECT machine_hash FROM auth WHERE auth_token = '").append(authTokenString).append("'").c_str());
         if (query.next()) {
             // If there is a result returned from the select, then use its machine_hash
-            machine_hash = query.value(0).toString().toStdString();
+            std::string machine_hash = query.value(0).toString().toStdString();
+
+            std::cout << machine_hash << " : "  << hashcode << std::endl;
+
+            // Now compare the current hash code against the database's stored hash code for the given ID
+            if (machine_hash == hashcode) {
+                std::cout << "TRUF" << std::endl;
+                // If they are equal, then the app is authenticated
+                // Close the connection to the SQL database
+                db.close();
+                emit closed();
+                close();
+                return;
+            } else {
+                // Otherwise the app is not authenticated
+                authStatus->setText("Unauthorized machine for the vault token!");
+                returnButton->enable();
+            }
         }
     } else {
         // In case the thing doesn't work, do something?
@@ -257,6 +286,4 @@ void AuthenticationPopup::authenticate() {
 
     // Close the connection to the SQL database
     db.close();
-
-    std::cout << machine_hash << std::endl;
 }
