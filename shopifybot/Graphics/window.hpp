@@ -63,6 +63,9 @@ public:
                         const std::string& variantID, const std::string& variantName, const std::string& variantSize,
                         const QDateTime& startAt, const std::string& profile, const std::string& proxy, QString imageURL,
                         unsigned int frequency = constants::BASE_FREQ);
+
+    // Checks the authentication
+    void checkAuthentication();
 signals:
     // Emitted every time the qtimer timesout
     void timeUpdated(QDateTime time);

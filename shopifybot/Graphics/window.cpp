@@ -179,29 +179,39 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     timeChecker->setInterval(1000);
     timeChecker->start();
 
-    // Try to check authenticity of computer
-    buildAuthWindow();
-    connect(atp, SIGNAL(closed()), this, SLOT(receiveAuthentication()));
+    // Check the authentication of the window
+    checkAuthentication();
 }
 
-// Builds the authorization popup window
-void BotWindow::buildAuthWindow() {
-    // Fade out the container
-    auto *eff = new QGraphicsOpacityEffect(this);
-    container->setGraphicsEffect(eff);
-    QPropertyAnimation *a = new QPropertyAnimation(eff,"opacity");
-    a->setDuration(500);
-    a->setStartValue(1);
-    a->setEndValue(0.1);
-    a->setEasingCurve(QEasingCurve::Linear);
-    a->start(QPropertyAnimation::DeleteWhenStopped);
-
-    // Also disable the container
-    container->setEnabled(false);
+// Checks the authentication
+void BotWindow::checkAuthentication() {
 
     atp = new AuthenticationPopup();
+    // Make sure not authenticated right off the bat
+    if (atp->authenticated) {
+        delete atp;
+    } else {
+        // Disable the container
+        container->setEnabled(false);
+
+        // Fade out the container
+        auto *eff = new QGraphicsOpacityEffect(this);
+        container->setGraphicsEffect(eff);
+        QPropertyAnimation *a = new QPropertyAnimation(eff,"opacity");
+        a->setDuration(500);
+        a->setStartValue(1);
+        a->setEndValue(0.1);
+        a->setEasingCurve(QEasingCurve::Linear);
+        a->start(QPropertyAnimation::DeleteWhenStopped);
+        connect(a, SIGNAL(finished()), this, SLOT(buildAuthWindow()));
+    }
+}
+
+// Builds the authentication window
+void BotWindow::buildAuthWindow() {
     atp->show();
     atp->setFocus();
+    connect(atp, SIGNAL(closed()), this, SLOT(receiveAuthentication()));
 }
 
 // Receives the authentication, as the authentication window only closes when authenticated

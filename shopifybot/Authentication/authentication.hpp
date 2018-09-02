@@ -71,6 +71,8 @@ public:
     // Constructor to build the authentication popup
     explicit AuthenticationPopup(QWidget *parent = 0);
 
+    bool authenticated = false;
+
 signals:
     // Tells whether the user is authorized
     void closed();

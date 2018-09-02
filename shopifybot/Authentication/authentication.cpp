@@ -110,17 +110,16 @@ AuthenticationPopup::AuthenticationPopup(QWidget *parent) :
     } else {
         std::string token;
         getline(authTokenFile, token);
+        // Close the file
+        authTokenFile.close();
         // If token exists, then use it to try to authenticate with server
         if (!token.empty()) {
             stack->setCurrentIndex(1);
-            returnButton->disable();
             authenticate(token);
         } else {
             stack->setCurrentIndex(0);
         }
     }
-    // Close the file
-    authTokenFile.close();
 }
 
 // Changes the stack index with a nice fade effect
@@ -194,7 +193,7 @@ void AuthenticationPopup::fadePage(QWidget *which, bool inOrOut) {
 void AuthenticationPopup::checkAuthAvailability() {
 
     // TODO: Write a function to get the special, unique computer hash which is put into a global string
-    std::string hashcode = "asdsadgysahuidjhuaskijaukhsugsjfdhdhiqfw8diguask";
+    std::string hashcode = "asdsadgysahuidjhuaskijaukhsugsjfdhdhiqfw8digu";
 
     // Get the text from the QLineEdit
     std::string authTokenString = authToken->text().toStdString();
@@ -231,7 +230,23 @@ void AuthenticationPopup::checkAuthAvailability() {
                 close();
                 return;
             } else {
-                authStatus->setText("Authentication token already in use.");
+                // If it is, then check if the hash code matches the computer's hash code
+                if (query.value(0).toString().toStdString() == hashcode) {
+                    authStatus->setText("Authentication token matched!");
+
+                    // Write the given authentication token to the authentication file
+                    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::AUTHENTICATION).toStdString().c_str(), std::ios::out | std::ios::trunc);
+                    fileout << authTokenString;
+                    fileout.close();
+
+                    // Close the database connection and authentication window
+                    db.close();
+                    emit closed();
+                    close();
+                    return;
+                } else {
+                    authStatus->setText("Authentication token already in use.");
+                }
             }
         } else {
             authStatus->setText("Invalid authentication token!");
@@ -262,16 +277,12 @@ void AuthenticationPopup::authenticate(const std::string& authTokenString) {
             // If there is a result returned from the select, then use its machine_hash
             std::string machine_hash = query.value(0).toString().toStdString();
 
-            std::cout << machine_hash << " : "  << hashcode << std::endl;
-
             // Now compare the current hash code against the database's stored hash code for the given ID
             if (machine_hash == hashcode) {
-                std::cout << "TRUF" << std::endl;
                 // If they are equal, then the app is authenticated
                 // Close the connection to the SQL database
                 db.close();
-                emit closed();
-                close();
+                authenticated = true;
                 return;
             } else {
                 // Otherwise the app is not authenticated
