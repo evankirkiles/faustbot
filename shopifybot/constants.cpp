@@ -73,6 +73,8 @@ namespace file_paths {
     const char* TASKS_LOG = "/../Logs/task_logs_";
     const char* TASK_LOG = "/../Logs/";
 
+    const char* AUTHENTICATION = "/../Resources/Vault/authentication.txt";
+
     const char* STYLESHEET = ":Stylesheets/stylesheet.qss";
     const char* COLORSTYLESHEET = "/../Resources/Stylesheets/colorstylesheet.qss";
     const char* COLORSTYLESHEET_WITHVARS = ":Stylesheets/colorstylesheet_withvars.qss";

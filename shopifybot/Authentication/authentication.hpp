@@ -21,9 +21,24 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QStackedWidget>
+#include <QPropertyAnimation>
+
+// QtSQL includes
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+
+// Guarded includes
+#ifndef ifstream
+#include <fstream>
+#endif
+#ifndef algorithm
+#include <algorithm>
+#endif
 
 // Include the constants
 #include "constants.hpp"
+// And include the clickablecheckableimage
+#include "Graphics/customwidgets.hpp"
 // Also the dark title bar
 #include "Graphics/titlebar.hpp"
 
@@ -59,7 +74,11 @@ public:
 signals:
     // Tells whether the user is authorized
     void closed();
-
+private slots:
+    // Checks if there exists a machine has for the given authentication ID in the database
+    void checkAuthAvailability();
+    // Checks if the computer matches the one in the database for the given authentication ID
+    void authenticate();
 private:
     // Stacked Widget for differnet pages of authentication popup
     QStackedWidget* stack;
@@ -76,6 +95,15 @@ private:
 
     // Second page
     QLabel* authStatus;
+    ClickableCheckableImage* returnButton;
+
+    // Connection to the mySQL server
+    QSqlDatabase db;
+
+    // Changes the index of the stack
+    void changeStackIndex(int to);
+    // Fades a widget
+    void fadePage(QWidget* which, bool inOrOut);
 };
 
 

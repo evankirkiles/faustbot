@@ -6,11 +6,15 @@
 
 // Builds the authentication popup
 AuthenticationPopup::AuthenticationPopup(QWidget *parent) :
+        db(QSqlDatabase::addDatabase("QMYSQL")),
         stack(new QStackedWidget(this)),
         firstpage(new QWidget(this)),
         secondpage(new QWidget(this)),
         authToken(new QLineEdit(this)),
-        authStatus(new QLabel("STATUS", this)),
+        authStatus(new QLabel("Authenticating...", this)),
+        returnButton(new ClickableCheckableImage(26, 26, 2, file_paths::REFRESH2_IMG, file_paths::REFRESH_IMG,
+                                                 file_paths::REFRESH2_IMG, file_paths::REFRESH_IMG,
+                                                 file_paths::DISABLEDREFRESH_IMG, this)),
         submit(new QPushButton("SUBMIT", this)),
         QWidget(parent) {
 
@@ -68,17 +72,191 @@ AuthenticationPopup::AuthenticationPopup(QWidget *parent) :
     // Second page of widgets
     auto authstatusLayout = new QHBoxLayout;
     authstatusLayout->addWidget(authStatus);
+    authstatusLayout->addWidget(returnButton);
+    authstatusLayout->setAlignment(Qt::AlignCenter);
+    authstatusLayout->setContentsMargins(0, 0, 0, 0);
     authStatus->setFixedHeight(20);
     secondpage->setLayout(authstatusLayout);
     stack->addWidget(secondpage);
 
     // Sets the current stack index
-    stack->setCurrentIndex(0);
+//    stack->setCurrentIndex(1);
+//    returnButton->disable();
+
+    // Check if there is an auth token available
+
+    // Connect to mySQL server
+    db.setHostName("den1.mysql3.gear.host");
+    db.setDatabaseName("faustbot");
+    db.setUserName("faustbot");
+    db.setPassword("Ha5u~6UQtL0?");
 
     // Finalize layouts
     externLayout->addWidget(bg);
     setLayout(externLayout);
 
-    // Connect submit to closing the thing
-    connect(submit, &QPushButton::clicked, [this] () { emit closed(); close(); });
+    // Connect submit to checking the ID authenticity
+    connect(submit, &QPushButton::clicked, [this] () {
+        if (authToken->text().isEmpty()) { authToken->setFocus(); return; }
+        checkAuthAvailability();
+        changeStackIndex(1);
+    });
+    // Connect the return button to returning to the first page
+    connect(returnButton, &ClickableCheckableImage::runTask, [this] () {
+        changeStackIndex(0);
+    });
+}
+
+// Changes the stack index with a nice fade effect
+void AuthenticationPopup::changeStackIndex(int to) {
+
+    // Fade the stack out
+    // Fade out the container
+    if (to == 1) {
+        firstpage->setDisabled(true);
+        returnButton->enable();
+        auto *eff = new QGraphicsOpacityEffect(this);
+        firstpage->setGraphicsEffect(eff);
+        QPropertyAnimation *a = new QPropertyAnimation(eff, "opacity");
+        a->setDuration(250);
+        a->setStartValue(1);
+        a->setEndValue(0.1);
+        a->setEasingCurve(QEasingCurve::Linear);
+        a->start(QPropertyAnimation::DeleteWhenStopped);
+
+        // Wait for the QPropertyAnimation to finish
+        connect(a, &QPropertyAnimation::finished, [this] () {
+            stack->setCurrentIndex(1);
+            fadePage(secondpage, true);
+        });
+    } else if (to == 0) {
+        secondpage->setDisabled(true);
+        returnButton->disable();
+        auto *eff = new QGraphicsOpacityEffect(this);
+        secondpage->setGraphicsEffect(eff);
+        QPropertyAnimation *a = new QPropertyAnimation(eff, "opacity");
+        a->setDuration(250);
+        a->setStartValue(1);
+        a->setEndValue(0.1);
+        a->setEasingCurve(QEasingCurve::Linear);
+        a->start(QPropertyAnimation::DeleteWhenStopped);
+
+        // Wait for the QPropertyAnimation to finish
+        connect(a, &QPropertyAnimation::finished, [this] () {
+            stack->setCurrentIndex(0);
+            fadePage(firstpage, true);
+        });
+    }
+}
+
+// Fades in or out a widget
+void AuthenticationPopup::fadePage(QWidget *which, bool inOrOut) {
+    if (inOrOut) {
+        which->setDisabled(false);
+        auto *eff = new QGraphicsOpacityEffect(this);
+        which->setGraphicsEffect(eff);
+        QPropertyAnimation *a = new QPropertyAnimation(eff, "opacity");
+        a->setDuration(250);
+        a->setStartValue(0);
+        a->setEndValue(1);
+        a->setEasingCurve(QEasingCurve::Linear);
+        a->start(QPropertyAnimation::DeleteWhenStopped);
+    } else {
+        which->setDisabled(true);
+        auto *eff = new QGraphicsOpacityEffect(this);
+        which->setGraphicsEffect(eff);
+        QPropertyAnimation *a = new QPropertyAnimation(eff, "opacity");
+        a->setDuration(250);
+        a->setStartValue(1);
+        a->setEndValue(0);
+        a->setEasingCurve(QEasingCurve::Linear);
+        a->start(QPropertyAnimation::DeleteWhenStopped);
+    }
+}
+
+// Checks the database at the given authentication token to see if a machine is already registered under that ID
+void AuthenticationPopup::checkAuthAvailability() {
+
+    // TODO: Write a function to get the special, unique computer hash which is put into a global string
+    std::string hashcode = "asdsadgysahuidjhuaskijaukhsugsjfdhdhiqfw8diguask";
+
+    // Get the text from the QLineEdit
+    std::string authTokenString = authToken->text().toStdString();
+    authTokenString.erase (std::remove (authTokenString.begin(), authTokenString.end(), '\''), authTokenString.end());
+
+    // Now set up connection to MySQL database
+    bool ok = db.open();
+
+    // If connection is made, then look in the database for the given authToken
+    if (ok) {
+        authStatus->setText("Connected, checking token...");
+
+        // Perform SQL query
+        QSqlQuery query;
+        query.exec(std::string("SELECT machine_hash FROM auth WHERE auth_token = '").append(authTokenString).append("'").c_str());
+        if (query.next()) {
+            // Check if the hash code is already set for the given ID
+            if (query.value(0).toString().toStdString().empty()) {
+                // If it is not, then set it
+                query.clear();
+                query.exec(std::string("UPDATE auth SET machine_hash = '").append(hashcode).append("' WHERE auth_token='").append(authTokenString).append("'").c_str());
+
+                // Write the authentication token to the authentication file location
+                std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::AUTHENTICATION).toStdString().c_str(), std::ios::out | std::ios::trunc);
+                fileout << authTokenString;
+                fileout.close();
+
+                // Now quit the database connection
+                db.close();
+
+                // Finally, close the authentication because it succesfully added a row
+                emit closed();
+                close();
+                return;
+            }
+        } else {
+            authStatus->setText("Invalid auth token!");
+        }
+    }
+
+    // Now quit the database connection
+    db.close();
+}
+
+// Tries to authenticate the computer
+void AuthenticationPopup::authenticate() {
+
+//    // First, get the authentication ID from the authentication text file
+//    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::AUTHENTICATION).toStdString().c_str());
+//    std::string authToken;
+//    getline(filein, authToken);
+//    filein.close();
+//    // Make sure authenticate ID retrieved
+//    if (authToken.empty()) { std::cout << "Auth token not found" << std::endl; return; }
+    std::string authTokenString = "a";
+    std::string machine_hash;
+
+    // Ensure connection to auth server
+    bool ok = db.open();
+
+    // If connection is made, then look in the database for the given authToken
+    if (ok) {
+        authStatus->setText("Connected, checking token...");
+
+        // Perform SQL query
+        QSqlQuery query;
+        query.exec(std::string("SELECT machine_hash FROM auth WHERE auth_token = '").append(authTokenString).append("'").c_str());
+        if (query.next()) {
+            // If there is a result returned from the select, then use its machine_hash
+            machine_hash = query.value(0).toString().toStdString();
+        }
+    } else {
+        // In case the thing doesn't work, do something?
+        authStatus->setText("Couldn't connect to authentication servers.");
+    }
+
+    // Close the connection to the SQL database
+    db.close();
+
+    std::cout << machine_hash << std::endl;
 }

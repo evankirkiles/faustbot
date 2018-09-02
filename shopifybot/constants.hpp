@@ -102,10 +102,10 @@ namespace file_paths {
     extern const char* TASKS_LOG;
     extern const char* TASK_LOG;
 
-    extern const char* CHECKOUT;
-    extern const char* PROXYCHECKER;
     extern const char* CHECKOUTCOOKIES_TXT;
     extern const char* CHECKOUTBODY_TXT;
+
+    extern const char* AUTHENTICATION;
 
     extern const char* STYLESHEET;
     extern const char* COLORSTYLESHEET;

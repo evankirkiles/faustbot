@@ -23,7 +23,7 @@ set(INSTALL_RUNTIME_DIR "${prefix}/MacOS")
 set(INSTALL_CMAKE_DIR "${prefix}/Resources")
 
 # Find the packages necessary
-find_package(Qt5 COMPONENTS Core Widgets Concurrent Network REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets Concurrent Network Sql REQUIRED)
 find_package(CURL REQUIRED)
 
 # List of sources
@@ -105,11 +105,13 @@ include_directories(
         ${Qt5Widgets_INCLUDE_DIRS}
         ${Qt5Core_INCLUDE_DIRS}
         ${Qt5Concurrent_INCLUDE_DIRS}
-        ${Qt5Network_INCLUDE_DIRS})
+        ${Qt5Network_INCLUDE_DIRS}
+        ${Qt5SQL_INCLUDE_DIRS})
 target_link_libraries(Faust
         ${Qt5Widgets_LIBRARIES}
         ${Qt5Core_LIBRARIES}
         ${Qt5Concurrent_LIBRARIES}
+        ${Qt5Sql_LIBRARIES}
         ${Qt5Network_LIBRARIES})
 
 # ---------------------------------------------------------------------------- #
@@ -119,6 +121,7 @@ set(REQ_QT_PLUGINS
         ${Qt5Core_PLUGINS}
         ${Qt5Widgets_PLUGINS}
         ${Qt5Network_PLUGINS}
+        ${Qt5Sql_PLUGINS}
         ${Qt5Gui_PLUGINS}
         ${Qt5Concurrent_PLUGINS})
 foreach(plugin ${REQ_QT_PLUGINS})
@@ -175,9 +178,6 @@ install(CODE "
     \"\${CMAKE_INSTALL_PREFIX}/${plugin_dest_dir}/plugins/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
     include(BundleUtilities)
     fixup_bundle(\"${APPS}\" \"${QT_PLUGINS}\" \"${DIRS}\")")
-
-# Move the resources into the binary directory
-configure_file(shopifybot/WebAccess/proxychecker.py ${CMAKE_CURRENT_BINARY_DIR}/Resources/proxychecker.py COPYONLY)
 
 # Pack everything up
 set(CPACK_GENERATOR "DRAGNDROP")
