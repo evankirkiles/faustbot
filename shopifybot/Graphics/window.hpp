@@ -31,6 +31,8 @@
 // Include the sidebar popups
 #include "sidebarpopups.hpp"
 
+#include "Authentication/authentication.hpp"
+
 // Constants include
 #ifndef file_paths
 #include "constants.hpp"
@@ -65,10 +67,19 @@ signals:
     // Emitted every time the qtimer timesout
     void timeUpdated(QDateTime time);
 
+public slots:
+    // Tells the window that the application is not authorized
+    void receiveAuthentication();
+    // Builds the Authentication window
+    void buildAuthWindow();
+
 private:
 
     // Dark title bar widget
     DarkTitleBar* dtb;
+
+    // Authorization popup
+    AuthenticationPopup* atp;
 
     // Bool telling whether windows are open
     bool addTaskOpen = false;
@@ -79,6 +90,9 @@ private:
     bool settingsOpen = false;
     // Number of tasks created, incremented every time a task is added
     int numTasksCreated = 0;
+
+    // Container widget
+    QWidget* container;
 
     // Visualization widgets
     QLabel *logo;

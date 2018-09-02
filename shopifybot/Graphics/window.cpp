@@ -60,11 +60,14 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     // Vertical layout for the listview widget
     tasklistLayout = new QVBoxLayout;
     // Combine layouts
+    container = new QWidget(this);
+    container->setContentsMargins(0, 0, 0, 0);
     mainLayout->addLayout(topLayout);
     mainLayout->addLayout(botLayout);
+    container->setLayout(mainLayout);
     topLayout->addLayout(leftColumn);
     topLayout->setStretchFactor(leftColumn, 1);
-    inFrameLayout->addLayout(mainLayout);
+    inFrameLayout->addWidget(container);
     externLayout->addWidget(bg);
     setLayout(externLayout);
 
@@ -77,39 +80,40 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     logo = new QLabel();
     logo->setPixmap(logoimg);
     logo->setFixedSize(210, 200);
-    title = new QLabel("FAUST BOT", this);
+    title = new QLabel("FAUST BOT", container);
     title->setAlignment(Qt::AlignCenter);
     title->setObjectName("bot_title");
     title->setFixedHeight(30);
-    startAllTasks = new QPushButton("Start All", this);
+    startAllTasks = new QPushButton("Start All", container);
     startAllTasks->setObjectName("startallbutton");
-    stopAllTasks = new QPushButton("Stop All", this);
+    stopAllTasks = new QPushButton("Stop All", container);
     stopAllTasks->setObjectName("stopallbutton");
     alltaskButtonsLayout->addWidget(startAllTasks);
     alltaskButtonsLayout->addWidget(stopAllTasks);
-    addtask = new QPushButton("NEW KEYWORD TASK", this);
+    addtask = new QPushButton("NEW KEYWORD TASK", container);
     addtask->setObjectName("addtaskbutton");
     addtask->setFixedHeight(70);
-    addVIDtask = new QPushButton("NEW VARIANT ID TASK", this);
+    addVIDtask = new QPushButton("NEW VARIANT ID TASK", container);
     addVIDtask->setObjectName("addtaskbuttonv2");
     addVIDtask->setFixedHeight(50);
-    variantParser = new QPushButton("Parser", this);
+    variantParser = new QPushButton("Parser", container);
     variantParser->setObjectName("sidebuttons");
-    billing = new QPushButton("Profiles", this);
+    billing = new QPushButton("Profiles", container);
     billing->setObjectName("sidebuttons");
-    proxies = new QPushButton("Proxies", this);
+    proxies = new QPushButton("Proxies", container);
     proxies->setObjectName("sidebuttons");
-    clear = new QPushButton("Clear", this);
+    clear = new QPushButton("Clear", container);
     clear->setObjectName("sidebuttons");
     clear->setStyleSheet("margin-top: 0px; margin-bottom: 0px;");
-    settings = new QPushButton(this);
+    settings = new QPushButton(container);
     settings->setObjectName("sidebuttons");
     settings->setFixedSize(32, 30);
     settings->setIcon(QIcon(file_paths::GEAR_IMG));
     settings->setStyleSheet("margin-top: 0px; margin-bottom: 0px;");
     bottomHorLayout->addWidget(clear);
+    bottomHorLayout->addSpacing(10);
     bottomHorLayout->addWidget(settings);
-    copyrightLabel = new QLabel("© 2018 Faust BOT - All Rights Reserved", this);
+    copyrightLabel = new QLabel("© 2018 Faust BOT - All Rights Reserved", container);
     copyrightLabel->setObjectName("copyrightlabel");
     // Add widgets to the left column
     leftColumn->addWidget(logo);
@@ -133,14 +137,14 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     line2->setFrameShape(QFrame::HLine);
     line2->setFrameShadow(QFrame::Sunken);
     line2->setObjectName("horizontal_line");
-    tasktitle = new QLabel("TASKS", this);
+    tasktitle = new QLabel("TASKS", container);
     tasktitle->setAlignment(Qt::AlignCenter);
     tasktitle->setObjectName("task_title");
-    tasklist = new QScrollArea(this);
+    tasklist = new QScrollArea(container);
     tasklist->setSizePolicy(spRight);
     tasklist->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tasklist->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    tasklistwidget = new QWidget(this);
+    tasklistwidget = new QWidget(container);
 
     tasklistLayout->setAlignment(Qt::AlignTop);
     tasklistwidget->setLayout(tasklistLayout);
@@ -170,10 +174,50 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     connect(settings, SIGNAL(clicked()), this, SLOT(openSettings()));
 
     // Build the timer updated on second intervals
-    timeChecker = new QTimer(this);
+    timeChecker = new QTimer(container);
     connect(timeChecker, &QTimer::timeout, [this] () { emit timeUpdated(QDateTime::currentDateTime()); } );
     timeChecker->setInterval(1000);
     timeChecker->start();
+
+    // Try to check authenticity of computer
+    buildAuthWindow();
+    connect(atp, SIGNAL(closed()), this, SLOT(receiveAuthentication()));
+}
+
+// Builds the authorization popup window
+void BotWindow::buildAuthWindow() {
+    // Fade out the container
+    auto *eff = new QGraphicsOpacityEffect(this);
+    container->setGraphicsEffect(eff);
+    QPropertyAnimation *a = new QPropertyAnimation(eff,"opacity");
+    a->setDuration(500);
+    a->setStartValue(1);
+    a->setEndValue(0.1);
+    a->setEasingCurve(QEasingCurve::Linear);
+    a->start(QPropertyAnimation::DeleteWhenStopped);
+
+    // Also disable the container
+    container->setEnabled(false);
+
+    atp = new AuthenticationPopup();
+    atp->show();
+    atp->setFocus();
+}
+
+// Receives the authentication, as the authentication window only closes when authenticated
+void BotWindow::receiveAuthentication() {
+    // Fade in the container
+    auto *eff = new QGraphicsOpacityEffect(this);
+    container->setGraphicsEffect(eff);
+    QPropertyAnimation *a = new QPropertyAnimation(eff,"opacity");
+    a->setDuration(500);
+    a->setStartValue(0.1);
+    a->setEndValue(1);
+    a->setEasingCurve(QEasingCurve::Linear);
+    a->start(QPropertyAnimation::DeleteWhenStopped);
+
+    // Enable the container again
+    container->setEnabled(true);
 }
 
 // Slot which takes information from the new task window and builds a task

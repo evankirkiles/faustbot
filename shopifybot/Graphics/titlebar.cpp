@@ -27,7 +27,7 @@ DarkTitleBar::DarkTitleBar(QWidget *parent, bool p_moreInfo, bool p_refresh, boo
     setObjectName("titlebar");
 
     // Uses a horizontal box layout obviously
-    auto mainLayout = new QHBoxLayout(this);
+    mainLayout = new QHBoxLayout(this);
     mainLayout->setContentsMargins(5, 1, 5, 1);
     mainLayout->addWidget(closeWindow);
 

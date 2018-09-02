@@ -210,14 +210,14 @@ QComboBox QAbstractItemView {
     padding: 3px 3px 3px 3px;
     border-radius: 4px;
     border-style: solid;
-    max-height: 20px;
+    height: 20px;
 }
 #addtask_editbox_unchanged {
     font-size: 13px;
     padding: 3px 3px 3px 3px;
     border-radius: 4px;
     border-style: solid;
-    max-height: 20px;
+    height: 20px;
 }
 #task_title_lineedit {
     font-size: 15px;

@@ -81,12 +81,13 @@ private:
     // The actual title of the window as well as a pushbutton to close it
     QLabel* title;
 
-    // Buttons
-    ClickableImage* closeWindow;
-
 public:
     // Constructor that builds the title bar
     DarkTitleBar(QWidget* parent, bool moreInfo = false, bool refresh = false, bool clear = false);
+
+    QHBoxLayout* mainLayout;
+    // Buttons
+    ClickableImage* closeWindow;
     // Optional moreinfo button
     ClickableImage* moreInfoButton;
     // Optional refresh button

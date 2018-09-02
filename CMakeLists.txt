@@ -33,6 +33,7 @@ set(SHOPBOT_SRCS
         shopifybot/WebAccess/checkout.cpp
         shopifybot/WebAccess/proxychecker.cpp
         shopifybot/constants.cpp
+        shopifybot/Authentication/authentication.cpp
         shopifybot/Infrastructure/tasks.cpp
         shopifybot/Graphics/window.cpp
         shopifybot/Graphics/taskwidget.cpp
