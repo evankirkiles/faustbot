@@ -56,13 +56,14 @@ public:
                  const std::string& collection, const std::vector<std::string>& keywords,
                  const std::vector<std::string>& colorKeywords, const std::string& size, const QDateTime& startAt,
                  const std::string& profile, const std::string& proxy,
-                 unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ);
+                 unsigned int resultsToCheck=constants::BASE_NUMRESULTS, unsigned int frequency=constants::BASE_FREQ,
+                 int position = -1);
 
     // Adds a VID task to the list
     void addVIDTaskFunc(const std::string& title, const URLAndMethod& website, const std::string& identifier,
                         const std::string& variantID, const std::string& variantName, const std::string& variantSize,
                         const QDateTime& startAt, const std::string& profile, const std::string& proxy, QString imageURL,
-                        unsigned int frequency = constants::BASE_FREQ);
+                        unsigned int frequency = constants::BASE_FREQ, int position = -1);
 
     // Checks the authentication
     void checkAuthentication();
@@ -156,10 +157,10 @@ private slots:
     // Connects to the submit slot in the new task window, and adds a task with the given information
     void buildTask(QString title, URLAndMethod website, QString collection,
                    QString keywords, QString colorKeywords, QString size,
-                   QDateTime start, QString profile, QString proxy, int copies);
+                   QDateTime start, QString profile, QString proxy, int copies, int position);
     // Connects to the submit slot in the new VID task window, and adds a VID task with the given information
     void buildVIDTask(QString title, URLAndMethod website, QString variantID, QString variantName, QString variantSize,
-                      QDateTime start, QString profile, QString proxy, QString p_imageURL, int copies);
+                      QDateTime start, QString profile, QString proxy, QString p_imageURL, int copies, int position);
 };
 
 

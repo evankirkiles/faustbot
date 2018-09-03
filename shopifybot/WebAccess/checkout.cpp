@@ -359,19 +359,30 @@ void Checkout::run(const std::string& URL) {
         filein.open(QApplication::applicationDirPath().toStdString()
                                      .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str());
         inputs = 0;
-        while (getline(filein, authenticitytoken)) {
-            if (authenticitytoken.find("input") != std::string::npos) {
+        std::string temporarystring, paymentgateway;
+        bool oneValFound = false;
+        while (getline(filein, temporarystring)) {
+            if (temporarystring.find("authenticity_token") != std::string::npos) {
                 // If there is an input field in the line, check for auth token (should only be 4, we want the third)
-                const unsigned long authtokenPos = authenticitytoken.find(R"(name="authenticity_token" value=")");
+                const unsigned long authtokenPos = temporarystring.find(R"(name="authenticity_token" value=")");
                 if (authtokenPos != std::string::npos) {
                     inputs++;
                     // On the third authenticity token, save it to the string and then break the while loop
                     if (inputs == 3) {
+                        authenticitytoken = temporarystring;
                         authenticitytoken.erase(0, authtokenPos + 33);
                         authenticitytoken = authenticitytoken.substr(0, authenticitytoken.find('"'));
-                        break;
+                        if (oneValFound) { break; } else { oneValFound = true; }
                     }
                 }
+            }
+            // Also find credit card checkout payment gateway
+            const unsigned long paymentgatewayloc = temporarystring.find("checkout_payment_gateway_");
+            if (paymentgatewayloc != std::string::npos &&
+                temporarystring.find("Paypal") == std::string::npos) {
+                paymentgateway = temporarystring;
+                paymentgateway.erase(0, paymentgatewayloc + 25);
+                paymentgateway = paymentgateway.substr(0, paymentgateway.find('"'));
             }
         }
         log(std::string("Got authenticity token: ").append(authenticitytoken));
@@ -574,8 +585,6 @@ void Checkout::run(const std::string& URL) {
         // Set the timeout
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
 
-        // TODO: Parse through the file to get the total price and payment gateway
-
         std::string authpostfields =
                 std::string("utf8=%E2%9C%93") +
                 "&_method=patch" +
@@ -583,13 +592,13 @@ void Checkout::run(const std::string& URL) {
                 "&previous_step=payment_method" +
                 "&step=" +
                 "&s=" + curl_easy_escape(curl, s.c_str(), static_cast<int>(s.length())) +
-                "&checkout[payment_gateway]=128707719" +
+                "&checkout[payment_gateway]=" + + curl_easy_escape(curl, paymentgateway.c_str(), static_cast<int>(paymentgateway.length())) +
                 "&checkout[credit_card][vault]=false" +
                 "&checkout[different_billing_address]=false" +
                 "&checkout[remember_me]=false" +
                 "&checkout[remember_me]=0" +
                 "&checkout[vault_phone]=" + curl_easy_escape(curl, std::string("+").append(profile["phone"].toString().toStdString()).c_str(), static_cast<int>(profile["phone"].toString().toStdString().length()) + 1) +
-                "&checkout[total_price]=9000" +
+                "&checkout[total_price]=10" +
                 "&complete=1" +
                 "&checkout[client_details][browser_width]=2545" +
                 "&checkout[client_details][browser_height]=775" +
@@ -626,7 +635,7 @@ void Checkout::run(const std::string& URL) {
             curl_global_cleanup();
             return;
         } else {
-            log("Processing info is in the html body!");
+            log("Processing finished, check status in HTML body.");
 
             // Clean up curl instance
             curl_easy_cleanup(curl);

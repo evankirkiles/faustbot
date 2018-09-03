@@ -254,7 +254,7 @@ void BotWindow::receiveAuthentication() {
 // Slot which takes information from the new task window and builds a task
 void BotWindow::buildTask(QString title, URLAndMethod website, QString collection,
                           QString keywords, QString colorKeywords, QString size,
-                          QDateTime start, QString profile, QString proxy, int copies) {
+                          QDateTime start, QString profile, QString proxy, int copies, int position) {
 
     // Gets an identifier by checking how many task widgets there are on the tasklist
     // Make sure to break the keywords QStrings down into its component keywords
@@ -262,21 +262,22 @@ void BotWindow::buildTask(QString title, URLAndMethod website, QString collectio
     for (int i=0; i<copies; i++) {
         addTask(title.toStdString(), website, std::to_string(numTasksCreated), collection.toStdString(),
                 vectorFromString(keywords.toStdString()), vectorFromString(colorKeywords.toStdString()),
-                size.toStdString(), start, profile.toStdString(), proxy.toStdString());
+                size.toStdString(), start, profile.toStdString(), proxy.toStdString(), constants::BASE_NUMRESULTS,
+                constants::BASE_FREQ, position);
     }
 }
 
 // Slot which takes information from the new VID task window and builds necessary VID tasks
 void BotWindow::buildVIDTask(QString title, URLAndMethod website, QString variantID, QString variantName,
                              QString variantSize, QDateTime start, QString profile, QString proxy,
-                             QString p_imageURL, int copies) {
+                             QString p_imageURL, int copies, int position) {
 
     // Gets an identifier by checking how many task widgets there are on the tasklist
     // Builds a task based on the number of copies sent
     for (int i = 0; i < copies; i++) {
         addVIDTaskFunc(title.toStdString(), website, std::to_string(numTasksCreated), variantID.toStdString(),
                        variantName.toStdString(), variantSize.toStdString(), start, profile.toStdString(),
-                       proxy.toStdString(), p_imageURL);
+                       proxy.toStdString(), p_imageURL, constants::BASE_FREQ, position);
     }
 }
 
@@ -285,7 +286,7 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
                         const std::string &collection, const std::vector<std::string> &keywords,
                         const std::vector<std::string> &colorKeywords, const std::string &size,
                         const QDateTime& startAt, const std::string& profile, const std::string& proxy,
-                        unsigned int resultsToCheck, unsigned int frequency) {
+                        unsigned int resultsToCheck, unsigned int frequency, int position) {
 
     // Increment the task identifier
     numTasksCreated++;
@@ -308,11 +309,18 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
     connect(newtask->duplicateButton, &ClickableImage::clicked, [this, newtask] () {
         buildTask(newtask->title->text(), newtask->task->swh.sourceURL, newtask->task->collection.c_str(),
                   stringFromVector(newtask->task->keywords).c_str(), stringFromVector(newtask->task->colorKeywords).c_str(),
-                  newtask->task->size.c_str(), newtask->task->startat, newtask->task->profile.c_str(), newtask->task->proxy.c_str(), 1);
+                  newtask->task->size.c_str(), newtask->task->startat, newtask->task->profile.c_str(), newtask->task->proxy.c_str(),
+                  1, tasklistLayout->indexOf(newtask) + 1);
     });
 
-    // Adds the task to the qvboxlayout
-    tasklistLayout->addWidget(newtask);
+
+    // If the position is set, then insert the widget at that position
+    if (position > 0) {
+        tasklistLayout->insertWidget(position, newtask);
+    } else {
+        // Adds the task to the qvboxlayout
+        tasklistLayout->addWidget(newtask);
+    }
     // Show the new task
     newtask->show();
 }
@@ -321,7 +329,7 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
 void BotWindow::addVIDTaskFunc(const std::string &title, const URLAndMethod &website, const std::string &identifier,
                                const std::string &variantID, const std::string &variantName,
                                const std::string &variantSize, const QDateTime &startAt, const std::string &profile,
-                               const std::string &proxy, QString p_imageURL, unsigned int frequency) {
+                               const std::string &proxy, QString p_imageURL, unsigned int frequency, int position) {
 
     // Increment the task identifier
     numTasksCreated++;
@@ -344,11 +352,16 @@ void BotWindow::addVIDTaskFunc(const std::string &title, const URLAndMethod &web
         buildVIDTask(newtask->title->text(), newtask->task->swh.sourceURL, newtask->task->variantID.c_str(),
                      newtask->variantName->toPlainText(), newtask->variantSize->text(),
                      newtask->task->startat, newtask->task->profile.c_str(), newtask->task->proxy.c_str(),
-                     newtask->imageURL, 1);
+                     newtask->imageURL, 1, tasklistLayout->indexOf(newtask) + 1);
     });
 
-    // Add the task to the qvboxlayout
-    tasklistLayout->addWidget(newtask);
+    // If the position is set, then insert the widget at that position
+    if (position > 0) {
+        tasklistLayout->insertWidget(position, newtask);
+    } else {
+        // Adds the task to the qvboxlayout
+        tasklistLayout->addWidget(newtask);
+    }
     // Show the new task
     newtask->show();
 
@@ -439,8 +452,8 @@ void BotWindow::openNewTask() {
     // Make necessary connections
     connect(atd, &AddTaskDisplay::closed, [this] () { addTaskOpen = false; });
     // Connect the buildtask symbol to the addtask slot of the mainwindow
-    connect(atd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString, int)),
-            this, SLOT(buildTask(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString, int)));
+    connect(atd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString, int, int)),
+            this, SLOT(buildTask(QString, URLAndMethod, QString, QString, QString, QString, QDateTime, QString, QString, int, int)));
 }
 
 // Opens the add VID task window
@@ -463,8 +476,8 @@ void BotWindow::openNewVIDTask() {
     // Make necessary connections
     connect(avidtd, &AddVIDTaskDisplay::closed, [this] () { addVIDTaskOpen = false; });
     // Connect the buildtask symbol to the addtask slot of the mainwindow
-    connect(avidtd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, int)),
-            this, SLOT(buildVIDTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, int)));
+    connect(avidtd, SIGNAL(sendTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, int, int)),
+            this, SLOT(buildVIDTask(QString, URLAndMethod, QString, QString, QString, QDateTime, QString, QString, QString, int, int)));
 }
 
 // Opens the parser window

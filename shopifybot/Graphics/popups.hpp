@@ -145,7 +145,7 @@ signals:
     // Sends the information of the new task to the main window to add it
     void sendTask(QString title, URLAndMethod website, QString collection,
                   QString keywords, QString colorKeywords, QString size,
-                  QDateTime start, QString profile, QString proxy, int numCopies);
+                  QDateTime start, QString profile, QString proxy, int numCopies, int position = -1);
 private slots:
     // Tries to send the information in the form to the main window to add it to the task list
     // If not all required fields are filled, then does not send the form yet.
@@ -219,7 +219,7 @@ signals:
     // Sends the information of the new task to the main window to add it
     void sendTask(QString title, URLAndMethod website, QString variantID,
                   QString variantName, QString variantSize, QDateTime start, QString profile,
-                  QString proxy, QString imageURL, int numCopies);
+                  QString proxy, QString imageURL, int numCopies, int position = -1);
 private slots:
     // Tries to send the information in the form to the main window to add it to the task list
     // If not all required fields are filled, then does not send the form yet.
