@@ -120,6 +120,8 @@ namespace file_paths {
     extern const char* TEMPPROXIES_TXT;
     extern const char* COOKIES_TXT;
 
+    extern const char* TASKS_CACHE;
+
     // Image locations
     extern const char* LOGO_FILE;
     extern const char* PLAY_IMG;
@@ -158,6 +160,8 @@ namespace file_paths {
     extern const char* REFRESHICON2_IMG;
     extern const char* DEFAULTTHUMB_IMG;
     extern const char* GEAR_IMG;
+    extern const char* DOWNLOAD_IMG;
+    extern const char* UPLOAD_IMG;
 }
 
 namespace constants {

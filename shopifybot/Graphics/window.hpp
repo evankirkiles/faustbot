@@ -69,13 +69,15 @@ public:
 signals:
     // Emitted every time the qtimer timesout
     void timeUpdated(QDateTime time);
-
+    // Emitted to delete all the tasks
+    void deleteAllTasks();
 public slots:
     // Tells the window that the application is not authorized
     void receiveAuthentication();
     // Builds the Authentication window
     void buildAuthWindow();
-
+    // Loads in the tasks from the tasks file
+    void loadInSavedTasks();
 private:
 
     // Dark title bar widget
@@ -116,6 +118,8 @@ private:
     QPushButton *billing;
     QPushButton *proxies;
     QPushButton *clear;
+    QPushButton *saveTasks;
+    QPushButton *loadTasks;
     QPushButton *settings;
     SettingsDisplay *settingsDisp;
     QLabel *copyrightLabel;

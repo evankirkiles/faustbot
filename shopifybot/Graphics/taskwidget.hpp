@@ -201,6 +201,8 @@ signals:
 public slots:
     // Run every time the main window's QTimer updates
     void checkTime(QDateTime time);
+    // Writes the task to the saved file as a JSON object
+    void saveToFile();
 private slots:
     // Runs the task, performed when user clicks the play button
     void run();
@@ -287,6 +289,8 @@ signals:
 public slots:
     // Run every time the main window's QTimer updates
     void checkTime(QDateTime time);
+    // Writes the task to the saved file as a JSON object
+    void saveToFile();
 private slots:
     // Runs the task, performed when user clicks the play button
     void run();

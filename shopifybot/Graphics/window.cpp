@@ -105,13 +105,27 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     clear = new QPushButton("Clear", container);
     clear->setObjectName("sidebuttons");
     clear->setStyleSheet("margin-top: 0px; margin-bottom: 0px;");
+    saveTasks = new QPushButton(container);
+    saveTasks->setObjectName("sidebuttons");
+    saveTasks->setFixedSize(32, 30);
+    saveTasks->setIcon(QIcon(file_paths::UPLOAD_IMG));
+    saveTasks->setStyleSheet("margin-top: 0px; margin-bottom: 0px;");
+    loadTasks = new QPushButton(container);
+    loadTasks->setObjectName("sidebuttons");
+    loadTasks->setFixedSize(32, 30);
+    loadTasks->setIcon(QIcon(file_paths::DOWNLOAD_IMG));
+    loadTasks->setStyleSheet("margin-top: 0px; margin-bottom: 0px;");
     settings = new QPushButton(container);
     settings->setObjectName("sidebuttons");
     settings->setFixedSize(32, 30);
     settings->setIcon(QIcon(file_paths::GEAR_IMG));
     settings->setStyleSheet("margin-top: 0px; margin-bottom: 0px;");
     bottomHorLayout->addWidget(clear);
-    bottomHorLayout->addSpacing(10);
+    bottomHorLayout->addSpacing(5);
+    bottomHorLayout->addWidget(saveTasks);
+    bottomHorLayout->addSpacing(5);
+    bottomHorLayout->addWidget(loadTasks);
+    bottomHorLayout->addSpacing(5);
     bottomHorLayout->addWidget(settings);
     copyrightLabel = new QLabel("© 2018 Faust BOT - All Rights Reserved", container);
     copyrightLabel->setObjectName("copyrightlabel");
@@ -172,12 +186,19 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     connect(proxies, SIGNAL(clicked()), this, SLOT(openProxies()));
     // Open the settings window when the settings button is clicked
     connect(settings, SIGNAL(clicked()), this, SLOT(openSettings()));
+    // Connect the task loader to its button
+    connect(loadTasks, SIGNAL(clicked()), this, SLOT(loadInSavedTasks()));
+    // Make the clear button emit the delete all tasks
+    connect(clear, &QPushButton::clicked, [this] () { emit deleteAllTasks(); });
+    // Clear the tasks cache file when you download
+    connect(saveTasks, &QPushButton::clicked, [this] () { std::remove(QApplication::applicationDirPath().append(file_paths::TASKS_CACHE).toStdString().c_str()); });
 
     // Build the timer updated on second intervals
     timeChecker = new QTimer(container);
     connect(timeChecker, &QTimer::timeout, [this] () { emit timeUpdated(QDateTime::currentDateTime()); } );
     timeChecker->setInterval(1000);
     timeChecker->start();
+
 
     // Check the authentication of the window
     checkAuthentication();
@@ -278,9 +299,11 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
     // Connect the signals of the window to this new task's start and stop
     connect(startAllTasks, SIGNAL(clicked()), newtask, SLOT(run()));
     connect(stopAllTasks, SIGNAL(clicked()), newtask, SLOT(stopWidget()));
+    connect(saveTasks, SIGNAL(clicked()), newtask, SLOT(saveToFile()));
 
     // Connect the 1 second interval timer to the taskwidget's time check function
     connect(this, SIGNAL(timeUpdated(QDateTime)), newtask, SLOT(checkTime(QDateTime)));
+    connect(this, SIGNAL(deleteAllTasks()), newtask, SLOT(exit()));
 
     // Adds the task to the qvboxlayout
     tasklistLayout->addWidget(newtask);
@@ -288,7 +311,7 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
     newtask->show();
 }
 
-// Creates a tasl and adds it to the tasklist
+// Creates a task and adds it to the tasklist
 void BotWindow::addVIDTaskFunc(const std::string &title, const URLAndMethod &website, const std::string &identifier,
                                const std::string &variantID, const std::string &variantName,
                                const std::string &variantSize, const QDateTime &startAt, const std::string &profile,
@@ -301,15 +324,82 @@ void BotWindow::addVIDTaskFunc(const std::string &title, const URLAndMethod &web
     // Connect the signals of the window to this new task's start and stop
     connect(startAllTasks, SIGNAL(clicked()), newtask, SLOT(run()));
     connect(stopAllTasks, SIGNAL(clicked()), newtask, SLOT(stopWidget()));
+    connect(saveTasks, SIGNAL(clicked()), newtask, SLOT(saveToFile()));
 
     // Connect the 1 second interval timer to the taskwidget's time check function
     connect(this, SIGNAL(timeUpdated(QDateTime)), newtask, SLOT(checkTime(QDateTime)));
+    connect(this, SIGNAL(deleteAllTasks()), newtask, SLOT(exit()));
 
     // Add the task to the qvboxlayout
     tasklistLayout->addWidget(newtask);
     // Show the new task
     newtask->show();
 
+}
+
+// Loads in the saved tasks from the tasks cache
+void BotWindow::loadInSavedTasks() {
+
+    // Clear all the tasks
+    emit deleteAllTasks();
+
+    // Open up the saved tasks file
+    std::ifstream filein(QApplication::applicationDirPath().append(file_paths::TASKS_CACHE).toStdString().c_str());
+    std::string str;
+
+    // Now parse through the file and add each saved task
+    while(getline(filein, str)) {
+        // Do not consider empty lines
+        if (str.empty()) { continue; }
+
+        // The first 3 letters of the line denote what type of task is being added
+        if (str.substr(0, 3) == "KWD") {
+            str.erase(0, 4);
+
+            // Get the title
+            const unsigned long delimPos = str.find(" :-: ");
+            std::string title = str.substr(0, delimPos);
+            str.erase(0, delimPos + 5);
+
+            // Now build a JSON object of the rest of the task
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(str.c_str()).toUtf8());
+            QJsonObject jsonObjecc = jsonDoc.object();
+
+            // Build the task from the JSON
+            addTask(title, supported_sites::WEBSITES.at(supported_sites::WEBSITES_BWD.at(jsonObjecc["website"].toString().toStdString())),
+                    jsonObjecc["identifier"].toString().toStdString(), jsonObjecc["collection"].toString().toStdString(),
+                    vectorFromString(jsonObjecc["keywords"].toString().toStdString()),
+                    vectorFromString(jsonObjecc["colorKeywords"].toString().toStdString()),
+                    jsonObjecc["size"].toString().toStdString(),
+                    QDateTime::fromSecsSinceEpoch(stoi(jsonObjecc["startat"].toString().toStdString())),
+                    jsonObjecc["profile"].toString().toStdString(),
+                    jsonObjecc["proxy"].toString().toStdString(), constants::BASE_NUMRESULTS,
+                    stoi(jsonObjecc["frequency"].toString().toStdString()));
+        } else if (str.substr(0, 3) == "VID") {
+            str.erase(0, 4);
+
+            // Get the title
+            const unsigned long delimPos = str.find(" :-: ");
+            std::string title = str.substr(0, delimPos);
+            str.erase(0, delimPos + 5);
+
+            // Now build a JSON object of the rest of the task
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(QString(str.c_str()).toUtf8());
+            QJsonObject jsonObjecc = jsonDoc.object();
+
+            // Build the task from the JSON
+            addVIDTaskFunc(title, supported_sites::WEBSITES.at(supported_sites::WEBSITES_BWD.at(jsonObjecc["website"].toString().toStdString())),
+                           jsonObjecc["identifier"].toString().toStdString(),
+                           jsonObjecc["variantID"].toString().toStdString(),
+                           jsonObjecc["prodTitle"].toString().toStdString(),
+                           jsonObjecc["variantSize"].toString().toStdString(),
+                           QDateTime::fromSecsSinceEpoch(stoi(jsonObjecc["startat"].toString().toStdString())),
+                           jsonObjecc["profile"].toString().toStdString(),
+                           jsonObjecc["proxy"].toString().toStdString(),
+                           jsonObjecc["variantImg"].toString(),
+                           stoi(jsonObjecc["frequency"].toString().toStdString()));
+        }
+    }
 }
 
 // Opens the add task window

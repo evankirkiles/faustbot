@@ -88,6 +88,8 @@ namespace file_paths {
     const char* TEMPPROXIES_TXT = "/../Resources/Vault/tempproxies.txt";
     const char* COOKIES_TXT = "/../Resources/Contents/CookieJar/cookies.txt";
 
+    const char* TASKS_CACHE = "/../Resources/Vault/taskscache.txt";
+
     // Images
     const char* LOGO_FILE = ":Assets/logo.png";
     const char* PLAY_IMG = ":Assets/play.png";
@@ -125,6 +127,8 @@ namespace file_paths {
     const char* REFRESHICON2_IMG = ":Assets/refreshicon2.png";
     const char* DEFAULTTHUMB_IMG = ":Assets/defaultthumb.png";
     const char* GEAR_IMG = ":Assets/gear.png";
+    const char* DOWNLOAD_IMG = ":Assets/downloadimg.png";
+    const char* UPLOAD_IMG = ":Assets/uploadimg.png";
 }
 
 namespace constants {

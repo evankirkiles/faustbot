@@ -180,6 +180,29 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     connect(edit, SIGNAL(clicked()), this, SLOT(showEdit()));
 }
 
+// Writes the task to a json file to allow for task loading/saving
+// Format of task is:
+// {VID | KWD} {TITLE} :-: {"website":"{WEBSITE}","identifier":"{IDENTIFIER}","collection":"{COLLECTION}",
+// "keywords":"{KEYWORDS}","colorKeywords":"{COLORKEYWORDS}","size":"{SIZE}","startat":"{STARTAT}","profile":"{PROFILE}",
+// "proxy":"{PROXY}","frequency":"{FREQUENCY}"}
+void TaskWidget::saveToFile() {
+
+    // Open the file and write the task to it
+    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::TASKS_CACHE).toStdString().c_str(), std::ios::out | std::ios::app);
+    fileout << "KWD " << title->text().toStdString() <<
+            " :-: {\"website\":\"" << task->swh.sourceURL.baseURL <<
+            "\",\"identifier\":\"" << identifier->text().toStdString() <<
+            "\",\"collection\":\"" << collection->text().toStdString() <<
+            "\",\"keywords\":\"" << keywords->toPlainText().toStdString() <<
+            "\",\"colorKeywords\":\"" << colorKeywords->toPlainText().toStdString() <<
+            "\",\"size\":\"" << size->text().toStdString() <<
+            "\",\"startat\":\"" << startAt->dateTime().toSecsSinceEpoch() <<
+            "\",\"profile\":\"" << task->profile <<
+            "\",\"proxy\":\"" << task->proxy <<
+            "\",\"frequency\":\"" << std::to_string(task->frequency) << "\"}\n";
+    fileout.close();
+}
+
 // Tells the event loop to run the task
 void TaskWidget::run() {
 
@@ -221,6 +244,8 @@ void TaskWidget::run() {
     // Begin the thread!
     taskthread->start();
 }
+
+// Saves t
 
 // Checks the time against the taskwidget's start time. If there is a match (or if early by a second), then run the task.
 void TaskWidget::checkTime(QDateTime time) {
@@ -534,6 +559,25 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
 
     // Load the image
     loadImage();
+}
+
+// Writes the VID task to the saved task cache
+void VIDTaskWidget::saveToFile() {
+
+    // Open the file and write the task to it
+    std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::TASKS_CACHE).toStdString().c_str(), std::ios::out | std::ios::app);
+    fileout << "VID " << title->text().toStdString() <<
+            " :-: {\"website\":\"" << task->swh.sourceURL.baseURL <<
+            "\",\"identifier\":\"" << identifier->text().toStdString() <<
+            "\",\"variantID\":\"" << variantId->text().toStdString() <<
+            "\",\"prodTitle\":\"" << variantName->toPlainText().toStdString() <<
+            "\",\"variantImg\":\"" << imageURL.toStdString() <<
+            "\",\"variantSize\":\"" << variantSize->text().toStdString() <<
+            "\",\"startat\":\"" << startAt->dateTime().toSecsSinceEpoch() <<
+            "\",\"profile\":\"" << task->profile <<
+            "\",\"proxy\":\"" << task->proxy <<
+            "\",\"frequency\":\"" << std::to_string(task->frequency) << "\"}\n";
+    fileout.close();
 }
 
 // Tells the event loop to run the task
