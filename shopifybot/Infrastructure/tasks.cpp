@@ -137,6 +137,18 @@ std::vector<std::string> vectorFromString(const std::string& interpret) {
     return toReturn;
 }
 
+// Function which interprets a vector int a string form
+std::string stringFromVector(const std::vector<std::string>& interpret) {
+
+    // Create a string to return and write into it from the vector
+    std::string toReturn;
+    for (const std::string& i : interpret) {
+        toReturn.append(i).append(", ");
+    }
+
+    return toReturn;
+}
+
 // MARK: VARIANT ID TASK
 // Task which runs given a single variant ID, which is continuously checked whether or not it is available.
 // Constructor that simply initializes all the instance variables to be used

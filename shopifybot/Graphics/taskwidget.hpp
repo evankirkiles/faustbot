@@ -194,10 +194,15 @@ public:
     // Title label, public so edit task can access it
     QLabel* title;
 
+    // Duplicate clickable image
+    ClickableImage* duplicateButton;
+
+    // Actual task instance
+    Task* task;
+
 signals:
     // Emitted to the running task to tell it to stop
     void stopTask();
-
 public slots:
     // Run every time the main window's QTimer updates
     void checkTime(QDateTime time);
@@ -230,9 +235,6 @@ private:
 
     // Frequency of the task
     unsigned int taskfreq;
-
-    // Actual task instance
-    Task* task;
 
     // Thread for copied task
     QThread* taskthread;
@@ -283,6 +285,15 @@ public:
     // Title label, public so edit task can access it
     QLabel* title;
 
+    // Duplicate clickable image
+    ClickableImage* duplicateButton;
+
+    // Variant task ID instance
+    VariantIDTask* task;
+    QTextEdit* variantName;
+    QLabel* variantSize;
+    QString imageURL;
+
 signals:
     // Emitted to the running task to tell it to stop
     void stopTask();
@@ -319,15 +330,11 @@ private:
     bool deleted = false;
 
     // Store information about the thumbnail image
-    QString imageURL;
     QPixmap thumbnail;
     QPixmap defaultThumbnail;
 
     // Frequency of the while loop
     unsigned int taskfreq;
-
-    // Variant task ID instance
-    VariantIDTask* task;
 
     // Thread for copied task
     QThread* taskthread;
@@ -345,8 +352,6 @@ private:
     QLabel* variantId;
     QFrame* separator1;
     QLabel* thumbnailImg;
-    QTextEdit* variantName;
-    QLabel* variantSize;
     QDateTimeEdit* startAt;
     QFrame* separator2;
 

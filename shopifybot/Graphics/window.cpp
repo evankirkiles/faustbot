@@ -263,8 +263,6 @@ void BotWindow::buildTask(QString title, URLAndMethod website, QString collectio
         addTask(title.toStdString(), website, std::to_string(numTasksCreated), collection.toStdString(),
                 vectorFromString(keywords.toStdString()), vectorFromString(colorKeywords.toStdString()),
                 size.toStdString(), start, profile.toStdString(), proxy.toStdString());
-        // Increment the task identifier
-        numTasksCreated++;
     }
 }
 
@@ -279,8 +277,6 @@ void BotWindow::buildVIDTask(QString title, URLAndMethod website, QString varian
         addVIDTaskFunc(title.toStdString(), website, std::to_string(numTasksCreated), variantID.toStdString(),
                        variantName.toStdString(), variantSize.toStdString(), start, profile.toStdString(),
                        proxy.toStdString(), p_imageURL);
-        // Increment the task identifier
-        numTasksCreated++;
     }
 }
 
@@ -290,6 +286,9 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
                         const std::vector<std::string> &colorKeywords, const std::string &size,
                         const QDateTime& startAt, const std::string& profile, const std::string& proxy,
                         unsigned int resultsToCheck, unsigned int frequency) {
+
+    // Increment the task identifier
+    numTasksCreated++;
 
     // Create a new task
     auto newtask = new TaskWidget(title, website, identifier, collection, keywords, colorKeywords, size,
@@ -305,6 +304,13 @@ void BotWindow::addTask(const std::string &title, const URLAndMethod &website, c
     connect(this, SIGNAL(timeUpdated(QDateTime)), newtask, SLOT(checkTime(QDateTime)));
     connect(this, SIGNAL(deleteAllTasks()), newtask, SLOT(exit()));
 
+    // Connect the button's duplicate button to building the same task
+    connect(newtask->duplicateButton, &ClickableImage::clicked, [this, newtask] () {
+        buildTask(newtask->title->text(), newtask->task->swh.sourceURL, newtask->task->collection.c_str(),
+                  stringFromVector(newtask->task->keywords).c_str(), stringFromVector(newtask->task->colorKeywords).c_str(),
+                  newtask->task->size.c_str(), newtask->task->startat, newtask->task->profile.c_str(), newtask->task->proxy.c_str(), 1);
+    });
+
     // Adds the task to the qvboxlayout
     tasklistLayout->addWidget(newtask);
     // Show the new task
@@ -316,6 +322,9 @@ void BotWindow::addVIDTaskFunc(const std::string &title, const URLAndMethod &web
                                const std::string &variantID, const std::string &variantName,
                                const std::string &variantSize, const QDateTime &startAt, const std::string &profile,
                                const std::string &proxy, QString p_imageURL, unsigned int frequency) {
+
+    // Increment the task identifier
+    numTasksCreated++;
 
     // Create a new task
     auto newtask = new VIDTaskWidget(title, website, identifier, variantID, profile, proxy, startAt, variantName,
@@ -329,6 +338,14 @@ void BotWindow::addVIDTaskFunc(const std::string &title, const URLAndMethod &web
     // Connect the 1 second interval timer to the taskwidget's time check function
     connect(this, SIGNAL(timeUpdated(QDateTime)), newtask, SLOT(checkTime(QDateTime)));
     connect(this, SIGNAL(deleteAllTasks()), newtask, SLOT(exit()));
+
+    // Connect the button's duplicate button to building the same task
+    connect(newtask->duplicateButton, &ClickableImage::clicked, [this, newtask] () {
+        buildVIDTask(newtask->title->text(), newtask->task->swh.sourceURL, newtask->task->variantID.c_str(),
+                     newtask->variantName->toPlainText(), newtask->variantSize->text(),
+                     newtask->task->startat, newtask->task->profile.c_str(), newtask->task->proxy.c_str(),
+                     newtask->imageURL, 1);
+    });
 
     // Add the task to the qvboxlayout
     tasklistLayout->addWidget(newtask);

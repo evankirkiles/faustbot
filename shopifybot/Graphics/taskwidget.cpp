@@ -96,6 +96,9 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     sizeHor->addWidget(sizetitle);
     sizeHor->addWidget(size);
     auto statusHor = new QHBoxLayout();
+    auto functionalVert = new QVBoxLayout;
+    functionalVert->setContentsMargins(0, 0, 0, 0);
+    functionalVert->setAlignment(Qt::AlignCenter);
 
     // Separator line between identifier and first column
     separator0 = new QFrame(this);
@@ -138,6 +141,11 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
 
     // Delete button
     deleteButton = new ClickableImage(60, 60, 4, file_paths::DELETE2_IMG, file_paths::DELETE_IMG, this);
+    // Duplicate button
+    duplicateButton = new ClickableImage(60, 60, 4, file_paths::DUPLICATE2_IMG, file_paths::DUPLICATE_IMG, this);
+    functionalVert->addWidget(deleteButton);
+    functionalVert->addSpacing(10);
+    functionalVert->addWidget(duplicateButton);
 
     // Add the labels and layouts to the main row
     zerocol->addWidget(identifier);
@@ -163,7 +171,7 @@ TaskWidget::TaskWidget(const std::string& p_title, const URLAndMethod& p_website
     fifthcol->addLayout(statusHor);
     fifthcol->addWidget(status);
     row->addLayout(fifthcol);
-    row->addWidget(deleteButton);
+    row->addLayout(functionalVert);
 
     // Set the qframe's layout to the row
     setLayout(row);
@@ -473,6 +481,9 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     sizeLayout->addWidget(sizeLabel);
     sizeLayout->addWidget(variantSize);
     auto statusHor = new QHBoxLayout();
+    auto functionalVert = new QVBoxLayout;
+    functionalVert->setContentsMargins(0, 0, 0, 0);
+    functionalVert->setAlignment(Qt::AlignCenter);
 
     // Separator line between identifier and first column
     separator0 = new QFrame(this);
@@ -515,6 +526,11 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
 
     // Delete button
     deleteButton = new ClickableImage(60, 60, 4, file_paths::DELETE2_IMG, file_paths::DELETE_IMG, this);
+    // Duplicate button
+    duplicateButton = new ClickableImage(60, 60, 4, file_paths::DUPLICATE2_IMG, file_paths::DUPLICATE_IMG, this);
+    functionalVert->addWidget(deleteButton);
+    functionalVert->addSpacing(10);
+    functionalVert->addWidget(duplicateButton);
 
     // Add the labels and layouts to the main row
     zerocol->addWidget(identifier);
@@ -541,7 +557,7 @@ VIDTaskWidget::VIDTaskWidget(const std::string &p_title, const URLAndMethod &p_w
     fifthcol->addLayout(statusHor);
     fifthcol->addWidget(status);
     row->addLayout(fifthcol);
-    row->addWidget(deleteButton);
+    row->addLayout(functionalVert);
 
     // Set the qframe's layout to the row
     setLayout(row);
