@@ -26,6 +26,5 @@ int main(int argc, char **argv) {
     // Run the application
     app.exec();
 
-
     return 0;
 }

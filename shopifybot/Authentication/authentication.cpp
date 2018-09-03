@@ -192,12 +192,9 @@ void AuthenticationPopup::fadePage(QWidget *which, bool inOrOut) {
 // Checks the database at the given authentication token to see if a machine is already registered under that ID
 void AuthenticationPopup::checkAuthAvailability() {
 
-    // TODO: Write a function to get the special, unique computer hash which is put into a global string
-    std::string hashcode = "asdsadgysahuidjhuaskijaukhsugsjfdhdhiqfw8digu";
-
     // Get the text from the QLineEdit
     std::string authTokenString = authToken->text().toStdString();
-    authTokenString.erase (std::remove (authTokenString.begin(), authTokenString.end(), '\''), authTokenString.end());
+    authTokenString.erase(std::remove (authTokenString.begin(), authTokenString.end(), '\''), authTokenString.end());
 
     // Now set up connection to MySQL database
     bool ok = db.open();
@@ -214,7 +211,7 @@ void AuthenticationPopup::checkAuthAvailability() {
             if (query.value(0).toString().toStdString().empty()) {
                 // If it is not, then set it
                 query.clear();
-                query.exec(std::string("UPDATE auth SET machine_hash = '").append(hashcode).append("' WHERE auth_token='").append(authTokenString).append("'").c_str());
+                query.exec(std::string("UPDATE auth SET machine_hash = '").append(Address::getSystemUniqueId()).append("' WHERE auth_token='").append(authTokenString).append("'").c_str());
 
                 // Write the authentication token to the authentication file location
                 std::ofstream fileout(QApplication::applicationDirPath().append(file_paths::AUTHENTICATION).toStdString().c_str(), std::ios::out | std::ios::trunc);
@@ -231,7 +228,7 @@ void AuthenticationPopup::checkAuthAvailability() {
                 return;
             } else {
                 // If it is, then check if the hash code matches the computer's hash code
-                if (query.value(0).toString().toStdString() == hashcode) {
+                if (Address::validate(query.value(0).toString().toStdString())) {
                     authStatus->setText("Authentication token matched!");
 
                     // Write the given authentication token to the authentication file
@@ -260,9 +257,6 @@ void AuthenticationPopup::checkAuthAvailability() {
 // Tries to authenticate the computer
 void AuthenticationPopup::authenticate(const std::string& authTokenString) {
 
-    // Local instance of machine hash string (will be empty)
-    std::string hashcode = "asdsadgysahuidjhuaskijaukhsugsjfdhdhiqfw8digu";
-
     // Ensure connection to auth server
     bool ok = db.open();
 
@@ -274,11 +268,9 @@ void AuthenticationPopup::authenticate(const std::string& authTokenString) {
         QSqlQuery query;
         query.exec(std::string("SELECT machine_hash FROM auth WHERE auth_token = '").append(authTokenString).append("'").c_str());
         if (query.next()) {
-            // If there is a result returned from the select, then use its machine_hash
-            std::string machine_hash = query.value(0).toString().toStdString();
 
             // Now compare the current hash code against the database's stored hash code for the given ID
-            if (machine_hash == hashcode) {
+            if (Address::validate(query.value(0).toString().toStdString())) {
                 // If they are equal, then the app is authenticated
                 // Close the connection to the SQL database
                 db.close();

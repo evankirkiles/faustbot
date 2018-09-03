@@ -41,6 +41,8 @@
 #include "Graphics/customwidgets.hpp"
 // Also the dark title bar
 #include "Graphics/titlebar.hpp"
+// Also the address generator
+#include "Authentication/addressgenerator.hpp"
 
 // The QGraphicsEffect to put over the window
 class DarkenEffect : public QGraphicsEffect {
