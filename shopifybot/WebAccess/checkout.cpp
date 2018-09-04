@@ -22,7 +22,8 @@ void Checkout::log(const std::string &message) {
 
 // Builds the checkout object's instance variables
 Checkout::Checkout(const std::string &p_cartLink, const std::string &p_logFileLocation,
-                   const std::string &p_profile, const std::string &p_proxy, const std::string &p_identifier) :
+                   const std::string &p_profile, const std::string &p_proxy,
+                   const std::string &p_identifier) :
         cartLink(p_cartLink), logFileLocation(p_logFileLocation), identifier(p_identifier) {
 
     std::ifstream filein;
@@ -359,10 +360,11 @@ void Checkout::run(const std::string& URL) {
         filein.open(QApplication::applicationDirPath().toStdString()
                                      .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str());
         inputs = 0;
-        std::string temporarystring, paymentgateway;
-        bool oneValFound = false;
+        std::string temporarystring, shippingmethod;
+        bool authtokenFound = false;
+        bool shippingMethodfound = false;
         while (getline(filein, temporarystring)) {
-            if (temporarystring.find("authenticity_token") != std::string::npos) {
+            if (!authtokenFound && temporarystring.find("authenticity_token") != std::string::npos) {
                 // If there is an input field in the line, check for auth token (should only be 4, we want the third)
                 const unsigned long authtokenPos = temporarystring.find(R"(name="authenticity_token" value=")");
                 if (authtokenPos != std::string::npos) {
@@ -372,17 +374,20 @@ void Checkout::run(const std::string& URL) {
                         authenticitytoken = temporarystring;
                         authenticitytoken.erase(0, authtokenPos + 33);
                         authenticitytoken = authenticitytoken.substr(0, authenticitytoken.find('"'));
-                        if (oneValFound) { break; } else { oneValFound = true; }
+                        if (!shippingMethodfound) { break; } else { authtokenFound = true; }
                     }
                 }
             }
-            // Also find credit card checkout payment gateway
-            const unsigned long paymentgatewayloc = temporarystring.find("checkout_payment_gateway_");
-            if (paymentgatewayloc != std::string::npos &&
-                temporarystring.find("Paypal") == std::string::npos) {
-                paymentgateway = temporarystring;
-                paymentgateway.erase(0, paymentgatewayloc + 25);
-                paymentgateway = paymentgateway.substr(0, paymentgateway.find('"'));
+            // Get the shipping method
+            if (!shippingMethodfound && temporarystring.find("checkout_shipping_rate") != std::string::npos) {
+                // If there is a value to the line, retrieve it
+                const unsigned long shippingRatePos = temporarystring.find("value");
+                if (shippingRatePos != std::string::npos) {
+                    shippingmethod = temporarystring;
+                    shippingmethod.erase(0, shippingRatePos + 7);
+                    shippingmethod = shippingmethod.substr(0, shippingmethod.find('"'));
+                    if (!authtokenFound) { break; } else { shippingMethodfound = true; }
+                }
             }
         }
         log(std::string("Got authenticity token: ").append(authenticitytoken));
@@ -420,7 +425,7 @@ void Checkout::run(const std::string& URL) {
                 "&authenticity_token=" + curl_easy_escape(curl, authenticitytoken.c_str(), static_cast<int>(authenticitytoken.length())) +
                 "&previous_step=shipping_method" +
                 "&button=" +
-                "&checkout[shipping_rate][id]=shopify-UPS%2520GROUND%2520%285-7%2520business%2520days%29-10.00" +
+                "&checkout[shipping_rate][id]=" + curl_easy_escape(curl, shippingmethod.c_str(), static_cast<int>(shippingmethod.length())) +
                 "&checkout[client_details][browser_width]=2560" +
                 "&checkout[client_details][browser_height]=775" +
                 "&checkout[client_details][javascript_enabled]=1" +
@@ -592,7 +597,7 @@ void Checkout::run(const std::string& URL) {
                 "&previous_step=payment_method" +
                 "&step=" +
                 "&s=" + curl_easy_escape(curl, s.c_str(), static_cast<int>(s.length())) +
-                "&checkout[payment_gateway]=" + + curl_easy_escape(curl, paymentgateway.c_str(), static_cast<int>(paymentgateway.length())) +
+                "&checkout[payment_gateway]=" + curl_easy_escape(curl, paymentgateway.c_str(), static_cast<int>(paymentgateway.length())) +
                 "&checkout[credit_card][vault]=false" +
                 "&checkout[different_billing_address]=false" +
                 "&checkout[remember_me]=false" +
@@ -635,7 +640,7 @@ void Checkout::run(const std::string& URL) {
             curl_global_cleanup();
             return;
         } else {
-            log("Processing finished, check status in HTML body.");
+            log("Processing...");
 
             // Clean up curl instance
             curl_easy_cleanup(curl);

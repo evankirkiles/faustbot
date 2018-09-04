@@ -42,7 +42,8 @@ class Checkout : public QObject {
 public:
     // Builds the checkout with the given URL for the given profile, proxy, etc.
     explicit Checkout(const std::string& cartLink, const std::string& logFileLocation,
-                      const std::string& profile, const std::string& proxy, const std::string& identifier);
+                      const std::string& profile, const std::string& proxy,
+                      const std::string& identifier);
 
     // Runs the checkout
     void run(const std::string& URL);
