@@ -282,7 +282,7 @@ void TaskWidget::setStatus(QString text, QString hexColor) {
     status->setStyleSheet(std::string("color: ").append(hexColor.toStdString()).append(";").c_str());
 
     // If task has actually finished, change the play button to the replay button
-    if (text == "Finished!" || text == "Failed") {
+    if (text == "Finished!" || text == "Failed" || text == "Failed.") {
         play->changeCheckedImg(file_paths::REPLAY2_IMG, file_paths::REPLAY_IMG);
         play->isChecked = false;
     } else if (text == "Interrupted.") {

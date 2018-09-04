@@ -33,7 +33,7 @@
 #include <QApplication>
 
 // Include the global constants
-#include <shopifybot/constants.hpp>
+#include "constants.hpp"
 
 // Class containing all checkout related functions in the form of a "Checkout" class
 // Will be able to run multiple times until success is had.

@@ -364,6 +364,7 @@ void Checkout::run(const std::string& URL) {
         bool authtokenFound = false;
         bool shippingMethodfound = false;
         while (getline(filein, temporarystring)) {
+            // Get the authentication token
             if (!authtokenFound && temporarystring.find("authenticity_token") != std::string::npos) {
                 // If there is an input field in the line, check for auth token (should only be 4, we want the third)
                 const unsigned long authtokenPos = temporarystring.find(R"(name="authenticity_token" value=")");
@@ -371,10 +372,9 @@ void Checkout::run(const std::string& URL) {
                     inputs++;
                     // On the third authenticity token, save it to the string and then break the while loop
                     if (inputs == 3) {
-                        authenticitytoken = temporarystring;
-                        authenticitytoken.erase(0, authtokenPos + 33);
+                        authenticitytoken = temporarystring.substr(authtokenPos + 33);
                         authenticitytoken = authenticitytoken.substr(0, authenticitytoken.find('"'));
-                        if (!shippingMethodfound) { break; } else { authtokenFound = true; }
+                        if (shippingMethodfound) { break; } else { authtokenFound = true; }
                     }
                 }
             }
@@ -383,16 +383,16 @@ void Checkout::run(const std::string& URL) {
                 // If there is a value to the line, retrieve it
                 const unsigned long shippingRatePos = temporarystring.find("value");
                 if (shippingRatePos != std::string::npos) {
-                    shippingmethod = temporarystring;
-                    shippingmethod.erase(0, shippingRatePos + 7);
+                    shippingmethod = temporarystring.substr(shippingRatePos + 7);
                     shippingmethod = shippingmethod.substr(0, shippingmethod.find('"'));
-                    if (!authtokenFound) { break; } else { shippingMethodfound = true; }
+                    if (authtokenFound) { break; } else { shippingMethodfound = true; }
                 }
             }
         }
         log(std::string("Got authenticity token: ").append(authenticitytoken));
         filein.close();
 
+        std::string totalprice;
         // Reinit the curl session
         curl = curl_easy_init();
         emit setStatus("Posting...", "#7cd4f4");
@@ -462,6 +462,23 @@ void Checkout::run(const std::string& URL) {
             return;
         } else {
             log("Successfully submitted shipping method to Shopify servers!");
+
+            // Get the total price from shopify page
+            // Get the total price as well
+            filein.open(QApplication::applicationDirPath().toStdString()
+                                         .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str());
+            temporarystring = "";
+            while (getline(filein, temporarystring)) {
+                if (temporarystring.find("data-checkout-payment-due-target") != std::string::npos) {
+                    const unsigned long pricePos = temporarystring.find("data-checkout-payment-due-target");
+                    totalprice = temporarystring.substr(pricePos + 34);
+                    totalprice = totalprice.substr(0, totalprice.find('"'));
+                    break;
+                }
+            }
+            std::cout << totalprice << std::endl;
+            filein.close();
+
             // Clean up curl instance
             curl_easy_cleanup(curl);
         }
@@ -569,7 +586,7 @@ void Checkout::run(const std::string& URL) {
         log("Processing...");
         emit setStatus("Processing...", "#7cd4f4");
 
-        // Set other cURL operatoin settings
+        // Set other cURL operation settings
         // URL to perform POST request on
         curl_easy_setopt(curl, CURLOPT_URL, shopifyCheckoutURL.c_str());
         curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
@@ -590,6 +607,7 @@ void Checkout::run(const std::string& URL) {
         // Set the timeout
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
 
+        std::cout << totalprice << std::endl;
         std::string authpostfields =
                 std::string("utf8=%E2%9C%93") +
                 "&_method=patch" +
@@ -597,13 +615,13 @@ void Checkout::run(const std::string& URL) {
                 "&previous_step=payment_method" +
                 "&step=" +
                 "&s=" + curl_easy_escape(curl, s.c_str(), static_cast<int>(s.length())) +
-                "&checkout[payment_gateway]=" + curl_easy_escape(curl, paymentgateway.c_str(), static_cast<int>(paymentgateway.length())) +
+                "&checkout[payment_gateway]=128707719" +
                 "&checkout[credit_card][vault]=false" +
                 "&checkout[different_billing_address]=false" +
                 "&checkout[remember_me]=false" +
                 "&checkout[remember_me]=0" +
                 "&checkout[vault_phone]=" + curl_easy_escape(curl, std::string("+").append(profile["phone"].toString().toStdString()).c_str(), static_cast<int>(profile["phone"].toString().toStdString().length()) + 1) +
-                "&checkout[total_price]=10" +
+                "&checkout[total_price]=" + totalprice +
                 "&complete=1" +
                 "&checkout[client_details][browser_width]=2545" +
                 "&checkout[client_details][browser_height]=775" +
