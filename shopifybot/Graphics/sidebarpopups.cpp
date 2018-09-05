@@ -1538,6 +1538,8 @@ ProductParserDisplay::ProductParserDisplay(QWidget *parent) :
         product(new QCheckBox(this)),
         extensionLabel(new QLabel("Extension: ", this)),
         extension(new QLineEdit(this)),
+        availabilityFilteringLabel(new QLabel("Availability Filter: ", this)),
+        availabilityFiltering(new QCheckBox(this)),
         limitLabel(new QLabel("Limit: ", this)),
         limit(new QLineEdit(this)),
         goButton(new QPushButton("GO", this)),
@@ -1582,6 +1584,7 @@ ProductParserDisplay::ProductParserDisplay(QWidget *parent) :
     auto websiteLayout = new QHBoxLayout;
     auto typeLayout = new QHBoxLayout;
     auto extensionLayout = new QHBoxLayout;
+    auto filteringLayout = new QHBoxLayout;
     auto limitLayout = new QHBoxLayout;
 
     // Set widget properties
@@ -1597,6 +1600,7 @@ ProductParserDisplay::ProductParserDisplay(QWidget *parent) :
     collection->setChecked(true);
     extensionLabel->setObjectName("addtask_mediocre_text");
     extension->setObjectName("addtask_editbox");
+    availabilityFilteringLabel->setObjectName("addtask_mediocre_text");
     limitLabel->setObjectName("addtask_mediocre_text");
     limitLabel->setFixedWidth(35);
     limit->setObjectName("addtask_editbox");
@@ -1604,7 +1608,7 @@ ProductParserDisplay::ProductParserDisplay(QWidget *parent) :
     limit->setText("20");
     limit->setFixedWidth(35);
     goButton->setObjectName("addtaskbutton");
-    goButton->setFixedSize(100, 30);
+    goButton->setFixedSize(210, 30);
 
     // Add the widgets to their layouts
     websiteLayout->addWidget(websiteLabel);
@@ -1621,10 +1625,16 @@ ProductParserDisplay::ProductParserDisplay(QWidget *parent) :
     extensionLayout->addWidget(extensionLabel);
     extensionLayout->addWidget(extension);
     mainLayout->addLayout(extensionLayout);
+    filteringLayout->addStretch();
+    filteringLayout->addWidget(availabilityFilteringLabel);
+    filteringLayout->addWidget(availabilityFiltering);
+    filteringLayout->addSpacing(10);
+    filteringLayout->addWidget(limitLabel);
+    filteringLayout->addWidget(limit);
+    filteringLayout->addStretch();
+    mainLayout->addLayout(filteringLayout);
+    limitLayout->setContentsMargins(0, 0, 0, 0);
     limitLayout->addStretch();
-    limitLayout->addWidget(limitLabel);
-    limitLayout->addWidget(limit);
-    limitLayout->addSpacing(10);
     limitLayout->addWidget(goButton);
     limitLayout->addStretch();
     mainLayout->addLayout(limitLayout);
@@ -1638,6 +1648,14 @@ ProductParserDisplay::ProductParserDisplay(QWidget *parent) :
     // Make sure that collection and product are not both checked or neither checked
     connect(collection, &QCheckBox::stateChanged, [this] () { product->setChecked(collection->checkState() == 0); } );
     connect(product, &QCheckBox::stateChanged, [this] () { collection->setChecked(product->checkState() == 0); } );
+    connect(websites, &QComboBox::currentTextChanged, [this] () {
+        if (websites->currentText() == "Kith") {
+            availabilityFiltering->setChecked(true);
+            availabilityFiltering->setDisabled(true);
+        } else {
+            availabilityFiltering->setDisabled(false);
+        }
+    });
 
     // Connect the go button to the parse product slot
     connect(goButton, SIGNAL(clicked()), this, SLOT(parseProds()));
@@ -1661,10 +1679,10 @@ void ProductParserDisplay::parseProds() {
     // Pull the models from the given page for the specified method
     if (collection->isChecked()) {
         // Pull all the models from the collection page
-        swh.getAllModels(extension->text().toStdString(), false, std::string("?limit=").append(limit->text().toStdString()));
+        swh.getAllModels(extension->text().toStdString(), availabilityFiltering->isChecked(), std::string("?limit=").append(limit->text().toStdString()));
     } else {
         // Pull all the variants from the product page
-        swh.getAllModelsProductPage(extension->text().toStdString());
+        swh.getAllModelsProductPage(extension->text().toStdString(), availabilityFiltering->isChecked());
     }
 
     // Then load the file into the product parsed view

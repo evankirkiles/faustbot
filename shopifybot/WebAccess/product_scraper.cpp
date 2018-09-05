@@ -309,7 +309,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
 }
 
 // Writes all the variants on a product page to a file
-void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension) {
+void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension, bool availabilityFiltering) {
 
     // Open time logging file
     std::ofstream timeLogs;
@@ -364,8 +364,15 @@ void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension
                 std::string name = str.substr(0, temptoken);
                 name.erase(std::unique(name.begin(), name.end(),
                                         [](char a, char b) { return a == ' ' && b == ' '; }), name.end());
-                logFile << name << " :-: " << id << "\n";
 
+                // Check the availability
+                if (str.find("\"variants\":") > str.find("\"available\":")) {
+                    str.erase(0, str.find("\"available\":") + 12);
+                    std::string availability = str.substr(0, str.find(','));
+                    if (availability != "false" || !availabilityFiltering) {
+                        logFile << name << " :-: " << id << "\n";
+                    }
+                }
                 // Now continue searching for ID's
                 tokenpos = str.find("},{\"id\":");
             }

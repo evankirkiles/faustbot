@@ -396,6 +396,8 @@ private:
     QCheckBox* product;
     QLabel* extensionLabel;
     QLineEdit* extension;
+    QLabel* availabilityFilteringLabel;
+    QCheckBox* availabilityFiltering;
     QLabel* limitLabel;
     QLineEdit* limit;
     QPushButton* goButton;
