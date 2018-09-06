@@ -45,6 +45,9 @@ public:
                       const std::string& profile, const std::string& proxy,
                       const std::string& identifier);
 
+    // Prepares a checkout
+    void prepare(const std::string& URL);
+
     // Runs the checkout
     void run(const std::string& URL);
 
@@ -58,8 +61,13 @@ private:
     std::string proxy, proxyunp;
     QJsonObject profile, ccard;
 
+    // Required for running of the task
+    std::string checkoutURL;
+    std::string paymentGateway;
+
     // Must be true for run
     bool allInitialized = false;
+    bool allPrepared = false;
 
     // Logs a line to the given log file
     void log(const std::string& message);

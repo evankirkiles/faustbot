@@ -55,7 +55,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                 // Print the rest of the string after the found part up until the specified token
                 str.erase(0, stringpos + 5);
                 unsigned long tokenpos = str.find(',');
-                if (str.substr(tokenpos, 10) != R"(,"title":")") {
+                if ((tokenpos + 10 <= str.length()) && (str.substr(tokenpos, 10) != R"(,"title":")")) {
                     stringpos = str.find("\"id\":");
                     continue;
                 }
@@ -139,11 +139,13 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                     boost::to_upper(size);
 
                     // In case of color coming in brackets after title
-                    if ((sourceURL.method == 101 || sourceURL.method == 112 || sourceURL.method == 113) &&
-                            size.find('[') != std::string::npos) {
-                        std::string color = size.substr(size.find('[') + 1);
-                        color.pop_back();
-                        logFile << "\nTITLE: " << size.substr(0, size.find('[') - 1) << ", COLOR: " << color << "\n";
+                    if ((sourceURL.method == 101 || sourceURL.method == 112 || sourceURL.method == 113)) {
+                        if (size.find('[') != std::string::npos) {
+                            std::string color = size.substr(size.find('[') + 1);
+                            color.pop_back();
+                            logFile << "\nTITLE: " << size.substr(0, size.find('[') - 1) << ", COLOR: " << color
+                                    << "\n";
+                        }
                     } else if (sourceURL.method == 102 || sourceURL.method == 105 || sourceURL.method == 109 ||
                                sourceURL.method == 116) {
                         logFile << "\nTITLE: " << size << ", COLOR: ";
@@ -161,11 +163,14 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                         logFile << "\nTITLE: " << size.substr(0, inPosition);
                         size = size.substr(inPosition + 4);
                         logFile << ", COLOR: " << size << "\n";
-                    } else if (sourceURL.method == 120 && size.find('(') != std::string::npos) {
-                        // Color comes in the title between parentheses '(' color ')'
-                        std::string color = size.substr(size.find('(') + 1);
-                        color.pop_back();
-                        logFile << "\nTITLE: " << size.substr(0, size.find('(') - 1) << ", COLOR: " << color << "\n";
+                    } else if (sourceURL.method == 120) {
+                        if (size.find('(') != std::string::npos) {
+                            // Color comes in the title between parentheses '(' color ')'
+                            std::string color = size.substr(size.find('(') + 1);
+                            color.pop_back();
+                            logFile << "\nTITLE: " << size.substr(0, size.find('(') - 1) << ", COLOR: " << color
+                                    << "\n";
+                        }
                     } else {
                         // Bodega (104), Shoegallery (107), Addict Miami (114), Anti Social Social Club (115), BBC (117)
                         logFile << "\nTITLE: " << size << "\n";
