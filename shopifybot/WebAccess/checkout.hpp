@@ -64,6 +64,8 @@ private:
     // Required for running of the task
     std::string checkoutURL;
     std::string paymentGateway;
+    std::string shippingMethod = "shopify-UPS%20GROUND%20(5-7%20business%20days)-10.00";
+    std::string totalprice;
 
     // Must be true for run
     bool allInitialized = false;
