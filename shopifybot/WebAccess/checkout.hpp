@@ -35,6 +35,9 @@
 // Include the global constants
 #include "constants.hpp"
 
+// The callback function which allows one to write data directly to a string from a libcurl request
+size_t string_call_back(void *contents, size_t size, size_t nmemb, std::string *s);
+
 // Class containing all checkout related functions in the form of a "Checkout" class
 // Will be able to run multiple times until success is had.
 class Checkout : public QObject {
@@ -65,14 +68,26 @@ private:
     std::string checkoutURL;
     std::string paymentGateway;
     std::string shippingMethod = "shopify-UPS%20GROUND%20(5-7%20business%20days)-10.00";
+    std::string creditCardInstance;
     std::string totalprice;
 
     // Must be true for run
     bool allInitialized = false;
     bool allPrepared = false;
+    bool shouldcontinue = true;
+
+    // Cookie format
+    char nline[256];
 
     // Logs a line to the given log file
     void log(const std::string& message);
+
+    // Each step of the checkout is run in a function to allow for concurrency, passed in the curl instance
+    void getCheckoutURL(const std::string& URL);
+    void postContactInfo();
+    void postShippingMethod();
+    void submitCreditCard();
+    void postCreditCard();
 };
 
 #endif //SHOPIFY_BOT_CHECKOUT_HPP
