@@ -19,6 +19,7 @@
 #include <chrono>
 #endif
 #include <random>
+#include <thread>
 
 // cURL include
 #ifndef curl
@@ -31,6 +32,9 @@
 #include <QString>
 #include <QObject>
 #include <QApplication>
+#include <QFuture>
+#include <QtConcurrent>
+#include <QList>
 
 // Include the global constants
 #include "constants.hpp"
@@ -67,7 +71,7 @@ private:
     // Required for running of the task
     std::string checkoutURL;
     std::string paymentGateway;
-    std::string shippingMethod = "shopify-UPS%20GROUND%20(5-7%20business%20days)-10.00";
+    std::string shippingMethod;
     std::string creditCardInstance;
     std::string totalprice;
 
@@ -78,6 +82,9 @@ private:
 
     // Cookie format
     char nline[256];
+
+    // For communicating between concurrent runs
+    bool contactSubmitted = false;
 
     // Logs a line to the given log file
     void log(const std::string& message);

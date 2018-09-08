@@ -403,27 +403,27 @@ void Checkout::run(const std::string& URL) {
     // Check initialized
     if (!allInitialized) { log("Profile, proxy, or credit card uninitialized! Cannot run."); return; }
 
-    // If not prepared, perform preparations
-    // if (!allPrepared) { prepare("https://kith.com/cart/2600789213191:1"); }
-
     // Begin by getting the redirected checkout URL
     getCheckoutURL(URL);
     if (!shouldcontinue) { return; }
-
+    // Run each of these steps concurrently
+    auto contactPost = QtConcurrent::run(this, &Checkout::postContactInfo);
+    auto shippingPost = QtConcurrent::run(this, &Checkout::postShippingMethod);
+    auto ccardSubmit = QtConcurrent::run(this, &Checkout::submitCreditCard);
+    contactPost.waitForFinished();
     // Now submit the customer information
-    postContactInfo();
+//    postContactInfo();
     if (!shouldcontinue) { return; }
-
     // Submit the shipping method
-    postShippingMethod();
+//    postShippingMethod();
     if (!shouldcontinue) { return; }
-
     // Submit the credit card to sessions
-    submitCreditCard();
+//    submitCreditCard();
     if (!shouldcontinue) { return; }
-
     // Now post the credit card information
-    postCreditCard();
+    ccardSubmit.waitForFinished();
+    shippingPost.waitForFinished();
+//    postCreditCard();
     if (!shouldcontinue) { return; }
 
     // Emit finished if it gets here
@@ -599,9 +599,31 @@ void Checkout::postContactInfo() {
         return;
     } else {
         log("Successfully submitted contact information to Shopify servers!");
+
+        // Get the shipping method from the page data
+        std::ifstream filein(QApplication::applicationDirPath().toStdString()
+                                     .append(file_paths::CHECKOUTBODY_TXT).append(identifier).append(".txt").c_str());
+        std::string temporarystring;
+        while (getline(filein, temporarystring)) {
+            // Get the shipping method
+            if (temporarystring.find("checkout_shipping_rate") != std::string::npos) {
+                // If there is a value to the line, retrieve it
+                const unsigned long shippingRatePos = temporarystring.find("value");
+                if (shippingRatePos != std::string::npos) {
+                    shippingMethod = temporarystring.substr(shippingRatePos + 7);
+                    shippingMethod = shippingMethod.substr(0, shippingMethod.find('"'));
+                    break;
+                }
+            }
+        }
+        filein.close();
+
+        contactSubmitted = true;
         // Clean up curl instance
         curl_easy_cleanup(curl);
     }
+
+    std::cout << "Finished posting contact info." << std::endl;
 }
 
 // Posts the shipping method to the checkout URL
@@ -635,6 +657,11 @@ void Checkout::postShippingMethod() {
     if (!proxyunp.empty()) { curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, proxyunp.c_str()); }
     // Set the timeout
     curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
+
+    // Stall until the contact information has been submitted
+    while(!contactSubmitted) {
+        std::this_thread::sleep_for(std::chrono::nanoseconds(100));
+    }
 
     std::ifstream filein;
     std::cout << shippingMethod << std::endl;
@@ -736,6 +763,8 @@ void Checkout::postShippingMethod() {
         // Clean up curl instance
         curl_easy_cleanup(curl);
     }
+
+    std::cout << "Finished posting shipping info." << std::endl;
 }
 
 // Posts the credit card information to a session

@@ -298,7 +298,7 @@ void TaskWidget::exit() {
         return;
     } else {
         // Delete the log file when this task is deleted
-        remove(std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString().c_str()).
+        remove(std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString()).
                 append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt").c_str());
         // Remove all connections
         deleted = true;
@@ -313,8 +313,8 @@ void TaskWidget::showLogs() {
     if (*logWindowOpen) { if (lfd) { lfd->raise(); } return; }
 
     // Otherwise create a new log window and show it
-    lfd = new LogFileDisplay(task->title, std::string(QApplication::applicationDirPath().append(file_paths::TASK_LOG).
-            toStdString().c_str()).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt"));
+    lfd = new LogFileDisplay(task->title, std::string(
+            QApplication::applicationDirPath().append(file_paths::TASK_LOG).toStdString()).append("task_logs_").append(task->swh.sourceURL.title).append(task->swh.taskID).append(".txt"));
     lfd->show();
     lfd->setFocus();
     // Connect the closeLogs function of lfd to the delete button of the task
