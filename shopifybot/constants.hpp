@@ -61,7 +61,6 @@ namespace supported_sites {
     extern const URLAndMethod APBSTORE;        // Colors are located in the product's title, after a '[' and before a ']'
     extern const URLAndMethod ADDICTMIAMI;     // Colors are located in the product's title, inseparable unfortunately
     extern const URLAndMethod ASSC;            // Colors are located in the product's title, inseparable unfortunately
-    // CANNOT GET PAYMENT GATEWAY FOR ASSC BECAUSE NO PRODUCTS ARE IN STOCK, IDK HOW TO SOLVE
     extern const URLAndMethod EXCLUSIVEDNA;    // Colors are located in the product's sizes before a ' \/ '
     extern const URLAndMethod BBCICECREAM;     // Colors are located in the product's sizes before a ' \/ '
     extern const URLAndMethod BAPE;            // Colors are located in the product's sizes before a ' \/ '
@@ -72,7 +71,7 @@ namespace supported_sites {
     // TODO: Make Bape search more efficient
     extern const URLAndMethod BEATNIC;          // Colors are located in the products.json after the term "Color: "
     // TODO: Debug Beatnic scraping as well, currently UNSUPPORTED
-    extern const URLAndMethod BLACKMARKETUSA;   // Colors are located in the product's title, after a '(' but before a ')'
+    extern const URLAndMethod BLACKMARKETUS;   // Colors are located in the product's title, after a '(' but before a ')'
 
     // MARK: Specialized Shopify sites
 
