@@ -24,7 +24,7 @@ INSERT INTO auth (auth_token,machine_hash) VALUES ('${YOUR NEW AUTH TOKEN HERE}'
 
 I built this application on a Mac so I made it a portable executable using Mac-specific settings. One can run it through a compiler on a Windows computer after removing the Mac packaging code in the CMakeLists.txt, but building a Windows executable would take a little bit more work.
 
-To build the .dmg, follow these instructions after compiling (in CLion) and using `cd` into the build directory:
+To build the .dmg, follow these instructions after building (in CLion) and using `cd` into the build directory:
 
 ```
 cd cmake-build-debug
