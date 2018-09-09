@@ -4,7 +4,7 @@
 
 Status: **Dormant**
 
-*UPDATE:* I've stopped working on this due to school starting up and quite honestly a lack of motivation. Feel free to use whatever code you find useful here, but please star if you do. :)
+***UPDATE:*** I've stopped working on this due to school starting up and quite honestly a lack of motivation. If you have any questions, I'll try to answer them if you send me an email (found on my main github page). Feel free to use whatever code you find useful here, but please star if you do. :)
 
 Bot for various supported Shopify sites. Runs tasks using QThreads to allow for concurrency. Checkout works as long as you don't run into captcha, although the status box for each task is very misleading. There is no system to evaluate the success of orders yet as well, but if you put in a valid credit card and the HTML body for the task after running is the processing payment page (about 31 KB), it should have worked. 65 KB HTML body file indicates that a captcha popped up.
 
