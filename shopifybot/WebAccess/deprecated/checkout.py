@@ -104,6 +104,11 @@ else:
 # Create requests session
 session = requests.session()
 
+# Credits for this part go to: https://github.com/Asteezy24/ShopifyCheckout
+# His code is only partially complete, it does not go through full checkout and neither does this script.
+# The only working checkout is the cURL version in C++ I wrote, but even then it cannot bypass reCaptcha
+# as Asteezy claimed–if a captcha appears, then the checkout will return you to the contact info page and ask
+# you to verify you are not a bot with a recaptcha again.
 
 # Function that sends the customer info to the Shopify servers
 def send_customer_info():

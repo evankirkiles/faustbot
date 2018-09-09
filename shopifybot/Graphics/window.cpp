@@ -199,9 +199,8 @@ BotWindow::BotWindow(QWidget *parent) : QWidget(parent) {
     timeChecker->setInterval(1000);
     timeChecker->start();
 
-
     // Check the authentication of the window
-    checkAuthentication();
+    if (database::USE_AUTHENTICATION) { checkAuthentication(); }
 }
 
 // Checks the authentication

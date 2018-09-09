@@ -177,6 +177,17 @@ namespace constants {
     extern const std::map<std::string, std::string> CUSTOMIZEVARS;
 }
 
+namespace database {
+    // Make true to enable authentication system
+    extern const bool USE_AUTHENTICATION;
+
+    // Information for the authentication database
+    extern const char* HOSTNAME;
+    extern const char* DATABASENAME;
+    extern const char* USERNAME;
+    extern const char* PASSWORD;
+}
+
 
 
 

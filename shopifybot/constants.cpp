@@ -144,4 +144,13 @@ namespace constants {
     };
 }
 
+namespace database {
+    const bool USE_AUTHENTICATION = false;
+
+    const char* HOSTNAME = "";
+    const char* DATABASENAME = "";
+    const char* USERNAME = "";
+    const char* PASSWORD = "";
+}
+
 

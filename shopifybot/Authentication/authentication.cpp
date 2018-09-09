@@ -80,10 +80,10 @@ AuthenticationPopup::AuthenticationPopup(QWidget *parent) :
     stack->addWidget(secondpage);
 
     // Connect to mySQL server
-    db.setHostName("den1.mysql3.gear.host");
-    db.setDatabaseName("faustbot");
-    db.setUserName("faustbot");
-    db.setPassword("Ha5u~6UQtL0?");
+    db.setHostName(database::HOSTNAME);
+    db.setDatabaseName(database::DATABASENAME);
+    db.setUserName(database::USERNAME);
+    db.setPassword(database::PASSWORD);
 
     // Finalize layouts
     externLayout->addWidget(bg);
