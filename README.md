@@ -1,30 +1,75 @@
-# Shopify Bot
+# Faust Bot for SHOPIFY
 
-Status: **Under Development**
+<img src="/screenshot1.png" alt="Screenshot of interface"/>
 
-Bot for various supported Shopify sites. Runs 'tasks' which can be put onto different threads to allow for multithreading, each one given a keyword to search for as well as a color and a size. As soon as a product is found matching all three fields, it is purchased through a Selenium headless web browser with PayPal (Using normal credit card often requires reCAPTCHA, which takes upwards of 30 seconds and isn't efficient. You might get lucky and not run into a reCAPTCHA, but it's not a good risk to take consistently.)
+Status: **Dormant**
+
+*UPDATE:* I've stopped working on this due to school starting up and quite honestly a lack of motivation. Feel free to use whatever code you find useful here, but please star if you do. :)
+
+Bot for various supported Shopify sites. Runs tasks using QThreads to allow for concurrency. Checkout works as long as you don't run into captcha, although the status box for each task is very misleading. There is no system to evaluate the success of orders yet as well, but if you put in a valid credit card and the HTML body for the task after running is the processing payment page (about 31 KB), it should have worked. 65 KB HTML body file indicates that a captcha popped up.
+
+Authentication system can be enabled by creating a MySQL database and filling in its information in constants.hpp. Then, create a new table in the database called "auth" with two columns: "auth_token" and "machine_hash". To add an authentication key, simply add a row with the given token in "auth_token" and NULL in "machine_hash". This can be done with a SQL command like so:
+
+```
+USE ${YOUR DATABASE NAME HERE};
+INSERT INTO auth (auth_token,machine_hash) VALUES ('${YOUR NEW AUTH TOKEN HERE}', );
+```
+
+**Dependencies:**
+- libcurl
+- Qt 5 or greater (Core, Widgets, Concurrent, Network, and Sql modules)
+- CPack (for building portable Mac executable)
+
+**Platforms:**
+
+I built this application on a Mac so I made it a portable executable using Mac-specific settings. One can run it through a compiler on a Windows computer after removing the Mac packaging code in the CMakeLists.txt, but building a Windows executable would take a little bit more work.
+
+To build the .dmg, follow these instructions after compiling (in CLion) and using `cd` into the build directory:
+
+```
+cd cmake-build-debug
+cpack -G DragNDrop CPackConfig.cmake
+```
 
 **Features:**
-- C++ cURL webscraper with Python used for checking out a product once variant id has been found.
+- C++ cURL webscraper and checkout.
 - Scraping of various Shopify websites to produce list of variant ids for products' respective colors and sizes.
-- Variant ID retrieval directly from a product's page given the color and size you want
-- Selenium-based checkout module using PayPal (_recommended_) or normal Credit Card information.
-  * PayPal checkout has not been fully tested, but should be able to be made faster with one-click checkout.
-- Logging while tasks are running to keep you updated on timestamps of what the bot has done.
+- Availability filtering of Shopify website scraping.
+- Support for multiple credit cards and profiles which can be randomized for each checkout.
+- Proxy support and proxy checker using cURL.
+- Save/load tasks to/from JSON file.
+- Start tasks at a certain time.
+- Fully customizable interface.
+- MySQL authentication system.
 
 **To-Do List:**
-- Add a GUI.
-- Finish multithreading support (make tasks completely thread-safe by not sharing webscraping files).
 - Try it out on a real product.
+- Add "More Info Displays."
+- Support sites which require logging in before checkout.
 
 ---
-Contact me if you have a Shopify site you want to be supported!
+
+To add support for a website, first make sure it has a products.json page (Do this by appending /products.json to the main page or any collection page). If it does, then add it to constants file with a method number in the 100's and try parsing products from it. Ideally, the products will be formatted with their title first (after TITLE: ), then color (after COLOR:), and then their variant IDs with the size and corresponding id separated by a ':-:'.
 
 **Supported Sites:**
+- 12amrun
+- 18montrose
+- A Ma Maniére
+- Addict
+- Anti Social Social Club
+- APB Store
+- Bape
+- Billionaire Boys' Club
+- Black Market USA
 - Blends
 - Bodega
+- Exclusive DNA
+- Hanon (REQUIRES LOGIN, so not really)
 - Kith
+- Notre
+- Shoe Gallery
+- ShopNiceKicks
 - Social Status
-- Undefeated
+- Undefeated (REQUIRES LOGIN, so not really)
 - WishATL
 - Xhibition
