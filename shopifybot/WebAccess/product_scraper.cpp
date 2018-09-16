@@ -55,7 +55,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                 // Print the rest of the string after the found part up until the specified token
                 str.erase(0, stringpos + 5);
                 unsigned long tokenpos = str.find(',');
-                if ((tokenpos + 10 <= str.length()) && (str.substr(tokenpos, 10) != R"(,"title":")")) {
+                if (str.substr(tokenpos, 10) != R"(,"title":")") {
                     stringpos = str.find("\"id\":");
                     continue;
                 }
@@ -75,7 +75,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                     if (colourWayPos != std::string::npos) {
                         const unsigned long asciiLoc = str.substr(0, colourWayPos).rfind("u003e") + 5;
                         sscolor = str.substr(asciiLoc, colourWayPos - asciiLoc);
-                        boost::to_upper(sscolor);
+                        std::transform(sscolor.begin(), sscolor.end(), sscolor.begin(), toupper);
                     }
                 }
 
@@ -85,7 +85,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                     if (colourWayPos != std::string::npos) {
                         const unsigned long asciiLoc = str.find_first_of("u003c", colourWayPos);
                         sscolor = str.substr(colourWayPos, asciiLoc - colourWayPos - 1);
-                        boost::to_upper(sscolor);
+                        std::transform(sscolor.begin(), sscolor.end(), sscolor.begin(), toupper);
                     }
                 }
 
@@ -98,7 +98,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                     if (sourceURL.method == 102) {
                         if (sscolor.empty()) {
                             sscolor = size.substr(size.find(' ') + 1);
-                            boost::to_upper(sscolor);
+                            std::transform(sscolor.begin(), sscolor.end(), sscolor.begin(), toupper);
                             logFile << sscolor << "\n" << size.substr(0, size.find(' ')) << " :-: " << id << "\n";
                         } else {
                             logFile << size.substr(0, size.find(' ')) << " :-: " << id << "\n";
@@ -110,7 +110,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                     } else if (sourceURL.method == 105 || sourceURL.method == 116) {
                         if (sscolor.empty()) {
                             sscolor = size.substr(0, size.find(" \\/"));
-                            boost::to_upper(sscolor);
+                            std::transform(sscolor.begin(), sscolor.end(), sscolor.begin(), toupper);
                             logFile << sscolor << "\n" << size.substr(size.find(" \\/") + 4) << " :-: " << id << "\n";
                         } else {
                             logFile << size.substr(size.find(" \\/") + 4) << " :-: " << id << "\n";
@@ -119,7 +119,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                     } else if (sourceURL.method == 109) {
                         if (sscolor.empty()) {
                             sscolor = size.substr(size.find(" \\/") + 4);
-                            boost::to_upper(sscolor);
+                            std::transform(sscolor.begin(), sscolor.end(), sscolor.begin(), toupper);
                             logFile << sscolor << "\n" << size.substr(0, size.find(" \\/")) << " :-: " << id
                                     << "\n";
                         } else {
@@ -133,19 +133,18 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                     // For everything else, simply write the size and the id
                     } else {
                         // For Billionaire Boys' Club, the processing is done in getting the ID
-                        logFile << boost::to_upper_copy(size) << " :-: " << id << "\n";
+                        std::transform(size.begin(), size.end(), size.begin(), toupper);
+                        logFile << size << " :-: " << id << "\n";
                     }
                 } else {
-                    boost::to_upper(size);
+                    std::transform(size.begin(), size.end(), size.begin(), toupper);
 
                     // In case of color coming in brackets after title
-                    if ((sourceURL.method == 101 || sourceURL.method == 112 || sourceURL.method == 113)) {
-                        if (size.find('[') != std::string::npos) {
-                            std::string color = size.substr(size.find('[') + 1);
-                            color.pop_back();
-                            logFile << "\nTITLE: " << size.substr(0, size.find('[') - 1) << ", COLOR: " << color
-                                    << "\n";
-                        }
+                    if ((sourceURL.method == 101 || sourceURL.method == 112 || sourceURL.method == 113) &&
+                            size.find('[') != std::string::npos) {
+                        std::string color = size.substr(size.find('[') + 1);
+                        color.pop_back();
+                        logFile << "\nTITLE: " << size.substr(0, size.find('[') - 1) << ", COLOR: " << color << "\n";
                     } else if (sourceURL.method == 102 || sourceURL.method == 105 || sourceURL.method == 109 ||
                                sourceURL.method == 116) {
                         logFile << "\nTITLE: " << size << ", COLOR: ";
@@ -163,14 +162,11 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                         logFile << "\nTITLE: " << size.substr(0, inPosition);
                         size = size.substr(inPosition + 4);
                         logFile << ", COLOR: " << size << "\n";
-                    } else if (sourceURL.method == 120) {
-                        if (size.find('(') != std::string::npos) {
-                            // Color comes in the title between parentheses '(' color ')'
-                            std::string color = size.substr(size.find('(') + 1);
-                            color.pop_back();
-                            logFile << "\nTITLE: " << size.substr(0, size.find('(') - 1) << ", COLOR: " << color
-                                    << "\n";
-                        }
+                    } else if (sourceURL.method == 120 && size.find('(') != std::string::npos) {
+                        // Color comes in the title between parentheses '(' color ')'
+                        std::string color = size.substr(size.find('(') + 1);
+                        color.pop_back();
+                        logFile << "\nTITLE: " << size.substr(0, size.find('(') - 1) << ", COLOR: " << color << "\n";
                     } else {
                         // Bodega (104), Shoegallery (107), Addict Miami (114), Anti Social Social Club (115), BBC (117)
                         logFile << "\nTITLE: " << size << "\n";
@@ -195,14 +191,14 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
                 getline(searchFile, str);
                 str.erase(std::unique(str.begin(), str.end(),
                                       [](char a, char b) { return a == ' ' && b == ' '; }), str.end());
-                boost::to_upper(str);
+                std::transform(str.begin(), str.end(), str.begin(), toupper);
                 logFile << "TITLE: " << str;
 
                 // The colorway is four lines down
                 for (int i = 0; i < 4; ++i) { getline(searchFile, str); }
                 str.erase(std::unique(str.begin(), str.end(),
                                       [](char a, char b) { return a == ' ' && b == ' '; }), str.end());
-                boost::to_upper(str);
+                std::transform(str.begin(), str.end(), str.begin(), toupper);
                 logFile << ", COLOR: " << str << "\n";
 
                 // Begin looking at variants and their id's
@@ -251,7 +247,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
 
                 // The title of the product is down 24 lines
                 for (int i = 0; i < 24; ++i) { getline(searchFile, str); }
-                boost::to_upper(str);
+                std::transform(str.begin(), str.end(), str.begin(), toupper);
                 logFile << "TITLE: " << str;
 
                 prodFound = true;
@@ -268,7 +264,8 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
 
                         // Color will be after the tooltip"> substring
                         str.erase(0, tempPos + 9);
-                        std::string tempString = boost::to_upper_copy(str.substr(0, str.find('<')));
+                        std::string tempString = str.substr(0, str.find('<'));
+                        std::transform(tempString.begin(), tempString.end(), tempString.begin(), toupper);
                         logFile << ", COLOR: " << tempString << "\n";
 
                         colorFound = true;
@@ -314,7 +311,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
 }
 
 // Writes all the variants on a product page to a file
-void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension, bool availabilityFiltering) {
+void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension) {
 
     // Open time logging file
     std::ofstream timeLogs;
@@ -369,15 +366,8 @@ void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension
                 std::string name = str.substr(0, temptoken);
                 name.erase(std::unique(name.begin(), name.end(),
                                         [](char a, char b) { return a == ' ' && b == ' '; }), name.end());
+                logFile << name << " :-: " << id << "\n";
 
-                // Check the availability
-                if (str.find("\"variants\":") > str.find("\"available\":")) {
-                    str.erase(0, str.find("\"available\":") + 12);
-                    std::string availability = str.substr(0, str.find(','));
-                    if (availability != "false" || !availabilityFiltering) {
-                        logFile << name << " :-: " << id << "\n";
-                    }
-                }
                 // Now continue searching for ID's
                 tokenpos = str.find("},{\"id\":");
             }
@@ -573,9 +563,10 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                 unsigned long stringpos = str.find("TITLE: ");
                 if (stringpos != std::string::npos && !prodFound) {
                     std::string title = str.substr(stringpos + 7);
-                    for (const std::string &keywd : keywords) {
+                    for (std::string keywd : keywords) {
+                        std::transform(keywd.begin(), keywd.end(), keywd.begin(), toupper);
                         // If a keyword matches, then proceed to check the color
-                        if (title.find(boost::to_upper_copy(keywd)) != std::string::npos) {
+                        if (title.find(keywd) != std::string::npos) {
                             prdct.title = title;
                             titleMatch = true;
                             break;
@@ -584,11 +575,12 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                         }
                     }
                     if (titleMatch) {
-                        for (const std::string &keywd : colorKeywords) {
+                        for (std::string keywd : colorKeywords) {
+                            std::transform(keywd.begin(), keywd.end(), keywd.begin(), toupper);
                             // If a keyword matches the color, then product has been found
-                            if (str.find(boost::to_upper_copy(keywd)) != std::string::npos) {
+                            if (str.find(keywd) != std::string::npos) {
                                 // Reformat the color if it is found
-                                str.erase(0, str.find(boost::to_upper_copy(keywd)));
+                                str.erase(0, str.find(keywd));
                                 prdct.color = str;
                                 prodFound = true;
                                 break;
@@ -619,9 +611,10 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                 unsigned long stringpos = str.find("TITLE: ");
                 if (stringpos != std::string::npos && !prodFound) {
                     std::string title = str.substr(stringpos + 7);
-                    for (const std::string &keywd : keywords) {
+                    for (std::string keywd : keywords) {
+                        std::transform(keywd.begin(), keywd.end(), keywd.begin(), toupper);
                         // If a keyword matches, then prepare to check the colors
-                        if (title.find(boost::to_upper_copy(keywd)) != std::string::npos) {
+                        if (title.find(keywd) != std::string::npos) {
                             prdct.title = title;
                             prodFound = true;
                             break;
@@ -640,9 +633,10 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                     }
 
                     // Then, check the color of the line and see if it matches
-                    for (const std::string &keywd : colorKeywords) {
+                    for (std::string keywd : colorKeywords) {
+                        std::transform(keywd.begin(), keywd.end(), keywd.begin(), toupper);
                         // If a keyword matches, then add the product ID to the product
-                        if (color.find(boost::to_upper_copy(keywd)) != std::string::npos) {
+                        if (color.find(keywd) != std::string::npos) {
                             prdct.color = color;
                             if (delimPos == std::string::npos) {
                                 // If there is only a color and no size, then just put that into the product and return
@@ -683,9 +677,10 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                     // Remove all extra whitespace from the title
                     title.erase(std::unique(title.begin(), title.end(),
                                             [](char a, char b) { return a == ' ' && b == ' '; }), title.end());
-                    for (const std::string &keywd : keywords) {
+                    for (std::string keywd : keywords) {
+                        std::transform(keywd.begin(), keywd.end(), keywd.begin(), toupper);
                         // If a keyword matches, then proceed to check the color
-                        if (title.find(boost::to_upper_copy(keywd)) != std::string::npos) {
+                        if (title.find(keywd) != std::string::npos) {
                             prdct.title = title;
                             titleMatch = true;
                             break;
@@ -695,9 +690,10 @@ Product ShopifyWebsiteHandler::lookForKeywords(const std::string &collection, co
                     }
                     if (titleMatch) {
                         str.erase(0, str.find("COLOR: ") + 7);
-                        for (const std::string &keywd : colorKeywords) {
+                        for (std::string keywd : colorKeywords) {
+                            std::transform(keywd.begin(), keywd.end(), keywd.begin(), toupper);
                             // If a keyword matches the color, then product has been found
-                            if (str.find(boost::to_upper_copy(keywd)) != std::string::npos) {
+                            if (str.find(keywd) != std::string::npos) {
                                 str.erase(std::unique(str.begin(), str.end(),
                                                       [](char a, char b) { return a == ' ' && b == ' '; }), str.end());
                                 prdct.color = str;
