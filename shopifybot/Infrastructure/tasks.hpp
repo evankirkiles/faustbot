@@ -26,6 +26,9 @@
 #ifndef QDateTime
 #include <QDateTime>
 #endif
+#ifndef stringstream
+#include <sstream>
+#endif
 
 // Include the checkout module
 #include "WebAccess/checkout.hpp"
