@@ -17,7 +17,6 @@
 #include <ctime>
 #include <algorithm>
 #include <iterator>
-#include <boost/algorithm/string.hpp>
 
 #include "constants.hpp"
 
