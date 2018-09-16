@@ -311,7 +311,7 @@ void ShopifyWebsiteHandler::getAllModels(const std::string& collection, bool ava
 }
 
 // Writes all the variants on a product page to a file
-void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension) {
+void ShopifyWebsiteHandler::getAllModelsProductPage(const std::string &extension, bool availabilityFiltering) {
 
     // Open time logging file
     std::ofstream timeLogs;
