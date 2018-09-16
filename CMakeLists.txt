@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.10)
 project(Faust LANGUAGES CXX)
 
 # Set various CMake variables
-set(CMAKE_CXX_STA
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE release)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
